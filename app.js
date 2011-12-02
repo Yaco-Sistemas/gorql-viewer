@@ -29,6 +29,7 @@ app.configure('development', function () {
         dumpExceptions: true,
         showStack: true
     }));
+    app.set('sparql endpoint', 'http://dbpedia.org/sparql');
 });
 
 app.configure('production', function () {

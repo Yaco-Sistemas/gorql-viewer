@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "express": "2.5.1",
-        "jqtpl": "1.0.7"
+        "jqtpl": "1.0.7",
+        "sparql": ">= 0.0.1"
     }
 }

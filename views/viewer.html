@@ -4,6 +4,14 @@
 </head>
 <body>
     <h1>Data Viewer</h1>
-    <div id="dv_viewport">viewport</div>
+    {{if error}}
+    <div id="error">${error}</div>
+    {{else}}
+    <div id="dv_viewport">
+        {{each data}}
+        <p>${$value}</p>
+        {{/each}}
+    </div>
+    {{/if}}
 </body>
 </html>

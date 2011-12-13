@@ -8,7 +8,9 @@
     <div id="error">${error}</div>
     {{else}}
     <div id="dv_viewport">
-        ${results}
+        {{each results}}
+        <p>${$value}</p>
+        {{/each}}
     </div>
     {{/if}}
 </body>

@@ -20,7 +20,7 @@ renderResults = function (response, error, results) {
     });
 };
 
-queryEndPoint = function (params, response) {
+queryEndPoint = function (params, response, cache, key) {
     "use strict";
     var client = new sparql.Client(app.exports.set('sparql endpoint')),
         embedded = false;
@@ -37,6 +37,14 @@ queryEndPoint = function (params, response) {
             error = 'Error: ' + err[1].statusCode;
         } else {
             // 1.- Cache the result
+
+            if (cache) {
+                cache.set(key, res, 10000, function (err, result) {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
 
             // TODO
 
@@ -69,7 +77,8 @@ exports.dataViewer = function (request, response) {
 
     var params = request.query,
         embedded = false,
-        cache;
+        cache,
+        key;
 
     if (!params.query) {
         // Invalid request
@@ -95,7 +104,8 @@ exports.dataViewer = function (request, response) {
     cache = app.exports.set('memcached');
 
     if (cache) {
-        cache.get(sha1(params.query), function (err, res) {
+        key = sha1(params.query);
+        cache.get(key, function (err, res) {
             if (err) {
                 console.error(err);
             } else {
@@ -103,12 +113,12 @@ exports.dataViewer = function (request, response) {
                     renderResults(response, false, res);
                 } else {
                     // Nothing in cache
-                    queryEndPoint(params, response);
+                    queryEndPoint(params, response, cache, key);
                 }
             }
         });
         return;
     }
 
-    queryEndPoint(params, response);
+    queryEndPoint(params, response, false);
 };

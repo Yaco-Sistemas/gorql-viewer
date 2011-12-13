@@ -6,8 +6,27 @@
  */
 
 var express = require('express'),
+    Memcached = require('memcached'),
     viewer = require('./routes/viewer'),
-    app = module.exports = express.createServer();
+    app = module.exports = express.createServer(),
+    initMemcached;
+
+// Utilities
+
+initMemcached = function (client, server, app) {
+    // TODO what if there are more than just one server
+    client.connect(server, function (err, conn) {
+        if (err) {
+            console.error('Error connecting to memcached');
+            console.error(err);
+            console.error('Cache won\'t be available');
+            app.set('memcached', null);
+        } else {
+            console.log('Connected to memcached');
+            console.log(conn.server);
+        }
+    });
+};
 
 // Configuration
 
@@ -25,16 +44,21 @@ app.configure(function () {
 
 app.configure('development', function () {
     "use strict";
+    var cache = new Memcached('localhost:11211');
     app.use(express.errorHandler({
         dumpExceptions: true,
         showStack: true
     }));
     app.set('sparql endpoint', 'http://dbpedia.org/sparql');
+    app.set('memcached', cache);
 });
 
 app.configure('production', function () {
     "use strict";
+    var cache = new Memcached('localhost:11211');  // TODO
     app.use(express.errorHandler());
+    app.set('sparql endpoint', 'http://dbpedia.org/sparql');  // TODO
+    app.set('memcached', cache);
 });
 
 // Routes

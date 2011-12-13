@@ -1,8 +1,60 @@
 /*jslint vars: false, node: true */
 /*global */
 
-var sparql = require('sparql'),
-    app = require.main;
+var app = require.main,
+    sparql = require('sparql'),
+    sha1 = require('sha1'),
+    renderResults,
+    queryEndPoint;
+
+// Utils
+
+renderResults = function (response, error, results) {
+    "use strict";
+    response.render('viewer.html', {
+        layout: false,
+        locals: {
+            error: error,
+            results: results
+        }
+    });
+};
+
+queryEndPoint = function (params, response) {
+    "use strict";
+    var client = new sparql.Client(app.exports.set('sparql endpoint')),
+        embedded = false;
+
+    if (params.embedded) {
+        embedded = true;
+    }
+
+    client.rows(params.query, function (err, res) {
+        var error = false;
+
+        if (res === undefined && err) {
+            console.error(err);
+            error = 'Error: ' + err[1].statusCode;
+        } else {
+            // 1.- Cache the result
+
+            // TODO
+
+            // 2.- Generate graphic representation if not embedded
+
+            if (embedded) {
+                // TODO response data in json
+                return;
+            }
+
+            // TODO generate graphics
+        }
+
+        // 3.- Return the json or the html response to the client
+
+        renderResults(response, error, res);
+    });
+};
 
 /*
  * GET data viewer.
@@ -17,16 +69,12 @@ exports.dataViewer = function (request, response) {
 
     var params = request.query,
         embedded = false,
-        client;
+        cache;
 
     if (!params.query) {
         // Invalid request
         response.send('Missing query', 400);
         return;
-    }
-
-    if (params.embedded) {
-        embedded = true;
     }
 
     // 2.- Query the SPARQL endpoint checking previously if the query was
@@ -44,33 +92,23 @@ exports.dataViewer = function (request, response) {
     params.query += 'FILTER (?population > 15000000 && langMatches(lang(?country_name), "ES")) .';
     params.query += '}';
 
-    client = new sparql.Client(app.exports.set('sparql endpoint'));
-    client.rows(params.query, function (err, res) {
-        var error = false;
+    cache = app.exports.set('memcached');
 
-        if (res === undefined && err) {
-            console.log(err);
-            error = 'Error: ' + err[1].statusCode;
-        } else {
-
-            // TODO
-
-            // 3.- Generate graphic representation if not embedded
-
-            if (embedded) {
-                // TODO response data in json
-                return;
+    if (cache) {
+        cache.get(sha1(params.query), function (err, res) {
+            if (err) {
+                console.error(err);
+            } else {
+                if (res !== false) {
+                    renderResults(response, false, res);
+                } else {
+                    // Nothing in cache
+                    queryEndPoint(params, response);
+                }
             }
-
-            // TODO generate graphics
-        }
-
-        // 4.- Return the json or the html response to the client
-
-        response.render('viewer.html', {
-            layout: false,
-            error: error,
-            data: res
         });
-    });
+        return;
+    }
+
+    queryEndPoint(params, response);
 };

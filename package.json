@@ -5,6 +5,8 @@
     "dependencies": {
         "express": "2.5.1",
         "jqtpl": "1.0.7",
-        "sparql": ">= 0.0.1"
+        "memcached": "0.0.5",
+        "sparql": ">= 0.0.1",
+        "sha1": "0.0.1"
     }
 }

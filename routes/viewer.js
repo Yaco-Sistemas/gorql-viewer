@@ -6,7 +6,8 @@ var app = require.main,
     sha1 = require('sha1'),
     resultsToMatrix,
     renderResults,
-    queryEndPoint;
+    queryEndPoint,
+    getQueryEndPointCallback;
 
 // Utilities
 
@@ -34,34 +35,51 @@ resultsToMatrix = function (results) {
     return matrix;
 };
 
-renderResults = function (response, error, results) {
+renderResults = function (response, params, error, results) {
     "use strict";
 
-    // 1.- Get the values from the array of objects
-
-    results = resultsToMatrix(results);
-
-    // 2.- Render the results
-
-    response.render('viewer.html', {
-        layout: false,
-        locals: {
-            error: error,
-            results: results
-        }
-    });
-};
-
-queryEndPoint = function (params, response, cache, key) {
-    "use strict";
-    var client = new sparql.Client(app.exports.set('sparql endpoint')),
-        embedded = false;
+    var embedded = false;
 
     if (params.embedded) {
         embedded = true;
     }
 
-    client.rows(params.query, function (err, res) {
+    // 1.- Get the values from the array of objects
+
+    results = resultsToMatrix(results);
+
+    if (embedded) {
+
+        // 2.- Render JSON results
+
+        // TODO
+
+    } else {
+
+        // 2.- Render HTML response
+
+        response.render('viewer.html', {
+            layout: false,
+            locals: {
+                error: error,
+                results: results
+            }
+        });
+    }
+};
+
+queryEndPoint = function (query, callback) {
+    "use strict";
+
+    var client = new sparql.Client(app.exports.set('sparql endpoint'));
+    // TODO reuse client?
+    client.rows(query, callback);
+};
+
+getQueryEndPointCallback = function (response, params, cache, key) {
+    "use strict";
+
+    return function (err, res) {
         var error = false;
 
         if (res === undefined && err) {
@@ -73,28 +91,19 @@ queryEndPoint = function (params, response, cache, key) {
             // 1.- Cache the result
 
             if (cache) {
-                cache.set(key, res, 10000, function (err, result) {
-                    if (err) {
+                cache.set(key, res, 10000, function (error) {
+                    if (error) {
                         // Error storing the results in cache, log it
-                        console.error(err);
+                        console.error(error);
                     }
                 });
             }
-
-            // 2.- Generate graphic representation if not embedded
-
-            if (embedded) {
-                // TODO response data in json
-                return;
-            }
-
-            // TODO generate graphics
         }
 
-        // 3.- Return the html response to the client
+        // 2.- Return the html response to the client
 
-        renderResults(response, error, res);
-    });
+        renderResults(response, params, error, res);
+    };
 };
 
 // Process GET petitions
@@ -107,7 +116,6 @@ exports.dataViewer = function (request, response) {
     //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
-        embedded = false,
         cache,
         key;
 
@@ -130,20 +138,20 @@ exports.dataViewer = function (request, response) {
             if (err) {
                 // Meec, error with the cache, query the endpoint then
                 console.error(err);
-                queryEndPoint(params, response, cache, key);
+                queryEndPoint(params.query, getQueryEndPointCallback(response, params, cache, key));
             } else {
                 if (res !== false) {
                     // Got the data from cache
-                    renderResults(response, false, res);
+                    renderResults(response, params, false, res);
                 } else {
                     // Nothing in cache, query the endpoint
-                    queryEndPoint(params, response, cache, key);
+                    queryEndPoint(params.query, getQueryEndPointCallback(response, params, cache, key));
                 }
             }
         });
     } else {
         // No cache, query the endpoint then
-        queryEndPoint(params, response, false);
+        queryEndPoint(params.query, getQueryEndPointCallback(response, params, false));
     }
 
     // Nothing more to do, the callbacks will take care of the response

@@ -3,14 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Data Viewer</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
     <h1>Data Viewer</h1>
     {{if error}}
     <div id="error">${error}</div>
     {{else}}
-    <div id="dv_viewport">
-    <table>
+    <table id="dv_viewport">
     <tbody>
         {{each headers}}
         <th>${$value}</th>
@@ -24,7 +24,6 @@
         {{/each}}
     </tbody>
     </table>
-    </div>
     {{/if}}
 </body>
 </html>

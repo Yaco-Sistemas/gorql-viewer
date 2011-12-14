@@ -8,6 +8,7 @@
 var express = require('express'),
     Memcached = require('memcached'),
     viewer = require('./routes/viewer'),
+    settings = require('./settings'),
     app = module.exports = express.createServer(),
     initMemcached;
 
@@ -45,23 +46,25 @@ app.configure(function () {
 
 app.configure('development', function () {
     "use strict";
-    var cache = new Memcached('localhost:11211');
+    var opts = settings.JSON.development,
+        cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler({
         dumpExceptions: true,
         showStack: true
     }));
-    app.set('sparql endpoint', 'http://dbpedia.org/sparql');
+    app.set('sparql endpoint', opts.sparqlEndpoint);
     app.set('memcached', cache);
-    app.set('memcached lifetime', 60); // seconds
+    app.set('memcached lifetime', opts.memcachedLifetime);
 });
 
 app.configure('production', function () {
     "use strict";
-    var cache = new Memcached('localhost:11211');  // TODO
+    var opts = settings.JSON.production,
+        cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler());
-    app.set('sparql endpoint', 'http://dbpedia.org/sparql');  // TODO
+    app.set('sparql endpoint', opts.sparqlEndpoint);
     app.set('memcached', cache);
-    app.set('memcached lifetime', 1800); // seconds
+    app.set('memcached lifetime', opts.memcachedLifetime);
 });
 
 // Routes

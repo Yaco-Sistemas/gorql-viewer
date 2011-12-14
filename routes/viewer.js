@@ -8,7 +8,7 @@ var app = require.main,
     renderResults,
     queryEndPoint;
 
-// Utils
+// Utilities
 
 resultsToMatrix = function (results) {
     "use strict";
@@ -23,18 +23,26 @@ resultsToMatrix = function (results) {
         newrow = [];
         for (key in row) {
             if (row.hasOwnProperty(key)) {
+                // For every object of the row, get the value
                 newrow.push(row[key].value);
             }
         }
         matrix.push(newrow);
     }
 
+    // The result is a bidimensional matrix with the values instead of objects
     return matrix;
 };
 
 renderResults = function (response, error, results) {
     "use strict";
+
+    // 1.- Get the values from the array of objects
+
     results = resultsToMatrix(results);
+
+    // 2.- Render the results
+
     response.render('viewer.html', {
         layout: false,
         locals: {
@@ -59,18 +67,19 @@ queryEndPoint = function (params, response, cache, key) {
         if (res === undefined && err) {
             console.error(err);
             error = 'Error: ' + err[1].statusCode;
+            res = [];
         } else {
+
             // 1.- Cache the result
 
             if (cache) {
                 cache.set(key, res, 10000, function (err, result) {
                     if (err) {
+                        // Error storing the results in cache, log it
                         console.error(err);
                     }
                 });
             }
-
-            // TODO
 
             // 2.- Generate graphic representation if not embedded
 
@@ -82,15 +91,13 @@ queryEndPoint = function (params, response, cache, key) {
             // TODO generate graphics
         }
 
-        // 3.- Return the json or the html response to the client
+        // 3.- Return the html response to the client
 
         renderResults(response, error, res);
     });
 };
 
-/*
- * GET data viewer.
- */
+// Process GET petitions
 
 exports.dataViewer = function (request, response) {
     "use strict";
@@ -105,7 +112,7 @@ exports.dataViewer = function (request, response) {
         key;
 
     if (!params.query) {
-        // Invalid request
+        // Invalid request, query is mandatory
         response.send('Missing query', 400);
         return;
     }
@@ -128,21 +135,27 @@ exports.dataViewer = function (request, response) {
     cache = app.exports.set('memcached');
 
     if (cache) {
-        key = sha1(params.query);
+        // Look for the response in the cache first
+        key = sha1(params.query); // The query hashed is the key in the cache
         cache.get(key, function (err, res) {
             if (err) {
+                // Meec, error with the cache, query the endpoint then
                 console.error(err);
+                queryEndPoint(params, response, cache, key);
             } else {
                 if (res !== false) {
+                    // Got the data from cache
                     renderResults(response, false, res);
                 } else {
-                    // Nothing in cache
+                    // Nothing in cache, query the endpoint
                     queryEndPoint(params, response, cache, key);
                 }
             }
         });
-        return;
+    } else {
+        // No cache, query the endpoint then
+        queryEndPoint(params, response, false);
     }
 
-    queryEndPoint(params, response, false);
+    // Nothing more to do, the callbacks will take care of the response
 };

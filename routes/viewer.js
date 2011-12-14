@@ -15,6 +15,7 @@ resultsToMatrix = function (results) {
     "use strict";
 
     var matrix = [],
+        headers = [],
         i,
         row,
         newrow,
@@ -25,6 +26,10 @@ resultsToMatrix = function (results) {
         newrow = [];
         for (key in row) {
             if (row.hasOwnProperty(key)) {
+                if (i === 0) {
+                    // First iteration
+                    headers.push(key);
+                }
                 // For every object of the row, get the value
                 newrow.push(row[key].value);
             }
@@ -33,13 +38,17 @@ resultsToMatrix = function (results) {
     }
 
     // The result is a bidimensional matrix with the values instead of objects
-    return matrix;
+    return {
+        matrix: matrix,
+        headers: headers
+    };
 };
 
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var embedded = false;
+    var embedded = false,
+        data;
 
     if (params.embedded) {
         embedded = true;
@@ -47,7 +56,7 @@ renderResults = function (response, params, error, results) {
 
     // 1.- Get the values from the array of objects
 
-    results = resultsToMatrix(results);
+    data = resultsToMatrix(results);
 
     if (embedded) {
 
@@ -63,7 +72,8 @@ renderResults = function (response, params, error, results) {
             layout: false,
             locals: {
                 error: error,
-                results: results
+                results: data.matrix,
+                headers: data.headers
             }
         });
     }

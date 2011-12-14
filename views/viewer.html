@@ -12,6 +12,9 @@
     <div id="dv_viewport">
     <table>
     <tbody>
+        {{each headers}}
+        <th>${$value}</th>
+        {{/each}}
         {{each results}}
         <tr>
             {{each $value}}

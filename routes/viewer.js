@@ -13,6 +13,7 @@ var app = require.main,
 
 resultsToMatrix = function (results) {
     "use strict";
+
     var matrix = [],
         i,
         row,
@@ -52,7 +53,7 @@ renderResults = function (response, params, error, results) {
 
         // 2.- Render JSON results
 
-        // TODO
+        response.send('Not implemented yet', 400); // TODO
 
     } else {
 
@@ -80,7 +81,8 @@ getQueryEndPointCallback = function (response, params, cache, key) {
     "use strict";
 
     return function (err, res) {
-        var error = false;
+        var error = false,
+            lifetime;
 
         if (res === undefined && err) {
             console.error(err);
@@ -91,7 +93,8 @@ getQueryEndPointCallback = function (response, params, cache, key) {
             // 1.- Cache the result
 
             if (cache) {
-                cache.set(key, res, 10000, function (error) {
+                lifetime = app.exports.set('memcached lifetime');
+                cache.set(key, res, lifetime, function (error) {
                     if (error) {
                         // Error storing the results in cache, log it
                         console.error(error);

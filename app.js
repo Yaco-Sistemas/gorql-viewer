@@ -14,6 +14,7 @@ var express = require('express'),
 // Utilities
 
 initMemcached = function (client, server, app) {
+    "use strict";
     // TODO what if there are more than just one server
     client.connect(server, function (err, conn) {
         if (err) {
@@ -51,6 +52,7 @@ app.configure('development', function () {
     }));
     app.set('sparql endpoint', 'http://dbpedia.org/sparql');
     app.set('memcached', cache);
+    app.set('memcached lifetime', 60); // seconds
 });
 
 app.configure('production', function () {
@@ -59,6 +61,7 @@ app.configure('production', function () {
     app.use(express.errorHandler());
     app.set('sparql endpoint', 'http://dbpedia.org/sparql');  // TODO
     app.set('memcached', cache);
+    app.set('memcached lifetime', 1800); // seconds
 });
 
 // Routes

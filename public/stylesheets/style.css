@@ -7,8 +7,8 @@ a {
   color: #00B7FF;
 }
 
-#dv_viewport,
-#dv_viewport tr,
-#dv_viewport td {
+#dv_table,
+#dv_table tr,
+#dv_table td {
     border: 1px solid black;
 }

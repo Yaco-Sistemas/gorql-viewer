@@ -8,9 +8,17 @@
     <div id="error">${error}</div>
     {{else}}
     <div id="dv_viewport">
+    <table>
+    <tbody>
         {{each results}}
-        <p>${$value}</p>
+        <tr>
+            {{each $value}}
+            <td>${$value}</td>
+            {{/each}}
+        </tr>
         {{/each}}
+    </tbody>
+    </table>
     </div>
     {{/if}}
 </body>

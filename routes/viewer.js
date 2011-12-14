@@ -4,13 +4,37 @@
 var app = require.main,
     sparql = require('sparql'),
     sha1 = require('sha1'),
+    resultsToMatrix,
     renderResults,
     queryEndPoint;
 
 // Utils
 
+resultsToMatrix = function (results) {
+    "use strict";
+    var matrix = [],
+        i,
+        row,
+        newrow,
+        key;
+
+    for (i = 0; i < results.length; i += 1) {
+        row = results[i];
+        newrow = [];
+        for (key in row) {
+            if (row.hasOwnProperty(key)) {
+                newrow.push(row[key].value);
+            }
+        }
+        matrix.push(newrow);
+    }
+
+    return matrix;
+};
+
 renderResults = function (response, error, results) {
     "use strict";
+    results = resultsToMatrix(results);
     response.render('viewer.html', {
         layout: false,
         locals: {

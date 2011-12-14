@@ -121,17 +121,6 @@ exports.dataViewer = function (request, response) {
     //     cached in Memcached. If it's not cached, then query the endpoint
     //     and cache the result
 
-    params.query = 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>';
-    params.query += 'PREFIX type: <http://dbpedia.org/class/yago/>';
-    params.query += 'PREFIX prop: <http://dbpedia.org/property/>';
-    params.query += 'SELECT ?country_name ?population';
-    params.query += 'WHERE {';
-    params.query += '?country a type:LandlockedCountries ;';
-    params.query += '         rdfs:label ?country_name ;';
-    params.query += '         prop:populationEstimate ?population .';
-    params.query += 'FILTER (?population > 15000000 && langMatches(lang(?country_name), "ES")) .';
-    params.query += '}';
-
     cache = app.exports.set('memcached');
 
     if (cache) {

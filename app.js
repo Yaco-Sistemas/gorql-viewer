@@ -46,7 +46,7 @@ app.configure(function () {
 
 app.configure('development', function () {
     "use strict";
-    var opts = settings.JSON.development,
+    var opts = settings.settings.development,
         cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler({
         dumpExceptions: true,
@@ -59,7 +59,7 @@ app.configure('development', function () {
 
 app.configure('production', function () {
     "use strict";
-    var opts = settings.JSON.production,
+    var opts = settings.settings.production,
         cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler());
     app.set('sparql endpoint', opts.sparqlEndpoint);

@@ -1,7 +1,7 @@
 /*jslint vars: false, node: true */
 /*global */
 
-exports.JSON = {
+exports.settings = {
     development: {
         sparqlEndpoint: 'http://dbpedia.org/sparql',
         memcachedServer: 'localhost:11211',

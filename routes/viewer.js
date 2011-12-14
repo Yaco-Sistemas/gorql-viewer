@@ -4,10 +4,10 @@
 var app = require.main,
     sparql = require('sparql'),
     sha1 = require('sha1'),
+    sparqlClient,
     resultsToMatrix,
     renderResults,
-    queryEndPoint,
-    getQueryEndPointCallback;
+    sparqlCallback;
 
 // Utilities
 
@@ -79,15 +79,7 @@ renderResults = function (response, params, error, results) {
     }
 };
 
-queryEndPoint = function (query, callback) {
-    "use strict";
-
-    var client = new sparql.Client(app.exports.set('sparql endpoint'));
-    // TODO reuse client?
-    client.rows(query, callback);
-};
-
-getQueryEndPointCallback = function (response, params, cache, key) {
+sparqlCallback = function (response, params, cache, key) {
     "use strict";
 
     return function (err, res) {
@@ -142,6 +134,11 @@ exports.dataViewer = function (request, response) {
     //     cached in Memcached. If it's not cached, then query the endpoint
     //     and cache the result
 
+    // Create the SPARQL client just once
+    if (sparqlClient === undefined) {
+        sparqlClient = new sparql.Client(app.exports.set('sparql endpoint'));
+    }
+
     cache = app.exports.set('memcached');
 
     if (cache) {
@@ -151,20 +148,20 @@ exports.dataViewer = function (request, response) {
             if (err) {
                 // Meec, error with the cache, query the endpoint then
                 console.error(err);
-                queryEndPoint(params.query, getQueryEndPointCallback(response, params, cache, key));
+                sparqlClient.rows(params.query, sparqlCallback(response, params, cache, key));
             } else {
                 if (res !== false) {
                     // Got the data from cache
                     renderResults(response, params, false, res);
                 } else {
                     // Nothing in cache, query the endpoint
-                    queryEndPoint(params.query, getQueryEndPointCallback(response, params, cache, key));
+                    sparqlClient.rows(params.query, sparqlCallback(response, params, cache, key));
                 }
             }
         });
     } else {
         // No cache, query the endpoint then
-        queryEndPoint(params.query, getQueryEndPointCallback(response, params, false));
+        sparqlClient.rows(params.query, sparqlCallback(response, params, false));
     }
 
     // Nothing more to do, the callbacks will take care of the response

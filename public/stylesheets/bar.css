@@ -1,0 +1,29 @@
+#dv_viewport {
+    font: 10px sans-serif;
+}
+
+#dv_viewport .bar rect {
+    fill: steelblue;
+    stroke: white;
+}
+
+#dv_viewport .bar text.value {
+    fill: white;
+}
+
+#dv_viewport .axis {
+    shape-rendering: crispEdges;
+}
+
+#dv_viewport .axis path {
+    fill: none;
+}
+
+#dv_viewport .x.axis line {
+    stroke: #fff;
+    stroke-opacity: .8;
+}
+
+#dv_viewport .y.axis path {
+    stroke: black;
+}

@@ -12,3 +12,9 @@ a {
 #dv_table td {
     border: 1px solid black;
 }
+
+#dv_query {
+    background: #EEE;
+    padding: 5px;
+    border: 1px solid #555;
+}

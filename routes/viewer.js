@@ -73,7 +73,9 @@ renderResults = function (response, params, error, results) {
             locals: {
                 error: error,
                 results: data.matrix,
-                headers: data.headers
+                headers: data.headers,
+                query: params.query,
+                graph: params.graph
             }
         });
     }
@@ -121,6 +123,7 @@ exports.dataViewer = function (request, response) {
     //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
+        graph = false,
         cache,
         key;
 
@@ -128,6 +131,26 @@ exports.dataViewer = function (request, response) {
         // Invalid request, query is mandatory
         response.send('Missing query', 400);
         return;
+    }
+
+    if (params.graph) {
+        graph = {};
+
+        // Process graph params
+        if (params.graph == 'bar') {
+            graph.type = 'bar'
+            // - xaxis -> must be a name
+            // - yaxis -> must be a name
+
+            // TODO
+        } else {
+            // Don't support the type
+            graph = false;
+        }
+
+        params.graph = graph;
+    } else {
+        params.graph = false;
     }
 
     // 2.- Query the SPARQL endpoint checking previously if the query was

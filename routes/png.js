@@ -29,7 +29,8 @@ renderResults = function (response, params, error, results) {
     var data,
         convert,
         i,
-        aux;
+        aux,
+        buffer;
 
     data = commons.resultsToMatrix(results);
 
@@ -40,13 +41,29 @@ renderResults = function (response, params, error, results) {
     convert = convertSVG(params.chart, aux);
     response.header("Content-Type", "image/png");
 
-    // Write the output of convert straight to the response
+    // Write the output of convert in an intermediate buffer
     convert.stdout.on('data', function (data) {
-        response.write(data);
+        try {
+            var prevBufferLength = (buffer ? buffer.length : 0),
+                newBuffer = new Buffer(prevBufferLength + data.length);
+
+            if (buffer) {
+                buffer.copy(newBuffer, 0, 0);
+            }
+
+            data.copy(newBuffer, prevBufferLength, 0);
+
+            buffer = newBuffer;
+        } catch (err) {
+            // Log it
+            console.error(err);
+            response.send('An error happend: ' + err, 500);
+        }
     });
 
-    // When we're done rendering, we're done
+    // When we're done buffering, write it to the response and we're done
     convert.on('exit', function (code) {
+        response.write(buffer);
         response.end();
     });
 };

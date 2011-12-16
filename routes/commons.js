@@ -5,6 +5,8 @@ var app = require.main,
     sparql = require('sparql'),
     sha1 = require('sha1'),
     uaParser = require('ua-parser'),
+    cssom = require('cssom'),
+    readFileSync = require('fs').readFileSync,
     sparqlClient,
     sparqlCallback;
 
@@ -165,7 +167,9 @@ exports.generateSVG = function (chart, data) {
     "use strict";
 
     var generator = require("../public/javascripts/" + chart.type),
-        svg = generator.chart(data, {});
+        svg = generator.chart(data, {}),
+        // fs uses relative paths to the root of the project, where is being executed node
+        styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8');
 
     // TODO embed styles
 

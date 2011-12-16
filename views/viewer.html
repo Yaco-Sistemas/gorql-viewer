@@ -4,11 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Data Viewer</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    {{if graph}}
+    {{if chart && !chart.png}}
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/d3.js"></script>
-    <script type="text/javascript" src="/javascripts/${graph.type}.js"></script>
-    <link rel="stylesheet" href="/stylesheets/${graph.type}.css" />
+    <script type="text/javascript" src="/javascripts/${chart.type}.js"></script>
+    <link rel="stylesheet" href="/stylesheets/${chart.type}.css" />
     <script type="text/javascript">
         $(document).ready(function () {
             DV.chart("#dv_viewport",
@@ -23,7 +23,11 @@
     {{if error}}
     <div id="error">${error}</div>
     {{else}}
-    <div id="dv_viewport"></div>
+    <div id="dv_viewport">
+    {{if chart && chart.png}}
+    <img src="/png/?query=${encoded_query}&chart=${chart.type}" />
+    {{/if}}
+    </div>
     <table id="dv_table">
     <thead>
         {{each headers}}

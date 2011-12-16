@@ -9,8 +9,7 @@ var commons = require('./commons'),
 convertSVG = function (chart, data) {
     "use strict";
 
-    var generator = require("../public/javascripts/" + chart.type),
-        svg = generator.chart(data, {}),
+    var svg = commons.generateSVG(chart, data),
         convert;
 
     // Start convert reading in an svg and outputting a png
@@ -70,7 +69,7 @@ renderResults = function (response, params, error, results) {
 
 // Get the data, generate chart in SVG, convert it to PNG, and return the image
 
-exports.png = function (request, response) {
+exports.get = function (request, response) {
     "use strict";
 
     var params = request.query;

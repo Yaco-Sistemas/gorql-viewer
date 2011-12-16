@@ -158,3 +158,16 @@ exports.resultsToMatrix = function (results) {
         headers: headers
     };
 };
+
+// Generate SVG using d3
+
+exports.generateSVG = function (chart, data) {
+    "use strict";
+
+    var generator = require("../public/javascripts/" + chart.type),
+        svg = generator.chart(data, {});
+
+    // TODO embed styles
+
+    return svg;
+};

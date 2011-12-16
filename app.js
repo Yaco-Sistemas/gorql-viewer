@@ -9,6 +9,7 @@ var express = require('express'),
     Memcached = require('memcached'),
     viewer = require('./routes/viewer'),
     png = require('./routes/png'),
+    svg = require('./routes/svg'),
     settings = require('./settings'),
     app = module.exports = express.createServer(),
     initMemcached;
@@ -71,7 +72,8 @@ app.configure('production', function () {
 // Routes
 
 app.get('/viewer/', viewer.dataViewer);
-app.get('/png/', png.png);
+app.get('/png/', png.get);
+app.get('/svg/', svg.get);
 
 // Start server
 

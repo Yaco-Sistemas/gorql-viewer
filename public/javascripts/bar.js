@@ -40,14 +40,14 @@ var DV = (function () {
     };
 }());
 
-if (exports === undefined) {
-    // Browser
-    exports = {};
-} else {
+if (typeof module !== 'undefined' && module.exports) {
     // Node
     var window,
         document,
         d3;
+} else {
+    // Browser
+    window.exports = {};
 }
 
 exports.chart = function (data, options) {
@@ -55,7 +55,8 @@ exports.chart = function (data, options) {
 
     var jsdom = require("jsdom").jsdom;
     document = jsdom("<html><head></head><body></body></html>");
-    d3 = require("d3")(document);
+    window = document.createWindow();
+    d3 = require("./d3")(window, document);
     DV.node(data, options);
-    console.log(document.body.innerHTML);
+    return document.body.innerHTML;
 };

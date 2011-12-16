@@ -1,9 +1,8 @@
-var d3 = function (document) {
+var d3 = function (window, document) {
 
   if (typeof module !== 'undefined' && module.exports) {
-    var window = document.createWindow();
-    var Sizzle = require('sizzle');
-    var navigator = {userAgent: 'node'};
+    window.navigator = {userAgent: 'node'};
+    var Sizzle = require('./sizzle');
   }
 
   return (function(){if (!Date.now) Date.now = function() {
@@ -3663,7 +3662,7 @@ d3.svg.mouse = function(container) {
 };
 
 // https://bugs.webkit.org/show_bug.cgi?id=44083
-var d3_mouse_bug44083 = /WebKit/.test(navigator.userAgent) ? -1 : 0;
+var d3_mouse_bug44083 = /WebKit/.test(window.navigator.userAgent) ? -1 : 0;
 
 function d3_svg_mousePoint(container, e) {
   var point = (container.ownerSVGElement || container).createSVGPoint();
@@ -4704,5 +4703,5 @@ function d3_behavior_zoomExtentClamp(x, i, k) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = d3;
 } else {
-  window.d3 = d3(document);
+  window.d3 = d3(window, document);
 }

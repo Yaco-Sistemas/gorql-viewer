@@ -7,6 +7,8 @@
 (function(){
 if (typeof module !== 'undefined' && module.exports) {
     var document = require("jsdom").jsdom();
+} else {
+    var document = window.document;
 }
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

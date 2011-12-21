@@ -22,20 +22,3 @@
 #dv_viewport .bar line {
     stroke: #CCC;
 }
-
-#dv_viewport .axis {
-    shape-rendering: crispEdges;
-}
-
-#dv_viewport .axis path {
-    fill: none;
-}
-
-#dv_viewport .x.axis line {
-    stroke: #fff;
-    stroke-opacity: .8;
-}
-
-#dv_viewport .y.axis path {
-    stroke: black;
-}

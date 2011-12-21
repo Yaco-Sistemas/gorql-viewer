@@ -76,7 +76,7 @@ exports.processPetition = function (request, response, renderCallback) {
         }
 
         // Process chart params
-        if (params.chart === 'bar') {
+        if (params.chart === 'bar' && params.labels !== undefined && params.values !== undefined) {
             chart.type = 'bar';
             defaults = app.exports.set('bar');
             // - labels -> must be a text selected property

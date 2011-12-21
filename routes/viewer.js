@@ -2,6 +2,7 @@
 /*global */
 
 var commons = require('./commons'),
+    reservedWords = ["PREFIX", "SELECT", "WHERE", "FILTER"], // TODO
     renderResults;
 
 renderResults = function (response, params, error, results) {
@@ -13,6 +14,8 @@ renderResults = function (response, params, error, results) {
             values: []
         },
         data,
+        query,
+        regex,
         i;
 
     if (params.embedded) {
@@ -41,13 +44,20 @@ renderResults = function (response, params, error, results) {
 
         // 2.- Render regular HTML response
 
+        query = params.query;
+        for (i = 0; i < reservedWords.length; i += 1) {
+            regex = new RegExp("(" + reservedWords[i] + ")", 'g');
+            query = query.replace(regex, "\n$1");
+        }
+        query = query.replace(/^\s+|\s+$/g, '');
+
         response.render('viewer.html', {
             layout: false,
             locals: {
                 error: error,
                 results: data.matrix,
                 headers: data.headers,
-                query: params.query,
+                query: query,
                 encoded_query: encodeURIComponent(params.query),
                 chart: params.chart
             }

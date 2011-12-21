@@ -15,7 +15,6 @@
                 [{{each(idx, value) chart.data.labels}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
                 [{{each(idx, value) chart.data.values}}{{if idx != 0}}, {{/if}}${value}{{/each}}],
                 {
-                    title: "Data viewer",
                     landscape: ${chart.landscape},
                     sizeX: ${chart.sizeX},
                     sizeY:${chart.sizeY}
@@ -50,9 +49,9 @@
         {{/each}}
     </tbody>
     </table>
-    <p id="dv_query">
+    <pre id="dv_query">
     ${query}
-    </p>
+    </pre>
     {{/if}}
 </body>
 </html>

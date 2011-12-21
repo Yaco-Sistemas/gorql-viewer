@@ -7,7 +7,8 @@ var DV = (function () {
     var svg,
         scale,
         size = 500,
-        config = {
+        config,
+        portrait = {
             rectWidth: 20,
             rectHeight: function (d, i) {
                 return scale(d);
@@ -22,11 +23,16 @@ var DV = (function () {
                 return (i * 20) + 10;
             },
             textY: function (d, i) {
-                return 500 - (scale(d) / 2);
+                return 500;
             },
-            textDX: 0,
-            textDY: 0,
-            textTAnchor: ""
+            textDX: 3,
+            textDY: ".35em",
+            textTAnchor: "",
+            textTransform: function (d, i) {
+                var x = (i * 20) + 10,
+                    y = 500;
+                return "rotate(-90 " + x + " " + y + ")";
+            }
         },
         landscape = {
             rectHeight: 20,
@@ -45,7 +51,8 @@ var DV = (function () {
             },
             textDX: -3,
             textDY: ".35em",
-            textTAnchor: "end"
+            textTAnchor: "end",
+            textTransform: ""
         },
 
         render = function (data) {
@@ -65,6 +72,7 @@ var DV = (function () {
                 .attr("dx", config.textDX)
                 .attr("dy", config.textDY)
                 .attr("text-anchor", config.textTAnchor)
+                .attr("transform", config.textTransform)
                 .text(String);
         },
 
@@ -77,6 +85,8 @@ var DV = (function () {
                 config = landscape;
                 height = 20 * values.length;
                 width = size;
+            } else {
+                config = portrait;
             }
 
             svg = d3.select(container).append("svg:svg")

@@ -87,7 +87,7 @@ exports.processPetition = function (request, response, renderCallback) {
             if (params.landscape === undefined) {
                 chart.landscape = defaults.landscape;
             } else {
-                chart.landscape = params.landscape;
+                chart.landscape = (params.landscape === "true");
             }
         } else {
             // Don't support the type

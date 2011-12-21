@@ -23,14 +23,14 @@ var DV = (function () {
                 return (i * 20) + 10;
             },
             textY: function (d, i) {
-                return 500;
+                return 500 - scale(d);
             },
-            textDX: 3,
+            textDX: -3,
             textDY: ".35em",
-            textTAnchor: "",
+            textTAnchor: "end",
             textTransform: function (d, i) {
                 var x = (i * 20) + 10,
-                    y = 500;
+                    y = 500 - scale(d);
                 return "rotate(-90 " + x + " " + y + ")";
             }
         },

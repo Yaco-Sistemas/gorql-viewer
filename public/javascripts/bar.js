@@ -41,6 +41,21 @@ var DV = (function () {
                 var x = portrait.textX(d, i),
                     y = portrait.textY(d, i);
                 return "rotate(-90 " + x + " " + y + ")";
+            },
+            lineTicks: function () {
+                return scale.y.ticks(10);
+            },
+            lineX1: function () {
+                return 0;
+            },
+            lineX2: function () {
+                return size.x;
+            },
+            lineY1: function () {
+                return scale.y;
+            },
+            lineY2: function () {
+                return scale.y;
             }
         },
         landscape = {
@@ -63,10 +78,34 @@ var DV = (function () {
             textDX: -10,
             textDY: ".35em",
             textTAnchor: "end",
-            textTransform: ""
+            textTransform: "",
+            lineTicks: function () {
+                return scale.x.ticks(10);
+            },
+            lineX1: function () {
+                return scale.x;
+            },
+            lineX2: function () {
+                return scale.x;
+            },
+            lineY1: function () {
+                return 0;
+            },
+            lineY2: function () {
+                return size.y;
+            }
         },
 
         render = function (data) {
+            svg.selectAll("line")
+                .data(config.lineTicks())
+                .enter().append("svg:line")
+                .attr("x1", config.lineX1())
+                .attr("x2", config.lineX2())
+                .attr("y1", config.lineY1())
+                .attr("y2", config.lineY2())
+                .attr("stroke", "#ccc");
+
             svg.selectAll("rect")
                 .data(data)
                 .enter().append("svg:rect")
@@ -119,6 +158,8 @@ var DV = (function () {
                 .attr("class", "chart bar")
                 .attr("width", size.x)
                 .attr("height", size.y);
+//                 .append("svg:g")
+//                 .attr("transform", "translate(10,15)");
 
             render(values);
         },

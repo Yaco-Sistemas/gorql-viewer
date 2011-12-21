@@ -170,23 +170,28 @@ exports.generateSVG = function (chart, data) {
 
     var generator = require("../public/javascripts/" + chart.type),
         svg = generator.chart(data, {}),
-        // fs uses relative paths to the root of the project, where is being executed node
+        // FS uses relative paths to the root of the project, where is being executed node
         styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8'),
-        document = jsdom("<html><head></head><body>" + svg + "</body></html>"),
+        // Use jsdom to create a fake document so we can use sizzle later
+        document = jsdom("<html><head></head><body><div id='dv_viewport'>" + svg + "</div></body></html>"),
         rule,
-        i,
         elems,
+        i,
         j;
 
+    // Parse the css and get the rules
     styles = cssom.parse(styles).cssRules;
 
     for (i = 0; i < styles.length; i += 1) {
         rule = styles[i];
+        // Use sizzle to get the nodes affected by the css rule
         elems = sizzle(rule.selectorText, document);
         for (j = 0; j < elems.length; j += 1) {
+            // Set the style for every element affected
             elems[j].style.cssText += ' ' + rule.style.cssText;
         }
     }
 
-    return document.body.innerHTML;
+    // ChildNodes[0] because the svg is inside the div viewport node
+    return document.body.childNodes[0].innerHTML;
 };

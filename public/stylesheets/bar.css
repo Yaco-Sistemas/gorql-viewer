@@ -7,8 +7,16 @@
     stroke: white;
 }
 
-#dv_viewport .bar text {
+#dv_viewport .bar text.value {
     fill: white;
+}
+
+#dv_viewport .bar text.rule {
+    fill: #CCC;
+}
+
+#dv_viewport .bar line {
+    stroke: #CCC;
 }
 
 #dv_viewport .axis {

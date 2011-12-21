@@ -52,11 +52,15 @@ var DV = (function () {
                 return size.x;
             },
             lineY1: function () {
-                return scale.y;
+                return function (i) {
+                    return size.y - scale.y(i);
+                };
             },
             lineY2: function () {
-                return scale.y;
-            }
+                return portrait.lineY1();
+            },
+            lineDX: 0,
+            lineDY: -3
         },
         landscape = {
             rectHeight: function () {
@@ -93,7 +97,9 @@ var DV = (function () {
             },
             lineY2: function () {
                 return size.y;
-            }
+            },
+            lineDX: 5,
+            lineDY: 10
         },
 
         render = function (data) {
@@ -103,8 +109,18 @@ var DV = (function () {
                 .attr("x1", config.lineX1())
                 .attr("x2", config.lineX2())
                 .attr("y1", config.lineY1())
-                .attr("y2", config.lineY2())
-                .attr("stroke", "#ccc");
+                .attr("y2", config.lineY2());
+
+            svg.selectAll("text.rule")
+                .data(config.lineTicks())
+                .enter().append("svg:text")
+                .attr("class", "rule")
+                .attr("x", config.lineX1())
+                .attr("y", config.lineY1())
+                .attr("dx", config.lineDX)
+                .attr("dy", config.lineDY)
+                .attr("text-anchor", "start")
+                .text(String);
 
             svg.selectAll("rect")
                 .data(data)
@@ -114,9 +130,10 @@ var DV = (function () {
                 .attr("width", config.rectWidth)
                 .attr("height", config.rectHeight);
 
-            svg.selectAll("text")
+            svg.selectAll("text.value")
                 .data(data)
                 .enter().append("svg:text")
+                .attr("class", "value")
                 .attr("x", config.textX)
                 .attr("y", config.textY)
                 .attr("dx", config.textDX)

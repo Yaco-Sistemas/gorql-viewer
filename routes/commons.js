@@ -6,6 +6,8 @@ var app = require.main,
     sha1 = require('sha1'),
     uaParser = require('ua-parser'),
     cssom = require('cssom'),
+    sizzle = require('../public/javascripts/sizzle'),
+    jsdom = require('jsdom').jsdom,
     readFileSync = require('fs').readFileSync,
     sparqlClient,
     sparqlCallback;
@@ -169,9 +171,22 @@ exports.generateSVG = function (chart, data) {
     var generator = require("../public/javascripts/" + chart.type),
         svg = generator.chart(data, {}),
         // fs uses relative paths to the root of the project, where is being executed node
-        styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8');
+        styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8'),
+        document = jsdom("<html><head></head><body>" + svg + "</body></html>"),
+        rule,
+        i,
+        elems,
+        j;
 
-    // TODO embed styles
+    styles = cssom.parse(styles).cssRules;
 
-    return svg;
+    for (i = 0; i < styles.length; i += 1) {
+        rule = styles[i];
+        elems = sizzle(rule.selectorText, document);
+        for (j = 0; j < elems.length; j += 1) {
+            elems[j].style.cssText += ' ' + rule.style.cssText;
+        }
+    }
+
+    return document.body.innerHTML;
 };

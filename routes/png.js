@@ -29,7 +29,7 @@ renderResults = function (response, params, error, results) {
         convert,
         i,
         aux,
-        buffer;
+        buffer = '';
 
     data = commons.resultsToMatrix(results);
 

@@ -5,51 +5,62 @@ var DV = (function () {
     "use strict";
 
     var svg,
-        scale,
-        size = 500,
+        elems,
+        scale = {
+            x: null,
+            y: null
+        },
+        size = {
+            x: null,
+            y: null
+        },
         config,
         portrait = {
-            rectWidth: 20,
+            rectWidth: function () {
+                return size.x / elems;
+            },
             rectHeight: function (d, i) {
-                return scale(d);
+                return scale.y(d);
             },
             rectX: function (d, i) {
-                return i * 20;
+                return scale.x(i);
             },
             rectY: function (d, i) {
-                return 500 - scale(d);
+                return size.y - portrait.rectHeight(d, i);
             },
             textX: function (d, i) {
-                return (i * 20) + 10;
+                return portrait.rectX(d, i) + (portrait.rectWidth() / 2);
             },
             textY: function (d, i) {
-                return 500 - scale(d);
+                return size.y - portrait.rectHeight(d, i);
             },
-            textDX: -3,
+            textDX: -10,
             textDY: ".35em",
             textTAnchor: "end",
             textTransform: function (d, i) {
-                var x = (i * 20) + 10,
-                    y = 500 - scale(d);
+                var x = portrait.textX(d, i),
+                    y = portrait.textY(d, i);
                 return "rotate(-90 " + x + " " + y + ")";
             }
         },
         landscape = {
-            rectHeight: 20,
+            rectHeight: function () {
+                return size.y / elems;
+            },
             rectWidth: function (d, i) {
-                return scale(d);
+                return scale.x(d);
             },
             rectY: function (d, i) {
-                return i * 20;
+                return scale.y(i);
             },
             rectX: 0,
             textY: function (d, i) {
-                return (i * 20) + 10;
+                return landscape.rectY(d, i) + (landscape.rectHeight() / 2);
             },
             textX: function (d, i) {
-                return scale(d);
+                return landscape.rectWidth(d, i);
             },
-            textDX: -3,
+            textDX: -10,
             textDY: ".35em",
             textTAnchor: "end",
             textTransform: ""
@@ -78,25 +89,36 @@ var DV = (function () {
 
         init = function (container, labels, values, options) {
             var i,
-                width = 20 * values.length,
-                height = size;
+                width,
+                height;
+
+            elems = values.length;
+
+            size.x = options.sizeX;
+            size.y = options.sizeY;
 
             if (options.landscape) {
                 config = landscape;
-                height = 20 * values.length;
-                width = size;
+                scale.x = d3.scale.linear()
+                    .domain([0, d3.max(values)])
+                    .range([0, size.x]);
+                scale.y = d3.scale.linear()
+                    .domain([0, values.length])
+                    .range([0, size.y]);
             } else {
                 config = portrait;
+                scale.x = d3.scale.linear()
+                    .domain([0, values.length])
+                    .range([0, size.x]);
+                scale.y = d3.scale.linear()
+                    .domain([0, d3.max(values)])
+                    .range([0, size.y]);
             }
 
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart bar")
-                .attr("width", width)
-                .attr("height", height);
-
-            scale = d3.scale.linear()
-                .domain([0, d3.max(values)])
-                .range([0, size]);
+                .attr("width", size.x)
+                .attr("height", size.y);
 
             render(values);
         },

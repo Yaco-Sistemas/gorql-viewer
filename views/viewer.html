@@ -16,7 +16,9 @@
                 [{{each(idx, value) chart.data.values}}{{if idx != 0}}, {{/if}}${value}{{/each}}],
                 {
                     title: "Data viewer",
-                    landscape: ${chart.landscape}
+                    landscape: ${chart.landscape},
+                    sizeX: ${chart.sizeX},
+                    sizeY:${chart.sizeY}
                 });
         });
     </script>

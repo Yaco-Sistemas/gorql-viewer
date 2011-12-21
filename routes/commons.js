@@ -82,6 +82,8 @@ exports.processPetition = function (request, response, renderCallback) {
             // - labels -> must be a text selected property
             // - values -> must be a numerical selected property
             // - landscape -> must be boolean
+            // - sizeX -> in pixels
+            // - sizeY -> in pixels
             chart.labels = params.labels;
             chart.values = params.values;
             if (params.landscape === undefined) {
@@ -89,6 +91,8 @@ exports.processPetition = function (request, response, renderCallback) {
             } else {
                 chart.landscape = (params.landscape === "true");
             }
+            chart.sizeX = params.sizeX || defaults.sizeX;
+            chart.sizeY = params.sizeY || defaults.sizeY;
         } else {
             // Don't support the type
             chart = false;

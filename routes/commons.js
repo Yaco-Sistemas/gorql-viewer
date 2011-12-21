@@ -92,7 +92,11 @@ exports.processPetition = function (request, response, renderCallback) {
                 chart.landscape = (params.landscape === "true");
             }
             chart.sizeX = params.sizeX || defaults.sizeX;
+            chart.sizeX = parseInt(chart.sizeX, 10);
             chart.sizeY = params.sizeY || defaults.sizeY;
+            chart.sizeY = parseInt(chart.sizeY, 10);
+            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
+            chart.sizeLabel = parseInt(chart.sizeLabel, 10);
         } else {
             // Don't support the type
             chart = false;

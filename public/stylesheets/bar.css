@@ -15,6 +15,10 @@
     fill: #CCC;
 }
 
+#dv_viewport .bar text.label {
+    fill: black;
+}
+
 #dv_viewport .bar line {
     stroke: #CCC;
 }

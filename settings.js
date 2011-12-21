@@ -9,7 +9,8 @@ exports.settings = {
         bar: {
             landscape: false,
             sizeX: 500,
-            sizeY: 500
+            sizeY: 500,
+            sizeLabel: 70
         }
     },
 
@@ -20,7 +21,8 @@ exports.settings = {
         bar: {
             landscape: false,
             sizeX: 500,
-            sizeY: 500
+            sizeY: 500,
+            sizeLabel: 70
         }
     }
 };

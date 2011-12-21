@@ -60,7 +60,19 @@ var DV = (function () {
                 return portrait.lineY1();
             },
             lineDX: 0,
-            lineDY: -3
+            lineDY: -3,
+            labelX: function (d, i) {
+                return portrait.textX(d, i);
+            },
+            labelY: function (d, i) {
+                return size.y + size.offset;
+            },
+            labelTransform: function (d, i) {
+                var x = portrait.labelX(d, i),
+                    y = portrait.labelY(d, i);
+                return "rotate(-90 " + x + " " + y + ")";
+            },
+            labelDX: 0
         },
         landscape = {
             rectHeight: function () {
@@ -99,10 +111,19 @@ var DV = (function () {
                 return size.y;
             },
             lineDX: 5,
-            lineDY: 10
+            lineDY: 10,
+            labelX: function (d, i) {
+                return -1 * size.offset;
+            },
+            labelY: function (d, i) {
+                return landscape.textY(d, i);
+            },
+            labelTransform: "",
+            labelDX: 0
         },
 
-        render = function (data) {
+        render = function (labels, data) {
+            // Paint aux lines that help measuring
             svg.selectAll("line")
                 .data(config.lineTicks())
                 .enter().append("svg:line")
@@ -111,6 +132,7 @@ var DV = (function () {
                 .attr("y1", config.lineY1())
                 .attr("y2", config.lineY2());
 
+            // Paint the name of the helping lines
             svg.selectAll("text.rule")
                 .data(config.lineTicks())
                 .enter().append("svg:text")
@@ -122,6 +144,7 @@ var DV = (function () {
                 .attr("text-anchor", "start")
                 .text(String);
 
+            // Paint the bars
             svg.selectAll("rect")
                 .data(data)
                 .enter().append("svg:rect")
@@ -130,6 +153,7 @@ var DV = (function () {
                 .attr("width", config.rectWidth)
                 .attr("height", config.rectHeight);
 
+            // Paint the values on the bars
             svg.selectAll("text.value")
                 .data(data)
                 .enter().append("svg:text")
@@ -141,44 +165,65 @@ var DV = (function () {
                 .attr("text-anchor", config.textTAnchor)
                 .attr("transform", config.textTransform)
                 .text(String);
+
+            // Paint labels
+            svg.selectAll("text.label")
+                .data(labels)
+                .enter().append("svg:text")
+                .attr("class", "label")
+                .attr("x", config.labelX)
+                .attr("y", config.labelY)
+                .attr("dx", config.labelDX)
+                .attr("dy", config.textDY)
+                .attr("text-anchor", "start")
+                .attr("transform", config.labelTransform)
+                .text(String);
         },
 
         init = function (container, labels, values, options) {
             var i,
                 width,
-                height;
+                height,
+                transform;
 
             elems = values.length;
 
             size.x = options.sizeX;
             size.y = options.sizeY;
+            size.offset = options.sizeLabel;
 
+            // Create dynamically the scales
             if (options.landscape) {
                 config = landscape;
+                size.x -= size.offset;
                 scale.x = d3.scale.linear()
                     .domain([0, d3.max(values)])
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
                     .domain([0, values.length])
                     .range([0, size.y]);
+                transform = "translate(" + size.offset + ", 0)";
             } else {
                 config = portrait;
+                size.y -= size.offset;
                 scale.x = d3.scale.linear()
                     .domain([0, values.length])
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
                     .domain([0, d3.max(values)])
                     .range([0, size.y]);
+                transform = "";
             }
 
+            // Create the svg root node
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart bar")
-                .attr("width", size.x)
-                .attr("height", size.y);
-//                 .append("svg:g")
-//                 .attr("transform", "translate(10,15)");
+                .attr("width", options.sizeX) // original sizes
+                .attr("height", options.sizeY)
+                .append("svg:g")
+                .attr("transform", transform);
 
-            render(values);
+            render(labels, values);
         },
 
         node = function (data, options) {

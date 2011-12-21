@@ -12,8 +12,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             DV.chart("#dv_viewport",
-                [{{each results}}${$value[1]}, {{/each}}],
-                { title: "Data viewer" });
+                [{{each(idx, value) chart.data.labels}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
+                [{{each(idx, value) chart.data.values}}{{if idx != 0}}, {{/if}}${value}{{/each}}],
+                {
+                    title: "Data viewer",
+                    landscape: ${chart.landscape}
+                });
         });
     </script>
     {{/if}}

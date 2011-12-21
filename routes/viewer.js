@@ -8,10 +8,12 @@ renderResults = function (response, params, error, results) {
     "use strict";
 
     var embedded = false,
-        convert,
+        chartData = {
+            labels: [],
+            values: []
+        },
         data,
-        i,
-        aux;
+        i;
 
     if (params.embedded) {
         embedded = true;
@@ -19,9 +21,13 @@ renderResults = function (response, params, error, results) {
 
     // 1.- Get the values from the array of objects
 
-//     if (!embedded && params.chart) {
-//         
-//     }
+    if (!embedded && params.chart) {
+        for (i = 0; i < results.length; i += 1) {
+            chartData.labels.push(results[i][params.chart.labels].value);
+            chartData.values.push(results[i][params.chart.values].value);
+        }
+        params.chart.data = chartData;
+    }
 
     data = commons.resultsToMatrix(results);
 

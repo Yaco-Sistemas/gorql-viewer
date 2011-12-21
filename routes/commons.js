@@ -55,6 +55,7 @@ exports.processPetition = function (request, response, renderCallback) {
 
     var params = request.query,
         chart = false,
+        defaults,
         ua,
         cache,
         key;
@@ -77,10 +78,17 @@ exports.processPetition = function (request, response, renderCallback) {
         // Process chart params
         if (params.chart === 'bar') {
             chart.type = 'bar';
-            // - xaxis -> must be a name
-            // - yaxis -> must be a name
-            chart.xaxis = params.xaxis;
-            chart.yaxis = params.yaxis;
+            defaults = app.exports.set('bar');
+            // - labels -> must be a text selected property
+            // - values -> must be a numerical selected property
+            // - landscape -> must be boolean
+            chart.labels = params.labels;
+            chart.values = params.values;
+            if (params.landscape === undefined) {
+                chart.landscape = defaults.landscape;
+            } else {
+                chart.landscape = params.landscape;
+            }
         } else {
             // Don't support the type
             chart = false;
@@ -169,7 +177,7 @@ exports.generateSVG = function (chart, data) {
     "use strict";
 
     var generator = require("../public/javascripts/" + chart.type),
-        svg = generator.chart(data, {}),
+        svg = generator.chart(data, chart),
         // FS uses relative paths to the root of the project, where is being executed node
         styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8'),
         // Use jsdom to create a fake document so we can use sizzle later

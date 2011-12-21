@@ -7,18 +7,19 @@ var commons = require('./commons'),
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var data,
-        i,
-        aux,
+    var i,
+        chartData = {
+            labels: [],
+            values: []
+        },
         svg;
 
-    data = commons.resultsToMatrix(results);
-
-    aux = [];
-    for (i = 0; i < data.matrix.length; i += 1) {
-        aux.push(data.matrix[i][1]); // TODO
+    for (i = 0; i < results.length; i += 1) {
+        chartData.labels.push(results[i][params.chart.labels].value);
+        chartData.values.push(results[i][params.chart.values].value);
     }
-    svg = commons.generateSVG(params.chart, aux),
+
+    svg = commons.generateSVG(params.chart, chartData);
 
     response.header("Content-Type", "image/svg+xml");
     response.write(svg);

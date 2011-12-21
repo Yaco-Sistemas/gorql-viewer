@@ -57,6 +57,7 @@ app.configure('development', function () {
     app.set('sparql endpoint', opts.sparqlEndpoint);
     app.set('memcached', cache);
     app.set('memcached lifetime', opts.memcachedLifetime);
+    app.set('bar', opts.bar);
 });
 
 app.configure('production', function () {
@@ -67,6 +68,7 @@ app.configure('production', function () {
     app.set('sparql endpoint', opts.sparqlEndpoint);
     app.set('memcached', cache);
     app.set('memcached lifetime', opts.memcachedLifetime);
+    app.set('bar', opts.bar);
 });
 
 // Routes

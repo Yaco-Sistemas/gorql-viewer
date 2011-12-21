@@ -1,46 +1,98 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true */
+/*global d3: true, exports: true, require, window: true, document: true, module */
 
 var DV = (function () {
     "use strict";
 
     var svg,
-        x,
+        scale,
+        size = 500,
+        config = {
+            rectWidth: 20,
+            rectHeight: function (d, i) {
+                return scale(d);
+            },
+            rectX: function (d, i) {
+                return i * 20;
+            },
+            rectY: function (d, i) {
+                return 500 - scale(d);
+            },
+            textX: function (d, i) {
+                return (i * 20) + 10;
+            },
+            textY: function (d, i) {
+                return 500 - (scale(d) / 2);
+            },
+            textDX: 0,
+            textDY: 0,
+            textTAnchor: ""
+        },
+        landscape = {
+            rectHeight: 20,
+            rectWidth: function (d, i) {
+                return scale(d);
+            },
+            rectY: function (d, i) {
+                return i * 20;
+            },
+            rectX: 0,
+            textY: function (d, i) {
+                return (i * 20) + 10;
+            },
+            textX: function (d, i) {
+                return scale(d);
+            },
+            textDX: -3,
+            textDY: ".35em",
+            textTAnchor: "end"
+        },
 
         render = function (data) {
             svg.selectAll("rect")
                 .data(data)
                 .enter().append("svg:rect")
-                .attr("y", function (d, i) { return i * 20; })
-                .attr("width", x)
-                .attr("height", 20);
+                .attr("x", config.rectX)
+                .attr("y", config.rectY)
+                .attr("width", config.rectWidth)
+                .attr("height", config.rectHeight);
 
             svg.selectAll("text")
                 .data(data)
                 .enter().append("svg:text")
-                .attr("x", x)
-                .attr("y", function (d, i) { return (i * 20) + 10; })
-                .attr("dx", -3) // padding-right
-                .attr("dy", ".35em") // vertical-align: middle
-                .attr("text-anchor", "end") // text-align: right
+                .attr("x", config.textX)
+                .attr("y", config.textY)
+                .attr("dx", config.textDX)
+                .attr("dy", config.textDY)
+                .attr("text-anchor", config.textTAnchor)
                 .text(String);
         },
 
-        init = function (container, data, options) {
+        init = function (container, labels, values, options) {
+            var i,
+                width = 20 * values.length,
+                height = size;
+
+            if (options.landscape) {
+                config = landscape;
+                height = 20 * values.length;
+                width = size;
+            }
+
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart bar")
-                .attr("width", 420)
-                .attr("height", 20 * data.length);
+                .attr("width", width)
+                .attr("height", height);
 
-            x = d3.scale.linear()
-                .domain([0, d3.max(data)])
-                .range([0, 420]);
+            scale = d3.scale.linear()
+                .domain([0, d3.max(values)])
+                .range([0, size]);
 
-            render(data);
+            render(values);
         },
 
         node = function (data, options) {
-            init(document.body, data, options);
+            init(document.body, data.labels, data.values, options);
         };
 
     // Public functions

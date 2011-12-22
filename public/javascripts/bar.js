@@ -230,7 +230,7 @@ var DV = (function () {
                 config = landscape;
                 size.x -= size.offset;
                 scale.x = d3.scale.linear()
-                    .domain([0, d3.max(d3.max(values))]) // of all series
+                    .domain([0, d3.max(d3.merge(series))])
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
                     .domain([0, nElems])
@@ -243,7 +243,7 @@ var DV = (function () {
                     .domain([0, nElems])
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
-                    .domain([0, d3.max(d3.max(values))]) // of all series
+                    .domain([0, d3.max(d3.merge(series))])
                     .range([0, size.y]);
                 transform = "";
             }

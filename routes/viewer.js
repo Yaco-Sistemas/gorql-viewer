@@ -43,7 +43,10 @@ renderResults = function (response, params, error, results) {
 
         // 2.- Render JSON results
 
-        response.send('Not implemented yet', 400); // TODO
+        response.json({
+            results: data.matrix,
+            headers: data.headers
+        });
 
     } else {
 

@@ -54,6 +54,7 @@ exports.processPetition = function (request, response, renderCallback) {
     //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
+        serieRE = /^serie\d+$/,
         chart = false,
         defaults,
         ua,
@@ -76,7 +77,7 @@ exports.processPetition = function (request, response, renderCallback) {
         }
 
         // Process chart params
-        if (params.chart === 'bar' && params.labels !== undefined && params.values !== undefined) {
+        if (params.chart === 'bar' && params.labels !== undefined && params.serie1 !== undefined) {
             chart.type = 'bar';
             defaults = app.exports.set('bar');
             // - labels -> must be a text selected property
@@ -85,7 +86,17 @@ exports.processPetition = function (request, response, renderCallback) {
             // - sizeX -> in pixels
             // - sizeY -> in pixels
             chart.labels = params.labels;
-            chart.values = params.values;
+            chart.series = [];
+
+            for (key in params) {
+                if (params.hasOwnProperty(key)) {
+                    if (serieRE.test(key)) {
+                        chart.series.push(params[key]);
+                    }
+                }
+            }
+
+            // = params.values;
             if (params.landscape === undefined) {
                 chart.landscape = defaults.landscape;
             } else {

@@ -13,7 +13,7 @@
         $(document).ready(function () {
             DV.chart("#dv_viewport",
                 [{{each(idx, value) chart.data.labels}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
-                [{{each(idx, value) chart.data.values}}{{if idx != 0}}, {{/if}}${value}{{/each}}],
+                [{{each(idx, serie) chart.data.values}}{{if idx != 0}}, {{/if}}[{{each(idx, value) serie}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}]{{/each}}],
                 {
                     landscape: ${chart.landscape},
                     sizeX: ${chart.sizeX},

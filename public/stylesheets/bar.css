@@ -2,8 +2,18 @@
     font: 10px sans-serif;
 }
 
-#dv_viewport .bar rect {
+#dv_viewport .bar rect.serie0 {
     fill: steelblue;
+    stroke: white;
+}
+
+#dv_viewport .bar rect.serie1 {
+    fill: #8800ee;
+    stroke: white;
+}
+
+#dv_viewport .bar rect.serie2 {
+    fill: #D9005B;
     stroke: white;
 }
 

@@ -5,7 +5,9 @@ var DV = (function () {
     "use strict";
 
     var svg,
-        elems,
+        nElems,
+        nSeries,
+        serieIdx,
         scale = {
             x: null,
             y: null
@@ -17,13 +19,13 @@ var DV = (function () {
         config,
         portrait = {
             rectWidth: function () {
-                return size.x / elems;
+                return (size.x / nElems) / nSeries;
             },
             rectHeight: function (d, i) {
                 return scale.y(d);
             },
             rectX: function (d, i) {
-                return scale.x(i);
+                return scale.x(i) + portrait.serieOffset();
             },
             rectY: function (d, i) {
                 return size.y - portrait.rectHeight(d, i);
@@ -72,17 +74,20 @@ var DV = (function () {
                     y = portrait.labelY(d, i);
                 return "rotate(-90 " + x + " " + y + ")";
             },
-            labelDX: 0
+            labelDX: 0,
+            serieOffset: function () {
+                return portrait.rectWidth() * serieIdx;
+            }
         },
         landscape = {
             rectHeight: function () {
-                return size.y / elems;
+                return (size.y / nElems) / nSeries;
             },
             rectWidth: function (d, i) {
                 return scale.x(d);
             },
             rectY: function (d, i) {
-                return scale.y(i);
+                return scale.y(i) + landscape.serieOffset();
             },
             rectX: 0,
             textY: function (d, i) {
@@ -119,10 +124,17 @@ var DV = (function () {
                 return landscape.textY(d, i);
             },
             labelTransform: "",
-            labelDX: 0
+            labelDX: 0,
+            serieOffset: function () {
+                return landscape.rectHeight() * serieIdx;
+            }
         },
 
         render = function (labels, data) {
+            var serie,
+                rect,
+                values;
+
             // Paint aux lines that help measuring
             svg.selectAll("line")
                 .data(config.lineTicks())
@@ -144,27 +156,34 @@ var DV = (function () {
                 .attr("text-anchor", "start")
                 .text(String);
 
-            // Paint the bars
-            svg.selectAll("rect")
-                .data(data)
-                .enter().append("svg:rect")
-                .attr("x", config.rectX)
-                .attr("y", config.rectY)
-                .attr("width", config.rectWidth)
-                .attr("height", config.rectHeight);
+            for (serieIdx = 0; serieIdx < data.length; serieIdx += 1) {
+                serie = data[serieIdx];
 
-            // Paint the values on the bars
-            svg.selectAll("text.value")
-                .data(data)
-                .enter().append("svg:text")
-                .attr("class", "value")
-                .attr("x", config.textX)
-                .attr("y", config.textY)
-                .attr("dx", config.textDX)
-                .attr("dy", config.textDY)
-                .attr("text-anchor", config.textTAnchor)
-                .attr("transform", config.textTransform)
-                .text(String);
+                // Paint the bars
+                svg.selectAll("rect.serie" + serieIdx)
+                    .data(serie)
+                    .enter().append("svg:rect")
+                    .attr("class", "serie" + serieIdx)
+                    .attr("x", config.rectX)
+                    .attr("y", config.rectY)
+                    .attr("width", config.rectWidth)
+                    .attr("height", config.rectHeight);
+
+                // Paint the values on the bars
+                svg.selectAll("text.value.serie" + serieIdx)
+                    .data(serie)
+                    .enter().append("svg:text")
+                    .attr("class", "value serie" + serieIdx)
+                    .attr("x", config.textX)
+                    .attr("y", config.textY)
+                    .attr("dx", config.textDX)
+                    .attr("dy", config.textDY)
+                    .attr("text-anchor", config.textTAnchor)
+                    .attr("transform", config.textTransform)
+                    .text(String);
+            }
+
+            serieIdx = 0;
 
             // Paint labels
             svg.selectAll("text.label")
@@ -182,11 +201,25 @@ var DV = (function () {
 
         init = function (container, labels, values, options) {
             var i,
-                width,
-                height,
+                j,
+                aux,
+                series = [],
                 transform;
 
-            elems = values.length;
+            if (values.length <= 0) {
+                return;
+            }
+
+            nElems = values.length;
+            nSeries = values[0].length;
+
+            for (i = 0; i < nSeries; i += 1) {
+                aux = [];
+                for (j = 0; j < values.length; j += 1) {
+                    aux.push(values[j][i]);
+                }
+                series.push(aux);
+            }
 
             size.x = options.sizeX;
             size.y = options.sizeY;
@@ -197,20 +230,20 @@ var DV = (function () {
                 config = landscape;
                 size.x -= size.offset;
                 scale.x = d3.scale.linear()
-                    .domain([0, d3.max(values)])
+                    .domain([0, d3.max(d3.max(values))]) // of all series
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
-                    .domain([0, values.length])
+                    .domain([0, nElems])
                     .range([0, size.y]);
                 transform = "translate(" + size.offset + ", 0)";
             } else {
                 config = portrait;
                 size.y -= size.offset;
                 scale.x = d3.scale.linear()
-                    .domain([0, values.length])
+                    .domain([0, nElems])
                     .range([0, size.x]);
                 scale.y = d3.scale.linear()
-                    .domain([0, d3.max(values)])
+                    .domain([0, d3.max(d3.max(values))]) // of all series
                     .range([0, size.y]);
                 transform = "";
             }
@@ -223,7 +256,7 @@ var DV = (function () {
                 .append("svg:g")
                 .attr("transform", transform);
 
-            render(labels, values);
+            render(labels, series);
         },
 
         node = function (data, options) {

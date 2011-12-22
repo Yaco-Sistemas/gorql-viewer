@@ -16,7 +16,9 @@ renderResults = function (response, params, error, results) {
         data,
         query,
         regex,
-        i;
+        aux,
+        i,
+        j;
 
     if (params.embedded) {
         embedded = true;
@@ -27,8 +29,12 @@ renderResults = function (response, params, error, results) {
     try {
         if (!embedded && params.chart) {
             for (i = 0; i < results.length; i += 1) {
+                aux = [];
                 chartData.labels.push(results[i][params.chart.labels].value);
-                chartData.values.push(results[i][params.chart.values].value);
+                for (j = 0; j < params.chart.series.length; j += 1) {
+                    aux.push(results[i][params.chart.series[j]].value);
+                }
+                chartData.values.push(aux);
             }
             params.chart.data = chartData;
         }

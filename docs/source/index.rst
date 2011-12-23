@@ -1,22 +1,77 @@
-.. Data Viewer documentation master file, created by
-   sphinx-quickstart on Thu Dec  1 13:00:24 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. CEIC Data Viewer documentation master file, created by
+   ablanco@yaco.es on Fri Dic 23 13:00:00 2011.
 
-Welcome to Data Viewer's documentation!
-=======================================
+===================================================
+¡Bienvenido a la documentación de CEIC Data Viewer!
+===================================================
 
-Contents:
+:Author: `Yaco Sistemas S.L. <http://www.yaco.es/>`_
+:Website: https://trac.yaco.es/ceic-ogov/
+:Release: |release|
+
+**TODO**
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin justo turpis,
+varius sed iaculis quis, dignissim vel lacus. Suspendisse lobortis neque
+eleifend quam semper et malesuada eros pretium. Suspendisse potenti. Fusce
+mattis tellus et tellus cursus ac rutrum libero porta. Suspendisse eget gravida
+est. In faucibus enim vel erat rutrum in tincidunt urna aliquet. Pellentesque
+porta sollicitudin libero, sed pharetra metus vehicula id.
+
+Phasellus est eros, luctus venenatis rutrum ut, pretium at quam. Cras turpis
+quam, euismod sed volutpat sit amet, dictum tempus lectus. Praesent ut turpis
+ac sapien condimentum iaculis. Aliquam luctus quam nec arcu rutrum sit amet
+dignissim tellus rhoncus. Quisque facilisis magna eu purus suscipit quis
+condimentum dui pretium. Donec viverra, magna a imperdiet feugiat, ipsum diam
+luctus lorem, nec placerat orci mi vitae enim. Quisque lobortis aliquet leo a
+porta. Nam pretium, orci et viverra convallis, est lorem placerat lectus, id
+lacinia ante lacus at velit. Sed sed tellus nibh.
+
+**TODO**
+
+La licencia de distribución de este software es la `EUPL o Licencia Pública de
+la Unión Europea <http://ec.europa.eu/idabc/eupl>`_. Esta licencia es una de
+las licencias aceptadas como software libre por la `FSF (Free Software
+Foundation) <http://www.fsf.org>`_.
+
+Introducción
+============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   intro
 
+Manuales
+========
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 1
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   deployment
+   user
+   developer
 
+Notas de publicación
+====================
+
+.. toctree::
+   :maxdepth: 1
+
+   releases
+
+Cómo obtener el visor de colecciones
+====================================
+
+El visor de colecciones se distribuirá en formato RPM (algún día)...
+
+**TODO**
+
+Para más información sobre cómo instalar el visor de colecciones,
+consulte el :doc:`deployment`.
+
+Puede obtener las fuentes del proyecto utilizando un cliente Mercurial:
+
+.. code-block:: bash
+
+    hg clone http://hg.yaco.es/ceic-ogov-data-viewer

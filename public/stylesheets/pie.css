@@ -2,7 +2,8 @@
     font: 10px sans-serif;
 }
 
-#dv_viewport .pie path.arc {
+#dv_viewport .pie path.slice,
+#dv_viewport .pie rect.label {
     fill: steelblue;
     stroke: white;
 }

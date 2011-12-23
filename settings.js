@@ -14,7 +14,8 @@ exports.settings = {
         },
         pie: {
             sizeX: 500,
-            sizeY: 500
+            sizeY: 500,
+            sizeLabel: 100
         }
     },
 
@@ -30,7 +31,8 @@ exports.settings = {
         },
         pie: {
             sizeX: 500,
-            sizeY: 500
+            sizeY: 500,
+            sizeLabel: 100
         }
     }
 };

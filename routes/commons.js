@@ -116,6 +116,7 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.series = [params.serie1];
             chart.sizeX = params.sizeX || defaults.sizeX;
             chart.sizeY = params.sizeY || defaults.sizeY;
+            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
         } else {
             // Don't support the type
             chart = false;

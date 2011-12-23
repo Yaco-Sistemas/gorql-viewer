@@ -5,14 +5,12 @@ var DV = (function () {
     "use strict";
 
     var svg,
-        center = {
-            x: 0,
-            y: 0
-        },
-        scale, // for opacity only
+        positions = {},
+        valueScale, // for opacity only
+        labelScale,
 
         render = function (labels, pie) {
-            var radius = d3.min([center.x, center.y]),
+            var radius = d3.min([positions.centerX, positions.centerY]),
                 arc = d3.svg.arc()
                     .startAngle(function (d) { return d.startAngle; })
                     .endAngle(function (d) { return d.endAngle; })
@@ -20,16 +18,34 @@ var DV = (function () {
                     .outerRadius(radius);
 
             // Paint the pie
-            svg.selectAll("path")
+            svg.selectAll("path.slice")
                 .data(pie, function (d) { return d.data; })
                 .enter().append("path")
                 .attr("d", arc)
-                .attr("class", "arc")
-                .style("opacity", function (d) { return scale(d.data); })
-                .attr("transform", "translate(" + center.x + ", " + center.y + ")");
+                .attr("class", "slice")
+                .style("opacity", function (d) { return valueScale(d.data); })
+                .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")");
 
             // Paint the labels
-            // TODO
+            svg.selectAll("rect.label")
+                .data(pie, function (d) { return d.data; })
+                .enter().append("svg:rect")
+                .attr("class", "label")
+                .attr("x", positions.labels + 10)
+                .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
+                .attr("width", 15)
+                .attr("height", 15)
+                .style("opacity", function (d) { return valueScale(d.data); });
+
+            svg.selectAll("text.label")
+                .data(labels)
+                .enter().append("svg:text")
+                .attr("class", "label")
+                .attr("x", positions.labels + 10)
+                .attr("dx", 20)
+                .attr("dy", 10)
+                .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
+                .text(String);
         },
 
         init = function (container, labels, values, options) {
@@ -43,12 +59,17 @@ var DV = (function () {
 
             pie = d3.layout.pie()(values);
 
-            center.x = parseInt(options.sizeX, 10) / 2;
-            center.y = parseInt(options.sizeY, 10) / 2;
+            positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
+            positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;
+            positions.centerY = parseInt(options.sizeY, 10) / 2;
 
-            scale = d3.scale.sqrt()
+            valueScale = d3.scale.sqrt()
                 .domain([0, d3.max(values)])
                 .range([0.25, 1]);
+
+            labelScale = d3.scale.linear()
+                .domain([0, values.length - 1])
+                .range([20, parseInt(options.sizeY, 10) - 20]);
 
             // Create the svg root node
             svg = d3.select(container).append("svg:svg")

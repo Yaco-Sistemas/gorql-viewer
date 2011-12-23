@@ -7,6 +7,7 @@
     {{if chart && !chart.png}}
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/d3.js"></script>
+    <script type="text/javascript" src="/javascripts/d3.layout.js"></script>
     <script type="text/javascript" src="/javascripts/${chart.type}.js"></script>
     <link rel="stylesheet" href="/stylesheets/${chart.type}.css" />
     <script type="text/javascript">
@@ -15,10 +16,10 @@
                 [{{each(idx, value) chart.data.labels}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
                 [{{each(idx, serie) chart.data.values}}{{if idx != 0}}, {{/if}}[{{each(idx, value) serie}}{{if idx != 0}}, {{/if}}${value}{{/each}}]{{/each}}],
                 {
-                    landscape: ${chart.landscape},
+//                     landscape: ${chart.landscape},
                     sizeX: ${chart.sizeX},
-                    sizeY: ${chart.sizeY},
-                    sizeLabel: ${chart.sizeLabel}
+                    sizeY: ${chart.sizeY}
+//                     sizeLabel: ${chart.sizeLabel}
                 });
         });
     </script>

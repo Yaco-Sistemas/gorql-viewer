@@ -1,0 +1,8 @@
+#dv_viewport {
+    font: 10px sans-serif;
+}
+
+#dv_viewport .pie path.arc {
+    fill: steelblue;
+    stroke: white;
+}

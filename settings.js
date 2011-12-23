@@ -11,6 +11,10 @@ exports.settings = {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 70
+        },
+        pie: {
+            sizeX: 500,
+            sizeY: 500
         }
     },
 
@@ -23,6 +27,10 @@ exports.settings = {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 70
+        },
+        pie: {
+            sizeX: 500,
+            sizeY: 500
         }
     }
 };

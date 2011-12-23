@@ -1,3 +1,5 @@
+var d3layouts = function (d3) {
+
 (function(){d3.layout = {};
 // Implements hierarchical edge bundling using Holten's algorithm. For each
 // input link, a path is computed that travels through the tree, up the parent
@@ -1889,3 +1891,11 @@ function d3_layout_treemapPad(node, padding) {
   return {x: x, y: y, dx: dx, dy: dy};
 }
 })();
+
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = d3layouts;
+} else {
+  d3layouts(d3);
+}

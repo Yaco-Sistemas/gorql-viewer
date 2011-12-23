@@ -87,6 +87,7 @@ exports.chart = function (data, options) {
     document = jsdom("<html><head></head><body></body></html>");
     window = document.createWindow();
     d3 = require("./d3")(window, document);
+    require("./d3.layout")(d3);
     DV.node(data, options);
     return document.body.innerHTML;
 };

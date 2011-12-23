@@ -5,20 +5,31 @@ var DV = (function () {
     "use strict";
 
     var svg,
+        center = {
+            x: 0,
+            y: 0
+        },
+        scale, // for opacity only
 
         render = function (labels, pie) {
-            var arc = d3.svg.arc()
-                .startAngle(function (d) {return d.startAngle})
-                .endAngle(function (d) {return d.endAngle})
-                .innerRadius(0)
-                .outerRadius(225);
+            var radius = d3.min([center.x, center.y]),
+                arc = d3.svg.arc()
+                    .startAngle(function (d) { return d.startAngle; })
+                    .endAngle(function (d) { return d.endAngle; })
+                    .innerRadius(0)
+                    .outerRadius(radius);
 
+            // Paint the pie
             svg.selectAll("path")
-                .data(pie, function (d) {return d.data;})
+                .data(pie, function (d) { return d.data; })
                 .enter().append("path")
                 .attr("d", arc)
                 .attr("class", "arc")
-                .attr("transform", "translate(250, 250)");
+                .style("opacity", function (d) { return scale(d.data); })
+                .attr("transform", "translate(" + center.x + ", " + center.y + ")");
+
+            // Paint the labels
+            // TODO
         },
 
         init = function (container, labels, values, options) {
@@ -31,6 +42,13 @@ var DV = (function () {
             values = d3.merge(values); // pie charts doesn't support series
 
             pie = d3.layout.pie()(values);
+
+            center.x = options.sizeX / 2;
+            center.y = options.sizeY / 2;
+
+            scale = d3.scale.sqrt()
+                .domain([0, d3.max(values)])
+                .range([0.25, 1]);
 
             // Create the svg root node
             svg = d3.select(container).append("svg:svg")

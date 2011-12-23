@@ -221,12 +221,12 @@ var DV = (function () {
                 series.push(aux);
             }
 
-            size.x = options.sizeX;
-            size.y = options.sizeY;
-            size.offset = options.sizeLabel;
+            size.x = parseInt(options.sizeX, 10);
+            size.y = parseInt(options.sizeY, 10);
+            size.offset = parseInt(options.sizeLabel, 10);
 
             // Create dynamically the scales
-            if (options.landscape) {
+            if (options.landscape === 'true') {
                 config = landscape;
                 size.x -= size.offset;
                 scale.x = d3.scale.linear()
@@ -251,8 +251,8 @@ var DV = (function () {
             // Create the svg root node
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart bar")
-                .attr("width", options.sizeX) // original sizes
-                .attr("height", options.sizeY)
+                .attr("width", parseInt(options.sizeX, 10)) // original sizes
+                .attr("height", parseInt(options.sizeY, 10))
                 .append("svg:g")
                 .attr("transform", transform);
 

@@ -8,8 +8,7 @@ var commons = require('./commons'),
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var embedded = false,
-        chartData = {
+    var chartData = {
             labels: [],
             values: []
         },
@@ -17,35 +16,15 @@ renderResults = function (response, params, error, results) {
         query,
         regex,
         aux,
+        key,
         i,
         j;
 
-    if (params.embedded) {
-        embedded = true;
-    }
-
     // 1.- Get the values from the array of objects
-
-    try {
-        if (!embedded && params.chart) {
-            for (i = 0; i < results.length; i += 1) {
-                aux = [];
-                chartData.labels.push(results[i][params.chart.labels].value);
-                for (j = 0; j < params.chart.series.length; j += 1) {
-                    aux.push(results[i][params.chart.series[j]].value);
-                }
-                chartData.values.push(aux);
-            }
-            params.chart.data = chartData;
-        }
-    } catch (err) {
-        console.log(err);
-        params.chart = false;
-    }
 
     data = commons.resultsToMatrix(results);
 
-    if (embedded) {
+    if (params.embedded) {
 
         // 2.- Render JSON results
 
@@ -56,7 +35,35 @@ renderResults = function (response, params, error, results) {
 
     } else {
 
-        // 2.- Render regular HTML response
+        if (params.chart) {
+            // preprocess for the chart
+            try {
+                // options
+                aux = [];
+                for (key in params.chart) {
+                    if (params.chart.hasOwnProperty(key)) {
+                        aux.push([key, params.chart[key]]);
+                    }
+                }
+                params.chart.options = aux;
+
+                // data
+                for (i = 0; i < results.length; i += 1) {
+                    aux = [];
+                    chartData.labels.push(results[i][params.chart.labels].value);
+                    for (j = 0; j < params.chart.series.length; j += 1) {
+                        aux.push(results[i][params.chart.series[j]].value);
+                    }
+                    chartData.values.push(aux);
+                }
+                params.chart.data = chartData;
+            } catch (err) {
+                console.log(err);
+                params.chart = false;
+            }
+        }
+
+        // prettify the query
 
         query = params.query;
         for (i = 0; i < reservedWords.length; i += 1) {
@@ -64,6 +71,8 @@ renderResults = function (response, params, error, results) {
             query = query.replace(regex, "\n$1");
         }
         query = query.replace(/^\s+|\s+$/g, '');
+
+        // 2.- Render regular HTML response
 
         response.render('viewer.html', {
             layout: false,

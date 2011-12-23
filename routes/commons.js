@@ -100,15 +100,12 @@ exports.processPetition = function (request, response, renderCallback) {
             if (params.landscape === undefined) {
                 chart.landscape = defaults.landscape;
             } else {
-                chart.landscape = (params.landscape === "true");
+                chart.landscape = params.landscape;
             }
             chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeX = parseInt(chart.sizeX, 10);
             chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.sizeY = parseInt(chart.sizeY, 10);
             chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
-            chart.sizeLabel = parseInt(chart.sizeLabel, 10);
-        } else if (params.chart === 'pie' && params.labels !== undefined && params.values !== undefined) {
+        } else if (params.chart === 'pie' && params.labels !== undefined && params.serie1 !== undefined) {
             chart.type = 'pie';
             defaults = app.exports.set('pie');
             // - labels -> must be a text selected property
@@ -116,11 +113,9 @@ exports.processPetition = function (request, response, renderCallback) {
             // - sizeX -> in pixels
             // - sizeY -> in pixels
             chart.labels = params.labels;
-            chart.series = [params.values];
+            chart.series = [params.serie1];
             chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeX = parseInt(chart.sizeX, 10);
             chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.sizeY = parseInt(chart.sizeY, 10);
         } else {
             // Don't support the type
             chart = false;

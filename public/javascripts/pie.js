@@ -43,8 +43,8 @@ var DV = (function () {
 
             pie = d3.layout.pie()(values);
 
-            center.x = options.sizeX / 2;
-            center.y = options.sizeY / 2;
+            center.x = parseInt(options.sizeX, 10) / 2;
+            center.y = parseInt(options.sizeY, 10) / 2;
 
             scale = d3.scale.sqrt()
                 .domain([0, d3.max(values)])
@@ -53,8 +53,8 @@ var DV = (function () {
             // Create the svg root node
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart pie")
-                .attr("width", options.sizeX) // original sizes
-                .attr("height", options.sizeY);
+                .attr("width", parseInt(options.sizeX, 10)) // original sizes
+                .attr("height", parseInt(options.sizeY, 10));
 
             render(labels, pie);
         },

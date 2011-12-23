@@ -16,10 +16,7 @@
                 [{{each(idx, value) chart.data.labels}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
                 [{{each(idx, serie) chart.data.values}}{{if idx != 0}}, {{/if}}[{{each(idx, value) serie}}{{if idx != 0}}, {{/if}}${value}{{/each}}]{{/each}}],
                 {
-//                     landscape: ${chart.landscape},
-                    sizeX: ${chart.sizeX},
-                    sizeY: ${chart.sizeY}
-//                     sizeLabel: ${chart.sizeLabel}
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
                 });
         });
     </script>
@@ -31,24 +28,16 @@
     <div id="error">${error}</div>
     {{else}}
     <div id="dv_viewport">
-    {{if chart && chart.png}}
-    <img src="/png/?query=${encoded_query}&chart=${chart.type}" />
-    {{/if}}
+    {{if chart && chart.png}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
     </div>
     <table id="dv_table">
     <thead>
-        {{each headers}}
-        <th>${$value}</th>
-        {{/each}}
+        {{each headers}}<th>${$value}</th>{{/each}}
     </thead>
     <tbody>
-        {{each results}}
-        <tr>
-            {{each $value}}
-            <td>${$value}</td>
-            {{/each}}
-        </tr>
-        {{/each}}
+        {{each results}}<tr>
+            {{each $value}}<td>${$value}</td>{{/each}}
+        </tr>{{/each}}
     </tbody>
     </table>
     <pre id="dv_query">${query}</pre>

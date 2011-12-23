@@ -54,7 +54,6 @@ exports.processPetition = function (request, response, renderCallback) {
     //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
-        serieRE = /^serie\d+$/,
         chart = false,
         defaults,
         ua,
@@ -76,56 +75,40 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.png = true;
         }
 
-        // Process chart params
-        if (params.chart === 'bar' && params.labels !== undefined && params.serie1 !== undefined) {
-            chart.type = 'bar';
-            defaults = app.exports.set('bar');
+        if (params.chart !== 'bar' && params.chart !== 'pie') {
+            // Don't support the type
+            chart = false;
+        } else if (params.labels !== undefined && params.series !== undefined) {
+            // Process chart params
+
             // - labels -> must be a text selected property
-            // - serieX -> must be a numerical selected property
-            // - landscape -> must be boolean
+            // - series -> must be a comma separated list of numerical selected properties
             // - sizeX -> in pixels
             // - sizeY -> in pixels
             // - sizeLabel -> in pixels
-            chart.labels = params.labels;
-            chart.series = [];
 
-            for (key in params) {
-                if (params.hasOwnProperty(key)) {
-                    if (serieRE.test(key)) {
-                        chart.series.push(params[key]);
-                    }
+            chart.type = params.chart;
+            defaults = app.exports.set(chart.type);
+
+            chart.labels = params.labels;
+            chart.series = params.series.split(',');
+            chart.sizeX = params.sizeX || defaults.sizeX;
+            chart.sizeY = params.sizeY || defaults.sizeY;
+            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
+
+            if (params.chart === 'bar' && params.labels !== undefined && params.serie1 !== undefined) {
+                // - landscape -> must be boolean
+
+                if (params.landscape === undefined) {
+                    chart.landscape = defaults.landscape;
+                } else {
+                    chart.landscape = params.landscape;
                 }
             }
-
-            if (params.landscape === undefined) {
-                chart.landscape = defaults.landscape;
-            } else {
-                chart.landscape = params.landscape;
-            }
-            chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
-        } else if (params.chart === 'pie' && params.labels !== undefined && params.serie1 !== undefined) {
-            chart.type = 'pie';
-            defaults = app.exports.set('pie');
-            // - labels -> must be a text selected property
-            // - values -> must be a numerical selected property
-            // - sizeX -> in pixels
-            // - sizeY -> in pixels
-            chart.labels = params.labels;
-            chart.series = [params.serie1];
-            chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
-        } else {
-            // Don't support the type
-            chart = false;
         }
-
-        params.chart = chart;
-    } else {
-        params.chart = false;
     }
+
+    params.chart = chart;
 
     // 2.- Query the SPARQL endpoint checking previously if the query was
     //     cached in Memcached. If it's not cached, then query the endpoint

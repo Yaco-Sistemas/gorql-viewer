@@ -9,6 +9,10 @@ var DV = (function () {
         valueScale, // for opacity only
         labelScale,
 
+        getSectorColor = function (d, i) {
+            return valueScale(d.data);
+        },
+
         render = function (labels, pie) {
             var radius = d3.min([positions.centerX, positions.centerY]),
                 arc = d3.svg.arc()
@@ -18,12 +22,12 @@ var DV = (function () {
                     .outerRadius(radius);
 
             // Paint the pie
-            svg.selectAll("path.slice")
+            svg.selectAll("path.sector")
                 .data(pie, function (d) { return d.data; })
                 .enter().append("path")
                 .attr("d", arc)
-                .attr("class", "slice")
-                .style("opacity", function (d) { return valueScale(d.data); })
+                .attr("class", "sector")
+                .style("opacity", getSectorColor)
                 .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")");
 
             // Paint the labels
@@ -35,7 +39,7 @@ var DV = (function () {
                 .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
                 .attr("width", 15)
                 .attr("height", 15)
-                .style("opacity", function (d) { return valueScale(d.data); });
+                .style("opacity", getSectorColor);
 
             svg.selectAll("text.label")
                 .data(labels)

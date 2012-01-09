@@ -66,6 +66,11 @@ var DV = (function () {
                 .attr("transform", "translate(" + size.offset + ",0)")
                 .call(yAxis);
 
+            // Add helping lines
+            svg.selectAll(".y.axis line.tick")
+                .attr("x1", 0)
+                .attr("x2", size.x);
+
             for (i = 0; i < series.length; i += 1) {
                 serie = series[i];
 
@@ -112,7 +117,7 @@ var DV = (function () {
             }
 
             xScale = d3.scale.linear()
-                .domain([0, nElems])
+                .domain([0, nElems - 1])
                 .range([0, size.x - size.offset]);
 
             yScale = d3.scale.linear()

@@ -50,3 +50,7 @@
     fill: none;
     stroke: #000;
 }
+
+#dv_viewport .y.axis line {
+    opacity: .2;
+}

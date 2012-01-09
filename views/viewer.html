@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Data Viewer</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+
     {{if chart && !chart.png && !chart.simile}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript" src="/javascripts/sizzle.js"></script>
@@ -22,6 +23,7 @@
         });
     </script>
     {{else}}
+
     {{if chart.type == "timeline"}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script>
@@ -30,36 +32,24 @@
         Timeline_parameters='bundle=true';
     </script>
     <script src="/timeline/timeline_js/timeline-api.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/javascripts/timeline.js"></script>
     <script type="text/javascript">
-        DomReady.ready(function () {
-            var bandInfos = [
-                Timeline.createBandInfo({
-                    width:          "70%",
-                    intervalUnit:   Timeline.DateTime.MONTH,
-                    intervalPixels: 100
-                }),
-                Timeline.createBandInfo({
-                    width:          "30%",
-                    intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 200
-                })
-            ];
-            bandInfos[1].syncWith = 0;
-            bandInfos[1].highlight = true;
-            tl = Timeline.create(document.getElementById("dv_viewport"), bandInfos);
-        });
+        DomReady.ready(initTimeline);
     </script>
     {{/if}}
+
     {{/if}}
 </head>
-<body onload=''>
+<body>
     <h1>Data Viewer</h1>
+
     {{if error}}
     <div id="error">${error}</div>
     {{else}}
     <div id="dv_viewport" class="{{if chart && chart.simile}}${chart.type}{{/if}}">
     {{if chart && chart.png}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
     </div>
+
     <table id="dv_table">
     <thead>
         {{each headers}}<th>${$value}</th>{{/each}}

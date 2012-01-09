@@ -114,7 +114,8 @@ exports.processPetition = function (request, response, renderCallback) {
                     chart.area = params.area;
                 }
             }
-        } else if (params.chart === 'timeline') {
+        } else if (params.chart === 'timeline' &&
+                    params.labels !== undefined && params.series !== undefined) {
             chart.simile = true;
             chart.type = params.chart;
             chart.labels = params.labels;

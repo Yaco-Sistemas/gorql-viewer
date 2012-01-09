@@ -13,7 +13,14 @@ var DV = (function () {
 
         render = function (labels, series, area) {
             var xAxis = d3.svg.axis()
-                    .scale(xScale),
+                    .scale(xScale)
+                    .ticks(nElems)
+                    .tickFormat(function (d, idx) {
+                        if (idx < labels.length) {
+                            return labels[idx];
+                        }
+                        return '';
+                    }),
                 yAxis = d3.svg.axis()
                     .scale(yScale)
                     .orient("left"),
@@ -45,6 +52,13 @@ var DV = (function () {
                 .attr("class", "x axis")
                 .attr("transform", "translate(" + size.offset + "," + (size.y - size.offset) + ")")
                 .call(xAxis);
+
+            // Rotate labels in the x-axis
+            svg.selectAll(".x.axis text")
+                .attr("text-anchor", "end")
+                .attr("transform", "rotate(-90)")
+                .attr("dx", -10)
+                .attr("dy", -7);
 
             // Add the y-axis.
             svg.append("svg:g")

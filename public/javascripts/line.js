@@ -57,14 +57,14 @@ var DV = (function () {
 
                 // Add the line path.
                 svg.append("svg:path")
-                    .attr("class", "line")
+                    .attr("class", "line serie" + i)
                     .attr("clip-path", "url(#clip)")
                     .attr("d", line(serie));
 
                 if (area) {
                     // Add the area path.
                     svg.append("svg:path")
-                        .attr("class", "area")
+                        .attr("class", "area serie" + i)
                         .attr("clip-path", "url(#clip)")
                         .attr("d", area(serie));
                 }

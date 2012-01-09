@@ -75,7 +75,7 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.png = true;
         }
 
-        if (params.chart !== 'bar' && params.chart !== 'pie') {
+        if (params.chart !== 'bar' && params.chart !== 'pie' && params.chart !== 'line') {
             // Don't support the type
             chart = false;
         } else if (params.labels !== undefined && params.series !== undefined) {
@@ -96,7 +96,7 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.sizeY = params.sizeY || defaults.sizeY;
             chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
 
-            if (params.chart === 'bar' && params.labels !== undefined && params.serie1 !== undefined) {
+            if (params.chart === 'bar') {
                 // - landscape -> must be boolean
 
                 if (params.landscape === undefined) {

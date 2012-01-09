@@ -16,6 +16,11 @@ exports.settings = {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100
+        },
+        line: {
+            sizeX: 500,
+            sizeY: 500,
+            sizeLabel: 100
         }
     },
 
@@ -30,6 +35,11 @@ exports.settings = {
             sizeLabel: 70
         },
         pie: {
+            sizeX: 500,
+            sizeY: 500,
+            sizeLabel: 100
+        },
+        line: {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100

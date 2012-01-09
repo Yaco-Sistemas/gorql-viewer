@@ -59,6 +59,7 @@ app.configure('development', function () {
     app.set('memcached lifetime', opts.memcachedLifetime);
     app.set('bar', opts.bar);
     app.set('pie', opts.pie);
+    app.set('line', opts.line);
 });
 
 app.configure('production', function () {
@@ -71,6 +72,7 @@ app.configure('production', function () {
     app.set('memcached lifetime', opts.memcachedLifetime);
     app.set('bar', opts.bar);
     app.set('pie', opts.pie);
+    app.set('line', opts.line);
 });
 
 // Routes

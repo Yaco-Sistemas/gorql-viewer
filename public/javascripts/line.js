@@ -11,7 +11,7 @@ var DV = (function () {
         yScale,
         size = {},
 
-        render = function (labels, series) {
+        render = function (labels, series, area) {
             var xAxis = d3.svg.axis()
                     .scale(xScale),
                 yAxis = d3.svg.axis()
@@ -22,8 +22,15 @@ var DV = (function () {
                     //.interpolate("monotone")
                     .x(function (d, idx) { return size.offset + xScale(idx); })
                     .y(function (d) { return Math.floor(yScale(d)); }),
-                area,
                 i;
+
+            if (area) {
+                area = d3.svg.area()
+                    //.interpolate("monotone")
+                    .x(function (d, idx) { return size.offset + xScale(idx); })
+                    .y0(size.y - size.offset)
+                    .y1(function (d) { return Math.floor(yScale(d)); });
+            }
 
             // Add the clip path.
             svg.append("svg:clipPath")
@@ -53,6 +60,14 @@ var DV = (function () {
                     .attr("class", "line")
                     .attr("clip-path", "url(#clip)")
                     .attr("d", line(serie));
+
+                if (area) {
+                    // Add the area path.
+                    svg.append("svg:path")
+                        .attr("class", "area")
+                        .attr("clip-path", "url(#clip)")
+                        .attr("d", area(serie));
+                }
             }
         },
 
@@ -60,7 +75,8 @@ var DV = (function () {
             var aux,
                 i,
                 j,
-                series = [];
+                series = [],
+                area = options.area === 'true';
 
             if (values.length <= 0) {
                 return;
@@ -95,7 +111,7 @@ var DV = (function () {
                 .attr("width", size.x)
                 .attr("height", size.y);
 
-            render(labels, series);
+            render(labels, series, area);
         },
 
         node = function (data, options) {

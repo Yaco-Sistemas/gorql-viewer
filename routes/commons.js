@@ -104,6 +104,14 @@ exports.processPetition = function (request, response, renderCallback) {
                 } else {
                     chart.landscape = params.landscape;
                 }
+            } else if (params.chart === 'line') {
+                // - area -> must be boolean
+
+                if (params.area === undefined) {
+                    chart.area = defaults.area;
+                } else {
+                    chart.area = params.area;
+                }
             }
         }
     }

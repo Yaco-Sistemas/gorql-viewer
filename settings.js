@@ -18,6 +18,7 @@ exports.settings = {
             sizeLabel: 100
         },
         line: {
+            area: 'false',
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100
@@ -40,6 +41,7 @@ exports.settings = {
             sizeLabel: 100
         },
         line: {
+            area: 'false',
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100

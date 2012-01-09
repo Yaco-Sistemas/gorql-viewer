@@ -2,6 +2,10 @@
     font: 10px sans-serif;
 }
 
+#dv_viewport #clip {
+    fill: none;
+}
+
 #dv_viewport path.line {
     fill: none;
     stroke: #666;

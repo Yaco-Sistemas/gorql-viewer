@@ -24,7 +24,7 @@
 }
 
 #dv_viewport path.area {
-    fill-opacity: .5;
+    fill-opacity: .25;
 }
 
 #dv_viewport path.area.serie0 {
@@ -41,10 +41,6 @@
 
 #dv_viewport .axis {
     shape-rendering: crispEdges;
-}
-
-#dv_viewport .x.axis .minor {
-    stroke-opacity: .5;
 }
 
 #dv_viewport .x.axis line,

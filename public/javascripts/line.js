@@ -19,8 +19,8 @@ var DV = (function () {
                     .orient("left"),
                 serie,
                 line = d3.svg.line()
-//                     .interpolate("monotone")
-                    .x(function (d, idx) { return xScale(idx); })
+                    //.interpolate("monotone")
+                    .x(function (d, idx) { return size.offset + xScale(idx); })
                     .y(function (d) { return Math.floor(yScale(d)); }),
                 area,
                 i;
@@ -52,10 +52,8 @@ var DV = (function () {
                 svg.append("svg:path")
                     .attr("class", "line")
                     .attr("clip-path", "url(#clip)")
-                    .attr("transform", "translate(" + size.offset + ",0)")
                     .attr("d", line(serie));
             }
-
         },
 
         init = function (container, labels, values, options) {

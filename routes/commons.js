@@ -67,7 +67,10 @@ exports.processPetition = function (request, response, renderCallback) {
     }
 
     if (params.chart) {
-        chart = {};
+        chart = {
+            png: false,
+            simile: false
+        };
         ua = uaParser.parse(request.headers["user-agent"]);
 
         // Detect old IE and ask for png instead of svg
@@ -75,10 +78,8 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.png = true;
         }
 
-        if (params.chart !== 'bar' && params.chart !== 'pie' && params.chart !== 'line') {
-            // Don't support the type
-            chart = false;
-        } else if (params.labels !== undefined && params.series !== undefined) {
+        if ((params.chart === 'bar' || params.chart === 'pie' || params.chart === 'line') &&
+                params.labels !== undefined && params.series !== undefined) {
             // Process chart params
 
             // - labels -> must be a text selected property
@@ -113,6 +114,14 @@ exports.processPetition = function (request, response, renderCallback) {
                     chart.area = params.area;
                 }
             }
+        } else if (params.chart === 'timeline') {
+            chart.simile = true;
+            chart.type = params.chart;
+            chart.labels = params.labels;
+            chart.series = params.series.split(',');
+        } else {
+            // Don't support the type
+            chart = false;
         }
     }
 

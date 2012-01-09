@@ -18,3 +18,12 @@ a {
     padding: 5px;
     border: 1px solid #555;
 }
+
+#dv_viewport {
+    margin-bottom: 20px;
+}
+
+#dv_viewport.timeline {
+    height: 150px;
+    border: 1px solid #aaa;
+}

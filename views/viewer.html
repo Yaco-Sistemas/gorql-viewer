@@ -35,6 +35,9 @@
     <script type="text/javascript" src="/javascripts/timeline.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
+            var viewport = document.getElementById("dv_viewport");
+            viewport.style.width = ${chart.sizeX} + 'px';
+            viewport.style.height = ${chart.sizeY} + 'px';
             initTimeline(
                 {
                     start: "${chart.start}",
@@ -44,7 +47,12 @@
                 },
                 [{{each(idx, value) headers}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
                 [{{each(idx, row) results}}{{if idx != 0}}, {{/if}}[{{each(idx, value) row}} {{if idx != 0}}, {{/if}}"${value}"{{/each}}]
-                 {{/each}}]
+                 {{/each}}],
+                viewport,
+                {
+                    detailRes: "${chart.detailRes}",
+                    overviewRes: "${chart.overviewRes}"
+                }
                 );
             });
     </script>
@@ -58,7 +66,7 @@
     {{if error}}
     <div id="error">${error}</div>
     {{else}}
-    <div id="dv_viewport" class="{{if chart && chart.simile}}${chart.type}{{/if}}">
+    <div id="dv_viewport">
     {{if chart && chart.png}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
     </div>
 

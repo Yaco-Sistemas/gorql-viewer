@@ -1,20 +1,21 @@
 /*jslint vars: false, browser: true */
 /*global Timeline */
 
-function initTimeline(fields, headers, results) {
+function initTimeline(fields, headers, results, viewport, options) {
     "use strict";
 
     var eventSource,
         bandInfos,
         events = [],
         startIdx,
-        endIdx = false,
+        endIdx,
         titleIdx,
-        descriptionIdx = false,
+        descriptionIdx,
         aux,
         row,
         i;
 
+    // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {
         aux = headers[i];
         if (aux === fields.start) {
@@ -38,9 +39,9 @@ function initTimeline(fields, headers, results) {
     bandInfos = [
         Timeline.createBandInfo({
             eventSource: eventSource,
-            date: results[0][startIdx],
+            date: results[0][startIdx], // TODO should be earliest date instead
             width: "80%",
-            intervalUnit: Timeline.DateTime.MONTH,
+            intervalUnit: Timeline.DateTime[options.detailRes.toUpperCase()],
             intervalPixels: 100
         }),
         Timeline.createBandInfo({
@@ -48,35 +49,37 @@ function initTimeline(fields, headers, results) {
             eventSource: eventSource,
             date: results[0][startIdx],
             width: "20%",
-            intervalUnit: Timeline.DateTime.YEAR,
+            intervalUnit: Timeline.DateTime[options.overviewRes.toUpperCase()],
             intervalPixels: 200
         })
     ];
 
+    // Synchronize bands
     bandInfos[1].syncWith = 0;
     bandInfos[1].highlight = true;
 
+    // Create events array
     for (i = 0; i < results.length; i += 1) {
         row = results[i];
         aux = {
             start: row[startIdx],
             title: row[titleIdx]
         };
-        if (endIdx) {
+        if (endIdx !== undefined) {
             aux.end = row[endIdx];
             aux.durationEvent = true;
         } else {
             aux.durationEvent = false;
         }
-        if (descriptionIdx) {
+        if (descriptionIdx !== undefined) {
             aux.description = row[descriptionIdx];
         }
         events.push(aux);
     }
 
-    Timeline.create(document.getElementById("dv_viewport"), bandInfos);
+    Timeline.create(viewport, bandInfos);
     eventSource.loadJSON({
-        dateTimeFormat: 'Gregorian',
+        dateTimeFormat: 'Gregorian', // TODO
         events: events
-    }, "http://www.yaco.es");
+    }, "http://www.yaco.es"); // TODO base url of results
 }

@@ -22,8 +22,3 @@ a {
 #dv_viewport {
     margin-bottom: 20px;
 }
-
-#dv_viewport.timeline {
-    height: 500px;
-    border: 1px solid #aaa;
-}

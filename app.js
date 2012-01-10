@@ -60,6 +60,7 @@ app.configure('development', function () {
     app.set('bar', opts.bar);
     app.set('pie', opts.pie);
     app.set('line', opts.line);
+    app.set('timeline', opts.timeline);
 });
 
 app.configure('production', function () {
@@ -73,6 +74,7 @@ app.configure('production', function () {
     app.set('bar', opts.bar);
     app.set('pie', opts.pie);
     app.set('line', opts.line);
+    app.set('timeline', opts.timeline);
 });
 
 // Routes

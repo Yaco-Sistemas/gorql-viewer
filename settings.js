@@ -22,6 +22,12 @@ exports.settings = {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100
+        },
+        timeline: {
+            sizeX: 800,
+            sizeY: 400,
+            detailRes: 'month',
+            overviewRes: 'year'
         }
     },
 
@@ -45,6 +51,12 @@ exports.settings = {
             sizeX: 500,
             sizeY: 500,
             sizeLabel: 100
+        },
+        timeline: {
+            sizeX: 800,
+            sizeY: 400,
+            detailRes: 'month',
+            overviewRes: 'year'
         }
     }
 };

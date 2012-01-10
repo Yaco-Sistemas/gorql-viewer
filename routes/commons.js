@@ -54,7 +54,11 @@ exports.processPetition = function (request, response, renderCallback) {
     //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
+        d3par,
+        similepar,
+        layerspar,
         chart = false,
+        processProperties,
         defaults,
         ua,
         cache,
@@ -77,28 +81,37 @@ exports.processPetition = function (request, response, renderCallback) {
 
         // Detect old IE and ask for png instead of svg
         if (ua.family === "IE" && ua.major < 9) {
+            // TODO there is plenty room for improvement here
             chart.png = true;
         }
 
+        d3par = [{name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}];
+        similepar = [{name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}, {name: 'detailRes', 'default': true}, {name: 'overviewRes', 'default': true}];
+        layerspar = [{name: 'lat'}, {name: 'long'}, {name: 'description'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}];
+
+        processProperties = function (properties, defaults, chart) {
+            var i,
+                prop;
+
+            for (i = 0; i < properties.length; i += 1) {
+                prop = properties[i];
+                if (prop['default']) {
+                    chart[prop.name] = params[prop.name] || defaults[prop.name];
+                } else {
+                    chart[prop.name] = params[prop.name];
+                }
+            }
+        };
+
+        // Process chart params
         if ((params.chart === 'bar' || params.chart === 'pie' || params.chart === 'line') &&
                 params.labels !== undefined && params.series !== undefined) {
-            // Process chart params
-
-            // - labels -> must be a text selected property
-            // - series -> must be a comma separated list of numerical selected properties
-            // - sizeX -> in pixels
-            // - sizeY -> in pixels
-            // - sizeLabel -> in pixels
-
             chart.type = params.chart;
             chart.d3 = true;
             defaults = app.exports.set(chart.type);
 
-            chart.labels = params.labels;
-            chart.series = params.series.split(',');
-            chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.sizeLabel = params.sizeLabel || defaults.sizeLabel;
+            processProperties(d3par, defaults, chart);
+            chart.series = chart.series.split(','); // series must be an array
 
             if (params.chart === 'bar') {
                 // - landscape -> must be boolean
@@ -121,29 +134,16 @@ exports.processPetition = function (request, response, renderCallback) {
                     params.start !== undefined && params.title !== undefined) {
             chart.simile = true;
             chart.type = params.chart;
-            chart.title = params.title;
-            chart.start = params.start;
-
-            chart.end = params.end; // optional
-            chart.description = params.description; // optional
-
             defaults = app.exports.set(chart.type);
-            chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeY = params.sizeY || defaults.sizeY;
-            chart.detailRes = params.detailRes || defaults.detailRes;
-            chart.overviewRes = params.overviewRes || defaults.overviewRes;
+
+            processProperties(similepar, defaults, chart);
         } else if (params.chart === 'map' &&
                     params.lat !== undefined && params.long !== undefined) {
             chart.layers = true;
             chart.type = params.chart;
-            chart.lat = params.lat;
-            chart.long = params.long;
-
-            chart.description = params.description; //optional
-
             defaults = app.exports.set(chart.type);
-            chart.sizeX = params.sizeX || defaults.sizeX;
-            chart.sizeY = params.sizeY || defaults.sizeY;
+
+            processProperties(layerspar, defaults, chart);
         } else {
             // Don't support the type
             chart = false;

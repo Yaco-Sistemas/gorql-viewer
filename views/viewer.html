@@ -70,7 +70,8 @@
             initMap(
                 {
                     lat: "${chart.lat}",
-                    long: "${chart.long}"
+                    long: "${chart.long}"{{if chart.description}},
+                    description: "${chart.description}"{{/if}}
                 },
                 [{{each(idx, value) headers}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
                 [{{each(idx, row) results}}{{if idx != 0}}, {{/if}}[{{each(idx, value) row}} {{if idx != 0}}, {{/if}}"${value}"{{/each}}]

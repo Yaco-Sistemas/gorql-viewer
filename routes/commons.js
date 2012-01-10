@@ -139,6 +139,8 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.lat = params.lat;
             chart.long = params.long;
 
+            chart.description = params.description; //optional
+
             defaults = app.exports.set(chart.type);
             chart.sizeX = params.sizeX || defaults.sizeX;
             chart.sizeY = params.sizeY || defaults.sizeY;

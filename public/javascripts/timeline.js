@@ -73,6 +73,8 @@ function initTimeline(fields, headers, results, viewport, options) {
         }
         if (descriptionIdx !== undefined) {
             aux.description = row[descriptionIdx];
+        } else {
+            aux.description = aux.title; // avoid undefined descriptions in globes
         }
         events.push(aux);
     }

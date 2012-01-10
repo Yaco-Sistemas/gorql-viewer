@@ -13,9 +13,13 @@ function initMap(fields, headers, results, viewport_id, options) {
             new OpenLayers.Pixel(-(size.w / 2), -size.h)
         ),
         aux,
+        lonlat,
         latIdx,
         longIdx,
         i;
+
+    map.addLayer(osm);
+    map.addLayer(markers);
 
     // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {
@@ -34,21 +38,16 @@ function initMap(fields, headers, results, viewport_id, options) {
 
     for (i = 0; i < results.length; i += 1) {
         aux = results[i];
-        markers.addMarker(
-            new OpenLayers.Marker(
-                new OpenLayers.LonLat(
-                    parseFloat(aux[longIdx]),
-                    parseFloat(aux[latIdx])
-                ),
-                icon.clone()
-            )
+        lonlat = new OpenLayers.LonLat(parseFloat(aux[longIdx]), parseFloat(aux[latIdx]));
+        lonlat.transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
         );
+        markers.addMarker(new OpenLayers.Marker(lonlat, icon.clone()));
     }
 
     // Initialize map
-    map.addLayer(osm);
-    map.setCenter(new OpenLayers.LonLat(0, 0), 0);
-    map.addLayer(markers);
     map.addControl(new OpenLayers.Control.LayerSwitcher());
-    map.zoomToMaxExtent();
+    map.addControl(new OpenLayers.Control.PanZoomBar());
+    map.zoomToExtent(markers.getDataExtent());
 }

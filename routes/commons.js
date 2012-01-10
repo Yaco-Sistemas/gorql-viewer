@@ -68,8 +68,10 @@ exports.processPetition = function (request, response, renderCallback) {
 
     if (params.chart) {
         chart = {
+            d3: false,
             png: false,
-            simile: false
+            simile: false,
+            layers: false
         };
         ua = uaParser.parse(request.headers["user-agent"]);
 
@@ -89,6 +91,7 @@ exports.processPetition = function (request, response, renderCallback) {
             // - sizeLabel -> in pixels
 
             chart.type = params.chart;
+            chart.d3 = true;
             defaults = app.exports.set(chart.type);
 
             chart.labels = params.labels;
@@ -129,6 +132,13 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.sizeY = params.sizeY || defaults.sizeY;
             chart.detailRes = params.detailRes || defaults.detailRes;
             chart.overviewRes = params.overviewRes || defaults.overviewRes;
+        } else if (params.chart === 'map') {
+            chart.layers = true;
+            chart.type = params.chart;
+
+            defaults = app.exports.set(chart.type);
+            chart.sizeX = params.sizeX || defaults.sizeX;
+            chart.sizeY = params.sizeY || defaults.sizeY;
         } else {
             // Don't support the type
             chart = false;

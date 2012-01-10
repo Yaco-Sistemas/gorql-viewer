@@ -61,6 +61,7 @@ app.configure('development', function () {
     app.set('pie', opts.pie);
     app.set('line', opts.line);
     app.set('timeline', opts.timeline);
+    app.set('map', opts.map);
 });
 
 app.configure('production', function () {
@@ -75,6 +76,7 @@ app.configure('production', function () {
     app.set('pie', opts.pie);
     app.set('line', opts.line);
     app.set('timeline', opts.timeline);
+    app.set('map', opts.map);
 });
 
 // Routes

@@ -28,6 +28,10 @@ exports.settings = {
             sizeY: 400,
             detailRes: 'month',
             overviewRes: 'year'
+        },
+        map: {
+            sizeX: 600,
+            sizeY: 400
         }
     },
 
@@ -57,6 +61,10 @@ exports.settings = {
             sizeY: 400,
             detailRes: 'month',
             overviewRes: 'year'
+        },
+        map: {
+            sizeX: 600,
+            sizeY: 400
         }
     }
 };

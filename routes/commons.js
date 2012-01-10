@@ -132,9 +132,12 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.sizeY = params.sizeY || defaults.sizeY;
             chart.detailRes = params.detailRes || defaults.detailRes;
             chart.overviewRes = params.overviewRes || defaults.overviewRes;
-        } else if (params.chart === 'map') {
+        } else if (params.chart === 'map' &&
+                    params.lat !== undefined && params.long !== undefined) {
             chart.layers = true;
             chart.type = params.chart;
+            chart.lat = params.lat;
+            chart.long = params.long;
 
             defaults = app.exports.set(chart.type);
             chart.sizeX = params.sizeX || defaults.sizeX;

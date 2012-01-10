@@ -53,25 +53,31 @@
                     detailRes: "${chart.detailRes}",
                     overviewRes: "${chart.overviewRes}"
                 }
-                );
-            });
+            );
+        });
     </script>
     {{else}}
 
     {{if chart && chart.layers}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
+    <script type="text/javascript" src="/javascripts/map.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            var viewport = document.getElementById("dv_viewport"),
-                map,
-                osm;
+            var viewport = document.getElementById("dv_viewport");
             viewport.style.width = ${chart.sizeX} + 'px';
             viewport.style.height = ${chart.sizeY} + 'px';
-            map = new OpenLayers.Map('dv_viewport');
-            osm = new OpenLayers.Layer.OSM( "Simple OSM Map");
-            map.addLayer(osm);
-            map.zoomToMaxExtent();
+            initMap(
+                {
+                    lat: "${chart.lat}",
+                    long: "${chart.long}"
+                },
+                [{{each(idx, value) headers}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
+                [{{each(idx, row) results}}{{if idx != 0}}, {{/if}}[{{each(idx, value) row}} {{if idx != 0}}, {{/if}}"${value}"{{/each}}]
+                 {{/each}}],
+                viewport.id,
+                {}
+            );
         });
     </script>
     {{/if}}

@@ -115,11 +115,13 @@ exports.processPetition = function (request, response, renderCallback) {
                 }
             }
         } else if (params.chart === 'timeline' &&
-                    params.labels !== undefined && params.series !== undefined) {
+                    params.start !== undefined && params.title !== undefined) {
             chart.simile = true;
             chart.type = params.chart;
-            chart.labels = params.labels;
-            chart.series = params.series.split(',');
+            chart.title = params.title;
+            chart.start = params.start;
+            chart.end = params.end; // optional
+            chart.description = params.description; // optional
         } else {
             // Don't support the type
             chart = false;

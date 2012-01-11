@@ -120,14 +120,14 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.family = 'd3';
             defaults = app.exports.set(chart.type);
 
+            if (params.chart === 'bar') {
+                d3par.push({name: 'landscape', 'default': true});
+            } else if (params.chart === 'line') {
+                d3par.push({name: 'area', 'default': true});
+            }
+
             processParameters(d3par, params, defaults, chart);
             chart.series = chart.series.split(','); // series must be an array
-
-            if (params.chart === 'bar') {
-                processParameters([{name: 'landscape', 'default': true}], params, defaults, chart);
-            } else if (params.chart === 'line') {
-                processParameters([{name: 'area', 'default': true}], params, defaults, chart);
-            }
         } else if (params.chart === 'timeline' &&
                     params.start !== undefined && params.title !== undefined) {
             chart.type = params.chart;

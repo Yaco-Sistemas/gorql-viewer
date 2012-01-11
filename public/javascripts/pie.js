@@ -1,15 +1,21 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module */
+/*global d3: true, exports: true, require, window: true, document: true, module, alert */
 
 var DV = (function () {
     "use strict";
 
     var svg,
         positions = {},
+        labelFromValue = {},
         labelScale,
 
         getSectorColor = function (i) {
             return "color" + i;
+        },
+
+        showBubble = function (d, i) {
+            // this value is the sector
+            alert(d.data); // TODO
         },
 
         render = function (labels, pie) {
@@ -26,7 +32,8 @@ var DV = (function () {
                 .enter().append("path")
                 .attr("d", arc)
                 .attr("class", function (d, i) { return "sector " + getSectorColor(i); })
-                .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")");
+                .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")")
+                .on("click", showBubble);
 
             // Paint the labels
             svg.selectAll("rect.label")
@@ -39,21 +46,28 @@ var DV = (function () {
                 .attr("height", 15);
 
             svg.selectAll("text.label")
-                .data(labels)
+                .data(pie, function (d) { return d.data; })
                 .enter().append("svg:text")
                 .attr("class", "label")
                 .attr("x", positions.labels + 10)
                 .attr("dx", 20)
                 .attr("dy", 10)
                 .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
-                .text(String);
+                .text(function (d) { return labelFromValue[d.data]; });
         },
 
         init = function (container, labels, values, options) {
-            var pie;
+            var pie,
+                i;
 
             if (values.length <= 0) {
                 return;
+            }
+
+            // Associate labels and values, it will be necessary later, while
+            // painting the labels
+            for (i = 0; i < values.length; i += 1) {
+                labelFromValue[values[i]] = labels[i];
             }
 
             values = d3.merge(values); // pie charts doesn't support series

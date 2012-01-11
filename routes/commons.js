@@ -58,7 +58,7 @@ exports.processPetition = function (request, response, renderCallback) {
         similepar,
         layerspar,
         chart = false,
-        processProperties,
+        processParameters,
         defaults,
         ua,
         cache,
@@ -72,10 +72,8 @@ exports.processPetition = function (request, response, renderCallback) {
 
     if (params.chart) {
         chart = {
-            d3: false,
-            png: false,
-            simile: false,
-            layers: false
+            family: false,
+            png: false
         };
         ua = uaParser.parse(request.headers["user-agent"]);
 
@@ -85,11 +83,21 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.png = true;
         }
 
-        d3par = [{name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}];
-        similepar = [{name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}, {name: 'detailRes', 'default': true}, {name: 'overviewRes', 'default': true}];
-        layerspar = [{name: 'lat'}, {name: 'long'}, {name: 'description'}, {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}];
+        d3par = [
+            {name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true},
+            {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}
+        ];
+        similepar = [
+            {name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'},
+            {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true},
+            {name: 'detailRes', 'default': true}, {name: 'overviewRes', 'default': true}
+        ];
+        layerspar = [
+            {name: 'lat'}, {name: 'long'}, {name: 'description'},
+            {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}
+        ];
 
-        processProperties = function (properties, defaults, chart) {
+        processParameters = function (properties, defaults, chart) {
             var i,
                 prop;
 
@@ -107,43 +115,31 @@ exports.processPetition = function (request, response, renderCallback) {
         if ((params.chart === 'bar' || params.chart === 'pie' || params.chart === 'line') &&
                 params.labels !== undefined && params.series !== undefined) {
             chart.type = params.chart;
-            chart.d3 = true;
+            chart.family = 'd3';
             defaults = app.exports.set(chart.type);
 
-            processProperties(d3par, defaults, chart);
+            processParameters(d3par, defaults, chart);
             chart.series = chart.series.split(','); // series must be an array
 
             if (params.chart === 'bar') {
-                // - landscape -> must be boolean
-
-                if (params.landscape === undefined) {
-                    chart.landscape = defaults.landscape;
-                } else {
-                    chart.landscape = params.landscape;
-                }
+                processParameters([{name: 'landscape', 'default': true}], defaults, chart);
             } else if (params.chart === 'line') {
-                // - area -> must be boolean
-
-                if (params.area === undefined) {
-                    chart.area = defaults.area;
-                } else {
-                    chart.area = params.area;
-                }
+                processParameters([{name: 'area', 'default': true}], defaults, chart);
             }
         } else if (params.chart === 'timeline' &&
                     params.start !== undefined && params.title !== undefined) {
-            chart.simile = true;
             chart.type = params.chart;
+            chart.family = 'simile';
             defaults = app.exports.set(chart.type);
 
-            processProperties(similepar, defaults, chart);
+            processParameters(similepar, defaults, chart);
         } else if (params.chart === 'map' &&
                     params.lat !== undefined && params.long !== undefined) {
-            chart.layers = true;
             chart.type = params.chart;
+            chart.family = 'layers';
             defaults = app.exports.set(chart.type);
 
-            processProperties(layerspar, defaults, chart);
+            processParameters(layerspar, defaults, chart);
         } else {
             // Don't support the type
             chart = false;

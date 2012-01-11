@@ -5,7 +5,7 @@
     <title>Data Viewer</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
-    {{if chart && !chart.png && chart.d3}}
+    {{if chart && !chart.png && chart.family == 'd3'}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript" src="/javascripts/sizzle.js"></script>
     <script type="text/javascript" src="/javascripts/d3.js"></script>
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/stylesheets/${chart.type}.css" />
     {{else}}
 
-    {{if chart && chart.type == "timeline"}}
+    {{if chart && chart.family == 'simile'}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript">
         Timeline_ajax_url="/timeline/timeline_ajax/simile-ajax-api.js";
@@ -58,7 +58,7 @@
     </script>
     {{else}}
 
-    {{if chart && chart.layers}}
+    {{if chart && chart.family == 'layers'}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
     <script type="text/javascript" src="/javascripts/map.js"></script>
@@ -94,7 +94,7 @@
     <div id="error">${error}</div>
     {{else}}
     <div id="dv_viewport">
-    {{if chart && chart.png}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
+    {{if chart && chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
     </div>
 
     <table id="dv_table">

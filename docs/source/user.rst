@@ -18,12 +18,22 @@ continuación se añaden los parámetros en formato GET.
 
    - bar
    - pie
+   - line
+   - timeline
+   - map
 
 Parámetros de los gráficos
 --------------------------
 
 Los siguientes parámetros son para configurar el gráfico a generar, por lo que
-si el parámetro *chart* no está presente no hay que utilizar ninguno de estos:
+si el parámetro *chart* no está presente no hay que utilizar ninguno de estos.
+
+Los parámetros se organizan por *familias* de gráficos.
+
+Gráficos SVG
+~~~~~~~~~~~~
+
+Este grupo gráficos engloba a los gráficos de tipo *bar*, *pie* y *line*.
 
  - **labels**
    Propiedad seleccionada en la consulta SPARQL que se usará como etiqueta en
@@ -43,12 +53,82 @@ si el parámetro *chart* no está presente no hay que utilizar ninguno de estos:
 
 A continuación siguen parámetros específicos de algunos tipos de gráficos.
 
-Barras
-~~~~~~
+Barras (*bar*)
+..............
 
  - **landscape**
    Valor booleano que determina si las barras se pintarán en horizontal.
    *Opcional*.
+
+Líneas (*line*)
+...............
+
+ - **area**
+   Valor booleano que determina si se debe resaltar el área debajo de las
+   líneas. *Opcional*.
+
+Gráficos Simile
+~~~~~~~~~~~~~~~
+
+Este grupo gráficos engloba a los gráficos de tipo *timeline*.
+
+ - **title**
+   Campo que se usará cómo nombre de los eventos representados en la línea
+   temporal.
+ - **start**
+   Campo con la fecha de inicio de los eventos.
+ - **end**
+   Campo con la fecha de fin de los eventos. *Opcional*. Si no está presente
+   los eventos se considerarán puntuales, en vez de tener una duración.
+ - **description**
+   Campo que se usará para rellenar el popup de información de los eventos.
+   *Opcional*.
+ - **sizeX**
+   Tamaño en píxeles que tendrá de ancho el gráfico generado. *Opcional*.
+ - **sizeY**
+   Tamaño en píxeles que tendrá de alto el gráfico generado. *Opcional*.
+ - **detailRes**
+   Resolución temporal de la banda con la vista detallada de los eventos.
+   *Opcional*. Los posibles valores que puede tomar son:
+
+   - millisecond
+   - second
+   - minute
+   - hour
+   - day
+   - week
+   - month
+   - year
+   - decade
+   - century
+   - millennium
+   - epoch
+   - era
+
+ - **overviewRes**
+   Resolución temporal de la banda con la vista resumisda de los eventos. Los
+   posibles valores que pude tomar son los mismos que para el parámetro
+   *detailRes*. Se recomienda configurar este parámetro a una resolución menor
+   que *detailRes* (una unidad mayor de tiempo). *Opcional*.
+
+Gráficos de Mapas
+~~~~~~~~~~~~~~~~~
+
+Este grupo gráficos engloba a los gráficos de tipo *map*.
+
+ - **lat**
+   Campo con las latitudes (coordenadas WSG 1984) de los campos a representar
+   con marcadores en el mapa.
+ - **long**
+   Campo con las longitudes (coordenadas WSG 1984) de los campos a representar
+   con marcadores en el mapa.
+ - **description**
+   Campo con el contenido de los popups que aparecen al pulsar sobre los
+   marcadores. **Opcional**. Si no está presente no se mostrarán los popups.
+ - **sizeX**
+   Tamaño en píxeles que tendrá de ancho el gráfico generado. *Opcional*.
+ - **sizeY**
+   Tamaño en píxeles que tendrá de alto el gráfico generado. *Opcional*.
 
 Ejemplos
 --------

@@ -199,27 +199,15 @@ var DV = (function () {
                 .text(String);
         },
 
-        init = function (container, labels, values, options) {
-            var i,
-                j,
-                aux,
-                series = [],
-                transform;
+        init = function (container, labels, series, options) {
+            var transform;
 
-            if (values.length <= 0) {
+            if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
 
-            nElems = values.length;
-            nSeries = values[0].length;
-
-            for (i = 0; i < nSeries; i += 1) {
-                aux = [];
-                for (j = 0; j < values.length; j += 1) {
-                    aux.push(values[j][i]);
-                }
-                series.push(aux);
-            }
+            nElems = labels.length;
+            nSeries = series.length;
 
             size.x = parseInt(options.sizeX, 10);
             size.y = parseInt(options.sizeY, 10);
@@ -261,11 +249,49 @@ var DV = (function () {
 
         node = function (data, options) {
             init(document.body, data.labels, data.values, options);
+        },
+
+        chart = function (container, data_container, options) {
+            var labels = [],
+                values = [],
+                labelIdx,
+                valuesIdx = [],
+                series = options.series.split(','),
+                aux = Sizzle(data_container + " tr"),
+                aux2,
+                i,
+                j;
+
+            // Get indexes
+            for (i = 0; i < aux[0].cells.length; i += 1) {
+                aux2 = aux[0].cells[i].innerHTML;
+                if (aux2 === options.labels) {
+                    labelIdx = i;
+                } else {
+                    for (j = 0; j < series.length; j += 1) {
+                        if (aux2 === series[j]) {
+                            valuesIdx.push(i);
+                            values.push([]); // future serie array
+                        }
+                    }
+                }
+            }
+
+            // Get data
+            for (i = 1; i < aux.length; i += 1) {
+                aux2 = aux[i].cells;
+                labels.push(aux2[labelIdx].innerHTML);
+                for (j = 0; j < valuesIdx.length; j += 1) {
+                    values[j].push(parseInt(aux2[valuesIdx[j]].innerHTML, 10));
+                }
+            }
+
+            init(container, labels, values, options);
         };
 
     // Public functions
     return {
-        chart: init,
+        chart: chart,
         node: node
     };
 }());

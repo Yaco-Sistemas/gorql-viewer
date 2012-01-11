@@ -8,17 +8,12 @@ var commons = require('./commons'),
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var chartData = {
-            labels: [],
-            values: []
-        },
-        data,
+    var data,
         query,
         regex,
         aux,
         key,
-        i,
-        j;
+        i;
 
     // 1.- Get the values from the array of objects
 
@@ -46,19 +41,6 @@ renderResults = function (response, params, error, results) {
                     }
                 }
                 params.chart.options = aux;
-
-                if (params.chart.series) {
-                    // data
-                    for (i = 0; i < results.length; i += 1) {
-                        aux = [];
-                        chartData.labels.push(results[i][params.chart.labels].value);
-                        for (j = 0; j < params.chart.series.length; j += 1) {
-                            aux.push(results[i][params.chart.series[j]].value);
-                        }
-                        chartData.values.push(aux);
-                    }
-                    params.chart.data = chartData;
-                }
             } catch (err) {
                 console.log(err);
                 params.chart = false;

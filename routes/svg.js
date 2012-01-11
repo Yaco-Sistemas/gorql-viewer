@@ -13,21 +13,22 @@ renderResults = function (response, params, error, results) {
             labels: [],
             values: []
         },
-        aux,
         svg;
 
     if (params.chart.family !== 'd3') {
         response.send('Invalid chart type.', 400);
     }
 
+    for (i = 0; i < params.chart.series.length; i += 1) {
+        chartData.values.push([]); // create future serie array
+    }
+
     try {
         for (i = 0; i < results.length; i += 1) {
-            aux = [];
             chartData.labels.push(results[i][params.chart.labels].value);
             for (j = 0; j < params.chart.series.length; j += 1) {
-                aux.push(parseInt(results[i][params.chart.series[j]].value, 10));
+                chartData.values[j].push(parseInt(results[i][params.chart.series[j]].value, 10));
             }
-            chartData.values.push(aux);
         }
         params.chart.data = chartData;
     } catch (err) {

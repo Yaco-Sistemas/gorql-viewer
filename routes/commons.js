@@ -10,6 +10,7 @@ var app = require.main,
     jsdom = require('jsdom').jsdom,
     readFileSync = require('fs').readFileSync,
     sparqlClient,
+    processParameters,
     sparqlCallback;
 
 sparqlCallback = function (response, params, renderCallback, cache, key) {
@@ -44,6 +45,22 @@ sparqlCallback = function (response, params, renderCallback, cache, key) {
     };
 };
 
+// Process parameters and store them in chart object
+
+processParameters = function (properties, params, defaults, chart) {
+    var i,
+        prop;
+
+    for (i = 0; i < properties.length; i += 1) {
+        prop = properties[i];
+        if (prop['default']) {
+            chart[prop.name] = params[prop.name] || defaults[prop.name];
+        } else {
+            chart[prop.name] = params[prop.name];
+        }
+    }
+};
+
 // Process GET petitions
 
 exports.processPetition = function (request, response, renderCallback) {
@@ -58,7 +75,6 @@ exports.processPetition = function (request, response, renderCallback) {
         similepar,
         layerspar,
         chart = false,
-        processParameters,
         defaults,
         ua,
         cache,
@@ -97,20 +113,6 @@ exports.processPetition = function (request, response, renderCallback) {
             {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}
         ];
 
-        processParameters = function (properties, defaults, chart) {
-            var i,
-                prop;
-
-            for (i = 0; i < properties.length; i += 1) {
-                prop = properties[i];
-                if (prop['default']) {
-                    chart[prop.name] = params[prop.name] || defaults[prop.name];
-                } else {
-                    chart[prop.name] = params[prop.name];
-                }
-            }
-        };
-
         // Process chart params
         if ((params.chart === 'bar' || params.chart === 'pie' || params.chart === 'line') &&
                 params.labels !== undefined && params.series !== undefined) {
@@ -118,13 +120,13 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.family = 'd3';
             defaults = app.exports.set(chart.type);
 
-            processParameters(d3par, defaults, chart);
+            processParameters(d3par, params, defaults, chart);
             chart.series = chart.series.split(','); // series must be an array
 
             if (params.chart === 'bar') {
-                processParameters([{name: 'landscape', 'default': true}], defaults, chart);
+                processParameters([{name: 'landscape', 'default': true}], params, defaults, chart);
             } else if (params.chart === 'line') {
-                processParameters([{name: 'area', 'default': true}], defaults, chart);
+                processParameters([{name: 'area', 'default': true}], params, defaults, chart);
             }
         } else if (params.chart === 'timeline' &&
                     params.start !== undefined && params.title !== undefined) {
@@ -132,14 +134,14 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.family = 'simile';
             defaults = app.exports.set(chart.type);
 
-            processParameters(similepar, defaults, chart);
+            processParameters(similepar, params, defaults, chart);
         } else if (params.chart === 'map' &&
                     params.lat !== undefined && params.long !== undefined) {
             chart.type = params.chart;
             chart.family = 'layers';
             defaults = app.exports.set(chart.type);
 
-            processParameters(layerspar, defaults, chart);
+            processParameters(layerspar, params, defaults, chart);
         } else {
             // Don't support the type
             chart = false;

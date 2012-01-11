@@ -16,6 +16,10 @@ renderResults = function (response, params, error, results) {
         aux,
         svg;
 
+    if (params.chart.family !== 'd3') {
+        response.send('Invalid chart type.', 400);
+    }
+
     try {
         for (i = 0; i < results.length; i += 1) {
             aux = [];

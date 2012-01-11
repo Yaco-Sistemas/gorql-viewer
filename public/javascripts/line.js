@@ -23,7 +23,8 @@ var DV = (function () {
                     }),
                 yAxis = d3.svg.axis()
                     .scale(yScale)
-                    .orient("left"),
+                    .orient("left")
+                    .tickFormat(d3.format(".0f")),
                 serie,
                 line = d3.svg.line()
                     //.interpolate("monotone")
@@ -67,7 +68,7 @@ var DV = (function () {
             // Move labels in the y-axis
             svg.selectAll(".y.axis text")
                 .attr("text-anchor", "start")
-                .attr("dx", 10)
+                .attr("dx", 9)
                 .attr("dy", -3);
 
             // Add helping lines

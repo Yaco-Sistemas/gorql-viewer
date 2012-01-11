@@ -1,5 +1,5 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module, alert */
+/*global d3: true, exports: true, require, window: true, document: true, module, alert, extractData */
 
 var DV = (function () {
     "use strict";
@@ -56,30 +56,30 @@ var DV = (function () {
                 .text(function (d) { return labelFromValue[d.data]; });
         },
 
-        init = function (container, labels, values, options) {
+        init = function (container, labels, series, options) {
             var pie,
                 i;
 
-            if (values.length <= 0) {
+            if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
 
+            series = series[0]; // pie charts doesn't support series
+
             // Associate labels and values, it will be necessary later, while
             // painting the labels
-            for (i = 0; i < values.length; i += 1) {
-                labelFromValue[values[i]] = labels[i];
+            for (i = 0; i < series.length; i += 1) {
+                labelFromValue[series[i]] = labels[i];
             }
 
-            values = d3.merge(values); // pie charts doesn't support series
-
-            pie = d3.layout.pie()(values);
+            pie = d3.layout.pie()(series);
 
             positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
             positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;
             positions.centerY = parseInt(options.sizeY, 10) / 2;
 
             labelScale = d3.scale.linear()
-                .domain([0, values.length - 1])
+                .domain([0, series.length - 1])
                 .range([20, parseInt(options.sizeY, 10) - 20]);
 
             // Create the svg root node
@@ -93,11 +93,16 @@ var DV = (function () {
 
         node = function (data, options) {
             init(document.body, data.labels, data.values, options);
+        },
+
+        chart = function (container, data_container, options) {
+            var data = extractData(data_container, options);
+            init(container, data.labels, data.series, options);
         };
 
     // Public functions
     return {
-        chart: init,
+        chart: chart,
         node: node
     };
 }());

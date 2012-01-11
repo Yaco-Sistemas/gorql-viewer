@@ -1,5 +1,5 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module */
+/*global d3: true, exports: true, require, window: true, document: true, module, extractData */
 
 var DV = (function () {
     "use strict";
@@ -95,31 +95,19 @@ var DV = (function () {
             }
         },
 
-        init = function (container, labels, values, options) {
-            var aux,
-                i,
-                j,
-                series = [],
-                area = options.area === 'true';
+        init = function (container, labels, series, options) {
+            var area = options.area === 'true';
 
-            if (values.length <= 0) {
+            if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
 
-            nElems = values.length;
-            nSeries = values[0].length;
+            nElems = labels.length;
+            nSeries = series.length;
 
             size.x = parseInt(options.sizeX, 10);
             size.y = parseInt(options.sizeY, 10);
             size.offset = parseInt(options.sizeLabel, 10);
-
-            for (i = 0; i < nSeries; i += 1) {
-                aux = [];
-                for (j = 0; j < values.length; j += 1) {
-                    aux.push(values[j][i]);
-                }
-                series.push(aux);
-            }
 
             xScale = d3.scale.linear()
                 .domain([0, nElems - 1])
@@ -140,11 +128,16 @@ var DV = (function () {
 
         node = function (data, options) {
             init(document.body, data.labels, data.values, options);
+        },
+
+        chart = function (container, data_container, options) {
+            var data = extractData(data_container, options);
+            init(container, data.labels, data.series, options);
         };
 
     // Public functions
     return {
-        chart: init,
+        chart: chart,
         node: node
     };
 }());

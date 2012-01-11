@@ -43,6 +43,12 @@
     shape-rendering: crispEdges;
 }
 
+#dv_viewport .y.axis path.domain,
+#dv_viewport .x.axis path.domain,
+#dv_viewport .x.axis line.tick {
+    stroke: none;
+}
+
 #dv_viewport .x.axis line,
 #dv_viewport .x.axis path,
 #dv_viewport .y.axis line,
@@ -52,5 +58,9 @@
 }
 
 #dv_viewport .y.axis line {
-    opacity: .2;
+    stroke: #CCC;
+}
+
+#dv_viewport .y.axis text {
+    fill: #CCC;
 }

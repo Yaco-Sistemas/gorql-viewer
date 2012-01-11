@@ -27,14 +27,14 @@ var DV = (function () {
                 serie,
                 line = d3.svg.line()
                     //.interpolate("monotone")
-                    .x(function (d, idx) { return size.offset + xScale(idx); })
+                    .x(function (d, idx) { return xScale(idx); })
                     .y(function (d) { return Math.floor(yScale(d)); }),
                 i;
 
             if (area) {
                 area = d3.svg.area()
                     //.interpolate("monotone")
-                    .x(function (d, idx) { return size.offset + xScale(idx); })
+                    .x(function (d, idx) { return xScale(idx); })
                     .y0(size.y - size.offset)
                     .y1(function (d) { return Math.floor(yScale(d)); });
             }
@@ -43,28 +43,32 @@ var DV = (function () {
             svg.append("svg:clipPath")
                 .attr("id", "clip")
                 .append("svg:rect")
-                .attr("transform", "translate(" + size.offset + ",0)")
-                .attr("width", size.x - size.offset)
+                .attr("width", size.x)
                 .attr("height", size.y - size.offset);
 
             // Add the x-axis.
             svg.append("svg:g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(" + size.offset + "," + (size.y - size.offset) + ")")
+                .attr("transform", "translate(0," + (size.y - size.offset) + ")")
                 .call(xAxis);
 
             // Rotate labels in the x-axis
             svg.selectAll(".x.axis text")
-                .attr("text-anchor", "end")
+                .attr("text-anchor", "start")
                 .attr("transform", "rotate(-90)")
-                .attr("dx", -10)
+                .attr("dx", -size.offset)
                 .attr("dy", -7);
 
             // Add the y-axis.
             svg.append("svg:g")
                 .attr("class", "y axis")
-                .attr("transform", "translate(" + size.offset + ",0)")
                 .call(yAxis);
+
+            // Move labels in the y-axis
+            svg.selectAll(".y.axis text")
+                .attr("text-anchor", "start")
+                .attr("dx", 10)
+                .attr("dy", -3);
 
             // Add helping lines
             svg.selectAll(".y.axis line.tick")
@@ -118,7 +122,7 @@ var DV = (function () {
 
             xScale = d3.scale.linear()
                 .domain([0, nElems - 1])
-                .range([0, size.x - size.offset]);
+                .range([0, size.x]);
 
             yScale = d3.scale.linear()
                 .domain([d3.max(d3.merge(series)), 0])

@@ -4,6 +4,53 @@
 
 #dv_viewport .pie path.sector,
 #dv_viewport .pie rect.label {
-    fill: steelblue;
     stroke: white;
+}
+
+#dv_viewport .color0 {
+    fill: #151ED1;
+}
+
+#dv_viewport .color1 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .color2 {
+    fill: #4F3825;
+}
+
+#dv_viewport .color3 {
+    fill: #27667B;
+}
+
+#dv_viewport .color4 {
+    fill: #65B516;
+}
+
+#dv_viewport .color5 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .color6 {
+    fill: #C7786A;
+}
+
+#dv_viewport .color7 {
+    fill: #D9011B;
+}
+
+#dv_viewport .color8 {
+    fill: #533A99;
+}
+
+#dv_viewport .color9 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .color10 {
+    fill: #7EE1AE;
+}
+
+#dv_viewport .color11 {
+    fill: #986FFA;
 }

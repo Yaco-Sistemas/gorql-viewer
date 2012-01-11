@@ -6,11 +6,10 @@ var DV = (function () {
 
     var svg,
         positions = {},
-        valueScale, // for opacity only
         labelScale,
 
-        getSectorColor = function (d, i) {
-            return valueScale(d.data);
+        getSectorColor = function (i) {
+            return "color" + i;
         },
 
         render = function (labels, pie) {
@@ -26,20 +25,18 @@ var DV = (function () {
                 .data(pie, function (d) { return d.data; })
                 .enter().append("path")
                 .attr("d", arc)
-                .attr("class", "sector")
-                .style("opacity", getSectorColor)
+                .attr("class", function (d, i) { return "sector " + getSectorColor(i); })
                 .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")");
 
             // Paint the labels
             svg.selectAll("rect.label")
                 .data(pie, function (d) { return d.data; })
                 .enter().append("svg:rect")
-                .attr("class", "label")
+                .attr("class", function (d, i) { return "label " + getSectorColor(i); })
                 .attr("x", positions.labels + 10)
                 .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
                 .attr("width", 15)
-                .attr("height", 15)
-                .style("opacity", getSectorColor);
+                .attr("height", 15);
 
             svg.selectAll("text.label")
                 .data(labels)
@@ -66,10 +63,6 @@ var DV = (function () {
             positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
             positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;
             positions.centerY = parseInt(options.sizeY, 10) / 2;
-
-            valueScale = d3.scale.sqrt()
-                .domain([0, d3.max(values)])
-                .range([0.25, 1]);
 
             labelScale = d3.scale.linear()
                 .domain([0, values.length - 1])

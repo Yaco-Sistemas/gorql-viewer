@@ -24,6 +24,7 @@ DV.merge((function () {
 
     var svg,
         positions = {},
+        indexFromValue = {},
         labelFromValue = {},
         labelScale,
 
@@ -74,6 +75,13 @@ DV.merge((function () {
                 .text(function (d) { return labelFromValue[d.data]; });
         },
 
+        compareOriginalIndexes = function (d1, d2) {
+            var idx1 = indexFromValue[d1],
+                idx2 = indexFromValue[d2];
+
+            return idx1 - idx2;
+        },
+
         init = function (container, labels, series, options) {
             var pie,
                 i;
@@ -87,10 +95,13 @@ DV.merge((function () {
             // Associate labels and values, it will be necessary later, while
             // painting the labels
             for (i = 0; i < series.length; i += 1) {
+                indexFromValue[series[i]] = i;
                 labelFromValue[series[i]] = labels[i];
             }
 
-            pie = d3.layout.pie()(series);
+            pie = d3.layout.pie();
+            pie.sort(compareOriginalIndexes);
+            pie = pie(series);
 
             positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
             positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;

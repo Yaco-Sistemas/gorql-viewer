@@ -7,6 +7,12 @@
     stroke: white;
 }
 
+#dv_viewport .pie text.highlight {
+    font-weight: bold;
+    font: 22px sans-serif;
+    fill: black;
+}
+
 #dv_viewport .color0 {
     fill: #151ED1;
 }

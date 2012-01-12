@@ -23,6 +23,7 @@ DV.merge((function () {
     "use strict";
 
     var svg,
+        sizes = {},
         positions = {},
         indexFromValue = {},
         labelFromValue = {},
@@ -32,28 +33,28 @@ DV.merge((function () {
             return "color" + i;
         },
 
-        highlightIn = function (d, i) {
-            var label = labelFromValue[d.data],
-                bbox = this.getBoundingClientRect(),
-                x = bbox.left - bbox.right,
-                y = bbox.top - bbox.bottom;
-
-            svg.append("svg:text")
-                .attr("class", "highlight")
-                .attr("x", bbox.left)
-                .attr("y", bbox.top)
-//                 .attr("x", positions.centerX)
-//                 .attr("y", positions.centerY)
-//                 .attr("transform", "translate(" + x + "," + y + ")")
-                .attr("text-anchor", "start")
-                .text(label + ": " + d.data);
-            this.style.opacity = 0.2;
-        },
-
         highlightOut = function (d, i) {
             svg.selectAll("text.highlight")
                 .remove();
-            this.style.opacity = 1;
+            svg.selectAll("path.sector")
+                .attr("style", "opacity: 1");
+        },
+
+        highlightIn = function (d, i) {
+            // Remove other highlights
+            highlightOut(d, i);
+
+            var label = labelFromValue[d.data];
+
+            svg.append("svg:text")
+                .attr("class", "highlight")
+                .attr("x", positions.centerX)
+                .attr("y", sizes.height)
+                .attr("dy", -10)
+                .attr("text-anchor", "middle")
+                .attr("text-path", this.getAttribute(d))
+                .text(label + ": " + d.data);
+            this.style.opacity = 0.2;
         },
 
         render = function (labels, pie) {
@@ -124,9 +125,14 @@ DV.merge((function () {
             pie.sort(compareOriginalIndexes);
             pie = pie(series);
 
+            sizes = {
+                width: options.sizeX,
+                height: options.sizeY
+            };
+
             positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
             positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;
-            positions.centerY = parseInt(options.sizeY, 10) / 2;
+            positions.centerY = (parseInt(options.sizeY, 10) / 2) - 20;
 
             labelScale = d3.scale.linear()
                 .domain([0, series.length - 1])

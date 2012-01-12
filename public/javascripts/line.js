@@ -50,7 +50,7 @@ var DV = (function () {
             // Add the x-axis.
             svg.append("svg:g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0," + (size.y - size.offset) + ")")
+                .attr("transform", "translate(" + size.xpadding / 2 + "," + (size.y - size.offset) + ")")
                 .call(xAxis);
 
             // Rotate labels in the x-axis
@@ -83,14 +83,16 @@ var DV = (function () {
                 svg.append("svg:path")
                     .attr("class", "line serie" + i)
                     .attr("clip-path", "url(#clip)")
-                    .attr("d", line(serie));
+                    .attr("d", line(serie))
+                    .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
 
                 if (area) {
                     // Add the area path.
                     svg.append("svg:path")
                         .attr("class", "area serie" + i)
                         .attr("clip-path", "url(#clip)")
-                        .attr("d", area(serie));
+                        .attr("d", area(serie))
+                        .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
                 }
             }
         },
@@ -106,12 +108,13 @@ var DV = (function () {
             nSeries = series.length;
 
             size.x = parseInt(options.sizeX, 10);
+            size.xpadding = size.x / (nElems + 1); // to avoid cropping labels
             size.y = parseInt(options.sizeY, 10);
             size.offset = parseInt(options.sizeLabel, 10);
 
             xScale = d3.scale.linear()
                 .domain([0, nElems - 1])
-                .range([0, size.x]);
+                .range([0, size.x - size.xpadding]);
 
             yScale = d3.scale.linear()
                 .domain([d3.max(d3.merge(series)), 0])

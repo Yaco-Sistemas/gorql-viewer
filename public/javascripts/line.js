@@ -1,7 +1,25 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module, extractData */
+/*global d3: true, exports: true, require, window: true, document: true, module, DV: true */
 
-var DV = (function () {
+if (!DV) {
+    var DV = {};
+}
+
+DV.merge = function (source, destination) {
+    "use strict";
+
+    var key;
+
+    for (key in source) {
+        if (source.hasOwnProperty(key)) {
+            if (!destination[key]) {
+                destination[key] = source[key];
+            }
+        }
+    }
+};
+
+DV.merge((function () {
     "use strict";
 
     var svg,
@@ -134,7 +152,7 @@ var DV = (function () {
         },
 
         chart = function (container, data_container, options) {
-            var data = extractData(data_container, options);
+            var data = DV.extractData(data_container, options);
             init(container, data.labels, data.series, options);
         };
 
@@ -143,7 +161,7 @@ var DV = (function () {
         chart: chart,
         node: node
     };
-}());
+}()), DV);
 
 if (typeof module !== 'undefined' && module.exports) {
     // Node

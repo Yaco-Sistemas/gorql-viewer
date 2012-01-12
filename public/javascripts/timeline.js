@@ -1,5 +1,5 @@
 /*jslint vars: false, browser: true */
-/*global Timeline, extractData */
+/*global Timeline, DV */
 
 function initTimeline(fields, viewport, data_container, options) {
     "use strict";
@@ -17,7 +17,7 @@ function initTimeline(fields, viewport, data_container, options) {
         row,
         i;
 
-    aux = extractData(data_container, options);
+    aux = DV.extractData(data_container, options);
     headers = aux.headers;
     results = aux.results;
 

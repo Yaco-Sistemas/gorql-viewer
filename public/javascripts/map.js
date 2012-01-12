@@ -1,5 +1,5 @@
 /*jslint vars: false, browser: true */
-/*global OpenLayers, extractData */
+/*global OpenLayers, DV */
 
 function initMap(fields, viewport_id, data_container, options) {
     "use strict";
@@ -35,7 +35,7 @@ function initMap(fields, viewport_id, data_container, options) {
     map.addLayer(osm);
     map.addLayer(markers);
 
-    aux = extractData(data_container, options);
+    aux = DV.extractData(data_container, options);
     headers = aux.headers;
     results = aux.results;
 

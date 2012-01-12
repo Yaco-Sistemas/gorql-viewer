@@ -1,7 +1,11 @@
 /*jslint vars: false, browser: true */
-/*global Sizzle */
+/*global Sizzle, DV */
 
-function extractData(data_container, options) {
+if (!window.DV) {
+    window.DV = {};
+}
+
+DV.extractData = function (data_container, options) {
     "use strict";
     var labels = [],
         values = [],
@@ -68,4 +72,4 @@ function extractData(data_container, options) {
     results.results = values;
 
     return results;
-}
+};

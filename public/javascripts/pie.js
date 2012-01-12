@@ -32,9 +32,28 @@ DV.merge((function () {
             return "color" + i;
         },
 
-        showBubble = function (d, i) {
-            // this value is the sector
-            alert(d.data); // TODO
+        highlightIn = function (d, i) {
+            var label = labelFromValue[d.data],
+                bbox = this.getBoundingClientRect(),
+                x = bbox.left - bbox.right,
+                y = bbox.top - bbox.bottom;
+
+            svg.append("svg:text")
+                .attr("class", "highlight")
+                .attr("x", bbox.left)
+                .attr("y", bbox.top)
+//                 .attr("x", positions.centerX)
+//                 .attr("y", positions.centerY)
+//                 .attr("transform", "translate(" + x + "," + y + ")")
+                .attr("text-anchor", "start")
+                .text(label + ": " + d.data);
+            this.style.opacity = 0.2;
+        },
+
+        highlightOut = function (d, i) {
+            svg.selectAll("text.highlight")
+                .remove();
+            this.style.opacity = 1;
         },
 
         render = function (labels, pie) {
@@ -52,7 +71,8 @@ DV.merge((function () {
                 .attr("d", arc)
                 .attr("class", function (d, i) { return "sector " + getSectorColor(i); })
                 .attr("transform", "translate(" + positions.centerX + ", " + positions.centerY + ")")
-                .on("click", showBubble);
+                .on("mouseover", highlightIn)
+                .on("mouseout", highlightOut);
 
             // Paint the labels
             svg.selectAll("rect.label")
@@ -97,6 +117,7 @@ DV.merge((function () {
             for (i = 0; i < series.length; i += 1) {
                 indexFromValue[series[i]] = i;
                 labelFromValue[series[i]] = labels[i];
+                // TODO y si varios sectores tienen exactamente el mismo valor?
             }
 
             pie = d3.layout.pie();

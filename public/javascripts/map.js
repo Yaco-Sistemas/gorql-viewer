@@ -1,9 +1,12 @@
 /*jslint vars: false, browser: true */
-/*global OpenLayers */
+/*global OpenLayers, extractData */
 
-function initMap(fields, headers, results, viewport_id, options) {
+function initMap(fields, viewport_id, data_container, options) {
     "use strict";
-    var map = new OpenLayers.Map(viewport_id, {
+
+    var headers,
+        results,
+        map = new OpenLayers.Map(viewport_id, {
             controls: [
                 new OpenLayers.Control.Navigation(),
                 new OpenLayers.Control.PanZoomBar(),
@@ -31,6 +34,10 @@ function initMap(fields, headers, results, viewport_id, options) {
 
     map.addLayer(osm);
     map.addLayer(markers);
+
+    aux = extractData(data_container, options);
+    headers = aux.headers;
+    results = aux.results;
 
     // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {

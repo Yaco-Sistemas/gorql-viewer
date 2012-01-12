@@ -26,6 +26,8 @@
 
     {{if chart && chart.family == 'simile'}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
+    <script type="text/javascript" src="/javascripts/sizzle.js"></script>
+    <script type="text/javascript" src="/javascripts/minedata.js"></script>
     <script type="text/javascript">
         Timeline_ajax_url="/timeline/timeline_ajax/simile-ajax-api.js";
         Timeline_urlPrefix='/timeline/timeline_js/';
@@ -45,10 +47,8 @@
                     end: "${chart.end}"{{/if}}{{if chart.description}},
                     description: "${chart.description}"{{/if}}
                 },
-                [{{each(idx, value) headers}}{{if idx != 0}}, {{/if}}"${value}"{{/each}}],
-                [{{each(idx, row) results}}{{if idx != 0}}, {{/if}}[{{each(idx, value) row}} {{if idx != 0}}, {{/if}}"${value}"{{/each}}]
-                 {{/each}}],
                 viewport,
+                "#dv_table",
                 {
                     detailRes: "${chart.detailRes}",
                     overviewRes: "${chart.overviewRes}"

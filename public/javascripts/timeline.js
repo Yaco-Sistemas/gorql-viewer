@@ -1,11 +1,13 @@
 /*jslint vars: false, browser: true */
-/*global Timeline */
+/*global Timeline, extractData */
 
-function initTimeline(fields, headers, results, viewport, options) {
+function initTimeline(fields, viewport, data_container, options) {
     "use strict";
 
     var eventSource,
         bandInfos,
+        headers,
+        results,
         events = [],
         startIdx,
         endIdx,
@@ -14,6 +16,10 @@ function initTimeline(fields, headers, results, viewport, options) {
         aux,
         row,
         i;
+
+    aux = extractData(data_container, options);
+    headers = aux.headers;
+    results = aux.results;
 
     // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {

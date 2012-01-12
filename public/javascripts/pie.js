@@ -36,15 +36,48 @@ DV.merge((function () {
         highlightOut = function (d, i) {
             svg.selectAll("text.highlight")
                 .remove();
-            svg.selectAll("path.sector")
-                .attr("style", "opacity: 1");
+            svg.selectAll("path.highlight")
+                .attr("transform", "translate(" + positions.centerX + "," + positions.centerY + ")");
         },
 
         highlightIn = function (d, i) {
             // Remove other highlights
             highlightOut(d, i);
 
-            var label = labelFromValue[d.data];
+            var label = labelFromValue[d.data],
+                factor = 30, // hypotenuse
+                angle = d.endAngle - d.startAngle,
+                quadrant,
+                tx,
+                ty;
+
+            angle = d.startAngle + (angle / 2); // bisec
+
+            if (angle < (Math.PI / 2)) {
+                // North East
+                tx = Math.sin(angle);
+                ty = -Math.cos(angle);
+            } else if (angle < Math.PI) {
+                // South East
+                angle = angle - (Math.PI / 2);
+                tx = Math.cos(angle);
+                ty = Math.sin(angle);
+            } else if (angle < ((3 * Math.PI) / 2)) {
+                // South West
+                angle = angle - Math.PI;
+                tx = -Math.sin(angle);
+                ty = Math.cos(angle);
+            } else {
+                // North West
+                angle = angle - ((3 * Math.PI) / 2);
+                tx = -Math.cos(angle);
+                ty = -Math.sin(angle);
+            }
+
+            tx = tx * factor;
+            ty = ty * factor;
+            tx = positions.centerX + tx;
+            ty = positions.centerY + ty;
 
             svg.append("svg:text")
                 .attr("class", "highlight")
@@ -54,7 +87,8 @@ DV.merge((function () {
                 .attr("text-anchor", "middle")
                 .attr("text-path", this.getAttribute(d))
                 .text(label + ": " + d.data);
-            this.style.opacity = 0.2;
+            this.setAttribute("transform", "translate(" + tx + "," + ty + ")");
+            this.setAttribute("class", this.getAttribute("class") + " highlight");
         },
 
         render = function (labels, pie) {

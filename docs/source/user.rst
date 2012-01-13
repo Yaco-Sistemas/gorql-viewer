@@ -5,7 +5,7 @@ Manual del usuario
 Cómo hacer consultas
 ====================
 
-Las consultas se deben realizar a la url http://dominio_visor/viewer/ y a
+Las consultas se deben realizar a la url |example_domain|/viewer/ y a
 continuación se añaden los parámetros en formato GET.
 
  - **query**
@@ -58,6 +58,13 @@ Barras (*bar*)
 
  - **landscape**
    Valor booleano que determina si las barras se pintarán en horizontal.
+   *Opcional*.
+
+Sectores (*pie*)
+................
+
+ - **sizeHighlight**
+   Tamaño en píxeles que se desplazará el sector resaltado sobre su bisectriz.
    *Opcional*.
 
 Líneas (*line*)
@@ -135,7 +142,7 @@ Ejemplos
 
 Consulta que pinta un gráfico de sectores (*pie*) de 700 píxeles de ancho::
 
-    http://dominio_visor/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20(%3Fpopulation%20%3E%2015000000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&chart=pie&labels=country_name&series=population&sizeX=700
+    |example_domain|/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20(%3Fpopulation%20%3E%2015000000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&chart=pie&labels=country_name&series=population&sizeX=700
 
 Además de la consulta SPARQL se le pasan los siguientes parámetros para dibujar
 el gráfico de sectores::

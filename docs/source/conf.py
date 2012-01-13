@@ -86,6 +86,11 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# This text is included at the beginning of each file
+rst_prolog = """
+.. |example_domain| replace:: http://www.dominio_visor.com
+"""
+
 
 # -- Options for HTML output ---------------------------------------------------
 

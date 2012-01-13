@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/javascripts/${chart.type}.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.chart("#dv_viewport",
+            DV.${chart.type}("#dv_viewport",
                 "#dv_table",
                 {
                     {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
@@ -40,7 +40,7 @@
             var viewport = document.getElementById("dv_viewport");
             viewport.style.width = ${chart.sizeX} + 'px';
             viewport.style.height = ${chart.sizeY} + 'px';
-            initTimeline(
+            DV.timeline(
                 {
                     start: "${chart.start}",
                     title: "${chart.title}"{{if chart.end}},
@@ -69,7 +69,7 @@
             var viewport = document.getElementById("dv_viewport");
             viewport.style.width = ${chart.sizeX} + 'px';
             viewport.style.height = ${chart.sizeY} + 'px';
-            initMap(
+            DV.map(
                 {
                     lat: "${chart.lat}",
                     long: "${chart.long}"{{if chart.description}},

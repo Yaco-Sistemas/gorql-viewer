@@ -212,7 +212,7 @@ DV.merge((function () {
 
     // Public functions
     return {
-        chart: chart,
+        pie: chart,
         node: node
     };
 }()), DV);

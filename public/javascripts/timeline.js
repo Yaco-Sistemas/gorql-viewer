@@ -1,7 +1,11 @@
 /*jslint vars: false, browser: true */
 /*global Timeline, DV */
 
-function initTimeline(fields, viewport, data_container, options) {
+if (!DV) {
+    var DV = {};
+}
+
+DV.timeline = function (fields, viewport, data_container, options) {
     "use strict";
 
     var eventSource,
@@ -90,4 +94,4 @@ function initTimeline(fields, viewport, data_container, options) {
         dateTimeFormat: 'Gregorian', // TODO
         events: events
     }, "http://www.yaco.es"); // TODO base url of results
-}
+};

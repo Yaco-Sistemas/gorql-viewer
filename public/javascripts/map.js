@@ -1,7 +1,11 @@
 /*jslint vars: false, browser: true */
 /*global OpenLayers, DV */
 
-function initMap(fields, viewport_id, data_container, options) {
+if (!DV) {
+    var DV = {};
+}
+
+DV.map = function (fields, viewport_id, data_container, options) {
     "use strict";
 
     var headers,
@@ -91,4 +95,4 @@ function initMap(fields, viewport_id, data_container, options) {
 
     // Initialize map
     map.zoomToExtent(markers.getDataExtent());
-}
+};

@@ -276,7 +276,7 @@ DV.merge((function () {
 
     // Public functions
     return {
-        chart: chart,
+        bar: chart,
         node: node
     };
 }()), DV);

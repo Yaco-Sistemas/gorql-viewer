@@ -158,7 +158,7 @@ DV.merge((function () {
 
     // Public functions
     return {
-        chart: chart,
+        line: chart,
         node: node
     };
 }()), DV);

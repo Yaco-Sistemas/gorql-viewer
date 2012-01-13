@@ -13,50 +13,350 @@
     fill: black;
 }
 
-#dv_viewport .color0 {
+#dv_viewport .colorA0 {
     fill: #151ED1;
 }
 
-#dv_viewport .color1 {
+#dv_viewport .colorA1 {
     fill: #8FBE46;
 }
 
-#dv_viewport .color2 {
+#dv_viewport .colorA2 {
     fill: #4F3825;
 }
 
-#dv_viewport .color3 {
+#dv_viewport .colorA3 {
     fill: #27667B;
 }
 
-#dv_viewport .color4 {
+#dv_viewport .colorA4 {
     fill: #65B516;
 }
 
-#dv_viewport .color5 {
+#dv_viewport .colorA5 {
     fill: #C1ACF8;
 }
 
-#dv_viewport .color6 {
+#dv_viewport .colorA6 {
     fill: #C7786A;
 }
 
-#dv_viewport .color7 {
+#dv_viewport .colorA7 {
     fill: #D9011B;
 }
 
-#dv_viewport .color8 {
+#dv_viewport .colorA8 {
     fill: #533A99;
 }
 
-#dv_viewport .color9 {
+#dv_viewport .colorA9 {
     fill: #6ED23D;
 }
 
-#dv_viewport .color10 {
+#dv_viewport .colorA10 {
     fill: #7EE1AE;
 }
 
-#dv_viewport .color11 {
+#dv_viewport .colorA11 {
     fill: #986FFA;
+}
+
+#dv_viewport .colorB0 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorB1 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorB2 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorB3 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorB4 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorB5 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorB6 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorB7 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorB8 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorB9 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorB10 {
+    fill: #7EE1AE;
+}
+
+#dv_viewport .colorB11 {
+    fill: #986FFA;
+}
+
+#dv_viewport .colorB12 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorB13 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorB14 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorB15 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorB16 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorB17 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorB18 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorB19 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorB20 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorB21 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorB22 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorB23 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorB24 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC0 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorC1 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorC2 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorC3 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorC4 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC5 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorC6 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorC7 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorC8 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorC9 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorC10 {
+    fill: #7EE1AE;
+}
+
+#dv_viewport .colorC11 {
+    fill: #986FFA;
+}
+
+#dv_viewport .colorC12 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorC13 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorC14 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC15 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorC16 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorC17 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorC18 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorC19 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorC20 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorC21 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorC22 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorC23 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorC24 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC25 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorC26 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorC27 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorC28 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorC29 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorC30 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorC31 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorC32 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorC33 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorC34 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC35 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorC36 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorC37 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorC38 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorC39 {
+    fill: #6ED23D;
+}
+
+#dv_viewport .colorC40 {
+    fill: #151ED1;
+}
+
+#dv_viewport .colorC41 {
+    fill: #8FBE46;
+}
+
+#dv_viewport .colorC42 {
+    fill: #4F3825;
+}
+
+#dv_viewport .colorC43 {
+    fill: #27667B;
+}
+
+#dv_viewport .colorC44 {
+    fill: #65B516;
+}
+
+#dv_viewport .colorC45 {
+    fill: #C1ACF8;
+}
+
+#dv_viewport .colorC46 {
+    fill: #C7786A;
+}
+
+#dv_viewport .colorC47 {
+    fill: #D9011B;
+}
+
+#dv_viewport .colorC48 {
+    fill: #533A99;
+}
+
+#dv_viewport .colorC49 {
+    fill: #6ED23D;
 }

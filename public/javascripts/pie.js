@@ -23,6 +23,7 @@ DV.merge((function () {
     "use strict";
 
     var svg,
+        nElems,
         sizes = {},
         positions = {},
         indexFromValue = {},
@@ -30,7 +31,13 @@ DV.merge((function () {
         labelScale,
 
         getSectorColor = function (i) {
-            return "color" + i;
+            var palette = 'A';
+            if (nElems >= 25) {
+                palette = 'C';
+            } else if (nElems >= 12) {
+                palette = 'B';
+            }
+            return "color" + palette + i;
         },
 
         highlightOut = function (d, i) {
@@ -156,6 +163,7 @@ DV.merge((function () {
             }
 
             series = series[0]; // pie charts doesn't support series
+            nElems = series.length;
 
             // Associate labels and values, it will be necessary later, while
             // painting the labels

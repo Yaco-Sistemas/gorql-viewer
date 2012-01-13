@@ -48,6 +48,8 @@ sparqlCallback = function (response, params, renderCallback, cache, key) {
 // Process parameters and store them in chart object
 
 processParameters = function (properties, params, defaults, chart) {
+    "use strict";
+
     var i,
         prop;
 
@@ -122,6 +124,8 @@ exports.processPetition = function (request, response, renderCallback) {
 
             if (params.chart === 'bar') {
                 d3par.push({name: 'landscape', 'default': true});
+            } else if (params.chart === 'pie') {
+                d3par.push({name: 'sizeHighlight', 'default': true});
             } else if (params.chart === 'line') {
                 d3par.push({name: 'area', 'default': true});
             }

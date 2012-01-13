@@ -37,7 +37,10 @@ DV.merge((function () {
             svg.selectAll("text.highlight")
                 .remove();
             svg.selectAll("path.highlight")
-                .attr("transform", "translate(" + positions.centerX + "," + positions.centerY + ")");
+                .transition()
+                .duration(500)
+                .attr("transform", "translate(" + positions.centerX + "," + positions.centerY + ")")
+                .attr("class", function (d, i) { return "sector " + getSectorColor(indexFromValue[d.data]); });
         },
 
         highlightIn = function (d, i) {
@@ -47,9 +50,11 @@ DV.merge((function () {
             var label = labelFromValue[d.data],
                 factor = 30, // hypotenuse
                 angle = d.endAngle - d.startAngle,
-                quadrant,
+                percentage,
                 tx,
                 ty;
+
+            percentage = Math.round((angle * 100) / (2 * Math.PI));
 
             angle = d.startAngle + (angle / 2); // bisec
 
@@ -86,13 +91,18 @@ DV.merge((function () {
                 .attr("dy", -10)
                 .attr("text-anchor", "middle")
                 .attr("text-path", this.getAttribute(d))
-                .text(label + ": " + d.data);
-            this.setAttribute("transform", "translate(" + tx + "," + ty + ")");
+                .text(label + ": " + d.data + " [" + percentage + "%]");
+
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .attr("transform", "translate(" + tx + "," + ty + ")");
+
             this.setAttribute("class", this.getAttribute("class") + " highlight");
         },
 
         render = function (labels, pie) {
-            var radius = d3.min([positions.centerX, positions.centerY]),
+            var radius = d3.min([positions.centerX, (positions.centerY - sizes.highlight)]),
                 arc = d3.svg.arc()
                     .startAngle(function (d) { return d.startAngle; })
                     .endAngle(function (d) { return d.endAngle; })
@@ -160,23 +170,25 @@ DV.merge((function () {
             pie = pie(series);
 
             sizes = {
-                width: options.sizeX,
-                height: options.sizeY
+                width: parseInt(options.sizeX, 10),
+                height: parseInt(options.sizeY, 10),
+                label: parseInt(options.sizeLabel, 10),
+                highlight: parseInt(options.sizeHighlight, 10)
             };
 
-            positions.labels = parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10);
-            positions.centerX = (parseInt(options.sizeX, 10) - parseInt(options.sizeLabel, 10)) / 2;
-            positions.centerY = (parseInt(options.sizeY, 10) / 2) - 20;
+            positions.labels = sizes.width - sizes.label;
+            positions.centerX = (sizes.width - sizes.label) / 2;
+            positions.centerY = (sizes.height / 2) - 20;
 
             labelScale = d3.scale.linear()
                 .domain([0, series.length - 1])
-                .range([20, parseInt(options.sizeY, 10) - 20]);
+                .range([20, sizes.height - 20]);
 
             // Create the svg root node
             svg = d3.select(container).append("svg:svg")
                 .attr("class", "chart pie")
-                .attr("width", parseInt(options.sizeX, 10)) // original sizes
-                .attr("height", parseInt(options.sizeY, 10));
+                .attr("width", sizes.width) // original sizes
+                .attr("height", sizes.height);
 
             render(labels, pie);
         },

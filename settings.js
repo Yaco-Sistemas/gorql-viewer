@@ -15,7 +15,8 @@ exports.settings = {
         pie: {
             sizeX: 500,
             sizeY: 500,
-            sizeLabel: 100
+            sizeLabel: 100,
+            sizeHighlight: 30
         },
         line: {
             area: 'false',
@@ -48,7 +49,8 @@ exports.settings = {
         pie: {
             sizeX: 500,
             sizeY: 500,
-            sizeLabel: 100
+            sizeLabel: 100,
+            sizeHighlight: 30
         },
         line: {
             area: 'false',

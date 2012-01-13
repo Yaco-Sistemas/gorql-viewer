@@ -48,7 +48,7 @@ DV.map = function (fields, viewport_id, data_container, options) {
         aux = headers[i];
         if (aux === fields.lat) {
             latIdx = i;
-        } else if (aux === fields.long) {
+        } else if (aux === fields.lon) {
             longIdx = i;
         } else if (aux === fields.description) {
             descriptionIdx = i;

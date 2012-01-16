@@ -2,16 +2,16 @@
 
 case $1 in
     start)
-        forever start /opt/dataviewer/app.js
+        su dataviewer -c "forever start /opt/dataviewer/app.js"
         ;;
     stop)
-        forever stop /opt/dataviewer/app.js
+        su dataviewer -c "forever stop /opt/dataviewer/app.js"
         ;;
     restart)
-        forever restart /opt/dataviewer/app.js
+        su dataviewer -c "forever restart /opt/dataviewer/app.js"
         ;;
     status)
-        forever list
+        su dataviewer -c "forever list"
         ;;
     *)
         echo $"Usage: $0 {start|stop|restart|status}"

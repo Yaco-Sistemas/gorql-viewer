@@ -29,6 +29,7 @@ mkdir %{installdir}
 %build
 cp -R * %{installdir}
 cd %{installdir}
+mkdir .forever
 npm install -d
 
 # clean files not needed
@@ -54,11 +55,11 @@ rm -rf $RPM_BUILD_ROOT
 %{installdir}/routes
 %{installdir}/views
 %{installdir}/node_modules
+%attr(755,%{name},%{name}) %{installdir}/.forever
 %{installdir}/app.js
 %{installdir}/package.json
 %{installdir}/settings.js
 /etc/%{name}
-%{installdir}/%{name}.sh
 %attr(755,%{name},%{name}) %{installdir}/%{name}.sh
 # %config %{installdir}/parts/supervisor/supervisord.conf
 

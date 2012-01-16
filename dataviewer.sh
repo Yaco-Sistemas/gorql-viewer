@@ -2,13 +2,13 @@
 
 case $1 in
     start)
-        forever start app.js
+        forever start /opt/dataviewer/app.js
         ;;
     stop)
-        forever stop app.js
+        forever stop /opt/dataviewer/app.js
         ;;
     restart)
-        forever restart app.js
+        forever restart /opt/dataviewer/app.js
         ;;
     status)
         forever list

@@ -11,7 +11,7 @@ Packager:      Alejandro Blanco <ablanco@yaco.es>
 Group:         Applications/Internet
 License:       EUPL License
 URL:           http://www.yaco.es
-Source0:       TODO.tar.gz
+Source0:       %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:      nodejs
 
@@ -22,6 +22,7 @@ BuildRequires: npm
 %{summary}
 
 %prep
+%setup -q
 mkdir %{installdir}
 
 %build

@@ -35,9 +35,6 @@ rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
 
 %install
-# install forever globally in the system
-npm install -g forever
-
 # move the rest to the build root
 mkdir -p `dirname $RPM_BUILD_ROOT%{installdir}`
 mkdir -p $RPM_BUILD_ROOT%{docdir}
@@ -67,6 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 # check if this the first installation
 if [ $1 = 1 ]; then
+# install forever globally in the system
+    npm install -g forever
 # create group and user
     getent group %{name} || groupadd -r %{name}
     getent passwd %{name} || useradd -d %{installdir} -g %{name} -M -r -s /sbin/nologin %{name}

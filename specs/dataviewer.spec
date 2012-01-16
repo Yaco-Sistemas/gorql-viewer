@@ -14,6 +14,7 @@ URL:           http://www.yaco.es
 Source0:       %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:      nodejs
+Requires:      gcc-c++
 
 BuildRequires: nodejs
 BuildRequires: npm

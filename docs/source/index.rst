@@ -63,11 +63,11 @@ Notas de publicación
 Cómo obtener el visor de colecciones
 ====================================
 
-El visor de colecciones se distribuirá en formato RPM (algún día)...
-
-**TODO**
-
-Para más información sobre cómo instalar el visor de colecciones,
+El visor de colecciones se distribuirá en formato RPM y ha sido testeado en
+sistemas CentOS/6.2. Los paquetes de cada uno de sus componentes están
+disponibles en el
+`siguiente servidor de Yaco <http://files.yaco.es/~ceic-ogov/>`_ de forma
+provisional. Para más información sobre cómo instalar el visor de colecciones,
 consulte el :doc:`deployment`.
 
 Puede obtener las fuentes del proyecto utilizando un cliente Mercurial:

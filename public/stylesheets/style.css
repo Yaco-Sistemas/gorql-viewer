@@ -17,4 +17,5 @@ a {
     background: #EEE;
     padding: 5px;
     border: 1px solid #555;
+    white-space: pre-wrap;
 }

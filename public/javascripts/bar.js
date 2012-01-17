@@ -217,7 +217,7 @@ DV.merge((function () {
                 .text(String);
         },
 
-        init = function (container, labels, series, options) {
+        init = function (d3, container, labels, series, options) {
             var transform;
 
             if (series.length <= 0 || series[0].length <= 0) {
@@ -265,13 +265,13 @@ DV.merge((function () {
             render(labels, series);
         },
 
-        node = function (data, options) {
-            init(document.body, data.labels, data.values, options);
+        node = function (document, d3, data, options) {
+            init(d3, document.body, data.labels, data.values, options);
         },
 
         chart = function (container, data_container, options) {
             var data = DV.extractData(data_container, options);
-            init(container, data.labels, data.series, options);
+            init(d3, container, data.labels, data.series, options);
         };
 
     // Public functions
@@ -281,12 +281,7 @@ DV.merge((function () {
     };
 }()), DV);
 
-if (typeof module !== 'undefined' && module.exports) {
-    // Node
-    var window,
-        document,
-        d3;
-} else {
+if (typeof module === 'undefined' || !module.exports) {
     // Browser
     window.exports = {};
 }
@@ -294,10 +289,14 @@ if (typeof module !== 'undefined' && module.exports) {
 exports.chart = function (data, options) {
     "use strict";
 
-    var jsdom = require("jsdom").jsdom;
+    // Node
+    var jsdom = require("jsdom").jsdom,
+        window,
+        document,
+        d3;
     document = jsdom("<html><head></head><body></body></html>");
     window = document.createWindow();
     d3 = require("./d3")(window, document);
-    DV.node(data, options);
+    DV.node(document, d3, data, options);
     return document.body.innerHTML;
 };

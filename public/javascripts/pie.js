@@ -24,6 +24,7 @@ DV.merge((function () {
 
     var svg,
         nElems,
+        d3lib,
         sizes = {},
         positions = {},
         indexFromValue = {},
@@ -100,7 +101,7 @@ DV.merge((function () {
                 .attr("text-path", this.getAttribute(d))
                 .text(label + ": " + d.data + " [" + percentage + "%]");
 
-            d3.select(this)
+            d3lib.select(this)
                 .transition()
                 .duration(500)
                 .attr("transform", "translate(" + tx + "," + ty + ")");
@@ -109,8 +110,8 @@ DV.merge((function () {
         },
 
         render = function (labels, pie) {
-            var radius = d3.min([positions.centerX, (positions.centerY - sizes.highlight)]),
-                arc = d3.svg.arc()
+            var radius = d3lib.min([positions.centerX, (positions.centerY - sizes.highlight)]),
+                arc = d3lib.svg.arc()
                     .startAngle(function (d) { return d.startAngle; })
                     .endAngle(function (d) { return d.endAngle; })
                     .innerRadius(0)
@@ -154,7 +155,7 @@ DV.merge((function () {
             return idx1 - idx2;
         },
 
-        init = function (container, labels, series, options) {
+        init = function (d3, container, labels, series, options) {
             var pie,
                 i;
 
@@ -162,6 +163,7 @@ DV.merge((function () {
                 return;
             }
 
+            d3lib = d3;
             series = series[0]; // pie charts doesn't support series
             nElems = series.length;
 
@@ -201,13 +203,13 @@ DV.merge((function () {
             render(labels, pie);
         },
 
-        node = function (data, options) {
-            init(document.body, data.labels, data.values, options);
+        node = function (document, d3, data, options) {
+            init(d3, document.body, data.labels, data.values, options);
         },
 
         chart = function (container, data_container, options) {
             var data = DV.extractData(data_container, options);
-            init(container, data.labels, data.series, options);
+            init(d3, container, data.labels, data.series, options);
         };
 
     // Public functions
@@ -217,12 +219,7 @@ DV.merge((function () {
     };
 }()), DV);
 
-if (typeof module !== 'undefined' && module.exports) {
-    // Node
-    var window,
-        document,
-        d3;
-} else {
+if (typeof module === 'undefined' || !module.exports) {
     // Browser
     window.exports = {};
 }
@@ -230,11 +227,15 @@ if (typeof module !== 'undefined' && module.exports) {
 exports.chart = function (data, options) {
     "use strict";
 
-    var jsdom = require("jsdom").jsdom;
+    // Node
+    var jsdom = require("jsdom").jsdom,
+        window,
+        document,
+        d3;
     document = jsdom("<html><head></head><body></body></html>");
     window = document.createWindow();
     d3 = require("./d3")(window, document);
     require("./d3.layout")(d3);
-    DV.node(data, options);
+    DV.node(document, d3, data, options);
     return document.body.innerHTML;
 };

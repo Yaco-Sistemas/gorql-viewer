@@ -39,6 +39,9 @@ Dependencias
 El visor de colecciones no tiene ninguna dependencia especial más allá de
 NodeJS, del que se proporciona también un paquete para su instalación.
 
+Las librerías que requiere el visor se distribuyen en el paquete del mismo, con
+lo que al instalar el visor se instalan también sus dependencias.
+
 NodeJS
 ======
 
@@ -85,6 +88,10 @@ script de servicio para el arranque del servidor.
 Los contenidos del paquete se despliegan en `/opt/dataviewer/`. Los logs se
 encuentran en `/opt/dataviewer/.forever/`.
 
+El servidor escucha, con la configuración por defecto, en el **puerto 3000**.
+La configuración del mismo se encuentra en el fichero `settings.js` en el
+directorio `/etc/dataviewer/`.
+
 Gestión del servicio
 --------------------
 
@@ -92,6 +99,11 @@ Gracias al script de servicio *dataviewer* es muy sencillo gestionar el
 **arranque**, **parada** y **monitorización** del servidor. Para ello tan sólo
 hemos de invocar al servicio con el argumento *start*, *stop* o *status*,
 respectivamente.
+
+Para la gestión de este servicio se utiliza Forever_ que se encarga de que el
+servidor se relance en caso de que ocurra algún problema.
+
+.. _Forever: https://github.com/nodejitsu/forever
 
 *Ejemplos de salida*
 
@@ -113,3 +125,16 @@ respectivamente.
  info:   Forever processes running
  data:       uid  command script                 forever pid  logfile                           uptime
  data:   [0] ekL8 node    /opt/dataviewer/app.js 8101    8102 /opt/dataviewer/.forever/ekL8.log 0:0:39:15.924
+
+Configuración
+-------------
+
+La configuración del visor se encuentra en el directorio `/etc/dataviewer/`.
+
+settings.js
+~~~~~~~~~~~
+
+Éste es el fichero principal de configuración del visor de colecciones. Incluye
+tres grupos de parámetros: *global*, *development* y *production*. Que son
+opciones globales para todos los casos, específicas para entornos de desarrollo,
+y específicas para entornos de producción, respectivamente.

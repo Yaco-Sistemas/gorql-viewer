@@ -13,350 +13,302 @@
     fill: black;
 }
 
-#dv_viewport .colorA0 {
-    fill: #80199c;
-}
-
-#dv_viewport .colorA1 {
-    fill: #c92881;
-}
-
-#dv_viewport .colorA2 {
-    fill: #ef189b;
-}
-
-#dv_viewport .colorA3 {
-    fill: #f74236;
-}
-
-#dv_viewport .colorA4 {
-    fill: #f86a2d;
-}
-
-#dv_viewport .colorA5 {
-    fill: #ffa532;
-}
-
-#dv_viewport .colorA6 {
-    fill: #fff253;
-}
-
-#dv_viewport .colorA7 {
-    fill: #b1d84a;
-}
-
-#dv_viewport .colorA8 {
-    fill: #18b665;
-}
-
-#dv_viewport .colorA9 {
-    fill: #17c5bd;
-}
-
-#dv_viewport .colorA10 {
-    fill: #15bbf9;
-}
-
-#dv_viewport .colorA11 {
-    fill: #1864b4;
-}
-
-#dv_viewport .colorB0 {
+#dv_viewport .serieB0 {
     fill: #810f9d;
 }
 
-#dv_viewport .colorB1 {
+#dv_viewport .serieB1 {
     fill: #9d17be;
 }
 
-#dv_viewport .colorB2 {
+#dv_viewport .serieB2 {
     fill: #f817a0;
 }
 
-#dv_viewport .colorB3 {
+#dv_viewport .serieB3 {
     fill: #ff1e1e;
 }
 
-#dv_viewport .colorB4 {
+#dv_viewport .serieB4 {
     fill: #ff602e;
 }
 
-#dv_viewport .colorB5 {
+#dv_viewport .serieB5 {
     fill: #ffaa3b;
 }
 
-#dv_viewport .colorB6 {
+#dv_viewport .serieB6 {
     fill: #ffd342;
 }
 
-#dv_viewport .colorB7 {
+#dv_viewport .serieB7 {
     fill: #eaed42;
 }
 
-#dv_viewport .colorB8 {
+#dv_viewport .serieB8 {
     fill: #6dbd49;
 }
 
-#dv_viewport .colorB9 {
+#dv_viewport .serieB9 {
     fill: #18a5b6;
 }
 
-#dv_viewport .colorB10 {
+#dv_viewport .serieB10 {
     fill: #16dad3;
 }
 
-#dv_viewport .colorB11 {
+#dv_viewport .serieB11 {
     fill: #1598ff;
 }
 
-#dv_viewport .colorB12 {
+#dv_viewport .serieB12 {
     fill: #4633d1;
 }
 
-#dv_viewport .colorB13 {
+#dv_viewport .serieB13 {
     fill: #9d006b;
 }
 
-#dv_viewport .colorB14 {
+#dv_viewport .serieB14 {
     fill: #bc083f;
 }
 
-#dv_viewport .colorB15 {
+#dv_viewport .serieB15 {
     fill: #c21c0c;
 }
 
-#dv_viewport .colorB16 {
+#dv_viewport .serieB16 {
     fill: #c45b16;
 }
 
-#dv_viewport .colorB17 {
+#dv_viewport .serieB17 {
     fill: #c69c20;
 }
 
-#dv_viewport .colorB18 {
+#dv_viewport .serieB18 {
     fill: #c8bc2f;
 }
 
-#dv_viewport .colorB19 {
+#dv_viewport .serieB19 {
     fill: #80a229;
 }
 
-#dv_viewport .colorB20 {
+#dv_viewport .serieB20 {
     fill: #008942;
 }
 
-#dv_viewport .colorB21 {
+#dv_viewport .serieB21 {
     fill: #008e88;
 }
 
-#dv_viewport .colorB22 {
+#dv_viewport .serieB22 {
     fill: #1098ca;
 }
 
-#dv_viewport .colorB23 {
+#dv_viewport .serieB23 {
     fill: #004894;
 }
 
-#dv_viewport .colorB24 {
+#dv_viewport .serieB24 {
     fill: #1c1073;
 }
 
-#dv_viewport .colorC0 {
+#dv_viewport .serieC0 {
     fill: #810f9d;
 }
 
-#dv_viewport .colorC1 {
+#dv_viewport .serieC1 {
     fill: #790c94;
 }
 
-#dv_viewport .colorC2 {
+#dv_viewport .serieC2 {
     fill: #9d17be;
 }
 
-#dv_viewport .colorC3 {
+#dv_viewport .serieC3 {
     fill: #d61698;
 }
 
-#dv_viewport .colorC4 {
+#dv_viewport .serieC4 {
     fill: #f817a0;
 }
 
-#dv_viewport .colorC5 {
+#dv_viewport .serieC5 {
     fill: #f72364;
 }
 
-#dv_viewport .colorC6 {
+#dv_viewport .serieC6 {
     fill: #ff1e1e;
 }
 
-#dv_viewport .colorC7 {
+#dv_viewport .serieC7 {
     fill: #fe3a29;
 }
 
-#dv_viewport .colorC8 {
+#dv_viewport .serieC8 {
     fill: #ff602e;
 }
 
-#dv_viewport .colorC9 {
+#dv_viewport .serieC9 {
     fill: #ff8634;
 }
 
-#dv_viewport .colorC10 {
+#dv_viewport .serieC10 {
     fill: #ffaa3b;
 }
 
-#dv_viewport .colorC11 {
+#dv_viewport .serieC11 {
     fill: #ffce42;
 }
 
-#dv_viewport .colorC12 {
+#dv_viewport .serieC12 {
     fill: #ffd342;
 }
 
-#dv_viewport .colorC13 {
+#dv_viewport .serieC13 {
     fill: #fff253;
 }
 
-#dv_viewport .colorC14 {
+#dv_viewport .serieC14 {
     fill: #eaed42;
 }
 
-#dv_viewport .colorC15 {
+#dv_viewport .serieC15 {
     fill: #b1d84a;
 }
 
-#dv_viewport .colorC16 {
+#dv_viewport .serieC16 {
     fill: #6dbd49;
 }
 
-#dv_viewport .colorC17 {
+#dv_viewport .serieC17 {
     fill: #17be68;
 }
 
-#dv_viewport .colorC18 {
+#dv_viewport .serieC18 {
     fill: #18a5b6;
 }
 
-#dv_viewport .colorC19 {
+#dv_viewport .serieC19 {
     fill: #17c5bd;
 }
 
-#dv_viewport .colorC20 {
+#dv_viewport .serieC20 {
     fill: #16dad3;
 }
 
-#dv_viewport .colorC21 {
+#dv_viewport .serieC21 {
     fill: #35c8ff;
 }
 
-#dv_viewport .colorC22 {
+#dv_viewport .serieC22 {
     fill: #1598ff;
 }
 
-#dv_viewport .colorC23 {
+#dv_viewport .serieC23 {
     fill: #176ecd;
 }
 
-#dv_viewport .colorC24 {
+#dv_viewport .serieC24 {
     fill: #4633d1;
 }
 
-#dv_viewport .colorC25 {
+#dv_viewport .serieC25 {
     fill: #80199c;
 }
 
-#dv_viewport .colorC26 {
+#dv_viewport .serieC26 {
     fill: #9d006b;
 }
 
-#dv_viewport .colorC27 {
+#dv_viewport .serieC27 {
     fill: #bc0072;
 }
 
-#dv_viewport .colorC28 {
+#dv_viewport .serieC28 {
     fill: #bc083f;
 }
 
-#dv_viewport .colorC29 {
+#dv_viewport .serieC29 {
     fill: #c70000;
 }
 
-#dv_viewport .colorC30 {
+#dv_viewport .serieC30 {
     fill: #c21c0c;
 }
 
-#dv_viewport .colorC31 {
+#dv_viewport .serieC31 {
     fill: #c33b11;
 }
 
-#dv_viewport .colorC32 {
+#dv_viewport .serieC32 {
     fill: #c45b16;
 }
 
-#dv_viewport .colorC33 {
+#dv_viewport .serieC33 {
     fill: #c57c1b;
 }
 
-#dv_viewport .colorC34 {
+#dv_viewport .serieC34 {
     fill: #c69c20;
 }
 
-#dv_viewport .colorC35 {
+#dv_viewport .serieC35 {
     fill: #c7a020;
 }
 
-#dv_viewport .colorC36 {
+#dv_viewport .serieC36 {
     fill: #c8bc2f;
 }
 
-#dv_viewport .colorC37 {
+#dv_viewport .serieC37 {
     fill: #b1b423;
 }
 
-#dv_viewport .colorC38 {
+#dv_viewport .serieC38 {
     fill: #80a229;
 }
 
-#dv_viewport .colorC39 {
+#dv_viewport .serieC39 {
     fill: #478b28;
 }
 
-#dv_viewport .colorC40 {
+#dv_viewport .serieC40 {
     fill: #008942;
 }
 
-#dv_viewport .colorC41 {
+#dv_viewport .serieC41 {
     fill: #007382;
 }
 
-#dv_viewport .colorC42 {
+#dv_viewport .serieC42 {
     fill: #008e88;
 }
 
-#dv_viewport .colorC43 {
+#dv_viewport .serieC43 {
     fill: #00a09a;
 }
 
-#dv_viewport .colorC44 {
+#dv_viewport .serieC44 {
     fill: #1098ca;
 }
 
-#dv_viewport .colorC45 {
+#dv_viewport .serieC45 {
     fill: #006bbf;
 }
 
-#dv_viewport .colorC46 {
+#dv_viewport .serieC46 {
     fill: #004894;
 }
 
-#dv_viewport .colorC47 {
+#dv_viewport .serieC47 {
     fill: #25159b;
 }
 
-#dv_viewport .colorC48 {
+#dv_viewport .serieC48 {
     fill: #1c1073;
 }
 
-#dv_viewport .colorC49 {
+#dv_viewport .serieC49 {
     fill: #420f69;
 }

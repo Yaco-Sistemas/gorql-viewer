@@ -1,10 +1,17 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+h1 {
+    color: #404040;
+    border-bottom: 1px solid #bfbfbf;
+    margin-bottom: 20px;
+    margin-top: 35px;
 }
 
 #dv_table,
@@ -18,4 +25,52 @@ a {
     padding: 5px;
     border: 1px solid #555;
     white-space: pre-wrap;
+}
+
+#dv_viewport .serie0 {
+    fill: #80199c;
+}
+
+#dv_viewport .serie1 {
+    fill: #c92881;
+}
+
+#dv_viewport .serie2 {
+    fill: #ef189b;
+}
+
+#dv_viewport .serie3 {
+    fill: #f74236;
+}
+
+#dv_viewport .serie4 {
+    fill: #f86a2d;
+}
+
+#dv_viewport .serie5 {
+    fill: #ffa532;
+}
+
+#dv_viewport .serie6 {
+    fill: #fff253;
+}
+
+#dv_viewport .serie7 {
+    fill: #b1d84a;
+}
+
+#dv_viewport .serie8 {
+    fill: #18b665;
+}
+
+#dv_viewport .serie9 {
+    fill: #17c5bd;
+}
+
+#dv_viewport .serie10 {
+    fill: #15bbf9;
+}
+
+#dv_viewport .serie11 {
+    fill: #1864b4;
 }

@@ -32,13 +32,13 @@ DV.merge((function () {
         labelScale,
 
         getSectorColor = function (i) {
-            var palette = 'A';
+            var palette = '';
             if (nElems >= 25) {
                 palette = 'C';
             } else if (nElems >= 12) {
                 palette = 'B';
             }
-            return "color" + palette + i;
+            return "serie" + palette + i;
         },
 
         highlightOut = function (d, i) {

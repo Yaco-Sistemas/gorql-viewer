@@ -12,31 +12,55 @@
 }
 
 #dv_viewport path.line.serie0 {
-    stroke: steelblue;
+    stroke: #80199c;
 }
 
 #dv_viewport path.line.serie1 {
-    stroke: #8800ee;
+    stroke: #c92881;
 }
 
 #dv_viewport path.line.serie2 {
-    stroke: #D9005B;
+    stroke: #ef189b;
+}
+
+#dv_viewport path.line.serie3 {
+    stroke: #f74236;
+}
+
+#dv_viewport path.line.serie4 {
+    stroke: #f86a2d;
+}
+
+#dv_viewport path.line.serie5 {
+    stroke: #ffa532;
+}
+
+#dv_viewport path.line.serie6 {
+    stroke: #fff253;
+}
+
+#dv_viewport path.line.serie7 {
+    stroke: #b1d84a;
+}
+
+#dv_viewport path.line.serie8 {
+    stroke: #18b665;
+}
+
+#dv_viewport path.line.serie9 {
+    stroke: #17c5bd;
+}
+
+#dv_viewport path.line.serie10 {
+    stroke: #15bbf9;
+}
+
+#dv_viewport path.line.serie11 {
+    stroke: #1864b4;
 }
 
 #dv_viewport path.area {
     fill-opacity: .25;
-}
-
-#dv_viewport path.area.serie0 {
-    fill: steelblue;
-}
-
-#dv_viewport path.area.serie1 {
-    fill: #8800ee;
-}
-
-#dv_viewport path.area.serie2 {
-    fill: #D9005B;
 }
 
 #dv_viewport .axis {

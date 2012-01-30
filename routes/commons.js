@@ -234,7 +234,7 @@ exports.generateSVG = function (chart, data) {
     var generator = require("../public/javascripts/" + chart.type),
         svg = generator.chart(data, chart),
         // FS uses relative paths to the root of the project, where is being executed node
-        styles = readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8'),
+        styles = readFileSync("public/stylesheets/style.css", 'utf-8'),
         // Use jsdom to create a fake document so we can use sizzle later
         document = jsdom("<html><head></head><body><div id='dv_viewport'>" + svg + "</div></body></html>"),
         rule,
@@ -242,6 +242,8 @@ exports.generateSVG = function (chart, data) {
         i,
         j;
 
+    // Add chart specific styles
+    styles += readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8');
     // Parse the css and get the rules
     styles = cssom.parse(styles).cssRules;
 

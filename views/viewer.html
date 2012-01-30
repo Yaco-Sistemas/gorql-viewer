@@ -95,15 +95,17 @@
     </section>
     {{else}}
 
+    {{if chart}}
     <section>
-        <h1>Chart</h1>
+        <h1 class="first">${chart.type} Chart</h1>
         <div id="dv_viewport">
         {{if chart && chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
         </div>
     </section>
+    {{/if}}
 
     <section>
-        <h1>Data</h1>
+        <h1 {{if !chart}}class="first"{{/if}}>Data</h1>
         <table id="dv_table">
         <thead>
             <tr>{{each headers}}<th>${$value}</th>{{/each}}</tr>

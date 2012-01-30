@@ -12,11 +12,23 @@ h1 {
     border-bottom: 1px solid #bfbfbf;
     margin-bottom: 20px;
     margin-top: 35px;
+    text-transform: capitalize;
+}
+
+h1.first {
+    margin-top: 0px;
+}
+
+#dv_viewport {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 #dv_table {
     color: #404040;
     width: 100%;
+    border-spacing: 0px;
 }
 
 #dv_table thead tr {
@@ -25,11 +37,25 @@ h1 {
 
 #dv_table th {
     border-bottom: 1px solid #bfbfbf;
+    text-transform: capitalize;
 }
 
 #dv_table th,
 #dv_table td {
     border-right: 1px dashed #dddddd;
+    padding: 3px 35px 3px 35px;
+}
+
+#dv_table th:first-child,
+#dv_table td:first-child {
+    padding-left: 12px;
+}
+
+#dv_table th:last-child,
+#dv_table td:last-child {
+    border-right: none;
+    padding-right: 12px;
+    width: 100%;
 }
 
 #dv_table tr.odd {
@@ -45,6 +71,7 @@ h1 {
     padding: 5px;
     border: 1px solid #555;
     white-space: pre-wrap;
+    margin-bottom: 0px;
 }
 
 #dv_viewport .serie0 {

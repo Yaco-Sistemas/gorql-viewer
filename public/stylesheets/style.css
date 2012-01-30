@@ -14,10 +14,30 @@ h1 {
     margin-top: 35px;
 }
 
-#dv_table,
-#dv_table tr,
+#dv_table {
+    color: #404040;
+    width: 100%;
+}
+
+#dv_table thead tr {
+    text-align: left;
+}
+
+#dv_table th {
+    border-bottom: 1px solid #bfbfbf;
+}
+
+#dv_table th,
 #dv_table td {
-    border: 1px solid black;
+    border-right: 1px dashed #dddddd;
+}
+
+#dv_table tr.odd {
+    background-color: white;
+}
+
+#dv_table tr.even {
+    background-color: #f0f0f0;
 }
 
 #dv_query {

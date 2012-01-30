@@ -109,8 +109,8 @@
             <tr>{{each headers}}<th>${$value}</th>{{/each}}</tr>
         </thead>
         <tbody>
-            {{each results}}<tr>
-                {{each $value}}<td>${$value}</td>{{/each}}
+            {{each(idx, result) results}}<tr class="{{if idx % 2}}even{{else}}odd{{/if}}">
+                {{each result}}<td>${$value}</td>{{/each}}
             </tr>{{/each}}
         </tbody>
         </table>

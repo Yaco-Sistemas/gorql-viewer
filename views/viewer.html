@@ -66,18 +66,18 @@
     <script type="text/javascript" src="/javascripts/map.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            var viewport = document.getElementById("dv_viewport");
-            viewport.style.width = ${chart.sizeX} + 'px';
-            viewport.style.height = ${chart.sizeY} + 'px';
             DV.map(
                 {
                     lat: "${chart.lat}",
                     lon: "${chart.long}"{{if chart.description}},
                     description: "${chart.description}"{{/if}}
                 },
-                viewport.id,
+                "dv_viewport",
                 "#dv_table",
-                {}
+                {
+                    width: ${chart.sizeX},
+                    height: ${chart.sizeY}
+                }
             );
         });
     </script>

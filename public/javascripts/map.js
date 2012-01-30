@@ -10,13 +10,8 @@ DV.map = function (fields, viewport_id, data_container, options) {
 
     var headers,
         results,
-        map = new OpenLayers.Map(viewport_id, {
-            controls: [
-                new OpenLayers.Control.Navigation(),
-                new OpenLayers.Control.PanZoomBar(),
-                new OpenLayers.Control.LayerSwitcher()
-            ]
-        }),
+        container = document.createElement('div'),
+        map,
         osm = new OpenLayers.Layer.OSM("Open Street Map"),
         markers = new OpenLayers.Layer.Markers("Markers"),
         size = new OpenLayers.Size(21, 25),
@@ -36,6 +31,18 @@ DV.map = function (fields, viewport_id, data_container, options) {
         descriptionIdx,
         i;
 
+    container.id = "ol_viewport";
+    container.style.width = options.width + 'px';
+    container.style.height = options.height + 'px';
+    document.getElementById(viewport_id).appendChild(container);
+
+    map = new OpenLayers.Map("ol_viewport", {
+        controls: [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanZoomBar(),
+            new OpenLayers.Control.LayerSwitcher()
+        ]
+    });
     map.addLayer(osm);
     map.addLayer(markers);
 

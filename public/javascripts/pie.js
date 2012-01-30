@@ -58,11 +58,9 @@ DV.merge((function () {
             var label = labelFromValue[d.data],
                 factor = 30, // hypotenuse
                 angle = d.endAngle - d.startAngle,
-                percentage,
+                percentage = Math.round((angle * 100) / (2 * Math.PI)),
                 tx,
                 ty;
-
-            percentage = Math.round((angle * 100) / (2 * Math.PI));
 
             angle = d.startAngle + (angle / 2); // bisec
 
@@ -99,7 +97,7 @@ DV.merge((function () {
                 .attr("dy", -10)
                 .attr("text-anchor", "middle")
                 .attr("text-path", this.getAttribute(d))
-                .text(label + ": " + d.data + " [" + percentage + "%]");
+                .text(label + ": " + d.data + " (" + percentage + "%)");
 
             d3lib.select(this)
                 .transition()

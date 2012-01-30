@@ -54,13 +54,12 @@ DV.merge((function () {
             textY: function (d, i) {
                 return size.y - portrait.rectHeight(d, i);
             },
-            textDX: -10,
             textDY: ".35em",
             textTAnchor: "end",
             textTransform: function (d, i) {
                 var x = portrait.textX(d, i),
                     y = portrait.textY(d, i);
-                return "rotate(-90 " + x + " " + y + ")";
+                return "translate(0, 10) rotate(-90 " + x + " " + y + ")";
             },
             lineTicks: function () {
                 return scale.y.ticks(10);
@@ -114,10 +113,9 @@ DV.merge((function () {
             textX: function (d, i) {
                 return landscape.rectWidth(d, i);
             },
-            textDX: -10,
             textDY: ".35em",
             textTAnchor: "end",
-            textTransform: "",
+            textTransform: "translate(-10, 0)",
             lineTicks: function () {
                 return scale.x.ticks(10);
             },
@@ -194,7 +192,6 @@ DV.merge((function () {
                     .attr("class", "value serie" + serieIdx)
                     .attr("x", config.textX)
                     .attr("y", config.textY)
-                    .attr("dx", config.textDX)
                     .attr("dy", config.textDY)
                     .attr("text-anchor", config.textTAnchor)
                     .attr("transform", config.textTransform)

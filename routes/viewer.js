@@ -20,10 +20,10 @@ renderResults = function (response, params, error, results) {
 
         // 2.- Render JSON results
 
-        response.json({
+        response.send("var DV_data = " + JSON.stringify({
             results: data.matrix,
             headers: data.headers
-        });
+        }) + ";", 200);
 
     } else {
 

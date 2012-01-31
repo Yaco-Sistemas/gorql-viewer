@@ -13,7 +13,7 @@ License:       EUPL License
 URL:           http://www.yaco.es
 Source0:       %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires:      nodejs
+Requires:      nodejs ImageMagick
 
 BuildRequires: nodejs
 BuildRequires: npm
@@ -32,6 +32,7 @@ mkdir .forever
 npm install -d
 
 # clean files not needed
+rm -rf %{installdir}/.hg
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
 

@@ -8,6 +8,7 @@ var app = require.main,
     cssom = require('cssom'),
     sizzle = require('../public/javascripts/sizzle'),
     jsdom = require('jsdom').jsdom,
+    dirname = require('path').dirname,
     readFileSync = require('fs').readFileSync,
     sparqlClient,
     processParameters,
@@ -234,7 +235,7 @@ exports.generateSVG = function (chart, data) {
     var generator = require("../public/javascripts/" + chart.type),
         svg = generator.chart(data, chart),
         // FS uses relative paths to the root of the project, where is being executed node
-        styles = readFileSync("public/stylesheets/style.css", 'utf-8'),
+        styles = readFileSync(dirname(app.filename) + "/public/stylesheets/style.css", 'utf-8'),
         // Use jsdom to create a fake document so we can use sizzle later
         document = jsdom("<html><head></head><body><div id='dv_viewport'>" + svg + "</div></body></html>"),
         rule,
@@ -243,7 +244,7 @@ exports.generateSVG = function (chart, data) {
         j;
 
     // Add chart specific styles
-    styles += readFileSync("public/stylesheets/" + chart.type + ".css", 'utf-8');
+    styles += readFileSync(dirname(app.filename) + "/public/stylesheets/" + chart.type + ".css", 'utf-8');
     // Parse the css and get the rules
     styles = cssom.parse(styles).cssRules;
 

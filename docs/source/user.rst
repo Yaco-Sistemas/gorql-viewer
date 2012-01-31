@@ -74,6 +74,8 @@ Líneas (*line*)
    Valor booleano que determina si se debe resaltar el área debajo de las
    líneas. *Opcional*.
 
+.. _simile-chart:
+
 Gráficos Simile
 ~~~~~~~~~~~~~~~
 

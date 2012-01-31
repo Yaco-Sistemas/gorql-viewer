@@ -5,27 +5,12 @@ Manual de despliegue
 Consideraciones generales
 =========================
 
-Mauris pellentesque posuere augue, at dignissim erat iaculis vel. Cras nisl
-justo, pretium ac rhoncus non, viverra a purus. Mauris vel luctus erat. Aliquam
-egestas rhoncus tellus, posuere luctus arcu volutpat venenatis. Donec id
-faucibus tortor. Morbi felis libero, placerat in luctus sit amet, vestibulum in
-arcu. Aliquam rutrum euismod massa a venenatis. Proin vulputate adipiscing
-ultrices. Fusce sed nibh leo. Nam id odio lorem, pretium convallis lorem.
-Phasellus leo orci, lobortis vel egestas nec, sollicitudin quis nunc. Cras
-consequat elit id diam varius vitae pretium nisi fermentum. Vivamus justo
-sapien, lacinia vel eleifend at, eleifend ut lacus. Aliquam ac nisi a est tempor
-faucibus at ac turpis. Vestibulum sodales scelerisque libero, molestie congue
-neque eleifend ut.
-
-In cursus mauris feugiat dui fermentum luctus. Sed ullamcorper aliquet urna sit
-amet adipiscing. Integer sagittis tellus orci. Aenean euismod pulvinar tellus id
-convallis. Quisque cursus quam ante, in egestas sem. Donec fermentum, augue sit
-amet tincidunt cursus, turpis arcu luctus leo, ut congue arcu orci a velit.
-Integer feugiat erat sit amet arcu varius aliquet. Suspendisse potenti. Integer
-orci metus, luctus ut rhoncus a, dapibus ut mauris. Phasellus imperdiet leo ac
-sem interdum quis adipiscing orci euismod. Morbi adipiscing rhoncus enim ac
-accumsan. Vestibulum cursus mi eget nisi elementum vel adipiscing tortor
-interdum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin justo turpis,
+varius sed iaculis quis, dignissim vel lacus. Suspendisse lobortis neque
+eleifend quam semper et malesuada eros pretium. Suspendisse potenti. Fusce
+mattis tellus et tellus cursus ac rutrum libero porta. Suspendisse eget gravida
+est. In faucibus enim vel erat rutrum in tincidunt urna aliquet. Pellentesque
+porta sollicitudin libero, sed pharetra metus vehicula id.
 
 Entorno de desarrollo
 =====================
@@ -36,8 +21,40 @@ de desarrollo se encuentra en el :doc:`developer`.
 Dependencias
 ============
 
-El visor de colecciones no tiene ninguna dependencia especial más allá de
-NodeJS, del que se proporciona también un paquete para su instalación.
+NodeJS
+------
+
+NodeJS es necesario para la ejecución del visor. Se provee de un paquete RPM
+para su instalación, el proceso se detalla en el siguiente apartado.
+
+ImageMagick
+-----------
+
+ImageMagick se utiliza para la generación de imágenes png de los gráficos en
+el servidor. No se provee RPM, pero está disponible en el repositorio. Se
+puede instalar haciendo uso de yum:
+
+::
+
+ # yum install ImageMagick
+
+Memcached
+---------
+
+Memcached es un servidor de cache y, aunque no es una dependencia obligatoria,
+sí que es muy recomendable. Si Memcached está instalado y corriendo, el visor
+hará uso de la caché para minimizar las peticiones al endpoint SparQL agilizando
+mucho el funcionamiento.
+
+No se provee RPM, pero está disponible en el repositorio. Se
+puede instalar haciendo uso de yum:
+
+::
+
+ # yum install memcached
+
+Otros
+-----
 
 Las librerías que requiere el visor se distribuyen en el paquete del mismo, con
 lo que al instalar el visor se instalan también sus dependencias.
@@ -55,9 +72,9 @@ Se puede instalar a partir de un RPM:
 
 Una vez descargado el paquete se instala ejecutando:
 
-.. code-block:: bash
+::
 
- $ rpm -Uvh nodejs-0.6.7-1.el6.x86_64.rpm
+ # rpm -Uvh nodejs-0.6.7-1.el6.x86_64.rpm
 
 Este paquete provee NodeJS_ y NPM_ (el sistema de paquetería de NodeJS),
 necesarios para el funcionamiento del visor de colecciones.
@@ -78,9 +95,9 @@ paquete RPM:
 
 Una vez descargado el paquete se instala ejecutando:
 
-.. code-block:: bash
+::
 
- $ rpm -Uvh dataviewer-0.0.1-1.x86_64.rpm
+ # rpm -Uvh dataviewer-0.0.1-1.x86_64.rpm
 
 Este paquete incluye el visor y todas las librerías que utiliza, y crea un
 script de servicio para el arranque del servidor.
@@ -107,19 +124,19 @@ servidor se relance en caso de que ocurra algún problema.
 
 *Ejemplos de salida*
 
-.. code-block:: bash
+::
 
  # service dataviewer start
  info:   Forever processing file: /opt/dataviewer/app.js
 
-.. code-block:: bash
+::
 
  # service dataviewer stop
  info:   Forever stopped process:
  data:       uid  command script                 forever pid  logfile                           uptime
  data:   [0] ekL8 node    /opt/dataviewer/app.js 8101    8102 /opt/dataviewer/.forever/ekL8.log 0:0:40:0.5
 
-.. code-block:: bash
+::
 
  # service dataviewer status
  info:   Forever processes running
@@ -138,3 +155,58 @@ settings.js
 tres grupos de parámetros: *global*, *development* y *production*. Que son
 opciones globales para todos los casos, específicas para entornos de desarrollo,
 y específicas para entornos de producción, respectivamente.
+
+El formato es JSON. Las opciones de desarrollo y producción son las mismas, se
+utiliza un grupo u otro según se arranque el visor en un modo u otro.
+
+El fichero trae una configuración de ejemplo.
+
+Global
+''''''
+
+ - **port**: Puerto en el que escucha el visor
+
+Development y Production
+''''''''''''''''''''''''
+
+ - **sparqlEndpoint**: Url del servidor al que se le realizan las consultas en
+   SparQL.
+ - **memcachedServer**: Url del servidor memcached, incluye el puerto.
+ - **memcachedLifetime**: Tiempo en segundos que memcached mantiene los datos.
+ - **bar**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.
+   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
+   - **landscape**: Valor booleano que determina si el gráfico se debe representar
+     en horizontal.
+
+ - **pie**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.
+   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
+   - **sizeHighlight**: Número de píxeles que se desplaza hacia afuera un sector
+     al ser resaltado con el cursor.
+
+ - **line**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.
+   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
+   - **area**: Valor booleano que determina si el área comprendida debajo de las
+     líneas se debe colorear.
+
+ - **timeline**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.
+   - **detailRes**: Resolución temporal de la banda con la vista detallada.
+     :ref:`Posibles valores. <simile-chart>`
+   - **overviewRes**: Resolución temporal de la banda con la vista resumen.
+     :ref:`Posibles valores. <simile-chart>`
+
+ - **map**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.

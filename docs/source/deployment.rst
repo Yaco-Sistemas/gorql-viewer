@@ -2,16 +2,6 @@
 Manual de despliegue
 ====================
 
-Consideraciones generales
-=========================
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin justo turpis,
-varius sed iaculis quis, dignissim vel lacus. Suspendisse lobortis neque
-eleifend quam semper et malesuada eros pretium. Suspendisse potenti. Fusce
-mattis tellus et tellus cursus ac rutrum libero porta. Suspendisse eget gravida
-est. In faucibus enim vel erat rutrum in tincidunt urna aliquet. Pellentesque
-porta sollicitudin libero, sed pharetra metus vehicula id.
-
 Entorno de desarrollo
 =====================
 

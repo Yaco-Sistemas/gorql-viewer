@@ -28,7 +28,6 @@ h1.first {
 
 #dv_table {
     color: #404040;
-    width: 100%;
     border-spacing: 0px;
 }
 
@@ -45,6 +44,7 @@ h1.first {
 #dv_table td {
     border-right: 1px dashed #dddddd;
     padding: 3px 35px 3px 35px;
+    white-space: nowrap;
 }
 
 #dv_table th:first-child,
@@ -56,7 +56,6 @@ h1.first {
 #dv_table td:last-child {
     border-right: none;
     padding-right: 12px;
-    width: 100%;
 }
 
 #dv_table tr.odd {

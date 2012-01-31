@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Data Viewer</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/pie.css" />
 <!--     <script type="text/javascript" src="/javascripts/dv-bundle.js"></script> -->
     <script type="text/javascript" src="/javascripts/dv-bundle.min.js"></script>
     <script type="text/javascript" src="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}&amp;embedded=true"></script>
@@ -10,16 +12,16 @@
         DomReady.ready(function () {
             DV.writeDataToTable(document.getElementById('dv_table_viewport'));
             DV.pie("#dv_viewport", "#dv_table", {
-                    family: "d3",
-                    png: "false",
-                    type: "pie",
-                    labels: "country_name",
-                    series: "population",
-                    sizeX: "600",
-                    sizeY: "400",
-                    sizeLabel: "100",
-                    sizeHighlight: "30"
-                });
+                family: "d3",
+                png: "false",
+                type: "pie",
+                labels: "country_name",
+                series: "population",
+                sizeX: "600",
+                sizeY: "400",
+                sizeLabel: "100",
+                sizeHighlight: "30"
+            });
         });
     </script>
 </head>

@@ -107,16 +107,7 @@
 
     <section>
         <h1 {{if !chart}}class="first"{{/if}}>Data</h1>
-        <table id="dv_table">
-        <thead>
-            <tr>{{each headers}}<th>${$value}</th>{{/each}}</tr>
-        </thead>
-        <tbody>
-            {{each(idx, result) results}}<tr class="{{if idx % 2}}even{{else}}odd{{/if}}">
-                {{each result}}<td>${$value}</td>{{/each}}
-            </tr>{{/each}}
-        </tbody>
-        </table>
+        {{html table}}
     </section>
 
     <section>

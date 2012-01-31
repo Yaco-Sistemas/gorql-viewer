@@ -2,6 +2,7 @@
 /*global */
 
 var commons = require('./commons'),
+    table = require('../public/javascripts/writetable'),
     renderResults;
 
 renderResults = function (response, params, error, results) {
@@ -44,6 +45,10 @@ renderResults = function (response, params, error, results) {
             }
         }
 
+        // Generate table with the data
+
+        aux = table.generateTableHTML(data.headers, data.matrix);
+
         // 2.- Render regular HTML response
 
         response.render('viewer.html', {
@@ -54,6 +59,7 @@ renderResults = function (response, params, error, results) {
                 headers: data.headers,
                 query: params.query,
                 encoded_query: encodeURIComponent(params.query),
+                table: aux,
                 chart: params.chart
             }
         });

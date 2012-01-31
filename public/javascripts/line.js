@@ -163,10 +163,8 @@ DV.merge((function () {
     };
 }()), DV);
 
-if (typeof module === 'undefined' || !module.exports) {
-    // Browser
-    window.exports = {};
-}
+// Browser
+exports = exports || {};
 
 exports.chart = function (data, options) {
     "use strict";

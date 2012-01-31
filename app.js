@@ -11,7 +11,9 @@ var express = require('express'),
     png = require('./routes/png'),
     svg = require('./routes/svg'),
     settings = require('./settings'),
+    globalOpts = settings.settings.global,
     app = module.exports = express.createServer(),
+    configureApp,
     initMemcached;
 
 // Utilities
@@ -46,37 +48,31 @@ app.configure(function () {
     app.use(express['static'](__dirname + '/public'));
 });
 
+configureApp = function (app, opts) {
+    "use strict";
+    app.set('sparql endpoint', opts.sparqlEndpoint);
+    app.set('memcached', new Memcached(opts.memcachedServer));
+    app.set('memcached lifetime', opts.memcachedLifetime);
+    app.set('bar', opts.bar);
+    app.set('pie', opts.pie);
+    app.set('line', opts.line);
+    app.set('timeline', opts.timeline);
+    app.set('map', opts.map);
+};
+
 app.configure('development', function () {
     "use strict";
-    var opts = settings.settings.development,
-        cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler({
         dumpExceptions: true,
         showStack: true
     }));
-    app.set('sparql endpoint', opts.sparqlEndpoint);
-    app.set('memcached', cache);
-    app.set('memcached lifetime', opts.memcachedLifetime);
-    app.set('bar', opts.bar);
-    app.set('pie', opts.pie);
-    app.set('line', opts.line);
-    app.set('timeline', opts.timeline);
-    app.set('map', opts.map);
+    configureApp(app, settings.settings.development);
 });
 
 app.configure('production', function () {
     "use strict";
-    var opts = settings.settings.production,
-        cache = new Memcached(opts.memcachedServer);
     app.use(express.errorHandler());
-    app.set('sparql endpoint', opts.sparqlEndpoint);
-    app.set('memcached', cache);
-    app.set('memcached lifetime', opts.memcachedLifetime);
-    app.set('bar', opts.bar);
-    app.set('pie', opts.pie);
-    app.set('line', opts.line);
-    app.set('timeline', opts.timeline);
-    app.set('map', opts.map);
+    configureApp(app, settings.settings.production);
 });
 
 // Routes
@@ -87,5 +83,5 @@ app.get('/svg/', svg.get);
 
 // Start server
 
-app.listen(3000);
+app.listen(globalOpts.port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

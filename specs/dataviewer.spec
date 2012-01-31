@@ -57,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,%{name},%{name}) %{installdir}/.forever
 %{installdir}/app.js
 %{installdir}/package.json
-%{installdir}/settings.js
+%config %attr(755,%{name},%{name}) %{installdir}/settings.js
 /etc/%{name}
 %attr(755,%{name},%{name}) %{installdir}/%{name}.sh
 # %config %{installdir}/parts/supervisor/supervisord.conf
@@ -75,6 +75,10 @@ if [ ! -e /etc/init.d/%{name} ]; then
     ln -s %{installdir}/%{name}.sh /etc/init.d/%{name}
 fi
 
+if [ ! -e /etc/%{name}/settings.js ]; then
+    ln -s %{installdir}/settings.js /etc/%{name}/settings.js
+fi
+
 # if [ ! -e /etc/%{name}/supervisord.conf ]; then
 #     ln -s %{installdir}/parts/supervisor/supervisord.conf /etc/%{name}/supervisord.conf
 # fi
@@ -82,6 +86,7 @@ fi
 %preun
 if [ $1 = 0 ]; then
    rm -f /etc/init.d/%{name}
+   rm -f /etc/%{name}/settings.js
 #    rm -f /etc/%{name}/supervisord.conf
 fi
 

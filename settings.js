@@ -2,6 +2,10 @@
 /*global */
 
 exports.settings = {
+    global: {
+        port: 3000
+    },
+
     development: {
         sparqlEndpoint: 'http://dbpedia.org/sparql',
         memcachedServer: 'localhost:11211',

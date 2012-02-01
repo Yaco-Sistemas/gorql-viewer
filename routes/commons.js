@@ -70,8 +70,6 @@ exports.processPetition = function (request, response, renderCallback) {
     "use strict";
 
     // 1.- Parse GET parameters
-    //     - query: SPARQL query to execute
-    //     - embedded: boolean flag to choose between json or html result
 
     var params = request.query,
         d3par,

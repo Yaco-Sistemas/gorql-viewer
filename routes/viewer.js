@@ -19,12 +19,20 @@ renderResults = function (response, params, error, results) {
 
     if (params.embedded) {
 
+        aux = parseInt(params.idx, 10);
+
         // 2.- Render JSON results
 
-        response.send("var DV_data = " + JSON.stringify({
-            results: data.matrix,
-            headers: data.headers
-        }) + ";", 200);
+        response.send("if (!DV) {" +
+            "   var DV = {};" +
+            "}" +
+            "if (!DV.data) {" +
+            "   DV.data = [];" +
+            "}" +
+            "DV.data[" + aux + "] = " + JSON.stringify({
+                results: data.matrix,
+                headers: data.headers
+            }) + ";", 200);
 
     } else {
 

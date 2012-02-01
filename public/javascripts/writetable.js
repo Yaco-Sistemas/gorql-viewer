@@ -44,9 +44,10 @@ DV.merge((function () {
             });
         },
 
-        browser = function (viewport) {
+        browser = function (viewport, idx) {
             // Client entry point
-            viewport.innerHTML = processTemplate(exports.tmpl, DV_data.headers, DV_data.results);
+            var data = DV.data[idx];
+            viewport.innerHTML = processTemplate(exports.tmpl, data.headers, data.results);
         },
 
         node = function (headers, results) {

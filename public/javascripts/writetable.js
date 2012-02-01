@@ -25,7 +25,7 @@ DV.merge = function (source, destination) {
 DV.merge((function () {
     "use strict";
 
-    var template = "<table id='dv_table'>" +
+    var template = "<table id='dv_table' {{if hide}}style='display: none;'{{/if}}>" +
         "<thead>" +
         "   <tr>{{each headers}}<th>${$value}</th>{{/each}}</tr>" +
         "</thead>" +
@@ -36,18 +36,19 @@ DV.merge((function () {
         "</tbody>" +
         "</table>",
 
-        processTemplate = function (tmplCallback, headers, data) {
+        processTemplate = function (tmplCallback, headers, data, hideTable) {
             // Process template
             return tmplCallback(template, {
                 headers: headers,
-                results: data
+                results: data,
+                hide: hideTable
             });
         },
 
-        browser = function (viewport, idx) {
+        browser = function (viewport, idx, hideTable) {
             // Client entry point
             var data = DV.data[idx];
-            viewport.innerHTML = processTemplate(exports.tmpl, data.headers, data.results);
+            viewport.innerHTML = processTemplate(exports.tmpl, data.headers, data.results, hideTable);
         },
 
         node = function (headers, results) {

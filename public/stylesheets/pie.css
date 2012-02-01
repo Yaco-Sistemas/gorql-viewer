@@ -1,314 +1,314 @@
-#dv_viewport {
+div.dv_viewport .pie {
     font: 10px sans-serif;
 }
 
-#dv_viewport .pie path.sector,
-#dv_viewport .pie rect.label {
+div.dv_viewport .pie path.sector,
+div.dv_viewport .pie rect.label {
     stroke: white;
 }
 
-#dv_viewport .pie text.highlight {
+div.dv_viewport .pie text.highlight {
     font-weight: bold;
     font: 22px sans-serif;
     fill: black;
 }
 
-#dv_viewport .serieB0 {
+div.dv_viewport .pie .serieB0 {
     fill: #810f9d;
 }
 
-#dv_viewport .serieB1 {
+div.dv_viewport .pie .serieB1 {
     fill: #9d17be;
 }
 
-#dv_viewport .serieB2 {
+div.dv_viewport .pie .serieB2 {
     fill: #f817a0;
 }
 
-#dv_viewport .serieB3 {
+div.dv_viewport .pie .serieB3 {
     fill: #ff1e1e;
 }
 
-#dv_viewport .serieB4 {
+div.dv_viewport .pie .serieB4 {
     fill: #ff602e;
 }
 
-#dv_viewport .serieB5 {
+div.dv_viewport .pie .serieB5 {
     fill: #ffaa3b;
 }
 
-#dv_viewport .serieB6 {
+div.dv_viewport .pie .serieB6 {
     fill: #ffd342;
 }
 
-#dv_viewport .serieB7 {
+div.dv_viewport .pie .serieB7 {
     fill: #eaed42;
 }
 
-#dv_viewport .serieB8 {
+div.dv_viewport .pie .serieB8 {
     fill: #6dbd49;
 }
 
-#dv_viewport .serieB9 {
+div.dv_viewport .pie .serieB9 {
     fill: #1cd48a;
 }
 
-#dv_viewport .serieB10 {
+div.dv_viewport .pie .serieB10 {
     fill: #16dad3;
 }
 
-#dv_viewport .serieB11 {
+div.dv_viewport .pie .serieB11 {
     fill: #1598ff;
 }
 
-#dv_viewport .serieB12 {
+div.dv_viewport .pie .serieB12 {
     fill: #4633d1;
 }
 
-#dv_viewport .serieB13 {
+div.dv_viewport .pie .serieB13 {
     fill: #9d006b;
 }
 
-#dv_viewport .serieB14 {
+div.dv_viewport .pie .serieB14 {
     fill: #bc083f;
 }
 
-#dv_viewport .serieB15 {
+div.dv_viewport .pie .serieB15 {
     fill: #c21c0c;
 }
 
-#dv_viewport .serieB16 {
+div.dv_viewport .pie .serieB16 {
     fill: #c45b16;
 }
 
-#dv_viewport .serieB17 {
+div.dv_viewport .pie .serieB17 {
     fill: #c69c20;
 }
 
-#dv_viewport .serieB18 {
+div.dv_viewport .pie .serieB18 {
     fill: #c8bc2f;
 }
 
-#dv_viewport .serieB19 {
+div.dv_viewport .pie .serieB19 {
     fill: #80a229;
 }
 
-#dv_viewport .serieB20 {
+div.dv_viewport .pie .serieB20 {
     fill: #008942;
 }
 
-#dv_viewport .serieB21 {
+div.dv_viewport .pie .serieB21 {
     fill: #008e88;
 }
 
-#dv_viewport .serieB22 {
+div.dv_viewport .pie .serieB22 {
     fill: #1098ca;
 }
 
-#dv_viewport .serieB23 {
+div.dv_viewport .pie .serieB23 {
     fill: #004894;
 }
 
-#dv_viewport .serieB24 {
+div.dv_viewport .pie .serieB24 {
     fill: #1c1073;
 }
 
-#dv_viewport .serieC0 {
+div.dv_viewport .pie .serieC0 {
     fill: #810f9d;
 }
 
-#dv_viewport .serieC1 {
+div.dv_viewport .pie .serieC1 {
     fill: #790c94;
 }
 
-#dv_viewport .serieC2 {
+div.dv_viewport .pie .serieC2 {
     fill: #9d17be;
 }
 
-#dv_viewport .serieC3 {
+div.dv_viewport .pie .serieC3 {
     fill: #d61698;
 }
 
-#dv_viewport .serieC4 {
+div.dv_viewport .pie .serieC4 {
     fill: #f817a0;
 }
 
-#dv_viewport .serieC5 {
+div.dv_viewport .pie .serieC5 {
     fill: #f72364;
 }
 
-#dv_viewport .serieC6 {
+div.dv_viewport .pie .serieC6 {
     fill: #ff1e1e;
 }
 
-#dv_viewport .serieC7 {
+div.dv_viewport .pie .serieC7 {
     fill: #fe3a29;
 }
 
-#dv_viewport .serieC8 {
+div.dv_viewport .pie .serieC8 {
     fill: #ff602e;
 }
 
-#dv_viewport .serieC9 {
+div.dv_viewport .pie .serieC9 {
     fill: #ff8634;
 }
 
-#dv_viewport .serieC10 {
+div.dv_viewport .pie .serieC10 {
     fill: #ffaa3b;
 }
 
-#dv_viewport .serieC11 {
+div.dv_viewport .pie .serieC11 {
     fill: #ffce42;
 }
 
-#dv_viewport .serieC12 {
+div.dv_viewport .pie .serieC12 {
     fill: #ffd342;
 }
 
-#dv_viewport .serieC13 {
+div.dv_viewport .pie .serieC13 {
     fill: #fff253;
 }
 
-#dv_viewport .serieC14 {
+div.dv_viewport .pie .serieC14 {
     fill: #eaed42;
 }
 
-#dv_viewport .serieC15 {
+div.dv_viewport .pie .serieC15 {
     fill: #b1d84a;
 }
 
-#dv_viewport .serieC16 {
+div.dv_viewport .pie .serieC16 {
     fill: #6dbd49;
 }
 
-#dv_viewport .serieC17 {
+div.dv_viewport .pie .serieC17 {
     fill: #17be68;
 }
 
-#dv_viewport .serieC18 {
+div.dv_viewport .pie .serieC18 {
     fill: #18a5b6;
 }
 
-#dv_viewport .serieC19 {
+div.dv_viewport .pie .serieC19 {
     fill: #17c5bd;
 }
 
-#dv_viewport .serieC20 {
+div.dv_viewport .pie .serieC20 {
     fill: #16dad3;
 }
 
-#dv_viewport .serieC21 {
+div.dv_viewport .pie .serieC21 {
     fill: #35c8ff;
 }
 
-#dv_viewport .serieC22 {
+div.dv_viewport .pie .serieC22 {
     fill: #1598ff;
 }
 
-#dv_viewport .serieC23 {
+div.dv_viewport .pie .serieC23 {
     fill: #176ecd;
 }
 
-#dv_viewport .serieC24 {
+div.dv_viewport .pie .serieC24 {
     fill: #4633d1;
 }
 
-#dv_viewport .serieC25 {
+div.dv_viewport .pie .serieC25 {
     fill: #80199c;
 }
 
-#dv_viewport .serieC26 {
+div.dv_viewport .pie .serieC26 {
     fill: #9d006b;
 }
 
-#dv_viewport .serieC27 {
+div.dv_viewport .pie .serieC27 {
     fill: #bc0072;
 }
 
-#dv_viewport .serieC28 {
+div.dv_viewport .pie .serieC28 {
     fill: #bc083f;
 }
 
-#dv_viewport .serieC29 {
+div.dv_viewport .pie .serieC29 {
     fill: #c70000;
 }
 
-#dv_viewport .serieC30 {
+div.dv_viewport .pie .serieC30 {
     fill: #c21c0c;
 }
 
-#dv_viewport .serieC31 {
+div.dv_viewport .pie .serieC31 {
     fill: #c33b11;
 }
 
-#dv_viewport .serieC32 {
+div.dv_viewport .pie .serieC32 {
     fill: #c45b16;
 }
 
-#dv_viewport .serieC33 {
+div.dv_viewport .pie .serieC33 {
     fill: #c57c1b;
 }
 
-#dv_viewport .serieC34 {
+div.dv_viewport .pie .serieC34 {
     fill: #c69c20;
 }
 
-#dv_viewport .serieC35 {
+div.dv_viewport .pie .serieC35 {
     fill: #c7a020;
 }
 
-#dv_viewport .serieC36 {
+div.dv_viewport .pie .serieC36 {
     fill: #c8bc2f;
 }
 
-#dv_viewport .serieC37 {
+div.dv_viewport .pie .serieC37 {
     fill: #b1b423;
 }
 
-#dv_viewport .serieC38 {
+div.dv_viewport .pie .serieC38 {
     fill: #80a229;
 }
 
-#dv_viewport .serieC39 {
+div.dv_viewport .pie .serieC39 {
     fill: #478b28;
 }
 
-#dv_viewport .serieC40 {
+div.dv_viewport .pie .serieC40 {
     fill: #008942;
 }
 
-#dv_viewport .serieC41 {
+div.dv_viewport .pie .serieC41 {
     fill: #007382;
 }
 
-#dv_viewport .serieC42 {
+div.dv_viewport .pie .serieC42 {
     fill: #008e88;
 }
 
-#dv_viewport .serieC43 {
+div.dv_viewport .pie .serieC43 {
     fill: #00a09a;
 }
 
-#dv_viewport .serieC44 {
+div.dv_viewport .pie .serieC44 {
     fill: #1098ca;
 }
 
-#dv_viewport .serieC45 {
+div.dv_viewport .pie .serieC45 {
     fill: #006bbf;
 }
 
-#dv_viewport .serieC46 {
+div.dv_viewport .pie .serieC46 {
     fill: #004894;
 }
 
-#dv_viewport .serieC47 {
+div.dv_viewport .pie .serieC47 {
     fill: #25159b;
 }
 
-#dv_viewport .serieC48 {
+div.dv_viewport .pie .serieC48 {
     fill: #1c1073;
 }
 
-#dv_viewport .serieC49 {
+div.dv_viewport .pie .serieC49 {
     fill: #420f69;
 }

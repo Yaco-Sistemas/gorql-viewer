@@ -116,7 +116,7 @@ DV.merge((function () {
         },
 
         init = function (d3, container, labels, series, options) {
-            var area = options.area === 'true';
+            var area = options.area === 'true' || options.area === true;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;

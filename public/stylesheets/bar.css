@@ -1,23 +1,23 @@
-#dv_viewport {
+div.dv_viewport {
     font: 10px sans-serif;
 }
 
-#dv_viewport .bar rect {
+div.dv_viewport .bar rect {
     stroke: white;
 }
 
-#dv_viewport .bar text.value {
+div.dv_viewport .bar text.value {
     fill: white;
 }
 
-#dv_viewport .bar text.rule {
+div.dv_viewport .bar text.rule {
     fill: #CCC;
 }
 
-#dv_viewport .bar text.label {
+div.dv_viewport .bar text.label {
     fill: black;
 }
 
-#dv_viewport .bar line {
+div.dv_viewport .bar line {
     stroke: #CCC;
 }

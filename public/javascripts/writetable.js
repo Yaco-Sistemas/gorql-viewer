@@ -25,36 +25,34 @@ DV.merge = function (source, destination) {
 DV.merge((function () {
     "use strict";
 
-    var template = "<table id='dv_table' {{if hide}}style='display: none;'{{/if}}>" +
-        "<thead>" +
+    var template = "<thead>" +
         "   <tr>{{each headers}}<th>${$value}</th>{{/each}}</tr>" +
         "</thead>" +
         "<tbody>" +
         "   {{each(idx, result) results}}<tr class='{{if idx % 2}}even{{else}}odd{{/if}}'>" +
         "       {{each result}}<td>${$value}</td>{{/each}}" +
         "   </tr>{{/each}}" +
-        "</tbody>" +
-        "</table>",
+        "</tbody>",
 
-        processTemplate = function (tmplCallback, headers, data, hideTable) {
+        processTemplate = function (tmplCallback, headers, data) {
             // Process template
             return tmplCallback(template, {
                 headers: headers,
-                results: data,
-                hide: hideTable
+                results: data
             });
         },
 
-        browser = function (viewport, idx, hideTable) {
+        browser = function (viewport, idx) {
             // Client entry point
             var data = DV.data[idx];
-            viewport.innerHTML = processTemplate(exports.tmpl, data.headers, data.results, hideTable);
+            viewport.innerHTML = processTemplate(exports.tmpl, data.headers, data.results);
         },
 
         node = function (headers, results) {
             // Server entry point
             var jqtpl = require("jqtpl");
-            return processTemplate(jqtpl.tmpl, headers, results);
+            return "<table id='dv_table' class='dv_table'>" +
+                processTemplate(jqtpl.tmpl, headers, results) + "</table>";
         };
 
     // Public functions

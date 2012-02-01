@@ -5,9 +5,9 @@
     <title>Data Viewer</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/pie.css" />
-<!--     <script type="text/javascript" src="/javascripts/dv-bundle.js"></script> -->
-    <script type="text/javascript" src="/javascripts/dv-bundle.min.js"></script>
-
+    <link rel="stylesheet" href="/stylesheets/line.css" />
+    <script type="text/javascript" src="/javascripts/dv-bundle.js"></script>
+<!--     <script type="text/javascript" src="/javascripts/dv-bundle.min.js"></script> -->
 </head>
 <body>
     <h1>Lorem ipsum dolor sit amet</h1>
@@ -33,11 +33,8 @@
     <script type="text/javascript" src="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}&amp;embedded=true&amp;idx=0"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.writeDataToTable(document.getElementById('dv_table_viewport'), 0);
-            DV.pie("#dv_viewport", "#dv_table", {
-                family: "d3",
-                png: "false",
-                type: "pie",
+            DV.writeDataToTable(document.getElementById('dv_table0'), 0);
+            DV.pie("#dv_viewport0", "#dv_table0", {
                 labels: "country_name",
                 series: "population",
                 sizeX: "600",
@@ -48,13 +45,13 @@
         });
     </script>
     <noscript><a href="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}">Ver resultados en el visor</a></noscript>
-    <div id="dv_viewport"></div>
+    <div id="dv_viewport0" class="dv_viewport"></div>
     <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
     ridiculus mus. Nunc hendrerit tellus ac lectus euismod porttitor. In hac
     habitasse platea dictumst. Nullam consectetur pulvinar ipsum quis scelerisque.
     Aenean est metus, venenatis sit amet congue id, rutrum nec velit. Duis et
     pulvinar est. Vivamus nec rutrum nisi.</p>
-    <div id="dv_table_viewport"></div>
+    <table id="dv_table0" class="dv_table"></table>
     <p>Morbi tincidunt malesuada turpis eu feugiat. Sed varius eros lectus. Nunc
     nibh elit, consequat ac molestie at, scelerisque eu libero. Nunc vulputate,
     libero a accumsan aliquet, sapien tellus pulvinar enim, nec venenatis quam est
@@ -69,5 +66,29 @@
     nibh et sapien facilisis auctor condimentum tortor vestibulum. Aenean orci nunc,
     suscipit ut consequat id, malesuada in elit. Nulla egestas augue et mauris
     accumsan egestas.</p>
+    <script type="text/javascript" src="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20%0APREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20%0APREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20%0ASELECT%20%3Fcountry_name%20%3FareaM%20%3FareaK%0A%0AWHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3AareaSqMi%20%3FareaM%20%3B%20prop%3AareaKm%20%3FareaK%20.%20%0AFILTER%20(%3FareaM%20%3C%2040000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%0AFILTER%20(%3FareaM%20%3E%205000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&amp;embedded=true&amp;idx=1"></script>
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.writeDataToTable(document.getElementById('dv_table1'), 1);
+            DV.line("#dv_viewport1", "#dv_table1", {
+                labels: "country_name",
+                series: "areaM,areaK",
+                sizeX: "600",
+                sizeY: "400",
+                sizeLabel: "70",
+                area: true
+            });
+        });
+    </script>
+    <noscript><a href="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20%0APREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20%0APREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20%0ASELECT%20%3Fcountry_name%20%3FareaM%20%3FareaK%0A%0AWHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3AareaSqMi%20%3FareaM%20%3B%20prop%3AareaKm%20%3FareaK%20.%20%0AFILTER%20(%3FareaM%20%3C%2040000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%0AFILTER%20(%3FareaM%20%3E%205000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D">Ver resultados en el visor</a></noscript>
+    <div id="dv_viewport1" class="dv_viewport"></div>
+    <table id="dv_table1" class="dv_table" style="display: none;"></table>
+    <p>Ut vitae elit elit, in placerat erat. Proin vitae sapien sit amet purus
+    commodo aliquet vitae ut ligula. Donec diam erat, dictum sit amet consequat ac,
+    laoreet eu magna. Vivamus non sagittis leo. Quisque a mi in leo vestibulum
+    eleifend a vel ante. Mauris non sem dui, in accumsan urna. Nullam vel orci
+    augue, et porta mauris. Nulla libero orci, volutpat id malesuada vel, fringilla
+    sed ligula. Cras nibh risus, lobortis sit amet aliquet ac, faucibus in lacus.
+    Suspendisse potenti. </p>
 </body>
 </html>

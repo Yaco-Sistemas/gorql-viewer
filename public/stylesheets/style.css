@@ -20,49 +20,49 @@ h1.first {
     margin-top: 0px;
 }
 
-#dv_viewport {
+div.dv_viewport {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
 }
 
-#dv_table {
+table.dv_table {
     color: #404040;
     border-spacing: 0px;
 }
 
-#dv_table thead tr {
+table.dv_table thead tr {
     text-align: left;
 }
 
-#dv_table th {
+table.dv_table th {
     border-bottom: 1px solid #bfbfbf;
     text-transform: capitalize;
 }
 
-#dv_table th,
-#dv_table td {
+table.dv_table th,
+table.dv_table td {
     border-right: 1px dashed #dddddd;
     padding: 3px 35px 3px 35px;
     white-space: nowrap;
 }
 
-#dv_table th:first-child,
-#dv_table td:first-child {
+table.dv_table th:first-child,
+table.dv_table td:first-child {
     padding-left: 12px;
 }
 
-#dv_table th:last-child,
-#dv_table td:last-child {
+table.dv_table th:last-child,
+table.dv_table td:last-child {
     border-right: none;
     padding-right: 12px;
 }
 
-#dv_table tr.odd {
+table.dv_table tr.odd {
     background-color: white;
 }
 
-#dv_table tr.even {
+table.dv_table tr.even {
     background-color: #f0f0f0;
 }
 
@@ -74,50 +74,50 @@ h1.first {
     margin-bottom: 0px;
 }
 
-#dv_viewport .serie0 {
+div.dv_viewport .serie0 {
     fill: #80199c;
 }
 
-#dv_viewport .serie1 {
+div.dv_viewport .serie1 {
     fill: #c92881;
 }
 
-#dv_viewport .serie2 {
+div.dv_viewport .serie2 {
     fill: #ef189b;
 }
 
-#dv_viewport .serie3 {
+div.dv_viewport .serie3 {
     fill: #f74236;
 }
 
-#dv_viewport .serie4 {
+div.dv_viewport .serie4 {
     fill: #f86a2d;
 }
 
-#dv_viewport .serie5 {
+div.dv_viewport .serie5 {
     fill: #ffa532;
 }
 
-#dv_viewport .serie6 {
+div.dv_viewport .serie6 {
     fill: #fff253;
 }
 
-#dv_viewport .serie7 {
+div.dv_viewport .serie7 {
     fill: #b1d84a;
 }
 
-#dv_viewport .serie8 {
+div.dv_viewport .serie8 {
     fill: #18b665;
 }
 
-#dv_viewport .serie9 {
+div.dv_viewport .serie9 {
     fill: #17c5bd;
 }
 
-#dv_viewport .serie10 {
+div.dv_viewport .serie10 {
     fill: #15bbf9;
 }
 
-#dv_viewport .serie11 {
+div.dv_viewport .serie11 {
     fill: #1864b4;
 }

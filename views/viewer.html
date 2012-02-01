@@ -99,7 +99,7 @@
     {{if chart}}
     <section>
         <h1 class="first">${chart.type} Chart</h1>
-        <div id="dv_viewport">
+        <div id="dv_viewport" class="dv_viewport">
         {{if chart && chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
         </div>
     </section>

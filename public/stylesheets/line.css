@@ -1,90 +1,90 @@
-#dv_viewport {
+div.dv_viewport .line {
     font: 10px sans-serif;
 }
 
-#dv_viewport #clip {
+div.dv_viewport .line #clip {
     fill: none;
 }
 
-#dv_viewport path.line {
+div.dv_viewport .line path.line {
     fill: none;
     stroke-width: 1.5px;
 }
 
-#dv_viewport path.line.serie0 {
+div.dv_viewport .line path.line.serie0 {
     stroke: #80199c;
 }
 
-#dv_viewport path.line.serie1 {
+div.dv_viewport .line path.line.serie1 {
     stroke: #c92881;
 }
 
-#dv_viewport path.line.serie2 {
+div.dv_viewport .line path.line.serie2 {
     stroke: #ef189b;
 }
 
-#dv_viewport path.line.serie3 {
+div.dv_viewport .line path.line.serie3 {
     stroke: #f74236;
 }
 
-#dv_viewport path.line.serie4 {
+div.dv_viewport .line path.line.serie4 {
     stroke: #f86a2d;
 }
 
-#dv_viewport path.line.serie5 {
+div.dv_viewport .line path.line.serie5 {
     stroke: #ffa532;
 }
 
-#dv_viewport path.line.serie6 {
+div.dv_viewport .line path.line.serie6 {
     stroke: #fff253;
 }
 
-#dv_viewport path.line.serie7 {
+div.dv_viewport .line path.line.serie7 {
     stroke: #b1d84a;
 }
 
-#dv_viewport path.line.serie8 {
+div.dv_viewport .line path.line.serie8 {
     stroke: #18b665;
 }
 
-#dv_viewport path.line.serie9 {
+div.dv_viewport .line path.line.serie9 {
     stroke: #17c5bd;
 }
 
-#dv_viewport path.line.serie10 {
+div.dv_viewport .line path.line.serie10 {
     stroke: #15bbf9;
 }
 
-#dv_viewport path.line.serie11 {
+div.dv_viewport .line path.line.serie11 {
     stroke: #1864b4;
 }
 
-#dv_viewport path.area {
+div.dv_viewport .line path.area {
     fill-opacity: .25;
 }
 
-#dv_viewport .axis {
+div.dv_viewport .line .axis {
     shape-rendering: crispEdges;
 }
 
-#dv_viewport .y.axis path.domain,
-#dv_viewport .x.axis path.domain,
-#dv_viewport .x.axis line.tick {
+div.dv_viewport .line .y.axis path.domain,
+div.dv_viewport .line .x.axis path.domain,
+div.dv_viewport .line .x.axis line.tick {
     stroke: none;
 }
 
-#dv_viewport .x.axis line,
-#dv_viewport .x.axis path,
-#dv_viewport .y.axis line,
-#dv_viewport .y.axis path {
+div.dv_viewport .line .x.axis line,
+div.dv_viewport .line .x.axis path,
+div.dv_viewport .line .y.axis line,
+div.dv_viewport .line .y.axis path {
     fill: none;
     stroke: #000;
 }
 
-#dv_viewport .y.axis line {
+div.dv_viewport .line .y.axis line {
     stroke: #CCC;
 }
 
-#dv_viewport .y.axis text {
+div.dv_viewport .line .y.axis text {
     fill: #CCC;
 }

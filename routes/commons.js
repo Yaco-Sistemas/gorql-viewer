@@ -235,7 +235,7 @@ exports.generateSVG = function (chart, data) {
         // FS uses relative paths to the root of the project, where is being executed node
         styles = readFileSync(dirname(app.filename) + "/public/stylesheets/style.css", 'utf-8'),
         // Use jsdom to create a fake document so we can use sizzle later
-        document = jsdom("<html><head></head><body><div id='dv_viewport'>" + svg + "</div></body></html>"),
+        document = jsdom("<html><head></head><body><div id='dv_viewport' class='dv_viewport'>" + svg + "</div></body></html>"),
         rule,
         elems,
         i,

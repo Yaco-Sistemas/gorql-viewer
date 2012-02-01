@@ -2,3 +2,5 @@ syntax: glob
 
 node_modules
 docs/build
+public/javascripts/dv-bundle.min.js
+public/javascripts/dv-bundle.js

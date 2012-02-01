@@ -52,13 +52,13 @@ DV.merge((function () {
         getY = function (d) { return Math.floor(yScale(d)); },
         size = {},
 
-        highlightOut = function (d, i) {
+        highlightOut = function () {
             svg.selectAll(".highlight").remove();
         },
 
         highlightIn = function (d, i) {
             // Remove other highlights
-            svg.selectAll(".highlight").remove();
+            highlightOut();
 
             var x = xScale(i),
                 y = Math.floor(yScale(d)),
@@ -69,14 +69,14 @@ DV.merge((function () {
                 offset = 25;
             }
 
-            svg.append("svg:circle")
+            svg.insert("svg:circle", ".point")
                 .attr("class", "highlight " + classes[1])
                 .attr("cx", x)
                 .attr("cy", y)
                 .attr("r", 5)
                 .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
 
-            svg.append("svg:text")
+            svg.insert("svg:text", ".point")
                 .attr("class", "highlight")
                 .attr("x", x)
                 .attr("y", y + offset)
@@ -150,29 +150,24 @@ DV.merge((function () {
                 .attr("x1", 0)
                 .attr("x2", size.x);
 
-            if (area) {
-                // We need to add areas first so they are under the other elements
-                for (i = 0; i < series.length; i += 1) {
-                    serie = series[i];
+            for (i = 0; i < series.length; i += 1) {
+                serie = series[i];
 
+                // Add the line path.
+                svg.insert("svg:path", ".point")
+                    .attr("class", "line serie" + i)
+                    .attr("clip-path", "url(#clip)")
+                    .attr("d", line(serie))
+                    .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
+
+                if (area) {
                     // Add the area path.
-                    svg.append("svg:path")
+                    svg.insert("svg:path", "path.line")
                         .attr("class", "area serie" + i)
                         .attr("clip-path", "url(#clip)")
                         .attr("d", area(serie))
                         .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
                 }
-            }
-
-            for (i = 0; i < series.length; i += 1) {
-                serie = series[i];
-
-                // Add the line path.
-                svg.append("svg:path")
-                    .attr("class", "line serie" + i)
-                    .attr("clip-path", "url(#clip)")
-                    .attr("d", line(serie))
-                    .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
 
                 // Add points for highlighting
                 svg.selectAll("circle.point.serie" + i)

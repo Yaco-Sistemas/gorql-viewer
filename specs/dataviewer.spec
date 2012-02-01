@@ -58,6 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %{installdir}/node_modules
 %attr(755,%{name},%{name}) %{installdir}/.forever
 %{installdir}/app.js
+%{installdir}/Makefile
 %{installdir}/package.json
 %config %attr(755,%{name},%{name}) %{installdir}/settings.js
 /etc/%{name}

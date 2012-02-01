@@ -1,5 +1,5 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module, DV: true */
+/*global d3: true, exports: true, require, window: true, document: true, module, DV: true, event */
 
 // Copyright 2012 Junta de Andalucia
 //
@@ -22,8 +22,8 @@
 // See the Licence for the specific language governing
 // permissions and limitations under the Licence.
 
-if (!DV) {
-    var DV = {};
+if (typeof DV === "undefined") {
+    window.DV = {};
 }
 
 DV.merge = function (source, destination) {
@@ -50,6 +50,39 @@ DV.merge((function () {
         yScale,
         size = {},
 
+        highlightOut = function (d, i) {
+            var from = event.fromElement.getAttribute('class');
+
+            if (from.indexOf('point') < 0) {
+                svg.selectAll(".highlight")
+                    .remove();
+            }
+        },
+
+        highlightIn = function (d, i) {
+            // Remove other highlights
+            highlightOut(d, i);
+
+            var x = xScale(i),
+                y = Math.floor(yScale(d)),
+                classes = this.getAttribute('class').split(' ');
+
+            svg.append("svg:circle")
+                .attr("class", "highlight " + classes[1])
+                .attr("cx", x)
+                .attr("cy", y)
+                .attr("r", 5)
+                .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
+
+            svg.append("svg:text")
+                .attr("class", "highlight")
+                .attr("x", x)
+                .attr("y", y - 10)
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(" + size.xpadding / 2 + ",0)")
+                .text(d);
+        },
+
         render = function (d3, labels, series, area) {
             var xAxis = d3.svg.axis()
                     .scale(xScale)
@@ -64,19 +97,21 @@ DV.merge((function () {
                     .scale(yScale)
                     .orient("left")
                     .tickFormat(d3.format(".0f")),
+                getX = function (d, idx) { return xScale(idx); },
+                getY = function (d) { return Math.floor(yScale(d)); },
                 serie,
                 line = d3.svg.line()
                     //.interpolate("monotone")
-                    .x(function (d, idx) { return xScale(idx); })
-                    .y(function (d) { return Math.floor(yScale(d)); }),
+                    .x(getX)
+                    .y(getY),
                 i;
 
             if (area) {
                 area = d3.svg.area()
                     //.interpolate("monotone")
-                    .x(function (d, idx) { return xScale(idx); })
+                    .x(getX)
                     .y0(size.y - size.offset)
-                    .y1(function (d) { return Math.floor(yScale(d)); });
+                    .y1(getY);
             }
 
             // Add the clip path.
@@ -115,6 +150,20 @@ DV.merge((function () {
                 .attr("x1", 0)
                 .attr("x2", size.x);
 
+            if (area) {
+                // We need to add areas first so they are under the other elements
+                for (i = 0; i < series.length; i += 1) {
+                    serie = series[i];
+
+                    // Add the area path.
+                    svg.append("svg:path")
+                        .attr("class", "area serie" + i)
+                        .attr("clip-path", "url(#clip)")
+                        .attr("d", area(serie))
+                        .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
+                }
+            }
+
             for (i = 0; i < series.length; i += 1) {
                 serie = series[i];
 
@@ -125,14 +174,17 @@ DV.merge((function () {
                     .attr("d", line(serie))
                     .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
 
-                if (area) {
-                    // Add the area path.
-                    svg.append("svg:path")
-                        .attr("class", "area serie" + i)
-                        .attr("clip-path", "url(#clip)")
-                        .attr("d", area(serie))
-                        .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
-                }
+                // Add points for highlighting
+                svg.selectAll("circle.point.serie" + i)
+                    .data(serie)
+                    .enter().append("svg:circle")
+                    .attr("class", "point serie" + i)
+                    .attr("cx", getX)
+                    .attr("cy", getY)
+                    .attr("r", 15)
+                    .attr("transform", "translate(" + size.xpadding / 2 + ",0)")
+                    .on("mouseover", highlightIn)
+                    .on("mouseout", highlightOut);
             }
         },
 
@@ -185,7 +237,9 @@ DV.merge((function () {
 }()), DV);
 
 // Browser
-exports = exports || {};
+if (typeof exports === "undefined") {
+    window.exports = {};
+}
 
 exports.chart = function (data, options) {
     "use strict";

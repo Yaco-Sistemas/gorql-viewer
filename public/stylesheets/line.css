@@ -6,6 +6,16 @@ div.dv_viewport .line #clip {
     fill: none;
 }
 
+div.dv_viewport .line .point {
+    stroke: transparent;
+    fill: transparent;
+}
+
+div.dv_viewport .line text.highlight {
+    font-size: 18px;
+    font-weight: bold;
+}
+
 div.dv_viewport .line path.line {
     fill: none;
     stroke-width: 1.5px;

@@ -48,24 +48,26 @@ DV.merge((function () {
         nSeries,
         xScale,
         yScale,
+        getX = function (d, idx) { return xScale(idx); },
+        getY = function (d) { return Math.floor(yScale(d)); },
         size = {},
 
         highlightOut = function (d, i) {
-            var from = event.fromElement.getAttribute('class');
-
-            if (from.indexOf('point') < 0) {
-                svg.selectAll(".highlight")
-                    .remove();
-            }
+            svg.selectAll(".highlight").remove();
         },
 
         highlightIn = function (d, i) {
             // Remove other highlights
-            highlightOut(d, i);
+            svg.selectAll(".highlight").remove();
 
             var x = xScale(i),
                 y = Math.floor(yScale(d)),
-                classes = this.getAttribute('class').split(' ');
+                classes = this.getAttribute('class').split(' '),
+                offset = -10;
+
+            if (y < 20) {
+                offset = 25;
+            }
 
             svg.append("svg:circle")
                 .attr("class", "highlight " + classes[1])
@@ -77,7 +79,7 @@ DV.merge((function () {
             svg.append("svg:text")
                 .attr("class", "highlight")
                 .attr("x", x)
-                .attr("y", y - 10)
+                .attr("y", y + offset)
                 .attr("text-anchor", "middle")
                 .attr("transform", "translate(" + size.xpadding / 2 + ",0)")
                 .text(d);
@@ -97,8 +99,6 @@ DV.merge((function () {
                     .scale(yScale)
                     .orient("left")
                     .tickFormat(d3.format(".0f")),
-                getX = function (d, idx) { return xScale(idx); },
-                getY = function (d) { return Math.floor(yScale(d)); },
                 serie,
                 line = d3.svg.line()
                     //.interpolate("monotone")

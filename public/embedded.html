@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/pie.css" />
     <link rel="stylesheet" href="/stylesheets/line.css" />
-    <script type="text/javascript" src="/javascripts/dv-bundle.js"></script>
-<!--     <script type="text/javascript" src="/javascripts/dv-bundle.min.js"></script> -->
+<!--     <script type="text/javascript" src="/javascripts/dv-bundle.js"></script> -->
+    <script type="text/javascript" src="/javascripts/dv-bundle.min.js"></script>
 </head>
 <body>
     <h1>Lorem ipsum dolor sit amet</h1>
@@ -33,7 +33,7 @@
     <script type="text/javascript" src="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}&amp;embedded=true&amp;idx=0"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.writeDataToTable(document.getElementById('dv_table0'), 0);
+            DV.writeDataToTable(Sizzle("#dv_table0")[0], 0);
             DV.pie("#dv_viewport0", "#dv_table0", {
                 labels: "country_name",
                 series: "population",
@@ -69,7 +69,7 @@
     <script type="text/javascript" src="/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20%0APREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20%0APREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20%0ASELECT%20%3Fcountry_name%20%3FareaM%20%3FareaK%0A%0AWHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3AareaSqMi%20%3FareaM%20%3B%20prop%3AareaKm%20%3FareaK%20.%20%0AFILTER%20(%3FareaM%20%3C%2040000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%0AFILTER%20(%3FareaM%20%3E%205000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&amp;embedded=true&amp;idx=1"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.writeDataToTable(document.getElementById('dv_table1'), 1);
+            DV.writeDataToTable(Sizzle("#dv_table1")[0], 1);
             DV.line("#dv_viewport1", "#dv_table1", {
                 labels: "country_name",
                 series: "areaM,areaK",

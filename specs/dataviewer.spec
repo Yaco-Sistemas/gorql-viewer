@@ -30,6 +30,7 @@ cp -R * %{installdir}
 cd %{installdir}
 mkdir .forever
 npm install -d
+make all
 
 # clean files not needed
 rm -rf %{installdir}/.hg

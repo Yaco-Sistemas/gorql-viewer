@@ -23,7 +23,7 @@
 // permissions and limitations under the Licence.
 
 if (typeof DV === "undefined") {
-    window.DV = {};
+    var DV = {};
 }
 
 DV.merge = function (source, destination) {
@@ -63,11 +63,8 @@ DV.merge((function () {
             var x = xScale(i),
                 y = Math.floor(yScale(d)),
                 classes = this.getAttribute('class').split(' '),
-                offset = -10;
-
-            if (y < 20) {
-                offset = 25;
-            }
+                node,
+                bbox;
 
             svg.insert("svg:circle", ".point")
                 .attr("class", "highlight " + classes[1])
@@ -76,13 +73,29 @@ DV.merge((function () {
                 .attr("r", 5)
                 .attr("transform", "translate(" + size.xpadding / 2 + ",0)");
 
-            svg.insert("svg:text", ".point")
+            node = svg.insert("svg:text", ".point")
                 .attr("class", "highlight")
                 .attr("x", x)
-                .attr("y", y + offset)
+                .attr("y", y - 10)
                 .attr("text-anchor", "middle")
                 .attr("transform", "translate(" + size.xpadding / 2 + ",0)")
                 .text(d);
+
+            node = node[0][0]; // Get the actual node
+            bbox = node.getBBox();
+
+            // Avoid text overflow
+            if (bbox.y < 0) {
+                // Top overflow
+                node.setAttribute('y', y + 5 + bbox.height);
+            }
+            if ((bbox.x + bbox.width + (size.xpadding / 2)) > size.x) {
+                // Right overflow
+                node.setAttribute('x', x - (bbox.width / 2));
+            } else if (bbox.x < 0) {
+                // Left overflow
+                node.setAttribute('x', x + (bbox.width / 2));
+            }
         },
 
         render = function (d3, labels, series, area) {
@@ -176,7 +189,7 @@ DV.merge((function () {
                     .attr("class", "point serie" + i)
                     .attr("cx", getX)
                     .attr("cy", getY)
-                    .attr("r", 15)
+                    .attr("r", 30)
                     .attr("transform", "translate(" + size.xpadding / 2 + ",0)")
                     .on("mouseover", highlightIn)
                     .on("mouseout", highlightOut);

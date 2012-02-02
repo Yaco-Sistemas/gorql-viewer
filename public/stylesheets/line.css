@@ -7,8 +7,8 @@ div.dv_viewport .line #clip {
 }
 
 div.dv_viewport .line .point {
-    stroke: transparent;
-    fill: transparent;
+    fill: white;
+    opacity: 0;
 }
 
 div.dv_viewport .line text.highlight {

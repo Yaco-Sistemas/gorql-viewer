@@ -1,5 +1,5 @@
 /*jslint vars: false, browser: true */
-/*global OpenLayers, DV */
+/*global OpenLayers, DV, Sizzle */
 
 // Copyright 2012 Junta de Andalucia
 //
@@ -30,6 +30,7 @@ DV.map = function (viewport_id, data_container, options) {
     "use strict";
 
     var fields = options.fields,
+        sizzle = Sizzle, // JSLint hack
         headers,
         results,
         container = document.createElement('div'),
@@ -56,7 +57,7 @@ DV.map = function (viewport_id, data_container, options) {
     container.id = "ol_viewport";
     container.style.width = options.width + 'px';
     container.style.height = options.height + 'px';
-    document.getElementById(viewport_id).appendChild(container);
+    sizzle(viewport_id)[0].appendChild(container);
 
     map = new OpenLayers.Map("ol_viewport", {
         controls: [

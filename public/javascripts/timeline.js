@@ -1,5 +1,5 @@
 /*jslint vars: false, browser: true */
-/*global Timeline, DV */
+/*global Timeline, DV, Sizzle */
 
 // Copyright 2012 Junta de Andalucia
 //
@@ -26,10 +26,12 @@ if (!DV) {
     var DV = {};
 }
 
-DV.timeline = function (viewport, data_container, options) {
+DV.timeline = function (viewportId, data_container, options) {
     "use strict";
 
     var fields = options.fields,
+        sizzle = Sizzle, // JSLint hack
+        viewport = sizzle(viewportId)[0],
         eventSource,
         bandInfos,
         headers,

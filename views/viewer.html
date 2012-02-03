@@ -44,14 +44,7 @@
             DV.timeline("#dv_viewport",
                 "#dv_table",
                 {
-                    fields: {
-                        start: "${chart.start}",
-                        title: "${chart.title}"{{if chart.end}},
-                        end: "${chart.end}"{{/if}}{{if chart.description}},
-                        description: "${chart.description}"{{/if}}
-                    },
-                    detailRes: "${chart.detailRes}",
-                    overviewRes: "${chart.overviewRes}"
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
                 }
             );
         });
@@ -69,13 +62,7 @@
             DV.map("#dv_viewport",
                 "#dv_table",
                 {
-                    fields: {
-                        lat: "${chart.lat}",
-                        lon: "${chart.long}"{{if chart.description}},
-                        description: "${chart.description}"{{/if}}
-                    },
-                    width: ${chart.sizeX},
-                    height: ${chart.sizeY}
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
                 }
             );
         });

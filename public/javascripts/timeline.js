@@ -29,8 +29,7 @@ if (!DV) {
 DV.timeline = function (viewportId, data_container, options) {
     "use strict";
 
-    var fields = options.fields,
-        sizzle = Sizzle, // JSLint hack
+    var sizzle = Sizzle, // JSLint hack
         viewport = sizzle(viewportId)[0],
         eventSource,
         bandInfos,
@@ -52,13 +51,13 @@ DV.timeline = function (viewportId, data_container, options) {
     // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {
         aux = headers[i];
-        if (aux === fields.start) {
+        if (aux === options.start) {
             startIdx = i;
-        } else if (aux === fields.end) {
+        } else if (aux === options.end) {
             endIdx = i;
-        } else if (aux === fields.title) {
+        } else if (aux === options.title) {
             titleIdx = i;
-        } else if (aux === fields.description) {
+        } else if (aux === options.description) {
             descriptionIdx = i;
         }
     }

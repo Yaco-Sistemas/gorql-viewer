@@ -29,8 +29,7 @@ if (!DV) {
 DV.map = function (viewport_id, data_container, options) {
     "use strict";
 
-    var fields = options.fields,
-        sizzle = Sizzle, // JSLint hack
+    var sizzle = Sizzle, // JSLint hack
         headers,
         results,
         container = document.createElement('div'),
@@ -55,8 +54,8 @@ DV.map = function (viewport_id, data_container, options) {
         i;
 
     container.id = "ol_viewport";
-    container.style.width = options.width + 'px';
-    container.style.height = options.height + 'px';
+    container.style.width = options.sizeX + 'px';
+    container.style.height = options.sizeY + 'px';
     sizzle(viewport_id)[0].appendChild(container);
 
     map = new OpenLayers.Map("ol_viewport", {
@@ -76,11 +75,11 @@ DV.map = function (viewport_id, data_container, options) {
     // Get the indexes of the fields
     for (i = 0; i < headers.length; i += 1) {
         aux = headers[i];
-        if (aux === fields.lat) {
+        if (aux === options.lat) {
             latIdx = i;
-        } else if (aux === fields.lon) {
+        } else if (aux === options.long) {
             longIdx = i;
-        } else if (aux === fields.description) {
+        } else if (aux === options.description) {
             descriptionIdx = i;
         }
     }

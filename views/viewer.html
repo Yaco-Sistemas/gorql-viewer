@@ -6,12 +6,30 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
-    {{if chart && !chart.png && chart.family == 'd3'}}
+    {{if chart && !chart.png}}
     <script type="text/javascript" src="/javascripts/domready.js"></script>
     <script type="text/javascript" src="/javascripts/sizzle.js"></script>
     <script type="text/javascript" src="/javascripts/minedata.js"></script>
+    {{if chart.family == 'd3'}}
     <script type="text/javascript" src="/javascripts/d3.js"></script>
     <script type="text/javascript" src="/javascripts/d3.layout.js"></script>
+    {{else}} {{if chart.family == 'simile'}}
+    <script type="text/javascript">
+        Timeline_ajax_url="/timeline/timeline_ajax/simile-ajax-api.js";
+        Timeline_urlPrefix='/timeline/timeline_js/';
+        Timeline_parameters='bundle=true&defaultLocale="es"';
+    </script>
+    <script type="text/javascript" src="/timeline/timeline_js/timeline-api.js"></script>
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            var viewport = document.getElementById("dv_viewport");
+            viewport.style.width = ${chart.sizeX} + 'px';
+            viewport.style.height = ${chart.sizeY} + 'px';
+        });
+    </script>
+    {{else}} {{if chart.family == 'layers'}}
+    <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
+    {{/if}}{{/if}}{{/if}}
     <script type="text/javascript" src="/javascripts/${chart.type}.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
@@ -23,54 +41,6 @@
         });
     </script>
     <link rel="stylesheet" href="/stylesheets/${chart.type}.css" />
-    {{else}}
-
-    {{if chart && chart.family == 'simile'}}
-    <script type="text/javascript" src="/javascripts/domready.js"></script>
-    <script type="text/javascript" src="/javascripts/sizzle.js"></script>
-    <script type="text/javascript" src="/javascripts/minedata.js"></script>
-    <script type="text/javascript">
-        Timeline_ajax_url="/timeline/timeline_ajax/simile-ajax-api.js";
-        Timeline_urlPrefix='/timeline/timeline_js/';
-        Timeline_parameters='bundle=true&defaultLocale="es"';
-    </script>
-    <script type="text/javascript" src="/timeline/timeline_js/timeline-api.js"></script>
-    <script type="text/javascript" src="/javascripts/timeline.js"></script>
-    <script type="text/javascript">
-        DomReady.ready(function () {
-            var viewport = document.getElementById("dv_viewport");
-            viewport.style.width = ${chart.sizeX} + 'px';
-            viewport.style.height = ${chart.sizeY} + 'px';
-            DV.timeline("#dv_viewport",
-                "#dv_table",
-                {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
-                }
-            );
-        });
-    </script>
-    {{else}}
-
-    {{if chart && chart.family == 'layers'}}
-    <script type="text/javascript" src="/javascripts/domready.js"></script>
-    <script type="text/javascript" src="/javascripts/sizzle.js"></script>
-    <script type="text/javascript" src="/javascripts/minedata.js"></script>
-    <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
-    <script type="text/javascript" src="/javascripts/map.js"></script>
-    <script type="text/javascript">
-        DomReady.ready(function () {
-            DV.map("#dv_viewport",
-                "#dv_table",
-                {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
-                }
-            );
-        });
-    </script>
-    {{/if}}
-
-    {{/if}}
-
     {{/if}}
 </head>
 <body>

@@ -1,5 +1,5 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module, DV: true */
+/*global d3: true, exports: true, require, window: true, document: true, module, DV: true, setTimeout */
 
 // Copyright 2012 Junta de Andalucia
 //
@@ -47,14 +47,8 @@ DV.merge((function () {
         nElems,
         nSeries,
         serieIdx,
-        scale = {
-            x: null,
-            y: null
-        },
-        size = {
-            x: null,
-            y: null
-        },
+        scale = {},
+        size = {},
         config,
         portrait = {
             rectWidth: function () { return (size.x / nElems) / nSeries; },
@@ -75,7 +69,18 @@ DV.merge((function () {
                 return "translate(0, 10) rotate(-90 " + x + " " + y + ")";
             },
             textTAnchorHigh: "middle",
-            textTransformHigh: function (d, i) { return "translate(0, 30)"; },
+            textTransformHigh: function () { return "translate(0, 30)"; },
+            textTransformHighBBox: function (bbox, transform) {
+                if (bbox.x < 0) {
+                    transform += " translate(" + bbox.width / 2 + ", 0)";
+                } else if ((bbox.x + bbox.width) > size.x) {
+                    transform += " translate(-" + bbox.width / 2 + ", 0)";
+                }
+                if ((bbox.y + bbox.height) > (size.y - size.offset)) {
+                    transform += " translate(0, -30)";
+                }
+                return transform;
+            },
             lineTicks: function () { return scale.y.ticks(10); },
             lineX1: function () { return 0; },
             lineX2: function () { return size.x; },
@@ -110,7 +115,13 @@ DV.merge((function () {
             textTAnchor: "end",
             textTransform: function () { return "translate(-10, 0)"; },
             textTAnchorHigh: "end",
-            textTransformHigh: function (d, i) { return "translate(-10, 0)"; },
+            textTransformHigh: function () { return "translate(-10, 0)"; },
+            textTransformHighBBox: function (bbox, transform) {
+                if (bbox.x < size.offset) {
+                    transform += " translate(" + (size.offset - bbox.x + (bbox.width / 2)) + ", 0)";
+                }
+                return transform;
+            },
             lineTicks: function () { return scale.x.ticks(10); },
             lineX1: function () { return scale.x; },
             lineX2: function () { return scale.x; },
@@ -159,7 +170,8 @@ DV.merge((function () {
                 height = config.rectHeightHigh(bbox.height),
                 cssclass = this.getAttribute('class'),
                 rect,
-                text;
+                text,
+                transform;
 
             serieIdx = parseInt(cssclass.substring(cssclass.length - 1), 10);
             svg.selectAll("rect").style("opacity", 0.8);
@@ -192,13 +204,26 @@ DV.merge((function () {
                 .attr("width", width)
                 .attr("height", height);
 
+            transform =  config.textTransformHigh(d, i);
+
             // Make the text grow
             text.transition()
-                .duration(500)
+                .duration(300)
                 .attr("text-anchor", config.textTAnchorHigh)
-                .attr("transform", config.textTransformHigh(d, i))
+                .attr("transform", transform)
                 .style("font-size", 30)
                 .style("fill", 'black');
+
+            setTimeout(function () { // TODO There is room for improvement here
+                var bbox = text[0][0].getBBox();
+                transform = config.textTransformHighBBox(bbox, transform);
+                text.transition()
+                    .duration(100)
+                    .style("font-size", 30)
+                    .style("fill", 'black')
+                    .attr("text-anchor", config.textTAnchorHigh)
+                    .attr("transform", transform);
+            }, 400);
         },
 
         render = function (labels, data) {

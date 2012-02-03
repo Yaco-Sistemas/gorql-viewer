@@ -26,10 +26,11 @@ if (!DV) {
     var DV = {};
 }
 
-DV.timeline = function (fields, viewport, data_container, options) {
+DV.timeline = function (viewport, data_container, options) {
     "use strict";
 
-    var eventSource,
+    var fields = options.fields,
+        eventSource,
         bandInfos,
         headers,
         results,

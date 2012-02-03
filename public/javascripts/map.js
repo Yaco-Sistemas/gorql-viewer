@@ -26,10 +26,11 @@ if (!DV) {
     var DV = {};
 }
 
-DV.map = function (fields, viewport_id, data_container, options) {
+DV.map = function (viewport_id, data_container, options) {
     "use strict";
 
-    var headers,
+    var fields = options.fields,
+        headers,
         results,
         container = document.createElement('div'),
         map,

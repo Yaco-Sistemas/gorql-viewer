@@ -57,36 +57,16 @@ DV.merge((function () {
         },
         config,
         portrait = {
-            rectWidth: function () {
-                return (size.x / nElems) / nSeries;
-            },
-            rectHeight: function (d, i) {
-                return scale.y(d);
-            },
-            rectX: function (d, i) {
-                return scale.x(i) + portrait.serieOffset();
-            },
-            rectY: function (d, i) {
-                return size.y - portrait.rectHeight(d, i);
-            },
-            rectHeightHigh: function (height) {
-                return height;
-            },
-            rectWidthHigh: function (width) {
-                return 2 * width;
-            },
-            rectYHigh: function (y) {
-                return y;
-            },
-            rectXHigh: function (x) {
-                return x - portrait.rectWidth() / 2;
-            },
-            textX: function (d, i) {
-                return portrait.rectX(d, i) + (portrait.rectWidth() / 2);
-            },
-            textY: function (d, i) {
-                return size.y - portrait.rectHeight(d, i);
-            },
+            rectWidth: function () { return (size.x / nElems) / nSeries; },
+            rectHeight: function (d, i) { return scale.y(d); },
+            rectX: function (d, i) { return scale.x(i) + portrait.serieOffset(); },
+            rectY: function (d, i) { return size.y - portrait.rectHeight(d, i); },
+            rectHeightHigh: function (height) { return height; },
+            rectWidthHigh: function (width) { return 2 * width; },
+            rectYHigh: function (y) { return y; },
+            rectXHigh: function (x) { return x - portrait.rectWidth() / 2; },
+            textX: function (d, i) { return portrait.rectX(d, i) + (portrait.rectWidth() / 2); },
+            textY: function (d, i) { return size.y - portrait.rectHeight(d, i); },
             textDY: ".35em",
             textTAnchor: "end",
             textTransform: function (d, i) {
@@ -96,103 +76,53 @@ DV.merge((function () {
             },
             textTAnchorHigh: "middle",
             textTransformHigh: function (d, i) { return "translate(0, 30)"; },
-            lineTicks: function () {
-                return scale.y.ticks(10);
-            },
-            lineX1: function () {
-                return 0;
-            },
-            lineX2: function () {
-                return size.x;
-            },
+            lineTicks: function () { return scale.y.ticks(10); },
+            lineX1: function () { return 0; },
+            lineX2: function () { return size.x; },
             lineY1: function () {
-                return function (i) {
-                    return size.y - scale.y(i);
-                };
+                return function (i) { return size.y - scale.y(i); };
             },
-            lineY2: function () {
-                return portrait.lineY1();
-            },
+            lineY2: function () { return portrait.lineY1(); },
             lineDX: 0,
             lineDY: -3,
-            labelX: function (d, i) {
-                return portrait.textX(d, i);
-            },
-            labelY: function (d, i) {
-                return size.y + size.offset;
-            },
+            labelX: function (d, i) { return portrait.textX(d, i); },
+            labelY: function (d, i) { return size.y + size.offset; },
             labelTransform: function (d, i) {
                 var x = portrait.labelX(d, i),
                     y = portrait.labelY(d, i);
                 return "rotate(-90 " + x + " " + y + ")";
             },
             labelDX: 0,
-            serieOffset: function () {
-                return portrait.rectWidth() * serieIdx;
-            }
+            serieOffset: function () { return portrait.rectWidth() * serieIdx; }
         },
         landscape = {
-            rectHeight: function () {
-                return (size.y / nElems) / nSeries;
-            },
-            rectWidth: function (d, i) {
-                return scale.x(d);
-            },
-            rectY: function (d, i) {
-                return scale.y(i) + landscape.serieOffset();
-            },
+            rectHeight: function () { return (size.y / nElems) / nSeries; },
+            rectWidth: function (d, i) { return scale.x(d); },
+            rectY: function (d, i) { return scale.y(i) + landscape.serieOffset(); },
             rectX: 0,
-            rectHeightHigh: function (height) {
-                return 2 * height;
-            },
-            rectWidthHigh: function (width) {
-                return width;
-            },
-            rectYHigh: function (y) {
-                return y - landscape.rectHeight() / 2;
-            },
-            rectXHigh: function (x) {
-                return x;
-            },
-            textY: function (d, i) {
-                return landscape.rectY(d, i) + (landscape.rectHeight() / 2);
-            },
-            textX: function (d, i) {
-                return landscape.rectWidth(d, i);
-            },
+            rectHeightHigh: function (height) { return 2 * height; },
+            rectWidthHigh: function (width) { return width; },
+            rectYHigh: function (y) { return y - landscape.rectHeight() / 2; },
+            rectXHigh: function (x) { return x; },
+            textY: function (d, i) { return landscape.rectY(d, i) + (landscape.rectHeight() / 2); },
+            textX: function (d, i) { return landscape.rectWidth(d, i); },
             textDY: ".35em",
             textTAnchor: "end",
             textTransform: function () { return "translate(-10, 0)"; },
             textTAnchorHigh: "end",
             textTransformHigh: function (d, i) { return "translate(-10, 0)"; },
-            lineTicks: function () {
-                return scale.x.ticks(10);
-            },
-            lineX1: function () {
-                return scale.x;
-            },
-            lineX2: function () {
-                return scale.x;
-            },
-            lineY1: function () {
-                return 0;
-            },
-            lineY2: function () {
-                return size.y;
-            },
+            lineTicks: function () { return scale.x.ticks(10); },
+            lineX1: function () { return scale.x; },
+            lineX2: function () { return scale.x; },
+            lineY1: function () { return 0; },
+            lineY2: function () { return size.y; },
             lineDX: 5,
             lineDY: 10,
-            labelX: function (d, i) {
-                return -1 * size.offset;
-            },
-            labelY: function (d, i) {
-                return landscape.textY(d, i);
-            },
+            labelX: function (d, i) { return -1 * size.offset; },
+            labelY: function (d, i) { return landscape.textY(d, i); },
             labelTransform: "",
             labelDX: 0,
-            serieOffset: function () {
-                return landscape.rectHeight() * serieIdx;
-            }
+            serieOffset: function () { return landscape.rectHeight() * serieIdx; }
         },
 
         highlightOut = function () {

@@ -22,7 +22,7 @@
 // See the Licence for the specific language governing
 // permissions and limitations under the Licence.
 
-if (!DV) {
+if (typeof DV === "undefined") {
     var DV = {};
 }
 
@@ -69,6 +69,18 @@ DV.merge((function () {
             rectY: function (d, i) {
                 return size.y - portrait.rectHeight(d, i);
             },
+            rectHeightHigh: function (height) {
+                return height;
+            },
+            rectWidthHigh: function (width) {
+                return 2 * width;
+            },
+            rectYHigh: function (y) {
+                return y;
+            },
+            rectXHigh: function (x) {
+                return x - portrait.rectWidth() / 2;
+            },
             textX: function (d, i) {
                 return portrait.rectX(d, i) + (portrait.rectWidth() / 2);
             },
@@ -82,6 +94,8 @@ DV.merge((function () {
                     y = portrait.textY(d, i);
                 return "translate(0, 10) rotate(-90 " + x + " " + y + ")";
             },
+            textTAnchorHigh: "middle",
+            textTransformHigh: function (d, i) { return "translate(0, 30)"; },
             lineTicks: function () {
                 return scale.y.ticks(10);
             },
@@ -128,6 +142,18 @@ DV.merge((function () {
                 return scale.y(i) + landscape.serieOffset();
             },
             rectX: 0,
+            rectHeightHigh: function (height) {
+                return 2 * height;
+            },
+            rectWidthHigh: function (width) {
+                return width;
+            },
+            rectYHigh: function (y) {
+                return y - landscape.rectHeight() / 2;
+            },
+            rectXHigh: function (x) {
+                return x;
+            },
             textY: function (d, i) {
                 return landscape.rectY(d, i) + (landscape.rectHeight() / 2);
             },
@@ -136,7 +162,9 @@ DV.merge((function () {
             },
             textDY: ".35em",
             textTAnchor: "end",
-            textTransform: "translate(-10, 0)",
+            textTransform: function () { return "translate(-10, 0)"; },
+            textTAnchorHigh: "end",
+            textTransformHigh: function (d, i) { return "translate(-10, 0)"; },
             lineTicks: function () {
                 return scale.x.ticks(10);
             },
@@ -165,6 +193,82 @@ DV.merge((function () {
             serieOffset: function () {
                 return landscape.rectHeight() * serieIdx;
             }
+        },
+
+        highlightOut = function () {
+            var nodes = svg.selectAll("rect.highlight")[0],
+                node,
+                i;
+
+            for (i = 0; i < nodes.length; i += 1) {
+                // We need the node itself in order to get the original bbox
+                node = nodes[i];
+                d3.select(node).transition().duration(200)
+                    .attr("x", node.origBBox.x)
+                    .attr("y", node.origBBox.y)
+                    .attr("width", node.origBBox.width)
+                    .attr("height", node.origBBox.height)
+                    .remove();
+            }
+
+            // Remove text
+            svg.selectAll("text.highlight").remove();
+
+            // Restore opacity
+            svg.selectAll("rect").style("opacity", 1);
+        },
+
+        highlightIn = function (d, i) {
+            // Remove other highlights
+            highlightOut();
+
+            var bbox = this.getBBox(),
+                x = config.rectXHigh(bbox.x),
+                y = config.rectYHigh(bbox.y),
+                width = config.rectWidthHigh(bbox.width),
+                height = config.rectHeightHigh(bbox.height),
+                cssclass = this.getAttribute('class'),
+                rect,
+                text;
+
+            serieIdx = parseInt(cssclass.substring(cssclass.length - 1), 10);
+            svg.selectAll("rect").style("opacity", 0.8);
+
+            // Paint a new and foreground bar
+            rect = svg.append("svg:rect")
+                .attr("class", cssclass + " highlight")
+                .attr("x", bbox.x)
+                .attr("y", bbox.y)
+                .attr("width", bbox.width)
+                .attr("height", bbox.height)
+                .on("mouseout", highlightOut);
+            rect[0][0].origBBox = bbox;
+
+            // Paint a new foreground value
+            text = svg.append("svg:text")
+                .attr("class", cssclass + " value highlight")
+                .attr("x", config.textX(d, i))
+                .attr("y", config.textY(d, i))
+                .attr("dy", config.textDY)
+                .attr("text-anchor", config.textTAnchor)
+                .attr("transform", config.textTransform(d, i))
+                .text(d);
+
+            // Make the bar grow
+            rect.transition()
+                .duration(500)
+                .attr("x", x)
+                .attr("y", y)
+                .attr("width", width)
+                .attr("height", height);
+
+            // Make the text grow
+            text.transition()
+                .duration(500)
+                .attr("text-anchor", config.textTAnchorHigh)
+                .attr("transform", config.textTransformHigh(d, i))
+                .style("font-size", 30)
+                .style("fill", 'black');
         },
 
         render = function (labels, data) {
@@ -204,7 +308,8 @@ DV.merge((function () {
                     .attr("x", config.rectX)
                     .attr("y", config.rectY)
                     .attr("width", config.rectWidth)
-                    .attr("height", config.rectHeight);
+                    .attr("height", config.rectHeight)
+                    .on("mouseover", highlightIn);
 
                 // Paint the values on the bars
                 svg.selectAll("text.value.serie" + serieIdx)
@@ -300,7 +405,9 @@ DV.merge((function () {
 }()), DV);
 
 // Browser
-exports = exports || {};
+if (typeof exports === "undefined") {
+    window.exports = {};
+}
 
 exports.chart = function (data, options) {
     "use strict";

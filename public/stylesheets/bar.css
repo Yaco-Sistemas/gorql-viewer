@@ -21,3 +21,8 @@ div.dv_viewport .bar text.label {
 div.dv_viewport .bar line {
     stroke: #CCC;
 }
+
+div.dv_viewport .bar text.highlight {
+/*     font-size: 30px; */
+    font-weight: bold;
+}

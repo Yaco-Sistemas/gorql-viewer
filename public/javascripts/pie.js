@@ -131,7 +131,8 @@ DV.merge((function () {
                 .attr("rx", 5)
                 .attr("ry", 5)
                 .attr("width", text.width + 30)
-                .attr("height", text.height + 12);
+                .attr("height", text.height + 12)
+                .attr("filter", "url(#dropshadow)");
 
             d3lib.select(this)
                 .transition()
@@ -189,7 +190,8 @@ DV.merge((function () {
 
         init = function (d3, container, labels, series, options) {
             var pie,
-                i;
+                i,
+                filter;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
@@ -231,6 +233,31 @@ DV.merge((function () {
                 .attr("class", "chart pie")
                 .attr("width", sizes.width) // original sizes
                 .attr("height", sizes.height);
+
+            // Create Drop Shadow filter
+            filter = svg.append("svg:defs")
+                .append("svg:filter")
+                .attr("id", "dropshadow")
+                .attr("height", "130%");
+
+            filter.append("svg:feGaussianBlur")
+                .attr("in", "SourceAlpha")
+                .attr("stdDeviation", 3);
+
+            filter = filter.append("svg:feMerge");
+            filter.append("svg:feMergeNode");
+            filter.append("svg:feMergeNode")
+                .attr("in", "SourceGraphic");
+
+            //  <defs>
+            //     <filter id="dropshadow" height="130%">
+            //       <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            //       <feMerge>
+            //         <feMergeNode/>
+            //         <feMergeNode in="SourceGraphic"/>
+            //       </feMerge>
+            //     </filter>
+            //   </defs>
 
             render(labels, pie);
         },

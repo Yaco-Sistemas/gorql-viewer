@@ -21,52 +21,69 @@ div.dv_viewport .line path.line {
     stroke-width: 1.5px;
 }
 
-div.dv_viewport .line path.line.serie0 {
+div.dv_viewport .line path.line.serie0,
+div.dv_viewport .line circle.highlight.serie0 {
     stroke: #80199c;
 }
 
-div.dv_viewport .line path.line.serie1 {
+div.dv_viewport .line path.line.serie1,
+div.dv_viewport .line circle.highlight.serie1 {
     stroke: #c92881;
 }
 
-div.dv_viewport .line path.line.serie2 {
+div.dv_viewport .line path.line.serie2,
+div.dv_viewport .line circle.highlight.serie2 {
     stroke: #ef189b;
 }
 
-div.dv_viewport .line path.line.serie3 {
+div.dv_viewport .line path.line.serie3,
+div.dv_viewport .line circle.highlight.serie3 {
     stroke: #f74236;
 }
 
-div.dv_viewport .line path.line.serie4 {
+div.dv_viewport .line path.line.serie4,
+div.dv_viewport .line circle.highlight.serie4 {
     stroke: #f86a2d;
 }
 
-div.dv_viewport .line path.line.serie5 {
+div.dv_viewport .line path.line.serie5,
+div.dv_viewport .line circle.highlight.serie5 {
     stroke: #ffa532;
 }
 
-div.dv_viewport .line path.line.serie6 {
+div.dv_viewport .line path.line.serie6,
+div.dv_viewport .line circle.highlight.serie6 {
     stroke: #fff253;
 }
 
-div.dv_viewport .line path.line.serie7 {
+div.dv_viewport .line path.line.serie7,
+div.dv_viewport .line circle.highlight.serie7 {
     stroke: #b1d84a;
 }
 
-div.dv_viewport .line path.line.serie8 {
+div.dv_viewport .line path.line.serie8,
+div.dv_viewport .line circle.highlight.serie8 {
     stroke: #18b665;
 }
 
-div.dv_viewport .line path.line.serie9 {
+div.dv_viewport .line path.line.serie9,
+div.dv_viewport .line circle.highlight.serie9 {
     stroke: #17c5bd;
 }
 
-div.dv_viewport .line path.line.serie10 {
+div.dv_viewport .line path.line.serie10,
+div.dv_viewport .line circle.highlight.serie10 {
     stroke: #15bbf9;
 }
 
-div.dv_viewport .line path.line.serie11 {
+div.dv_viewport .line path.line.serie11,
+div.dv_viewport .line circle.highlight.serie11 {
     stroke: #1864b4;
+}
+
+div.dv_viewport .line circle.highlight {
+    fill: white;
+    stroke-width: 2px;
 }
 
 div.dv_viewport .line path.area {

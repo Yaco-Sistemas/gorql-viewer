@@ -115,8 +115,13 @@ depuración activada.
 Embebido de informes
 ====================
 
-Es posible embeber informes y gráficos en otras páginas, para ello sólo hay que
-seguir los siguientes pasos:
+Es posible embeber informes y gráficos en otras páginas. Lo que se embebe es
+el gráfico y la tabla con los datos, aunque es posible ocultarlos si sólo
+se desea mostrar uno de los dos.
+
+Al embeber un informe se realiza una petición al visor de colecciones con la
+consulta deseada para obtener los resultados. La generación de la tabla con los
+datos, o del gráfico, se hace en el cliente mediante JavaScript.
 
 Carga de dependencias
 ---------------------
@@ -135,17 +140,21 @@ sustituyendo las hojas de estilo por unas personalizadas.
     <link rel="stylesheet" href="|example_domain|/stylesheets/line.css" />
     <script type="text/javascript" src="http://|example_domain|/javascripts/dv-bundle.min.js"></script>
 
-Estas líneas se deben incluir en la cabecera, en la etiqueta ``head``, de la
+Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.
 
 Inclusión de un informe concreto
 --------------------------------
 
-Para incluir un informe concreto hay que añadir unas etiquetas script
+Para incluir un informe concreto hay que añadir una etiqueta ``script``
 con la url específica del informe, es decir, la consulta SPARQL correspondiente.
+También es necesaria una segunda etiqueta ``script`` con el código de
+inicialización.
 
 Además hay que añadir a la página dos nodos que se utlizarán como *viewports*
 donde se escribirán los resultados de la consulta y se pintará la gráfica.
+
+Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
 
 .. code-block:: html
 
@@ -171,9 +180,9 @@ En total son dos etiquetas ``script``, una ``noscript``, un ``div`` donde se
 dibujará el gráfico, y una ``table`` donde se escribirán los datos devueltos
 por la consulta.
 
-La primera etiqueta ``script`` se utiliza para obtenerlos datos devueltos por
+La primera etiqueta ``script`` se utiliza para obtener los datos devueltos por
 la consulta. El ``src`` de la etiqueta es la url al visor con la consulta
-deseada. Parámetros de la url:
+deseada. Los parámetros de la url son:
 
 - **query**: Consulta SPARQL a realizar.
 - **embedded**: Valor boolean que debe estár a ``true`` para indicar que se
@@ -185,8 +194,10 @@ La siguiente etiqueta ``script`` contiene el código de inicialización que se
 encarga de llamar a la librería para escribir la tabla y dibujar el gráfico.
 
 El código de incialización se debe ejecutar una vez que la página está cargada,
-para ello se provee de la utilidad ``DomReady`` en la librería
-``dv-bundle-min``. La manera de utilizarlo es:
+para ello se provee de la utilidad DomReady_ en la librería ``dv-bundle-min``.
+La manera de utilizarlo es:
+
+.. _DomReady: http://code.google.com/p/domready/
 
 .. code-block:: javascript
 
@@ -198,9 +209,9 @@ No es obligatorio utilizar esta utilidad, es posible usar cualquier librería
 que asegure que el código se ejecutará cuando se haya cargado el DOM de la
 página.
 
-La primera línea del código se encarga de escribir los datos devueltos por la
-consulta en la etiqueta ``table`` dispuesta para ello. Este paso es
-imprescindible porque el gráfico lee los datos de dicha tabla.
+La primera línea del código de inicialización se encarga de escribir los datos
+devueltos por la consulta en la etiqueta ``table`` dispuesta para ello. Este
+paso es imprescindible porque el gráfico lee los datos de dicha tabla.
 
 Si no se quiere mostrar la tabla tan sólo hay que añadir un ``display: none``
 al estilo de la misma:
@@ -221,7 +232,9 @@ Necesita dos parámetros:
 - El índice del informe utilizado en la consulta.
 
 La librería ``dv-bundle-min`` incluye Sizzle_, un selector CSS que puede
-utilizarse para obtener el nodo DOM de la tabla.
+utilizarse para obtener el nodo DOM de la tabla. Una vez más, no es
+imprescindible utilizar está utilidad, cualquier otra forma de obtener el
+nodo DOM de la tabla es válida.
 
 .. _Sizzle: http://sizzlejs.com/
 
@@ -257,4 +270,5 @@ para los casos en los que el usuario no dispone de JavaScript en su navegador.
 
 Debe estár a continuación de la etiqueta script con el código de inicialización
 del informe y contener un enlace al visor con la consulta en SPARQL, y ningún
-parámetro más.
+parámetro más. Al usuario que acceda sin capacidad de JavaScript se le
+mostrará este enlace, y podrá así acceder a los resultados de la consulta.

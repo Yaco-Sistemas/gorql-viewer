@@ -55,7 +55,7 @@
     <section>
         <h1 class="first">${chart.type} Chart</h1>
         <div id="dv_viewport" class="dv_viewport">
-        {{if chart && chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
+        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
         </div>
     </section>
     {{/if}}

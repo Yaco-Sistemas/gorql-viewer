@@ -145,8 +145,16 @@ DV.merge((function () {
 
         highlightOut = function () {
             var nodes = svg.selectAll("rect.highlight")[0],
+                target = d3.event.relatedTarget,
                 node,
                 i;
+
+            if (target) {
+                if (target.tagName === 'text' && target.getAttribute('class').indexOf('highlight') > 0) {
+                    // It's the highlighted text, so we shouldn't highlight out
+                    return;
+                }
+            }
 
             for (i = 0; i < nodes.length; i += 1) {
                 // We need the node itself in order to get the original bbox

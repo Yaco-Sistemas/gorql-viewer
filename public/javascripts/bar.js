@@ -117,10 +117,17 @@ DV.merge((function () {
             textTAnchorHigh: "end",
             textTransformHigh: function () { return "translate(-10, 0)"; },
             textTransformHighBBox: function (bbox, transform) {
-                if (bbox.x < size.offset) {
-                    transform += " translate(" + (size.offset - bbox.x + (bbox.width / 2)) + ", 0)";
+                var x = 0,
+                    y = 0;
+                if (bbox.x < 10) {
+                    x = (Math.abs(bbox.x) + 20);
                 }
-                return transform;
+                if (bbox.y < 10) {
+                    y = 10;
+                } else if (bbox.y + bbox.height > size.y - 10) {
+                    y = -(bbox.height - (size.y - bbox.y));
+                }
+                return transform + " translate(" + x + ", " + y + ")";
             },
             lineTicks: function () { return scale.x.ticks(10); },
             lineX1: function () { return scale.x; },

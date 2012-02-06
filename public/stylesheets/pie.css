@@ -16,6 +16,7 @@ div.dv_viewport .pie text.highlight {
 
 div.dv_viewport .pie rect.highlight {
     fill: #eeeeee;
+    stroke: #bbbbbb;
 }
 
 div.dv_viewport .pie .serieB0 {

@@ -23,6 +23,6 @@ div.dv_viewport .bar line {
 }
 
 div.dv_viewport .bar text.highlight {
-/*     font-size: 30px; */
+    font-size: 30px;
     font-weight: bold;
 }

@@ -226,7 +226,6 @@ DV.merge((function () {
                 .duration(300)
                 .attr("text-anchor", config.textTAnchorHigh)
                 .attr("transform", transform)
-                .style("font-size", 30)
                 .style("fill", 'black');
 
             setTimeout(function () { // TODO There is room for improvement here
@@ -234,9 +233,6 @@ DV.merge((function () {
                 transform = config.textTransformHighBBox(bbox, transform);
                 text.transition()
                     .duration(100)
-                    .style("font-size", 30)
-                    .style("fill", 'black')
-                    .attr("text-anchor", config.textTAnchorHigh)
                     .attr("transform", transform);
             }, 400);
         },

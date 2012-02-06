@@ -22,7 +22,7 @@
 // See the Licence for the specific language governing
 // permissions and limitations under the Licence.
 
-if (!DV) {
+if (typeof DV === "undefined") {
     var DV = {};
 }
 
@@ -65,6 +65,8 @@ DV.merge((function () {
         highlightOut = function (d, i) {
             svg.selectAll("text.highlight")
                 .remove();
+            svg.selectAll("rect.highlight")
+                .remove();
             svg.selectAll("path.highlight")
                 .transition()
                 .duration(500)
@@ -81,7 +83,8 @@ DV.merge((function () {
                 angle = d.endAngle - d.startAngle,
                 percentage = Math.round((angle * 100) / (2 * Math.PI)),
                 tx,
-                ty;
+                ty,
+                text;
 
             angle = d.startAngle + (angle / 2); // bisec
 
@@ -111,14 +114,24 @@ DV.merge((function () {
             tx = positions.centerX + tx;
             ty = positions.centerY + ty;
 
-            svg.append("svg:text")
+            text = svg.append("svg:text")
                 .attr("class", "highlight")
                 .attr("x", positions.centerX)
                 .attr("y", sizes.height)
-                .attr("dy", -10)
+                .attr("dy", -15)
                 .attr("text-anchor", "middle")
                 .attr("text-path", this.getAttribute(d))
                 .text(label + ": " + d.data + " (" + percentage + "%)");
+            text = text[0][0].getBBox();
+
+            svg.insert("svg:rect", "text.highlight")
+                .attr("class", "highlight")
+                .attr("x", text.x - 15)
+                .attr("y", text.y - 6)
+                .attr("rx", 5)
+                .attr("ry", 5)
+                .attr("width", text.width + 30)
+                .attr("height", text.height + 12);
 
             d3lib.select(this)
                 .transition()
@@ -207,7 +220,7 @@ DV.merge((function () {
 
             positions.labels = sizes.width - sizes.label;
             positions.centerX = (sizes.width - sizes.label) / 2;
-            positions.centerY = (sizes.height / 2) - 20;
+            positions.centerY = (sizes.height / 2) - 25;
 
             labelScale = d3.scale.linear()
                 .domain([0, series.length - 1])
@@ -239,7 +252,9 @@ DV.merge((function () {
 }()), DV);
 
 // Browser
-exports = exports || {};
+if (typeof exports === "undefined") {
+    window.exports = {};
+}
 
 exports.chart = function (data, options) {
     "use strict";

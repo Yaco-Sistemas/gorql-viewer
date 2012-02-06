@@ -8,9 +8,14 @@ div.dv_viewport .pie rect.label {
 }
 
 div.dv_viewport .pie text.highlight {
+    font-size: 22px;
+    font-family: 'Droid Serif', serif;
     font-weight: bold;
-    font: 22px sans-serif;
-    fill: black;
+    fill: #737373;
+}
+
+div.dv_viewport .pie rect.highlight {
+    fill: #eeeeee;
 }
 
 div.dv_viewport .pie .serieB0 {

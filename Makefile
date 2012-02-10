@@ -1,4 +1,4 @@
-# Copyright 2012 Junta de Andalucia
+# Copyright 2012 Yaco Sistemas S.L.
 #
 # Developed by Yaco Sistemas <ablanco@yaco.es>
 #
@@ -23,7 +23,7 @@ UJS=node_modules/uglify-js/bin/uglifyjs
 UJSFLAGS=-nc
 
 all: node_modules/uglify-js/bin/uglifyjs public/javascripts/bar.js  public/javascripts/d3.js  public/javascripts/d3.layout.js public/javascripts/domready.js public/javascripts/line.js public/javascripts/map.js public/javascripts/minedata.js public/javascripts/pie.js public/javascripts/sizzle.js public/javascripts/timeline.js public/javascripts/writetable.js node_modules/jqtpl/lib/jqtpl.js
-	echo "// Copyright 2012 Junta de Andalucia - Developed by Yaco Sistemas - License EUPL 1.1 - http://joinup.ec.europa.eu/software/page/eupl" >> public/javascripts/dv-bundle.min.js
+	echo "// Copyright 2012 Yaco Sistemas S.L. - Developed by <ablanco@yaco.es> - License EUPL 1.1 - http://joinup.ec.europa.eu/software/page/eupl" >> public/javascripts/dv-bundle.min.js
 	echo "var exports = {};" >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/sizzle.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/d3.js >> public/javascripts/dv-bundle.min.js

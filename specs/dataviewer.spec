@@ -10,6 +10,7 @@ Summary:       Data Viewer executes SPARQL queries and shows the results
 Packager:      Alejandro Blanco <ablanco@yaco.es>
 Group:         Applications/Internet
 License:       EUPL 1.1 License
+# Copyright 2012 Yaco Sistemas S.L.
 URL:           http://www.yaco.es
 Source0:       %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root

@@ -1,7 +1,7 @@
 /*jslint vars: false */
 /*global d3: true, exports: true, require, window: true, document: true, module, DV: true, setTimeout */
 
-// Copyright 2012 Junta de Andalucia
+// Copyright 2012 Yaco Sistemas S.L.
 //
 // Developed by Yaco Sistemas <ablanco@yaco.es>
 //

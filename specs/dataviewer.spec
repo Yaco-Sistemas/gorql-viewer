@@ -43,6 +43,7 @@ rm -rf %{installdir}/specs
 mkdir -p `dirname $RPM_BUILD_ROOT%{installdir}`
 mkdir -p $RPM_BUILD_ROOT%{docdir}
 mv %{installdir}/INSTALL.rst $RPM_BUILD_ROOT%{docdir}/
+mv %{installdir}/COPYING $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir} `dirname $RPM_BUILD_ROOT%{installdir}`/
 
 # create empty directory to put symlinks later
@@ -53,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %doc %{docdir}/INSTALL.rst
-%doc COPYING
+%doc %{docdir}/COPYING
 %{installdir}/public
 %{installdir}/routes
 %{installdir}/views

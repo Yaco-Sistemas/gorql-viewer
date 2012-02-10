@@ -52,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %doc %{docdir}/INSTALL.rst
+%doc COPYING
 %{installdir}/public
 %{installdir}/routes
 %{installdir}/views

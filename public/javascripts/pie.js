@@ -79,7 +79,6 @@ DV.merge((function () {
             highlightOut(d, i);
 
             var label = labelFromValue[d.data],
-                factor = 30, // hypotenuse
                 angle = d.endAngle - d.startAngle,
                 percentage = Math.round((angle * 100) / (2 * Math.PI)),
                 tx,
@@ -109,8 +108,8 @@ DV.merge((function () {
                 ty = -Math.sin(angle);
             }
 
-            tx = tx * factor;
-            ty = ty * factor;
+            tx = tx * sizes.highlight; // hypotenuse
+            ty = ty * sizes.highlight; // hypotenuse
             tx = positions.centerX + tx;
             ty = positions.centerY + ty;
 
@@ -143,7 +142,7 @@ DV.merge((function () {
         },
 
         render = function (labels, pie) {
-            var radius = d3lib.min([positions.centerX, (positions.centerY - sizes.highlight)]),
+            var radius = d3lib.min([(positions.centerX - sizes.highlight), (positions.centerY - sizes.highlight)]),
                 arc = d3lib.svg.arc()
                     .startAngle(function (d) { return d.startAngle; })
                     .endAngle(function (d) { return d.endAngle; })

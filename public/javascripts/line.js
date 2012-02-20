@@ -216,7 +216,7 @@ DV.merge((function () {
                 .range([0, size.x - size.xpadding]);
 
             yScale = d3.scale.linear()
-                .domain([d3.max(d3.merge(series)), 0])
+                .domain([d3.max(d3.merge(series)), d3.min(d3.merge(series))])
                 .range([0, size.y - size.offset]);
 
             // Create the svg root node

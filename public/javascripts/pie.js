@@ -223,6 +223,11 @@ DV.merge((function () {
             positions.centerX = (sizes.width - sizes.label) / 2;
             positions.centerY = (sizes.height / 2) - 25;
 
+            if (sizes.highlight > (d3lib.min([positions.centerX, positions.centerY]) - 20)) {
+                // The highlight effect can't be that huge
+                sizes.highlight = d3lib.min([positions.centerX, positions.centerY]) - 20;
+            }
+
             labelScale = d3.scale.linear()
                 .domain([0, series.length - 1])
                 .range([20, sizes.height - 20]);

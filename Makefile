@@ -32,6 +32,7 @@ all: node_modules/uglify-js/bin/uglifyjs public/javascripts/bar.js  public/javas
 	$(UJS) $(UJSFLAGS) public/javascripts/domready.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/writetable.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/minedata.js >> public/javascripts/dv-bundle.min.js
+	cat public/openlayers/OpenLayers.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/bar.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/line.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/map.js >> public/javascripts/dv-bundle.min.js
@@ -47,6 +48,7 @@ bundle: public/javascripts/bar.js  public/javascripts/d3.js  public/javascripts/
 	cat public/javascripts/domready.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/writetable.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/minedata.js >> public/javascripts/dv-bundle.js
+	cat public/openlayers/OpenLayers.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/bar.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/line.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/map.js >> public/javascripts/dv-bundle.js

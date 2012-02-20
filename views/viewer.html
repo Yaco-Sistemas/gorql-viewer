@@ -20,13 +20,6 @@
         Timeline_parameters='bundle=true&defaultLocale="es"';
     </script>
     <script type="text/javascript" src="/timeline/timeline_js/timeline-api.js"></script>
-    <script type="text/javascript">
-        DomReady.ready(function () {
-            var viewport = document.getElementById("dv_viewport");
-            viewport.style.width = ${chart.sizeX} + 'px';
-            viewport.style.height = ${chart.sizeY} + 'px';
-        });
-    </script>
     {{else}} {{if chart.family == 'layers'}}
     <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
     {{/if}}{{/if}}{{/if}}

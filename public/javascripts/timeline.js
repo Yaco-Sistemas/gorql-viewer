@@ -44,6 +44,9 @@ DV.timeline = function (viewportId, data_container, options) {
         row,
         i;
 
+    viewport.style.width = options.sizeX + 'px';
+    viewport.style.height = options.sizeY + 'px';
+
     aux = DV.extractData(data_container, options);
     headers = aux.headers;
     results = aux.results;

@@ -33,6 +33,10 @@ all: node_modules/uglify-js/bin/uglifyjs public/javascripts/bar.js  public/javas
 	$(UJS) $(UJSFLAGS) public/javascripts/writetable.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/minedata.js >> public/javascripts/dv-bundle.min.js
 	cat public/openlayers/OpenLayers.js >> public/javascripts/dv-bundle.min.js
+	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" >> public/javascripts/dv-bundle.min.js
+	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> public/javascripts/dv-bundle.min.js
+	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> public/javascripts/dv-bundle.min.js
+	$(UJS) $(UJSFLAGS) public/timeline/timeline_js/timeline-api.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/bar.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/line.js >> public/javascripts/dv-bundle.min.js
 	$(UJS) $(UJSFLAGS) public/javascripts/map.js >> public/javascripts/dv-bundle.min.js
@@ -49,6 +53,10 @@ bundle: public/javascripts/bar.js  public/javascripts/d3.js  public/javascripts/
 	cat public/javascripts/writetable.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/minedata.js >> public/javascripts/dv-bundle.js
 	cat public/openlayers/OpenLayers.js >> public/javascripts/dv-bundle.js
+	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" >> public/javascripts/dv-bundle.js
+	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> public/javascripts/dv-bundle.js
+	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> public/javascripts/dv-bundle.js
+	cat public/timeline/timeline_js/timeline-api.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/bar.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/line.js >> public/javascripts/dv-bundle.js
 	cat public/javascripts/map.js >> public/javascripts/dv-bundle.js

@@ -49,7 +49,7 @@ DV.merge((function () {
         sizes = {},
         positions = {},
         indexFromValue = {},
-        labelFromValue = {},
+        labelFromIndex = {},
         labelScale,
 
         getSectorColor = function (i) {
@@ -71,14 +71,17 @@ DV.merge((function () {
                 .transition()
                 .duration(500)
                 .attr("transform", "translate(" + positions.centerX + "," + positions.centerY + ")")
-                .attr("class", function (d, i) { return "sector " + getSectorColor(indexFromValue[d.data]); });
+                .attr("class", function () {
+                    var className = this.getAttribute('class').match(/serie\w?\d+/);
+                    return "sector " + className[0];
+                });
         },
 
         highlightIn = function (d, i) {
             // Remove other highlights
             highlightOut(d, i);
 
-            var label = labelFromValue[d.data],
+            var label = labelFromIndex[i],
                 angle = d.endAngle - d.startAngle,
                 percentage = Math.round((angle * 100) / (2 * Math.PI)),
                 tx,
@@ -177,7 +180,7 @@ DV.merge((function () {
                 .attr("dx", 20)
                 .attr("dy", 10)
                 .attr("y", function (d, i) { return Math.floor(labelScale(i)); })
-                .text(function (d) { return labelFromValue[d.data]; });
+                .text(function (d, i) { return labelFromIndex[i]; });
         },
 
         compareOriginalIndexes = function (d1, d2) {
@@ -204,8 +207,7 @@ DV.merge((function () {
             // painting the labels
             for (i = 0; i < series.length; i += 1) {
                 indexFromValue[series[i]] = i;
-                labelFromValue[series[i]] = labels[i];
-                // TODO y si varios sectores tienen exactamente el mismo valor?
+                labelFromIndex[i] = labels[i];
             }
 
             pie = d3.layout.pie();

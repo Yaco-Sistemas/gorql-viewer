@@ -56,7 +56,10 @@ DV.map = function (viewport_id, data_container, options) {
     container.id = "ol_viewport";
     container.style.width = options.sizeX + 'px';
     container.style.height = options.sizeY + 'px';
-    sizzle(viewport_id)[0].appendChild(container);
+    aux = sizzle(viewport_id)[0];
+    aux.style.width = options.sizeX + 'px';
+    aux.style.height = options.sizeY + 'px';
+    aux.appendChild(container);
 
     map = new OpenLayers.Map("ol_viewport", {
         controls: [

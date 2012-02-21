@@ -27,11 +27,11 @@ tar cf ${PACKAGE}-${TAG}.tar /tmp/${PACKAGE}-${TAG}
 mv /tmp/${PACKAGE}-${TAG} /tmp/${PACKAGE}
 gzip ${PACKAGE}-${TAG}.tar
 
-if [ -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tgz ]
+if [ -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tar.gz ]
 then
-    rm -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tgz
+    rm -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tar.gz
 fi
-ln -s ${CURRENT_DIR}/${PACKAGE}-${TAG}.tgz ${BUILD_ROOT}/SOURCES/
+ln -s ${CURRENT_DIR}/${PACKAGE}-${TAG}.tar.gz ${BUILD_ROOT}/SOURCES/
 
 if [ -f ${BUILD_ROOT}/SPECS/${PACKAGE}.spec ]
 then

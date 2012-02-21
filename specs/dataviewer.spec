@@ -3,18 +3,18 @@
 %define installdir /opt/%{name}
 %define docdir /usr/share/doc/%{name}-%{version}
 
-Name:          %{name}
-Version:       0.0.1hg1
-Release:       1
-Summary:       Data Viewer executes SPARQL queries and shows the results
-Packager:      Alejandro Blanco <ablanco@yaco.es>
-Group:         Applications/Internet
-License:       EUPL 1.1 License
+Name: %{name}
+Version: 0.0.1hg182
+Release: 1
+Summary: Data Viewer executes SPARQL queries and shows the results
+Packager: Alejandro Blanco <ablanco@yaco.es>
+Group: Applications/Internet
+License: EUPL 1.1 License
 # Copyright 2012 Yaco Sistemas S.L.
-URL:           http://www.yaco.es
-Source0:       %{name}-%{version}.tar.gz
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires:      nodejs ImageMagick
+URL: http://www.yaco.es
+Source0: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+Requires: nodejs ImageMagick
 
 BuildRequires: nodejs
 BuildRequires: npm

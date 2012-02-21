@@ -20,10 +20,15 @@ REV=`hg parent | cut -d" " -f4 | cut -d":" -f1 | head -n 1`
 VERSION=`grep "Version: " specs/${PACKAGE}.spec | cut -d" " -f2 | cut -d"h" -f1`
 TAG="${VERSION}hg${REV}"
 
+echo "New version: ${TAG}"
+
 sed -i "s/Version: [0-9].[0-9].[0-9]hg[0-9]\+/Version: ${TAG}/g" specs/${PACKAGE}.spec
 
 mv /tmp/${PACKAGE} /tmp/${PACKAGE}-${TAG}
-tar cf ${PACKAGE}-${TAG}.tar /tmp/${PACKAGE}-${TAG}
+cd /tmp/
+tar cf ${PACKAGE}-${TAG}.tar ${PACKAGE}-${TAG}
+mv ${PACKAGE}-${TAG}.tar ${CURRENT_DIR}/
+cd ${CURRENT_DIR}
 mv /tmp/${PACKAGE}-${TAG} /tmp/${PACKAGE}
 gzip ${PACKAGE}-${TAG}.tar
 
@@ -43,6 +48,7 @@ cd ${BUILD_ROOT}/SPECS/
 rm -rf ${BUILD_ROOT}/BUILD/${PACKAGE}-${TAG}*
 rm -rf ${BUILD_ROOT}/BUILDROOT/*
 rm -rf /opt/${PACKAGE}
+rm -rf /var/tmp/*
 
 rpmbuild -ba ${PACKAGE}.spec
 

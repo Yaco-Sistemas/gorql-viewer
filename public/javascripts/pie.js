@@ -193,11 +193,15 @@ DV.merge((function () {
         init = function (d3, container, labels, series, options) {
             var pie,
                 i,
-                filter;
+                filter,
+                viewport = d3.select(container)[0][0];
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
+
+            viewport.style.width = options.sizeX + 'px';
+            viewport.style.height = options.sizeY + 'px';
 
             d3lib = d3;
             series = series[0]; // pie charts doesn't support series

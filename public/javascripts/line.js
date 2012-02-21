@@ -197,7 +197,8 @@ DV.merge((function () {
         },
 
         init = function (d3, container, labels, series, options) {
-            var area = options.area === 'true' || options.area === true;
+            var area = options.area === 'true' || options.area === true,
+                viewport = d3.select(container)[0][0];
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
@@ -205,6 +206,9 @@ DV.merge((function () {
 
             nElems = labels.length;
             nSeries = series.length;
+
+            viewport.style.width = options.sizeX + 'px';
+            viewport.style.height = options.sizeY + 'px';
 
             size.x = parseInt(options.sizeX, 10);
             size.xpadding = size.x / (nElems + 1); // to avoid cropping labels

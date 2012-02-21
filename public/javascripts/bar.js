@@ -307,11 +307,15 @@ DV.merge((function () {
         },
 
         init = function (d3, container, labels, series, options) {
-            var transform;
+            var viewport = d3.select(container)[0][0],
+                transform;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
+
+            viewport.style.width = options.sizeX + 'px';
+            viewport.style.height = options.sizeY + 'px';
 
             nElems = labels.length;
             nSeries = series.length;

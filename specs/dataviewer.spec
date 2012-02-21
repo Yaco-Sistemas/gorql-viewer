@@ -4,7 +4,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name:          %{name}
-Version:       0.0.1
+Version:       0.0.1hg1
 Release:       1
 Summary:       Data Viewer executes SPARQL queries and shows the results
 Packager:      Alejandro Blanco <ablanco@yaco.es>

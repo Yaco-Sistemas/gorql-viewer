@@ -47,6 +47,10 @@ table.dv_table td {
     white-space: nowrap;
 }
 
+table.dv_table td.error {
+    background-color: #FF9E9E;
+}
+
 table.dv_table th:first-child,
 table.dv_table td:first-child {
     padding-left: 12px;

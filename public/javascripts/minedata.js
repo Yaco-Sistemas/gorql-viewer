@@ -26,6 +26,11 @@ if (!window.DV) {
     window.DV = {};
 }
 
+DV.isNumber = function (n) {
+    "use strict";
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
 DV.extractData = function (data_container, options) {
     "use strict";
     var labels = [],
@@ -77,7 +82,13 @@ DV.extractData = function (data_container, options) {
             value = aux2[valuesIdx[j]].innerHTML;
             if (series) {
                 // Series values are numerical
-                values[j].push(parseInt(value, 10));
+                value = parseFloat(value);
+                if (!DV.isNumber(value)) {
+                    value = 0;
+                    aux2[valuesIdx[j]].className += " error";
+                    aux2[valuesIdx[j]].title = "The value is not a number";
+                }
+                values[j].push(value);
             } else {
                 row.push(value);
             }

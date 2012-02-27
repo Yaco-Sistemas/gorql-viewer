@@ -24,6 +24,7 @@
 
 exports.settings = {
     global: {
+        debug: false,
         port: 3000
     },
 

@@ -22,7 +22,8 @@
 // See the Licence for the specific language governing
 // permissions and limitations under the Licence.
 
-var commons = require('./commons'),
+var app = require.main,
+    commons = require('./commons'),
     table = require('../client/writetable'),
     renderResults;
 
@@ -83,6 +84,7 @@ renderResults = function (response, params, error, results) {
         response.render('viewer.html', {
             layout: false,
             locals: {
+                debug_charts: app.exports.set('debug_charts'),
                 error: error,
                 results: data.matrix,
                 headers: data.headers,

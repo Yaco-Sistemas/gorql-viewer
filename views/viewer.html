@@ -6,9 +6,8 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
-    <!--{{partial(chart) "debug"}}-->
-
     {{if chart && !chart.png}}
+    {{if debug_charts}}{{partial(chart) "debug"}}{{else}}
     <script type="text/javascript" src="/javascripts/dv-core.js"></script>
     {{if chart.family == 'd3'}}
     <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
@@ -16,7 +15,7 @@
     <script type="text/javascript" src="/javascripts/dv-time.js"></script>
     {{else}} {{if chart.family == 'layers'}}
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
-    {{/if}}{{/if}}{{/if}}
+    {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.${chart.type}("#dv_viewport",

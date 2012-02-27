@@ -22,26 +22,38 @@
 UJS=../../node_modules/uglify-js/bin/uglifyjs
 UJSFLAGS=-nc
 
-all: ../../node_modules/uglify-js/bin/uglifyjs ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js
-	echo "// Copyright 2012 Yaco Sistemas S.L. - Developed by <ablanco@yaco.es> - EUPL 1.1 License - http://joinup.ec.europa.eu/software/page/eupl" > dv-bundle.min.js
-	echo "var exports = {};" >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/sizzle.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/d3.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/d3.layout.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../node_modules/jqtpl/lib/jqtpl.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/domready.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/writetable.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/minedata.js >> dv-bundle.min.js
-	cat ../../client/openlayers/OpenLayers.js >> dv-bundle.min.js
-	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" >> dv-bundle.min.js
-	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> dv-bundle.min.js
-	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/timeline/timeline_js/timeline-api.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/bar.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/line.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/map.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/pie.js >> dv-bundle.min.js
-	$(UJS) $(UJSFLAGS) ../../client/timeline.js >> dv-bundle.min.js
+all: dv-core dv-d3 dv-time dv-openlayers
+	cat dv-core.js > dv.min.js
+	cat dv-d3.js >> dv.min.js
+	cat dv-time.js >> dv.min.js
+	cat dv-openlayers.js >> dv.min.js
+
+dv-core: ../../node_modules/uglify-js/bin/uglifyjs ../../client/sizzle.js ../../client/writetable.js ../../client/minedata.js ../../client/domready.js ../../node_modules/jqtpl/lib/jqtpl.js
+	echo "// Copyright 2012 Yaco Sistemas S.L. - Developed by <ablanco@yaco.es> - EUPL 1.1 License - http://joinup.ec.europa.eu/software/page/eupl" > dv-core.js
+	echo "var exports = {};" >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../client/sizzle.js >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../client/domready.js >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../node_modules/jqtpl/lib/jqtpl.js >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../client/writetable.js >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../client/minedata.js >> dv-core.js
+
+dv-d3: dv-core ../../client/d3.js ../../client/d3.layout.js ../../client/bar.js ../../client/line.js ../../client/pie.js
+	$(UJS) $(UJSFLAGS) ../../client/d3.js > dv-d3.js
+	$(UJS) $(UJSFLAGS) ../../client/d3.layout.js >> dv-d3.js
+	$(UJS) $(UJSFLAGS) ../../client/bar.js >> dv-d3.js
+	$(UJS) $(UJSFLAGS) ../../client/line.js >> dv-d3.js
+	$(UJS) $(UJSFLAGS) ../../client/pie.js >> dv-d3.js
+
+dv-time: dv-core ../../client/timeline/timeline_js/timeline-api.js ../../client/timeline.js
+	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" > dv-time.js
+	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> dv-time.js
+	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> dv-time.js
+	$(UJS) $(UJSFLAGS) ../../client/timeline/timeline_js/timeline-api.js >> dv-time.js
+	$(UJS) $(UJSFLAGS) ../../client/timeline.js >> dv-time.js
+
+dv-openlayers: dv-core ../../client/openlayers/OpenLayers.js ../../client/map.js
+	cat ../../client/openlayers/OpenLayers.js > dv-openlayers.js
+	$(UJS) $(UJSFLAGS) ../../client/map.js >> dv-openlayers.js
 
 bundle: ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js
 	echo "var exports = {};" > dv-bundle.js
@@ -63,8 +75,12 @@ bundle: ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../..
 	cat ../../client/pie.js >> dv-bundle.js
 	cat ../../client/timeline.js >> dv-bundle.js
 
-clean: dv-bundle.min.js
-	rm -f dv-bundle.min.js
+clean: dv.min.js dv-core.js dv-d3.js dv-time.js dv-openlayers.js
+	rm -f dv.min.js
+	rm -f dv-core.js
+	rm -f dv-d3.js
+	rm -f dv-time.js
+	rm -f dv-openlayers.js
 
 cleanbundle: dv-bundle.js
 	rm -f dv-bundle.js

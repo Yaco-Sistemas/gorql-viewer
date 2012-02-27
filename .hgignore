@@ -2,5 +2,9 @@ syntax: glob
 
 node_modules
 docs/build
-public/javascripts/dv-bundle.min.js
+public/javascripts/dv.min.js
 public/javascripts/dv-bundle.js
+public/javascripts/dv-core.js
+public/javascripts/dv-d3.js
+public/javascripts/dv-openlayers.js
+public/javascripts/dv-time.js

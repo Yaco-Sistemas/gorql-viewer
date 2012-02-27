@@ -12,3 +12,15 @@ public/javascripts/img
 public/javascripts/theme
 public/javascripts/timeline_ajax
 public/javascripts/timeline_js
+public/javascripts/OpenLayers.js
+public/javascripts/bar.js
+public/javascripts/d3.js
+public/javascripts/d3.layout.js
+public/javascripts/domready.js
+public/javascripts/line.js
+public/javascripts/map.js
+public/javascripts/minedata.js
+public/javascripts/pie.js
+public/javascripts/sizzle.js
+public/javascripts/timeline-api.js
+public/javascripts/timeline.js

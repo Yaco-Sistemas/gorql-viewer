@@ -79,7 +79,43 @@ dv-custom: dv-core
 cleancustom: dv-custom.js
 	rm -f dv-custom.js
 
-bundle: ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js
+debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js
+	cp ../../client/sizzle.js .
+	cp ../../client/d3.js .
+	cp ../../client/d3.layout.js .
+	cp ../../client/domready.js .
+	cp ../../client/minedata.js .
+	cp ../../client/openlayers/OpenLayers.js .
+	cp -R ../../client/openlayers/img .
+	cp -R ../../client/openlayers/theme .
+	cp ../../client/timeline/timeline_js/timeline-api.js .
+	cp -R ../../client/timeline/timeline_ajax .
+	cp -R ../../client/timeline/timeline_js .
+	cp ../../client/bar.js .
+	cp ../../client/line.js .
+	cp ../../client/map.js .
+	cp ../../client/pie.js .
+	cp ../../client/timeline.js .
+
+cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js minedata.js OpenLayers.js timeline-api.js pie.js sizzle.js timeline.js
+	rm -f sizzle.js
+	rm -f d3.js
+	rm -f d3.layout.js
+	rm -f domready.js
+	rm -f minedata.js
+	rm -f OpenLayers.js
+	rm -f timeline-api.js
+	rm -f bar.js
+	rm -f line.js
+	rm -f map.js
+	rm -f pie.js
+	rm -f timeline.js
+	rm -rf img
+	rm -rf theme
+	rm -rf timeline_ajax
+	rm -rf timeline_js
+
+bundle: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js
 	echo "var exports = {};" > dv-bundle.js
 	cat ../../client/sizzle.js >> dv-bundle.js
 	cat ../../client/d3.js >> dv-bundle.js

@@ -31,6 +31,7 @@ cp -R * %{installdir}
 cd %{installdir}
 mkdir .forever
 npm install -d
+cd %{installdir}/public/javascripts/
 make all
 
 # clean files not needed
@@ -55,18 +56,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %doc %{docdir}/INSTALL.rst
 %doc %{docdir}/COPYING
+%{installdir}/client
 %{installdir}/public
 %{installdir}/routes
 %{installdir}/views
 %{installdir}/node_modules
 %attr(755,%{name},%{name}) %{installdir}/.forever
 %{installdir}/app.js
-%{installdir}/Makefile
 %{installdir}/package.json
 %config %attr(755,%{name},%{name}) %{installdir}/settings.js
 /etc/%{name}
 %attr(755,%{name},%{name}) %{installdir}/%{name}.sh
-# %config %{installdir}/parts/supervisor/supervisord.conf
 
 %pre
 # check if this the first installation
@@ -85,15 +85,10 @@ if [ ! -e /etc/%{name}/settings.js ]; then
     ln -s %{installdir}/settings.js /etc/%{name}/settings.js
 fi
 
-# if [ ! -e /etc/%{name}/supervisord.conf ]; then
-#     ln -s %{installdir}/parts/supervisor/supervisord.conf /etc/%{name}/supervisord.conf
-# fi
-
 %preun
 if [ $1 = 0 ]; then
    rm -f /etc/init.d/%{name}
    rm -f /etc/%{name}/settings.js
-#    rm -f /etc/%{name}/supervisord.conf
 fi
 
 %postun

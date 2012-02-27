@@ -59,6 +59,26 @@ dv-openlayers: dv-core ../../client/openlayers/OpenLayers.js ../../client/map.js
 	cat ../../client/openlayers/OpenLayers.js > dv-openlayers.js
 	$(UJS) $(UJSFLAGS) ../../client/map.js >> dv-openlayers.js
 
+clean: dv.min.js dv-core.js dv-d3.js dv-time.js dv-openlayers.js
+	rm -f dv.min.js
+	rm -f dv-core.js
+	rm -f dv-d3.js
+	rm -f dv-time.js
+	rm -f dv-openlayers.js
+	rm -rf img
+	rm -rf theme
+	rm -rf timeline_ajax
+	rm -rf timeline_js
+
+dv-custom: dv-core
+	cat dv-core.js > dv-custom.js # dv-core is mandatory, not optional
+	# Add the 'cat' commands you need to append (>>) the dv-files you want
+	# in your custom bundle. Don't forget to add the rules of those files
+	# to this rule, so the corresponding js files get built
+
+cleancustom: dv-custom.js
+	rm -f dv-custom.js
+
 bundle: ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js
 	echo "var exports = {};" > dv-bundle.js
 	cat ../../client/sizzle.js >> dv-bundle.js
@@ -78,17 +98,6 @@ bundle: ../../client/bar.js  ../../client/d3.js  ../../client/d3.layout.js ../..
 	cat ../../client/map.js >> dv-bundle.js
 	cat ../../client/pie.js >> dv-bundle.js
 	cat ../../client/timeline.js >> dv-bundle.js
-
-clean: dv.min.js dv-core.js dv-d3.js dv-time.js dv-openlayers.js
-	rm -f dv.min.js
-	rm -f dv-core.js
-	rm -f dv-d3.js
-	rm -f dv-time.js
-	rm -f dv-openlayers.js
-	rm -rf img
-	rm -rf theme
-	rm -rf timeline_ajax
-	rm -rf timeline_js
 
 cleanbundle: dv-bundle.js
 	rm -f dv-bundle.js

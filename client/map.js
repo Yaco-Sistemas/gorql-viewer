@@ -26,6 +26,8 @@ if (!DV) {
     var DV = {};
 }
 
+OpenLayers.ImgPath = "/javascripts/img/";
+
 DV.map = function (viewport_id, data_container, options) {
     "use strict";
 

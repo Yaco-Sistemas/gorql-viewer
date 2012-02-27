@@ -45,13 +45,17 @@ dv-d3: dv-core ../../client/d3.js ../../client/d3.layout.js ../../client/bar.js 
 	$(UJS) $(UJSFLAGS) ../../client/pie.js >> dv-d3.js
 
 dv-time: dv-core ../../client/timeline/timeline_js/timeline-api.js ../../client/timeline.js
-	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" > dv-time.js
-	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> dv-time.js
+	cp -R ../../client/timeline/timeline_ajax .
+	cp -R ../../client/timeline/timeline_js .
+	echo "Timeline_ajax_url='/javascripts/timeline_ajax/simile-ajax-api.js';" > dv-time.js
+	echo "Timeline_urlPrefix='/javascripts/timeline_js/';" >> dv-time.js
 	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> dv-time.js
 	$(UJS) $(UJSFLAGS) ../../client/timeline/timeline_js/timeline-api.js >> dv-time.js
 	$(UJS) $(UJSFLAGS) ../../client/timeline.js >> dv-time.js
 
 dv-openlayers: dv-core ../../client/openlayers/OpenLayers.js ../../client/map.js
+	cp -R ../../client/openlayers/img .
+	cp -R ../../client/openlayers/theme .
 	cat ../../client/openlayers/OpenLayers.js > dv-openlayers.js
 	$(UJS) $(UJSFLAGS) ../../client/map.js >> dv-openlayers.js
 
@@ -81,6 +85,10 @@ clean: dv.min.js dv-core.js dv-d3.js dv-time.js dv-openlayers.js
 	rm -f dv-d3.js
 	rm -f dv-time.js
 	rm -f dv-openlayers.js
+	rm -rf img
+	rm -rf theme
+	rm -rf timeline_ajax
+	rm -rf timeline_js
 
 cleanbundle: dv-bundle.js
 	rm -f dv-bundle.js

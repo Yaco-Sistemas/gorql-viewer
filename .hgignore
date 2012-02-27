@@ -8,3 +8,7 @@ public/javascripts/dv-core.js
 public/javascripts/dv-d3.js
 public/javascripts/dv-openlayers.js
 public/javascripts/dv-time.js
+public/javascripts/img
+public/javascripts/theme
+public/javascripts/timeline_ajax
+public/javascripts/timeline_js

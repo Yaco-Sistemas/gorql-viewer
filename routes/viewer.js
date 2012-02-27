@@ -23,7 +23,7 @@
 // permissions and limitations under the Licence.
 
 var commons = require('./commons'),
-    table = require('../public/javascripts/writetable'),
+    table = require('../client/writetable'),
     renderResults;
 
 renderResults = function (response, params, error, results) {

@@ -27,7 +27,7 @@ var app = require.main,
     sha1 = require('sha1'),
     uaParser = require('ua-parser'),
     cssom = require('cssom'),
-    sizzle = require('../public/javascripts/sizzle'),
+    sizzle = require('../client/sizzle'),
     jsdom = require('jsdom').jsdom,
     dirname = require('path').dirname,
     readFileSync = require('fs').readFileSync,
@@ -251,7 +251,7 @@ exports.resultsToMatrix = function (results) {
 exports.generateSVG = function (chart, data) {
     "use strict";
 
-    var generator = require("../public/javascripts/" + chart.type),
+    var generator = require("../client/" + chart.type),
         svg = generator.chart(data, chart),
         // FS uses relative paths to the root of the project, where is being executed node
         styles = readFileSync(dirname(app.filename) + "/public/stylesheets/style.css", 'utf-8'),

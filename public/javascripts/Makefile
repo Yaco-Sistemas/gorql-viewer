@@ -47,9 +47,6 @@ dv-d3: dv-core ../../client/d3.js ../../client/d3.layout.js ../../client/bar.js 
 dv-time: dv-core ../../client/timeline/timeline_js/timeline-api.js ../../client/timeline.js
 	cp -R ../../client/timeline/timeline_ajax .
 	cp -R ../../client/timeline/timeline_js .
-	echo "Timeline_ajax_url='/javascripts/timeline_ajax/simile-ajax-api.js';" > dv-time.js
-	echo "Timeline_urlPrefix='/javascripts/timeline_js/';" >> dv-time.js
-	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> dv-time.js
 	$(UJS) $(UJSFLAGS) ../../client/timeline/timeline_js/timeline-api.js >> dv-time.js
 	$(UJS) $(UJSFLAGS) ../../client/timeline.js >> dv-time.js
 
@@ -125,9 +122,6 @@ bundle: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../c
 	cat ../../client/writetable.js >> dv-bundle.js
 	cat ../../client/minedata.js >> dv-bundle.js
 	cat ../../client/openlayers/OpenLayers.js >> dv-bundle.js
-	echo "Timeline_ajax_url='/timeline/timeline_ajax/simile-ajax-api.js';" >> dv-bundle.js
-	echo "Timeline_urlPrefix='/timeline/timeline_js/';" >> dv-bundle.js
-	echo "Timeline_parameters='bundle=true&defaultLocale=\'es\'';" >> dv-bundle.js
 	cat ../../client/timeline/timeline_js/timeline-api.js >> dv-bundle.js
 	cat ../../client/bar.js >> dv-bundle.js
 	cat ../../client/line.js >> dv-bundle.js

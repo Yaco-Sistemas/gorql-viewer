@@ -13,9 +13,15 @@
     <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
     <script type="text/javascript" src="/javascripts/dv-time.js"></script>
+    <script type="text/javascript">
+        DV.initTimeline('');
+    </script>
     {{else}} {{if chart.family == 'layers'}}
     <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
+    <script type="text/javascript">
+        DV.initMap('');
+    </script>
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
         DomReady.ready(function () {

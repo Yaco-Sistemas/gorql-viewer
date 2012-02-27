@@ -38,7 +38,7 @@ DV.map = function (viewport_id, data_container, options) {
         markers = new OpenLayers.Layer.Markers("Markers"),
         size = new OpenLayers.Size(21, 25),
         icon = new OpenLayers.Icon(
-            "/openlayers/img/marker.png",
+            "/javascripts/img/marker.png",
             size,
             new OpenLayers.Pixel(-(size.w / 2), -size.h) // offset
         ),

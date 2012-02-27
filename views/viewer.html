@@ -7,23 +7,14 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
     {{if chart && !chart.png}}
-    <script type="text/javascript" src="/javascripts/domready.js"></script>
-    <script type="text/javascript" src="/javascripts/sizzle.js"></script>
-    <script type="text/javascript" src="/javascripts/minedata.js"></script>
+    <script type="text/javascript" src="/javascripts/dv-core.js"></script>
     {{if chart.family == 'd3'}}
-    <script type="text/javascript" src="/javascripts/d3.js"></script>
-    <script type="text/javascript" src="/javascripts/d3.layout.js"></script>
+    <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
-    <script type="text/javascript">
-        Timeline_ajax_url="/timeline/timeline_ajax/simile-ajax-api.js";
-        Timeline_urlPrefix='/timeline/timeline_js/';
-        Timeline_parameters='bundle=true&defaultLocale="es"';
-    </script>
-    <script type="text/javascript" src="/timeline/timeline_js/timeline-api.js"></script>
+    <script type="text/javascript" src="/javascripts/dv-time.js"></script>
     {{else}} {{if chart.family == 'layers'}}
-    <script type="text/javascript" src="/openlayers/OpenLayers.js"></script>
+    <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
     {{/if}}{{/if}}{{/if}}
-    <script type="text/javascript" src="/javascripts/${chart.type}.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.${chart.type}("#dv_viewport",

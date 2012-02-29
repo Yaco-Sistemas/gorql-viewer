@@ -13,6 +13,10 @@ continuación se añaden los parámetros en formato GET.
  - **embedded**
    Valor booleano que determina si se deben devolver los datos en formato JSON
    en lugar de mostrar el visor. *Opcional*.
+ - **idx**
+   Índice del gráfico embebido dentro de la página en la que se embebe.
+   Comienza en cero y aumenta en uno por cada gráfico que se embebe en la misma
+   página. *Opcional*. No tiene sentido si no se usa la opción *embedded*.
  - **chart**
    Tipo de gráfico a generar. *Opcional*. Puede valer:
 
@@ -83,9 +87,9 @@ Este grupo gráficos engloba a los gráficos de tipo *timeline*.
 
  - **title**
    Campo que se usará cómo nombre de los eventos representados en la línea
-   temporal.
+   temporal. *Obligatorio*.
  - **start**
-   Campo con la fecha de inicio de los eventos.
+   Campo con la fecha de inicio de los eventos. *Obligatorio*.
  - **end**
    Campo con la fecha de fin de los eventos. *Opcional*. Si no está presente
    los eventos se considerarán puntuales, en vez de tener una duración.
@@ -111,8 +115,6 @@ Este grupo gráficos engloba a los gráficos de tipo *timeline*.
    - decade
    - century
    - millennium
-   - epoch
-   - era
 
  - **overviewRes**
    Resolución temporal de la banda con la vista resumisda de los eventos. Los
@@ -127,13 +129,13 @@ Este grupo gráficos engloba a los gráficos de tipo *map*.
 
  - **lat**
    Campo con las latitudes (coordenadas WSG 1984) de los campos a representar
-   con marcadores en el mapa.
+   con marcadores en el mapa. *Obligatorio*.
  - **long**
    Campo con las longitudes (coordenadas WSG 1984) de los campos a representar
-   con marcadores en el mapa.
+   con marcadores en el mapa. *Obligatorio*.
  - **description**
    Campo con el contenido de los popups que aparecen al pulsar sobre los
-   marcadores. **Opcional**. Si no está presente no se mostrarán los popups.
+   marcadores. *Opcional*. Si no está presente no se mostrarán los popups.
  - **sizeX**
    Tamaño en píxeles que tendrá de ancho el gráfico generado. *Opcional*.
  - **sizeY**

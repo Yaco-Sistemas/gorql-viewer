@@ -319,7 +319,14 @@ Aceptan tres parámetros:
 - El identificador del nodo DOM donde se debe pintar el gráfico.
 - El identificador del nodo DOM de tipo tabla con los datos.
 - Un objeto con las opciones del gráfico. Para ver la API consulte el
-  :doc:`user`.
+  :doc:`user`. Los nombres de las propiedades del objeto de opciones y los
+  valores de éstas, coinciden con los parámetros de la mencionada API.
+
+.. note::
+
+    Según el tipo de gráfico las propiedades del objeto de opciones pasado
+    serán unas u otras. **Todos los parámetros son obligatorios**, a diferencia
+    que en la API descrita en :doc:`user`.
 
 .. code-block:: javascript
 

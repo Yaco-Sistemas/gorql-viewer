@@ -126,19 +126,66 @@ datos, o del gráfico, se hace en el cliente mediante JavaScript.
 Carga de dependencias
 ---------------------
 
-Es necesario cargar la librería JavaScript que genera los informes. También es
-necesario cargar la CSS base y las correspondientes a los gráficos que se
-quieran utilizar.
+Es necesario cargar las librerías JavaScript que generan los informes. Se
+distribuyen en diferentes paquetes de manera que se puedan cargar únicamente
+las librerías necesarias. Aunque también se distribuye un paquete con todo el
+código necesario por si se prefiere esa opción.
 
-Es posible personalizar el aspecto de los gráficos generados simplemente
-sustituyendo las hojas de estilo por unas personalizadas.
+El fichero que contiene todo el código, y por lo tanto es suficiente para
+generar cualquier tipo de gráfico, es ``dv.min.js``. Con lo que añadiendo el
+siguiente tag no sería necesario cargar ningún otro JavaScript:
+
+.. code-block:: html
+
+    <script type="text/javascript" src="|example_domain|/javascripts/dv.min.js"></script>
+
+Dicho fichero es bastante pesado, por ello se distribuyen las librerías
+divididas en módulos de forma que no sea necesario cargarlo todo, si no sólo
+las necesarias según el tipo de gráfico:
+
+ - Gráficos *bar*, *pie* y *line*
+
+   - ``dv-core`` y ``dv-d3``
+
+ - Gráfico *timeline*
+
+   - ``dv-core`` y ``dv-timeline``
+
+ - Gráfico *map*
+
+   - ``dv-core`` y ``dv-openlayers``
+
+Es decir, ``dv-core`` es obligatoria sea cual sea el tipo de gráfico a generar.
+Y luego es necesario cargar el paquete correspondiente a la familia a la que
+pertenece el gráfico.
+
+Estos paquetes son compatibles entre sí, es decir, que se pueden cargar varios
+sin que haya conflictos. Por ejemplo, si se desea un gráfico de tipo *bar* y
+otro de tipo *map* sólo habría que cargar ``dv-core``, ``dv-d3`` y
+``dv-openlayers``. No es necesario cargar ``dv-core`` dos veces, ni cargar
+``dv-timeline``.
+
+Los tags serían, para cada librería:
+
+.. code-block:: html
+
+    <script type="text/javascript" src="|example_domain|/javascripts/dv-core.js"></script>
+    <script type="text/javascript" src="|example_domain|/javascripts/dv-d3.js"></script>
+    <script type="text/javascript" src="|example_domain|/javascripts/dv-time.js"></script>
+    <script type="text/javascript" src="|example_domain|/javascripts/dv-openlayers.js"></script>
+
+También es necesario cargar la CSS base y las correspondientes a los gráficos
+que se quieran utilizar. Es posible personalizar el aspecto de los gráficos
+generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
 
 .. code-block:: html
 
     <link rel="stylesheet" href="|example_domain|/stylesheets/style.css" />
+    <link rel="stylesheet" href="|example_domain|/stylesheets/bar.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/pie.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/line.css" />
-    <script type="text/javascript" src="http://|example_domain|/javascripts/dv-bundle.min.js"></script>
+    <link rel="stylesheet" href="|example_domain|/stylesheets/timeline.css" />
+    <link rel="stylesheet" href="|example_domain|/stylesheets/map.css" />
 
 Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.
@@ -176,7 +223,7 @@ Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
     <div id="dv_viewport0" class="dv_viewport"></div>
     <table id="dv_table0" class="dv_table"></table>
 
-En total son dos etiquetas ``script``, una ``noscript``, un ``div`` donde se
+En total son dos etiquetas ``script``, una ``noscript``, una ``div`` donde se
 dibujará el gráfico, y una ``table`` donde se escribirán los datos devueltos
 por la consulta.
 
@@ -194,7 +241,7 @@ La siguiente etiqueta ``script`` contiene el código de inicialización que se
 encarga de llamar a la librería para escribir la tabla y dibujar el gráfico.
 
 El código de incialización se debe ejecutar una vez que la página está cargada,
-para ello se provee de la utilidad DomReady_ en la librería ``dv-bundle-min``.
+para ello se provee de la utilidad DomReady_ en la librería ``dv-core.js``.
 La manera de utilizarlo es:
 
 .. _DomReady: http://code.google.com/p/domready/
@@ -231,12 +278,32 @@ Necesita dos parámetros:
 - El nodo de la tabla donde se escribirán los datos.
 - El índice del informe utilizado en la consulta.
 
-La librería ``dv-bundle-min`` incluye Sizzle_, un selector CSS que puede
+La librería ``dv-core.js`` incluye Sizzle_, un selector CSS que puede
 utilizarse para obtener el nodo DOM de la tabla. Una vez más, no es
 imprescindible utilizar está utilidad, cualquier otra forma de obtener el
 nodo DOM de la tabla es válida.
 
 .. _Sizzle: http://sizzlejs.com/
+
+En el caso de que se trate de los gráficos *timeline* o *map* hay que realizar
+una llamada extra de inicialización, antes de llamar a la función que se
+encarga de generar el gráfico deseado.
+
+Esta llamada se encarga de inicializar las librerías utilizadas para generar el
+gráfico, y reciben un único parámetro, el ``host`` donde se encuentra el visor
+de colecciones.
+
+Para el caso del gráfico de tipo *map*:
+
+.. code-block:: javascript
+
+    DV.initMap('|example_domain|');
+
+Para el caso del gráfico de tipo *timeline*:
+
+.. code-block:: javascript
+
+    DV.initTimeline('|example_domain|');
 
 La siguiente llamada es la que se encarga de generar el gráfico deseado. Hay
 una función por cada tipo de gráfico soportado:

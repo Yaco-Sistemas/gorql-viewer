@@ -31,7 +31,10 @@ var express = require('express'),
     viewer = require('./routes/viewer'),
     png = require('./routes/png'),
     svg = require('./routes/svg'),
+    kml = require('./routes/kml'),
     settings = require('./settings'),
+    dirname = require('path').dirname,
+    readFileSync = require('fs').readFileSync,
     globalOpts = settings.settings.global,
     app = module.exports = express.createServer(),
     configureApp,
@@ -102,6 +105,7 @@ app.configure('production', function () {
 app.get('/viewer/', viewer.dataViewer);
 app.get('/png/', png.get);
 app.get('/svg/', svg.get);
+app.post('/kml/', kml.get);
 
 // Start server
 

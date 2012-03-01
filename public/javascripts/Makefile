@@ -76,7 +76,7 @@ dv-custom: dv-core
 cleancustom: dv-custom.js
 	rm -f dv-custom.js
 
-debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js
+debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/mapea.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/openlayers/img ../../client/openlayers/theme ../../client/timeline/timeline_ajax ../../client/timeline/timeline_js
 	cp ../../client/sizzle.js .
 	cp ../../client/d3.js .
 	cp ../../client/d3.layout.js .
@@ -91,10 +91,11 @@ debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../cl
 	cp ../../client/bar.js .
 	cp ../../client/line.js .
 	cp ../../client/map.js .
+	cp ../../client/mapea.js .
 	cp ../../client/pie.js .
 	cp ../../client/timeline.js .
 
-cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js minedata.js OpenLayers.js timeline-api.js pie.js sizzle.js timeline.js
+cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js mapea.js minedata.js OpenLayers.js timeline-api.js pie.js sizzle.js timeline.js img theme timeline_ajax timeline_js
 	rm -f sizzle.js
 	rm -f d3.js
 	rm -f d3.layout.js
@@ -105,6 +106,7 @@ cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js minedata.js Ope
 	rm -f bar.js
 	rm -f line.js
 	rm -f map.js
+	rm -f mapea.js
 	rm -f pie.js
 	rm -f timeline.js
 	rm -rf img

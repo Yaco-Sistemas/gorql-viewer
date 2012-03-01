@@ -24,7 +24,7 @@
 
 exports.settings = {
     global: {
-        debug: false,
+        debug: true,
         port: 3000
     },
 
@@ -59,6 +59,10 @@ exports.settings = {
         map: {
             sizeX: 600,
             sizeY: 400
+        },
+        mapea: {
+            sizeX: 600,
+            sizeY: 400
         }
     },
 
@@ -91,6 +95,10 @@ exports.settings = {
             overviewRes: 'year'
         },
         map: {
+            sizeX: 600,
+            sizeY: 400
+        },
+        mapea: {
             sizeX: 600,
             sizeY: 400
         }

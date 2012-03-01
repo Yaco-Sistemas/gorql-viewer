@@ -17,11 +17,15 @@
         DV.initTimeline('');
     </script>
     {{else}} {{if chart.family == 'layers'}}
+    {{if chart.type == 'mapea'}}
+    <script type="text/javascript" src="/javascripts/dv-mapea.js"></script>
+    {{else}}
     <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
     <script type="text/javascript">
         DV.initMap('');
     </script>
+    {{/if}}
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
         DomReady.ready(function () {

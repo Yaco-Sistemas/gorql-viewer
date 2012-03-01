@@ -28,45 +28,20 @@ var commons = require('./commons'),
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var i,
-        j,
-        chartData = {
-            labels: [],
-            values: []
-        },
-        svg;
-
-    if (params.chart.family !== 'd3') {
+    if (params.chart.family !== 'layers') {
         response.send('Invalid chart type.', 400);
         return;
     }
 
-    for (i = 0; i < params.chart.series.length; i += 1) {
-        chartData.values.push([]); // create future serie array
-    }
+    // TODO
 
-    try {
-        for (i = 0; i < results.length; i += 1) {
-            chartData.labels.push(results[i][params.chart.labels].value);
-            for (j = 0; j < params.chart.series.length; j += 1) {
-                chartData.values[j].push(parseInt(results[i][params.chart.series[j]].value, 10));
-            }
-        }
-        params.chart.data = chartData;
-    } catch (err) {
-        console.log(err);
-        response.send('Some error happened processing the data.', 500);
-        return;
-    }
-
-    svg = commons.generateSVG(params.chart, chartData);
-
-    response.header("Content-Type", "image/svg+xml");
-    response.write(svg);
-    response.end();
+    response.render('points.kml', {
+        layout: false,
+        locals: {}
+    });
 };
 
-// Get the data, generate chart in SVG and return it
+// Get the data, generate chart in SVG, convert it to PNG, and return the image
 
 exports.get = function (request, response) {
     "use strict";

@@ -58,6 +58,7 @@ renderResults = function (response, params, error, results) {
 
     if (params.chart.family !== 'd3') {
         response.send('Invalid chart type.', 400);
+        return;
     }
 
     for (i = 0; i < params.chart.series.length; i += 1) {

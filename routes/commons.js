@@ -159,7 +159,7 @@ exports.processPetition = function (request, response, renderCallback) {
             defaults = app.exports.set(chart.type);
 
             processParameters(similepar, params, defaults, chart);
-        } else if (params.chart === 'map' &&
+        } else if ((params.chart === 'map' || params.chart === 'mapea') &&
                     params.lat !== undefined && params.long !== undefined) {
             chart.type = params.chart;
             chart.family = 'layers';

@@ -105,7 +105,7 @@ app.configure('production', function () {
 app.get('/viewer/', viewer.dataViewer);
 app.get('/png/', png.get);
 app.get('/svg/', svg.get);
-app.post('/kml/', kml.get);
+app.get('/kml/', kml.get);
 
 // Start server
 

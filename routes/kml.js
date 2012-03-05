@@ -26,7 +26,7 @@ var commons = require('./commons'),
     Base64 = require('../client/Base64'),
     renderResults;
 
-renderResults = function (response, params, error, results) {
+renderResults = function (response, params, error, results, original_params) {
     "use strict";
 
     var places = [],
@@ -34,7 +34,7 @@ renderResults = function (response, params, error, results) {
 
     // TODO
 
-    response.render('points.kml', {
+    response.render('points.html', {
         layout: false,
         locals: {
             host: "TODO",
@@ -49,6 +49,7 @@ exports.get = function (request, response) {
     "use strict";
 
     var params = request.query,
+        callback,
         data;
 
     if (!params.data) {
@@ -57,10 +58,17 @@ exports.get = function (request, response) {
         return;
     }
 
-    data = data.substr(0, data.length - 4); // Remove .kml extension
-    data = Base64.decode(params.data);
+    // Remove .kml extension
+    data = params.data.substr(0, params.data.length - 4);
+    data = Base64.decode(data);
     data = JSON.parse(data);
 
-    commons.processPetition(request, response, renderResults);
+    request.query.query = data.query;
+
+    callback = function (response, params, error, results) {
+        renderResults(response, params, error, results, data);
+    };
+
+    commons.processPetition(request, response, callback);
     // Nothing more to do, the callbacks will take care of the response
 };

@@ -44,10 +44,10 @@ DV.mapea = function (viewport_id, data_container, options) {
         DV.mapeaKMLHost = "";
     }
 
-// url += "&layers=KML*Hoteles*http://www.rumbo.es/hotel/espana/sevilla/sevilla/hoteles-sevilla/*s.kml*true";
+    // url += "&layers=KML*Hoteles*http://www.rumbo.es/hotel/espana/sevilla/sevilla/hoteles-sevilla/*s.kml*true";
 
     url += "&layers=KML*Results*" + DV.mapeaKMLHost + "/kml/*?data=";
-    data.query = "PREFIX%20owl%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2F%3E%0APREFIX%20dbpedia2%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%0APREFIX%20dbpedia%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20dbo%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0ASELECT%20%3Fname%20%3Flat%20%3Flong%0AWHERE%20%7B%0A%20%20%20%20%20%3Fcity%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Fsubject%3E%20%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FCategory%3AGerman_state_capitals%3E%20.%0A%20%20%20%20%20%3Fcity%20rdfs%3Alabel%20%3Fname%20.%0A%20%20%20%20%20%3Fcity%20geo%3Alat%20%3Flat%20.%0A%20%20%20%20%20%3Fcity%20geo%3Along%20%3Flong%20.%0A%20%20%20%20%20FILTER%20(LANG(%3Fname)%20%3D%20'de')%20.%0A%7D%0AORDER%20BY%20%3Fname";
+    data.query = options.encoded_query;
     data.lat = options.lat;
     data.long = options.long;
     data.description = options.description;

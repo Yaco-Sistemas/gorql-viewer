@@ -2,20 +2,16 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
         <name>Results</name>
-        <Style id="mark">
-            <IconStyle>
-                <Icon>
-                    <href>${host}/javascripts/img/marker.png</href>
-                </Icon>
-            </IconStyle>
-        </Style>
         {{each(idx, place) places}}
         <Placemark>
-            <name>${place.name}</name>
-            <description>${place.description}</description>
-            <styleUrl>#mark</styleUrl>
+            <name>${place.description}</name>
+            <description>
+                <![CDATA[
+                <div><span>${place.description}</span></div>
+                ]]>
+            </description>
             <Point>
-                <coordinates>-${place.lon},${place.lat}</coordinates>
+                <coordinates>${place.lon},${place.lat}</coordinates>
             </Point>
         </Placemark>
         {{/each}}

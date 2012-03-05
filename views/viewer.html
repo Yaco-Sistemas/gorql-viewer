@@ -32,7 +32,7 @@
             DV.${chart.type}("#dv_viewport",
                 "#dv_table",
                 {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}{{if chart.type == 'mapea'}}, encoded_query: ${encoded_query}{{/if}}
                 });
         });
     </script>

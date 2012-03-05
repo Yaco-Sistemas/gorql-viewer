@@ -63,7 +63,7 @@ exports.get = function (request, response) {
     data = Base64.decode(data);
     data = JSON.parse(data);
 
-    request.query.query = data.query;
+    request.query.query = decodeURIComponent(data.query);
 
     callback = function (response, params, error, results) {
         renderResults(response, params, error, results, data);

@@ -5,17 +5,17 @@
         <Style id="mark">
             <IconStyle>
                 <Icon>
-                    <href>{{host}}/javascripts/img/marker.png</href>
+                    <href>${host}/javascripts/img/marker.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         {{each(idx, place) places}}
         <Placemark>
-            <name>{{place.name}}</name>
-            <description>{{place.description}}</description>
+            <name>${place.name}</name>
+            <description>${place.description}</description>
             <styleUrl>#mark</styleUrl>
             <Point>
-                <coordinates>-{{place.lon}},{{place.lat}}</coordinates>
+                <coordinates>-${place.lon},${place.lat}</coordinates>
             </Point>
         </Placemark>
         {{/each}}

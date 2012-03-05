@@ -4,7 +4,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 0.0.1hg182
+Version: 0.0.1hg183
 Release: 1
 Summary: Data Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
@@ -38,6 +38,7 @@ make all
 rm -rf %{installdir}/.hg
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
+rm -f %{installdir}/make_dev_rpm.sh
 
 %install
 # move the rest to the build root

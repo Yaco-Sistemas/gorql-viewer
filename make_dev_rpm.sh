@@ -45,7 +45,7 @@ fi
 ln -s ${CURRENT_DIR}/specs/${PACKAGE}.spec ${BUILD_ROOT}/SPECS/
 
 cd ${BUILD_ROOT}/SPECS/
-rm -rf ${BUILD_ROOT}/BUILD/${PACKAGE}-${TAG}*
+rm -rf ${BUILD_ROOT}/BUILD/*
 rm -rf ${BUILD_ROOT}/BUILDROOT/*
 rm -rf /opt/${PACKAGE}
 rm -rf /var/tmp/*

@@ -32,7 +32,7 @@
             DV.${chart.type}("#dv_viewport",
                 "#dv_table",
                 {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}{{if chart.type == 'mapea'}}, encoded_query: ${encoded_query}{{/if}}
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}{{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
                 });
         });
     </script>
@@ -51,7 +51,7 @@
     <section>
         <h1 class="first">${chart.type} Chart</h1>
         <div id="dv_viewport" class="dv_viewport">
-        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query=${encoded_query}&chart=${chart.type}" />{{/if}}
+        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query={{html encoded_query}}&chart=${chart.type}" />{{/if}}
         </div>
     </section>
     {{/if}}

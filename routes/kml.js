@@ -74,7 +74,7 @@ exports.get = function (request, response) {
         data;
 
     if (!params.data) {
-        // Invalid request, chart is mandatory
+        // Invalid request, data is mandatory
         response.send('Missing data settings', 400);
         return;
     }

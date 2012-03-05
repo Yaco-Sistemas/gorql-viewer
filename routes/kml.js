@@ -30,14 +30,35 @@ renderResults = function (response, params, error, results, original_params) {
     "use strict";
 
     var places = [],
-        data = commons.resultsToMatrix(results);
+        data = commons.resultsToMatrix(results),
+        place,
+        latIdx,
+        lonIdx,
+        descriptionIdx,
+        i;
 
-    // TODO
+    for (i = 0; i < data.headers.length; i += 1) {
+        if (data.headers[i] === original_params.lat) {
+            latIdx = i;
+        } else if (data.headers[i] === original_params.long) {
+            lonIdx = i;
+        } if (data.headers[i] === original_params.description) {
+            descriptionIdx = i;
+        }
+    }
+
+    for (i = 0; i < data.matrix.length; i += 1) {
+        place = {};
+        place.lat = data.matrix[i][latIdx];
+        place.lon = data.matrix[i][lonIdx];
+        place.description = data.matrix[i][descriptionIdx];
+        places.push(place);
+    }
 
     response.render('points.html', {
         layout: false,
         locals: {
-            host: "TODO",
+            host: "http://data-viewer.ceic-ogov.yaco.es", // TODO
             places: places
         }
     });

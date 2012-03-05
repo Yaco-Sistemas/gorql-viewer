@@ -12,7 +12,14 @@
     </script>
     <script type="text/javascript" src="/javascripts/timeline_js/timeline-api.js"></script>
     {{else}} {{if family == 'layers'}}
-    {{if chart.type != 'mapea'}}
+    {{if chart.type == 'mapea'}}
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.initMapea("http://192.168.11.33:3000");
+        });
+    </script>
+    <script type="text/javascript" src="/javascripts/Base64.js"></script>
+    {{else}}
     <script type="text/javascript" src="/javascripts/OpenLayers.js"></script>
     {{/if}}
     {{/if}}{{/if}}{{/if}}

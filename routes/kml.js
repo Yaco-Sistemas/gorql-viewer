@@ -23,21 +23,23 @@
 // permissions and limitations under the Licence.
 
 var commons = require('./commons'),
+    Base64 = require('../client/Base64'),
     renderResults;
 
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    if (params.chart.family !== 'layers') {
-        response.send('Invalid chart type.', 400);
-        return;
-    }
+    var places = [],
+        data = commons.resultsToMatrix(results);
 
     // TODO
 
     response.render('points.kml', {
         layout: false,
-        locals: {}
+        locals: {
+            host: "TODO",
+            places: places
+        }
     });
 };
 
@@ -46,13 +48,18 @@ renderResults = function (response, params, error, results) {
 exports.get = function (request, response) {
     "use strict";
 
-    var params = request.query;
+    var params = request.query,
+        data;
 
-    if (!params.chart) {
+    if (!params.data) {
         // Invalid request, chart is mandatory
-        response.send('Missing chart settings', 400);
+        response.send('Missing data settings', 400);
         return;
     }
+
+    data = data.substr(0, data.length - 4); // Remove .kml extension
+    data = Base64.decode(params.data);
+    data = JSON.parse(data);
 
     commons.processPetition(request, response, renderResults);
     // Nothing more to do, the callbacks will take care of the response

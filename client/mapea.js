@@ -44,7 +44,7 @@ DV.mapea = function (viewport_id, data_container, options) {
         DV.mapeaKMLHost = "";
     }
 
-    url += "&layers=KML*Results*" + DV.mapeaKMLHost + "/kml/*?data=";
+    url += "&layers=KML*Resultados*" + DV.mapeaKMLHost + "/kml/*?data=";
     data.query = options.encoded_query;
     data.lat = options.lat;
     data.long = options.long;

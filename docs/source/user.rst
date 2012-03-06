@@ -125,7 +125,7 @@ Este grupo gráficos engloba a los gráficos de tipo *timeline*.
 Gráficos de Mapas
 ~~~~~~~~~~~~~~~~~
 
-Este grupo gráficos engloba a los gráficos de tipo *map*.
+Este grupo gráficos engloba a los gráficos de tipo *map* y *mapea*.
 
  - **lat**
    Campo con las latitudes (coordenadas WSG 1984) de los campos a representar

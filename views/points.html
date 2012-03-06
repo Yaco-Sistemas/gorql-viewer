@@ -4,7 +4,9 @@
         <name>Results</name>
         {{each(idx, place) places}}
         <Placemark>
+            {{if place.description}}
             <name>${place.description}</name>
+            {{/if}}
             <Point>
                 <coordinates>${place.lon},${place.lat}</coordinates>
             </Point>

@@ -34,7 +34,7 @@ renderResults = function (response, params, error, results, original_params) {
         place,
         latIdx,
         lonIdx,
-        descriptionIdx,
+        descriptionIdx = -1,
         i;
 
     for (i = 0; i < data.headers.length; i += 1) {
@@ -42,7 +42,7 @@ renderResults = function (response, params, error, results, original_params) {
             latIdx = i;
         } else if (data.headers[i] === original_params.long) {
             lonIdx = i;
-        } if (data.headers[i] === original_params.description) {
+        } if (original_params.description !== undefined && data.headers[i] === original_params.description) {
             descriptionIdx = i;
         }
     }
@@ -51,7 +51,9 @@ renderResults = function (response, params, error, results, original_params) {
         place = {};
         place.lat = data.matrix[i][latIdx];
         place.lon = data.matrix[i][lonIdx];
-        place.description = data.matrix[i][descriptionIdx];
+        if (descriptionIdx >= 0) {
+            place.description = data.matrix[i][descriptionIdx];
+        }
         places.push(place);
     }
 
@@ -75,6 +77,10 @@ exports.get = function (request, response) {
     if (!params.data) {
         // Invalid request, data is mandatory
         response.send('Missing data settings', 400);
+        return;
+    } else if (!params.data.lat || !params.data.long) {
+        // Invalid request, coordinates are mandatory
+        response.send('Missing coordinates fields', 400);
         return;
     }
 

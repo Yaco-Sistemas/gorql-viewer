@@ -48,7 +48,9 @@ DV.mapea = function (viewport_id, data_container, options) {
     data.query = options.encoded_query;
     data.lat = options.lat;
     data.long = options.long;
-    data.description = options.description;
+    if (options.description !== undefined) {
+        data.description = options.description;
+    }
     data = Base64.encode(JSON.stringify(data));
     url += data + ".kml*true";
 

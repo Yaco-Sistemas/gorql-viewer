@@ -78,16 +78,18 @@ exports.get = function (request, response) {
         // Invalid request, data is mandatory
         response.send('Missing data settings', 400);
         return;
-    } else if (!params.data.lat || !params.data.long) {
-        // Invalid request, coordinates are mandatory
-        response.send('Missing coordinates fields', 400);
-        return;
     }
 
     // Remove .kml extension
     data = params.data.substr(0, params.data.length - 4);
     data = Base64.decode(data);
     data = JSON.parse(data);
+
+    if (!data.lat || !data.long) {
+        // Invalid request, coordinates are mandatory
+        response.send('Missing coordinates fields', 400);
+        return;
+    }
 
     request.query.query = decodeURIComponent(data.query);
 

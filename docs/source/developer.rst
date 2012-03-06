@@ -179,6 +179,18 @@ Los tags serían, para cada librería:
     <script type="text/javascript" src="|example_domain|/javascripts/dv-openlayers.js"></script>
     <script type="text/javascript" src="|example_domain|/javascripts/dv-mapea.js"></script>
 
+Para el caso del gráfico de tipo *timeline* hay que añadir un tag extra en la
+cabecera de la página (tag ``head``) **antes de cargar las librerías
+JavaScript**, es decir, antes de los tags anteriores:
+
+.. code-block:: html
+
+    <script type="text/javascript">
+        var Timeline_ajax_url="|example_domain|/javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='|example_domain|/javascripts/timeline_js/',
+            Timeline_parameters='bundle=true&defaultLocale="es"';
+    </script>
+
 También es necesario cargar la CSS base y las correspondientes a los gráficos
 que se quieran utilizar. Es posible personalizar el aspecto de los gráficos
 generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
@@ -291,9 +303,9 @@ nodo DOM de la tabla es válida.
 
 .. _Sizzle: http://sizzlejs.com/
 
-En el caso de que se trate de los gráficos *timeline*, *map* o *mapea* hay que
-realizar una llamada extra de inicialización, antes de llamar a la función que
-se encarga de generar el gráfico deseado.
+En el caso de que se trate de los gráficos *map* o *mapea* hay que realizar una
+llamada extra de inicialización, antes de llamar a la función que se encarga de
+generar el gráfico deseado.
 
 Esta llamada se encarga de inicializar las librerías utilizadas para generar el
 gráfico, y reciben un único parámetro, el ``host`` donde se encuentra el visor
@@ -310,12 +322,6 @@ Para el caso del gráfico de tipo *mapea*:
 .. code-block:: javascript
 
     DV.initMapea('|example_domain|');
-
-Para el caso del gráfico de tipo *timeline*:
-
-.. code-block:: javascript
-
-    DV.initTimeline('|example_domain|');
 
 La siguiente llamada es la que se encarga de generar el gráfico deseado. Hay
 una función por cada tipo de gráfico soportado:

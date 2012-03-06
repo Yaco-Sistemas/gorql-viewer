@@ -33,7 +33,20 @@ var app = require.main,
     readFileSync = require('fs').readFileSync,
     sparqlClient,
     processParameters,
-    sparqlCallback;
+    sparqlCallback,
+    contains;
+
+contains = function (data, item) {
+    "use strict";
+    var i;
+
+    for (i = 0; i < data.length; i += 1) {
+        if (data[i] === item) {
+            return true;
+        }
+    }
+    return false;
+};
 
 sparqlCallback = function (response, params, renderCallback, cache, key) {
     "use strict";
@@ -219,21 +232,32 @@ exports.resultsToMatrix = function (results) {
     var matrix = [],
         headers = [],
         i,
+        h,
         row,
         newrow,
         key;
 
     for (i = 0; i < results.length; i += 1) {
         row = results[i];
-        newrow = [];
         for (key in row) {
             if (row.hasOwnProperty(key)) {
-                if (i === 0) {
-                    // First iteration
+                if (!contains(headers, key)) {
                     headers.push(key);
                 }
-                // For every object of the row, get the value
-                newrow.push(row[key].value);
+            }
+        }
+    }
+
+    for (i = 0; i < results.length; i += 1) {
+        row = results[i];
+        newrow = [];
+        for (h = 0; h < headers.length; h += 1) {
+            if (row[headers[h]] !== undefined) {
+                // Get the value from the result
+                newrow.push(row[headers[h]].value);
+            } else {
+                // Default to empty string
+                newrow.push("");
             }
         }
         matrix.push(newrow);

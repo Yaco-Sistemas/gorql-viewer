@@ -25,6 +25,7 @@ continuación se añaden los parámetros en formato GET.
    - line
    - timeline
    - map
+   - mapea
 
 Parámetros de los gráficos
 --------------------------

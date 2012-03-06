@@ -155,6 +155,10 @@ las necesarias según el tipo de gráfico:
 
    - ``dv-core`` y ``dv-openlayers``
 
+ - Gráfico *mapea*
+
+   - ``dv-core`` y ``dv-mapea``
+
 Es decir, ``dv-core`` es obligatoria sea cual sea el tipo de gráfico a generar.
 Y luego es necesario cargar el paquete correspondiente a la familia a la que
 pertenece el gráfico.
@@ -173,6 +177,7 @@ Los tags serían, para cada librería:
     <script type="text/javascript" src="|example_domain|/javascripts/dv-d3.js"></script>
     <script type="text/javascript" src="|example_domain|/javascripts/dv-time.js"></script>
     <script type="text/javascript" src="|example_domain|/javascripts/dv-openlayers.js"></script>
+    <script type="text/javascript" src="|example_domain|/javascripts/dv-mapea.js"></script>
 
 También es necesario cargar la CSS base y las correspondientes a los gráficos
 que se quieran utilizar. Es posible personalizar el aspecto de los gráficos
@@ -186,6 +191,7 @@ generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
     <link rel="stylesheet" href="|example_domain|/stylesheets/line.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/timeline.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/map.css" />
+    <link rel="stylesheet" href="|example_domain|/stylesheets/mapea.css" />
 
 Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.
@@ -285,9 +291,9 @@ nodo DOM de la tabla es válida.
 
 .. _Sizzle: http://sizzlejs.com/
 
-En el caso de que se trate de los gráficos *timeline* o *map* hay que realizar
-una llamada extra de inicialización, antes de llamar a la función que se
-encarga de generar el gráfico deseado.
+En el caso de que se trate de los gráficos *timeline*, *map* o *mapea* hay que
+realizar una llamada extra de inicialización, antes de llamar a la función que
+se encarga de generar el gráfico deseado.
 
 Esta llamada se encarga de inicializar las librerías utilizadas para generar el
 gráfico, y reciben un único parámetro, el ``host`` donde se encuentra el visor
@@ -298,6 +304,12 @@ Para el caso del gráfico de tipo *map*:
 .. code-block:: javascript
 
     DV.initMap('|example_domain|');
+
+Para el caso del gráfico de tipo *mapea*:
+
+.. code-block:: javascript
+
+    DV.initMapea('|example_domain|');
 
 Para el caso del gráfico de tipo *timeline*:
 
@@ -313,6 +325,7 @@ una función por cada tipo de gráfico soportado:
 - **pie**: Gráficos de sectores.
 - **timeline**: Línea del tiempo.
 - **map**: Mapa del mundo.
+- **mapea**: Mapas de Andalucía.
 
 Aceptan tres parámetros:
 
@@ -338,6 +351,11 @@ Aceptan tres parámetros:
         sizeLabel: "100",
         sizeHighlight: "30"
     });
+
+Para el caso particular del gráfico *mapea* es necesario pasarle un parámetro
+más de los que se describen en la mencionada API. Dicho parámetro es
+**encoded_query** y su valor debe ser la consulta SPARQL convenientemente
+codificada para url.
 
 La etiqueta ``noscript`` es necesaria para proveer de un mecanismo de *fallback*
 para los casos en los que el usuario no dispone de JavaScript en su navegador.

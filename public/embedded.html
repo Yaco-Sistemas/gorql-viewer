@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="/stylesheets/map.css" />
     <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
     <link rel="stylesheet" href="/stylesheets/timeline.css" />
+    <script type="text/javascript">
+        var Timeline_ajax_url="/javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='/javascripts/timeline_js/',
+            Timeline_parameters='bundle=true&defaultLocale="es"';
+    </script>
 <!--     <script type="text/javascript" src="/javascripts/dv-bundle.js"></script> -->
     <script type="text/javascript" src="/javascripts/dv.min.js"></script>
 </head>
@@ -137,7 +142,6 @@
     <script type="text/javascript" src='/viewer/?query=PREFIX%20owl%3A%20<http%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23>%0APREFIX%20xsd%3A%20<http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23>%0APREFIX%20rdfs%3A%20<http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23>%0APREFIX%20rdf%3A%20<http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23>%0APREFIX%20foaf%3A%20<http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F>%0APREFIX%20dc%3A%20<http%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F>%0APREFIX%20%3A%20<http%3A%2F%2Fdbpedia.org%2Fresource%2F>%0APREFIX%20dbpedia2%3A%20<http%3A%2F%2Fdbpedia.org%2Fproperty%2F>%0APREFIX%20dbpedia%3A%20<http%3A%2F%2Fdbpedia.org%2F>%0APREFIX%20skos%3A%20<http%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23>%0APREFIX%20dbo%3A%20<http%3A%2F%2Fdbpedia.org%2Fontology%2F>%0A%0ASELECT%20%3Fname%20%3Fbirth%20%3Fdeath%20%3Fperson%20WHERE%20%7B%0A%20%20%20%20%20%3Fperson%20dbo%3AbirthPlace%20%3ABerlin%20.%0A%20%20%20%20%20%3Fperson%20dbo%3AbirthDate%20%3Fbirth%20.%0A%20%20%20%20%20%3Fperson%20foaf%3Aname%20%3Fname%20.%0A%20%20%20%20%20%3Fperson%20dbo%3AdeathDate%20%3Fdeath%20.%0A%20%20%20%20%20FILTER%20(%3Fbirth%20<%20"1900-01-01"%5E%5Exsd%3Adate)%20.%0A%7D%0AORDER%20BY%20%3Fname&amp;embedded=true&amp;idx=3'></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.initTimeline('');
             DV.writeDataToTable(Sizzle("#dv_table3")[0], 3);
             DV.timeline("#dv_viewport3", "#dv_table3", {
                 sizeX: "1000",

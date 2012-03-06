@@ -1,5 +1,5 @@
 /*jslint vars: false, browser: true */
-/*global Timeline, DV, Sizzle */
+/*global Timeline, DV: true, Sizzle */
 
 // Copyright 2012 Yaco Sistemas S.L.
 //
@@ -22,17 +22,9 @@
 // See the Licence for the specific language governing
 // permissions and limitations under the Licence.
 
-if (!DV) {
+if (typeof DV === "undefined") {
     var DV = {};
 }
-
-DV.initTimeline = function (host) {
-    "use strict";
-
-    window.Timeline_ajax_url = host + '/javascripts/timeline_ajax/simile-ajax-api.js';
-    window.Timeline_urlPrefix = host + '/javascripts/timeline_js/';
-    window.Timeline_parameters = 'bundle=true&defaultLocale="es"';
-};
 
 DV.timeline = function (viewportId, data_container, options) {
     "use strict";
@@ -51,10 +43,6 @@ DV.timeline = function (viewportId, data_container, options) {
         aux,
         row,
         i;
-
-    if (typeof window.Timeline_ajax_url === "undefined") {
-        DV.initTimeline("");
-    }
 
     viewport.style.width = options.sizeX + 'px';
     viewport.style.height = options.sizeY + 'px';

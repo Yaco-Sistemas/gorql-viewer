@@ -12,6 +12,11 @@
     {{if chart.family == 'd3'}}
     <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
+    <script type="text/javascript">
+        var Timeline_ajax_url="/javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='/javascripts/timeline_js/',
+            Timeline_parameters='bundle=true&defaultLocale="es"';
+    </script>
     <script type="text/javascript" src="/javascripts/dv-time.js"></script>
     {{else}} {{if chart.family == 'layers'}}
     {{if chart.type == 'mapea'}}

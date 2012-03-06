@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "forever": "0.8.4",
+        "forever": "0.8.5",
         "express": "2.5.1",
         "jqtpl": "1.0.7",
         "memcached": "0.0.5",

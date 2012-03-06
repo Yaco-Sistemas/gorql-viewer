@@ -44,8 +44,6 @@ DV.mapea = function (viewport_id, data_container, options) {
         DV.mapeaKMLHost = "";
     }
 
-    // url += "&layers=KML*Hoteles*http://www.rumbo.es/hotel/espana/sevilla/sevilla/hoteles-sevilla/*s.kml*true";
-
     url += "&layers=KML*Results*" + DV.mapeaKMLHost + "/kml/*?data=";
     data.query = options.encoded_query;
     data.lat = options.lat;

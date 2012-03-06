@@ -52,6 +52,10 @@ DV.timeline = function (viewportId, data_container, options) {
         row,
         i;
 
+    if (typeof Timeline_ajax_url === "undefined") {
+        DV.initTimeline("");
+    }
+
     viewport.style.width = options.sizeX + 'px';
     viewport.style.height = options.sizeY + 'px';
 

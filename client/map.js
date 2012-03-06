@@ -58,6 +58,10 @@ DV.map = function (viewport_id, data_container, options) {
         descriptionIdx,
         i;
 
+    if (OpenLayers.ImgPath === undefined) {
+        DV.initMap("");
+    }
+
     container.id = "ol_viewport";
     container.style.width = options.sizeX + 'px';
     container.style.height = options.sizeY + 'px';

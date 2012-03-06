@@ -58,7 +58,6 @@ renderResults = function (response, params, error, results, original_params) {
     response.render('points.html', {
         layout: false,
         locals: {
-            host: "http://data-viewer.ceic-ogov.yaco.es", // TODO
             places: places
         }
     });

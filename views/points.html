@@ -5,11 +5,6 @@
         {{each(idx, place) places}}
         <Placemark>
             <name>${place.description}</name>
-            <description>
-                <![CDATA[
-                <div><span>${place.description}</span></div>
-                ]]>
-            </description>
             <Point>
                 <coordinates>${place.lon},${place.lat}</coordinates>
             </Point>

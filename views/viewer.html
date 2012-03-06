@@ -13,18 +13,17 @@
     <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
     <script type="text/javascript" src="/javascripts/dv-time.js"></script>
-    <script type="text/javascript">
-        DV.initTimeline('');
-    </script>
     {{else}} {{if chart.family == 'layers'}}
     {{if chart.type == 'mapea'}}
     <script type="text/javascript" src="/javascripts/dv-mapea.js"></script>
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.initMapea("http://data-viewer.ceic-ogov.yaco.es");
+        });
+    </script>
     {{else}}
     <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
-    <script type="text/javascript">
-        DV.initMap('');
-    </script>
     {{/if}}
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
@@ -32,7 +31,8 @@
             DV.${chart.type}("#dv_viewport",
                 "#dv_table",
                 {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}{{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
+                    {{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
                 });
         });
     </script>

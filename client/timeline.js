@@ -101,7 +101,7 @@ DV.timeline = function (viewportId, data_container, options) {
             start: row[startIdx],
             title: row[titleIdx]
         };
-        if (endIdx !== undefined) {
+        if (endIdx !== undefined && row[endIdx] !== "") {
             aux.end = row[endIdx];
             aux.durationEvent = true;
         } else {

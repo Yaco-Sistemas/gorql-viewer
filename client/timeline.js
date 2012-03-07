@@ -26,6 +26,23 @@ if (typeof DV === "undefined") {
     var DV = {};
 }
 
+DV.timelineValidRange = function (range) {
+    "use strict";
+
+    var timelineRanges = ["MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY",
+                          "WEEK", "MONTH", "YEAR", "DECADE", "CENTURY",
+                          "MILLENNIUM"],
+        i;
+
+    for (i = 0; i < timelineRanges.length; i += 1) {
+        if (range === timelineRanges[i]) {
+            return range; // It's valid
+        }
+    }
+
+    return "YEAR"; // Default time range for errors
+};
+
 DV.timeline = function (viewportId, data_container, options) {
     "use strict";
 
@@ -76,16 +93,16 @@ DV.timeline = function (viewportId, data_container, options) {
         Timeline.createBandInfo({
             eventSource: eventSource,
             date: results[0][startIdx], // TODO should be earliest date instead
-            width: "80%",
-            intervalUnit: Timeline.DateTime[options.detailRes.toUpperCase()],
+            width: "85%",
+            intervalUnit: Timeline.DateTime[DV.timelineValidRange(options.detailRes.toUpperCase())],
             intervalPixels: 100
         }),
         Timeline.createBandInfo({
             overview: true,
             eventSource: eventSource,
             date: results[0][startIdx],
-            width: "20%",
-            intervalUnit: Timeline.DateTime[options.overviewRes.toUpperCase()],
+            width: "15%",
+            intervalUnit: Timeline.DateTime[DV.timelineValidRange(options.overviewRes.toUpperCase())],
             intervalPixels: 200
         })
     ];

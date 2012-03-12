@@ -29,6 +29,11 @@
     {{else}}
     <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.initMap("http://data-viewer.ceic-ogov.yaco.es");
+        });
+    </script>
     {{/if}}
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">

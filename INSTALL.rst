@@ -10,23 +10,18 @@ Compile NodeJS
 
 You must download and compile node. http://nodejs.org/#download
 
-Download the lastest tar available (http://nodejs.org/dist/v0.6.6/node-v0.6.6.tar.gz)
+Download the lastest tar available (http://nodejs.org/dist/v0.6.12/node-v0.6.12.tar.gz)
 and do something like this::
 
- tar xvf node-v0.6.6.tar.gz
- cd node-v0.6.6
+ tar xvf node-v0.6.12.tar.gz
+ cd node-v0.6.12
  ./configure
  make
  sudo make install
 
 You can find more details in the documentation: https://github.com/joyent/node/wiki/Installation
 
-Install NPM
------------
-
-NPM is the node package manager, and you'll need it. Install it doing as root::
-
- curl http://npmjs.org/install.sh | sh
+It includes NPM, the NodeJS package manager.
 
 Deploy the Data Viewer
 ======================

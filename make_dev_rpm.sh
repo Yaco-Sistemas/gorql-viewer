@@ -49,6 +49,7 @@ rm -rf ${BUILD_ROOT}/BUILD/*
 rm -rf ${BUILD_ROOT}/BUILDROOT/*
 rm -rf /opt/${PACKAGE}
 rm -rf /var/tmp/*
+npm cache clean
 
 rpmbuild -ba ${PACKAGE}.spec
 

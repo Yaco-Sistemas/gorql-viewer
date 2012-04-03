@@ -61,7 +61,7 @@
     <section>
         <h1 class="first">${chart.type} Chart</h1>
         <div id="dv_viewport" class="dv_viewport">
-        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query={{html encoded_query}}&chart=${chart.type}" />{{/if}}
+        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query={{html encoded_query}}&amp;chart=${chart.type}{{each(idx, option) chart.options}}&amp;${option[0]}=${option[1]}{{/each}}" />{{/if}}
         </div>
     </section>
     {{/if}}

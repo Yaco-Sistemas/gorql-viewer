@@ -323,6 +323,24 @@ Para el caso del gráfico de tipo *mapea*:
 
     DV.initMapea('|example_domain|');
 
+El código quedaría tal que así para un gráfico de tipo *map*:
+
+.. code-block:: html
+
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.initMap('|example_domain|');
+            DV.writeDataToTable(Sizzle("#dv_table0")[0], 0);
+            DV.map("#dv_viewport0", "#dv_table0", {
+                description: "name",
+                lat: "lat",
+                long: "long",
+                sizeX: "600",
+                sizeY: "400"
+            });
+        });
+    </script>
+
 La siguiente llamada es la que se encarga de generar el gráfico deseado. Hay
 una función por cada tipo de gráfico soportado:
 

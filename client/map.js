@@ -34,6 +34,10 @@ DV.initMap = function (host) {
 DV.map = function (viewport_id, data_container, options) {
     "use strict";
 
+    if (OpenLayers.ImgPath === undefined) {
+        DV.initMap("");
+    }
+
     var sizzle = Sizzle, // JSLint hack
         headers,
         results,
@@ -43,7 +47,7 @@ DV.map = function (viewport_id, data_container, options) {
         markers = new OpenLayers.Layer.Markers("Markers"),
         size = new OpenLayers.Size(21, 25),
         icon = new OpenLayers.Icon(
-            "/javascripts/img/marker.png",
+            OpenLayers.ImgPath + "marker.png",
             size,
             new OpenLayers.Pixel(-(size.w / 2), -size.h) // offset
         ),
@@ -57,10 +61,6 @@ DV.map = function (viewport_id, data_container, options) {
         longIdx,
         descriptionIdx,
         i;
-
-    if (OpenLayers.ImgPath === undefined) {
-        DV.initMap("");
-    }
 
     container.id = "ol_viewport";
     container.style.width = options.sizeX + 'px';

@@ -30,7 +30,10 @@ var app = require.main,
 renderResults = function (response, params, error, results) {
     "use strict";
 
-    var data,
+    var charts = ['bar', 'pie', 'line', 'timeline', 'map', 'mapea'],
+        defaults = {},
+        chart,
+        data,
         aux,
         key,
         i;
@@ -41,20 +44,23 @@ renderResults = function (response, params, error, results) {
 
     if (params.embedded) {
 
-        aux = parseInt(params.idx, 10);
+        for (i = 0; i < charts.length; i += 1) {
+            aux = commons.getDefaultChartParameters(charts[i]);
+            chart = {};
+            commons.processChartParameters(aux.properties, {}, aux.defaults,
+                                           chart);
+            defaults[charts[i]] = chart;
+        }
+
+        aux = "if (!DV) { var DV = {}; } if (!DV.data) { DV.data = []; } " +
+            "DV.data[" + parseInt(params.idx, 10) + "] = " + JSON.stringify({
+                results: data.matrix,
+                headers: data.headers
+            }) + "; + DV.defaults = " + JSON.stringify(defaults) + ";";
 
         // 2.- Render JSON results
 
-        response.send("if (!DV) {" +
-            "   var DV = {};" +
-            "}" +
-            "if (!DV.data) {" +
-            "   DV.data = [];" +
-            "}" +
-            "DV.data[" + aux + "] = " + JSON.stringify({
-                results: data.matrix,
-                headers: data.headers
-            }) + ";", 200);
+        response.send(aux, 200);
 
     } else {
 

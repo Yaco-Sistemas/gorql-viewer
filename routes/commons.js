@@ -32,7 +32,6 @@ var app = require.main,
     dirname = require('path').dirname,
     readFileSync = require('fs').readFileSync,
     sparqlClient,
-    processParameters,
     sparqlCallback,
     contains;
 
@@ -82,7 +81,7 @@ sparqlCallback = function (response, params, renderCallback, cache, key) {
 
 // Process parameters and store them in chart object
 
-processParameters = function (properties, params, defaults, chart) {
+exports.processChartParameters = function (properties, params, defaults, chart) {
     "use strict";
 
     var i,
@@ -98,6 +97,62 @@ processParameters = function (properties, params, defaults, chart) {
     }
 };
 
+exports.getDefaultChartParameters = function (chartName) {
+    "use strict";
+
+    var d3par,
+        similepar,
+        layerspar,
+        family,
+        properties,
+        defaults;
+
+    d3par = [
+        {name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true},
+        {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}
+    ];
+    similepar = [
+        {name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'},
+        {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true},
+        {name: 'detailRes', 'default': true}, {name: 'overviewRes', 'default': true}
+    ];
+    layerspar = [
+        {name: 'lat'}, {name: 'long'}, {name: 'description'},
+        {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}
+    ];
+
+    // Process chart params
+    if (chartName === 'bar' || chartName === 'pie' || chartName === 'line') {
+        family = 'd3';
+        defaults = app.exports.set(chartName);
+        if (chartName === 'bar') {
+            d3par.push({name: 'landscape', 'default': true});
+        } else if (chartName === 'pie') {
+            d3par.push({name: 'sizeHighlight', 'default': true});
+        } else if (chartName === 'line') {
+            d3par.push({name: 'area', 'default': true});
+        }
+        properties = d3par;
+    } else if (chartName === 'timeline') {
+        family = 'simile';
+        defaults = app.exports.set(chartName);
+        properties = similepar;
+    } else if (chartName === 'map' || chartName === 'mapea') {
+        family = 'layers';
+        defaults = app.exports.set(chartName);
+        properties = layerspar;
+    } else {
+        // Don't support the type
+        return false;
+    }
+
+    return {
+        family: family,
+        properties: properties,
+        defaults: defaults
+    };
+};
+
 // Process GET petitions
 
 exports.processPetition = function (request, response, renderCallback) {
@@ -106,9 +161,6 @@ exports.processPetition = function (request, response, renderCallback) {
     // 1.- Parse GET parameters
 
     var params = request.query,
-        d3par,
-        similepar,
-        layerspar,
         chart = false,
         defaults,
         ua,
@@ -134,51 +186,28 @@ exports.processPetition = function (request, response, renderCallback) {
             chart.png = true;
         }
 
-        d3par = [
-            {name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true},
-            {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}
-        ];
-        similepar = [
-            {name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'},
-            {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true},
-            {name: 'detailRes', 'default': true}, {name: 'overviewRes', 'default': true}
-        ];
-        layerspar = [
-            {name: 'lat'}, {name: 'long'}, {name: 'description'},
-            {name: 'sizeX', 'default': true}, {name: 'sizeY', 'default': true}
-        ];
+        defaults = exports.getDefaultChartParameters(params.chart);
 
         // Process chart params
-        if ((params.chart === 'bar' || params.chart === 'pie' || params.chart === 'line') &&
+        if (defaults && defaults.family === 'd3' &&
                 params.labels !== undefined && params.series !== undefined) {
             chart.type = params.chart;
-            chart.family = 'd3';
-            defaults = app.exports.set(chart.type);
-
-            if (params.chart === 'bar') {
-                d3par.push({name: 'landscape', 'default': true});
-            } else if (params.chart === 'pie') {
-                d3par.push({name: 'sizeHighlight', 'default': true});
-            } else if (params.chart === 'line') {
-                d3par.push({name: 'area', 'default': true});
-            }
-
-            processParameters(d3par, params, defaults, chart);
+            chart.family = defaults.family;
+            exports.processChartParameters(defaults.properties, params,
+                                           defaults.defaults, chart);
             chart.series = chart.series.split(','); // series must be an array
-        } else if (params.chart === 'timeline' &&
-                    params.start !== undefined && params.title !== undefined) {
+        } else if (defaults && defaults.family === 'simile' &&
+                params.start !== undefined && params.title !== undefined) {
             chart.type = params.chart;
-            chart.family = 'simile';
-            defaults = app.exports.set(chart.type);
-
-            processParameters(similepar, params, defaults, chart);
-        } else if ((params.chart === 'map' || params.chart === 'mapea') &&
-                    params.lat !== undefined && params.long !== undefined) {
+            chart.family = defaults.family;
+            exports.processChartParameters(defaults.properties, params,
+                                           defaults.defaults, chart);
+        } else if (defaults && defaults.family === 'layers' &&
+                params.lat !== undefined && params.long !== undefined) {
             chart.type = params.chart;
-            chart.family = 'layers';
-            defaults = app.exports.set(chart.type);
-
-            processParameters(layerspar, params, defaults, chart);
+            chart.family = defaults.family;
+            exports.processChartParameters(defaults.properties, params,
+                                           defaults.defaults, chart);
         } else {
             // Don't support the type
             chart = false;

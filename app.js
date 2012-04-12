@@ -83,6 +83,7 @@ configureApp = function (app, opts) {
     app.set('line', opts.line);
     app.set('timeline', opts.timeline);
     app.set('map', opts.map);
+    app.set('mapea', opts.mapea);
 };
 
 app.configure('development', function () {

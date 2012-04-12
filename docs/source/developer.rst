@@ -231,9 +231,7 @@ Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
                 labels: "country_name",
                 series: "population",
                 sizeX: "600",
-                sizeY: "400",
-                sizeLabel: "100",
-                sizeHighlight: "30"
+                sizeY: "400"
             });
         });
     </script>
@@ -334,9 +332,7 @@ El código quedaría tal que así para un gráfico de tipo *map*:
             DV.map("#dv_viewport0", "#dv_table0", {
                 description: "name",
                 lat: "lat",
-                long: "long",
-                sizeX: "600",
-                sizeY: "400"
+                long: "long"
             });
         });
     </script>
@@ -362,8 +358,9 @@ Aceptan tres parámetros:
 .. note::
 
     Según el tipo de gráfico las propiedades del objeto de opciones pasado
-    serán unas u otras. **Todos los parámetros son obligatorios**, a diferencia
-    que en la API descrita en :doc:`user`.
+    serán unas u otras. Al igual que en la API descrita en el :doc:`user` no
+    todos los parámetros son obligatorios, se puede consultar dicha API para
+    saber cuáles son opcionales.
 
 .. code-block:: javascript
 
@@ -371,9 +368,7 @@ Aceptan tres parámetros:
         labels: "country_name",
         series: "population",
         sizeX: "600",
-        sizeY: "400",
-        sizeLabel: "100",
-        sizeHighlight: "30"
+        sizeY: "400"
     });
 
 Para el caso particular del gráfico *mapea* es necesario pasarle un parámetro

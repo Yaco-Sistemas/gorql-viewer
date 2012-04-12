@@ -34,6 +34,8 @@ DV.initMapea = function (host) {
 DV.mapea = function (viewport_id, data_container, options) {
     "use strict";
 
+    DV.processDefaultOptions(options, 'mapea');
+
     var sizzle = Sizzle, // JSLint hack
         viewport = sizzle(viewport_id)[0],
         iframe = document.createElement('iframe'),

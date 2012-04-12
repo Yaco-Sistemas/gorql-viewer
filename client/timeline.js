@@ -46,6 +46,8 @@ DV.timelineValidRange = function (range) {
 DV.timeline = function (viewportId, data_container, options) {
     "use strict";
 
+    DV.processDefaultOptions(options, 'timeline');
+
     var sizzle = Sizzle, // JSLint hack
         viewport = sizzle(viewportId)[0],
         eventSource,

@@ -238,6 +238,7 @@ DV.merge((function () {
 
         chart = function (container, data_container, options) {
             var data = DV.extractData(data_container, options);
+            DV.processDefaultOptions(options, 'line');
             init(d3, container, data.labels, data.series, options);
         };
 

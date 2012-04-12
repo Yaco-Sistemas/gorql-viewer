@@ -22,6 +22,7 @@ public/javascripts/line.js
 public/javascripts/map.js
 public/javascripts/mapea.js
 public/javascripts/minedata.js
+public/javascripts/defaults.js
 public/javascripts/pie.js
 public/javascripts/sizzle.js
 public/javascripts/timeline-api.js

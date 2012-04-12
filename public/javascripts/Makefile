@@ -29,7 +29,7 @@ all: dv-core dv-d3 dv-time dv-openlayers dv-mapea
 	cat dv-openlayers.js >> dv.min.js
 	cat dv-mapea.js >> dv.min.js
 
-dv-core: ../../node_modules/uglify-js/bin/uglifyjs ../../client/sizzle.js ../../client/writetable.js ../../client/minedata.js ../../client/domready.js ../../node_modules/jqtpl/lib/jqtpl.js
+dv-core: ../../node_modules/uglify-js/bin/uglifyjs ../../client/sizzle.js ../../client/writetable.js ../../client/minedata.js ../../client/defaults.js ../../client/domready.js ../../node_modules/jqtpl/lib/jqtpl.js
 	echo "// Copyright 2012 Yaco Sistemas S.L. - Developed by <ablanco@yaco.es> - EUPL 1.1 License - http://joinup.ec.europa.eu/software/page/eupl" > dv-core.js
 	echo "var exports = {};" >> dv-core.js
 	$(UJS) $(UJSFLAGS) ../../client/sizzle.js >> dv-core.js
@@ -37,6 +37,7 @@ dv-core: ../../node_modules/uglify-js/bin/uglifyjs ../../client/sizzle.js ../../
 	$(UJS) $(UJSFLAGS) ../../node_modules/jqtpl/lib/jqtpl.js >> dv-core.js
 	$(UJS) $(UJSFLAGS) ../../client/writetable.js >> dv-core.js
 	$(UJS) $(UJSFLAGS) ../../client/minedata.js >> dv-core.js
+	$(UJS) $(UJSFLAGS) ../../client/defaults.js >> dv-core.js
 
 dv-d3: dv-core ../../client/d3.js ../../client/d3.layout.js ../../client/bar.js ../../client/line.js ../../client/pie.js
 	$(UJS) $(UJSFLAGS) ../../client/d3.js > dv-d3.js
@@ -82,12 +83,13 @@ dv-custom: dv-core
 cleancustom: dv-custom.js
 	rm -f dv-custom.js
 
-debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/mapea.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/openlayers/img ../../client/openlayers/theme ../../client/timeline/timeline_ajax ../../client/timeline/timeline_js ../../client/Base64.js ../../client/mapea.js
+debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/mapea.js ../../client/minedata.js ../../client/defaults.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/openlayers/img ../../client/openlayers/theme ../../client/timeline/timeline_ajax ../../client/timeline/timeline_js ../../client/Base64.js ../../client/mapea.js
 	cp ../../client/sizzle.js .
 	cp ../../client/d3.js .
 	cp ../../client/d3.layout.js .
 	cp ../../client/domready.js .
 	cp ../../client/minedata.js .
+	cp ../../client/defaults.js .
 	cp ../../client/openlayers/OpenLayers.js .
 	cp -R ../../client/openlayers/img .
 	cp -R ../../client/openlayers/theme .
@@ -102,12 +104,13 @@ debug: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../cl
 	cp ../../client/pie.js .
 	cp ../../client/timeline.js .
 
-cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js mapea.js minedata.js OpenLayers.js timeline-api.js pie.js sizzle.js timeline.js img theme timeline_ajax timeline_js Base64.js
+cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js mapea.js minedata.js defaults.js OpenLayers.js timeline-api.js pie.js sizzle.js timeline.js img theme timeline_ajax timeline_js Base64.js
 	rm -f sizzle.js
 	rm -f d3.js
 	rm -f d3.layout.js
 	rm -f domready.js
 	rm -f minedata.js
+	rm -f defaults.js
 	rm -f OpenLayers.js
 	rm -f timeline-api.js
 	rm -f Base64.js
@@ -122,7 +125,7 @@ cleandebug: bar.js d3.js d3.layout.js domready.js line.js map.js mapea.js mineda
 	rm -rf timeline_ajax
 	rm -rf timeline_js
 
-bundle: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js ../../client/Base64.js ../../client/mapea.js
+bundle: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../client/domready.js ../../client/line.js ../../client/map.js ../../client/minedata.js ../../client/defaults.js ../../client/openlayers/OpenLayers.js ../../client/timeline/timeline_js/timeline-api.js ../../client/pie.js ../../client/sizzle.js ../../client/timeline.js ../../client/writetable.js ../../node_modules/jqtpl/lib/jqtpl.js ../../client/Base64.js ../../client/mapea.js
 	echo "var exports = {};" > dv-bundle.js
 	cat ../../client/sizzle.js >> dv-bundle.js
 	cat ../../client/d3.js >> dv-bundle.js
@@ -131,6 +134,7 @@ bundle: ../../client/bar.js ../../client/d3.js ../../client/d3.layout.js ../../c
 	cat ../../client/domready.js >> dv-bundle.js
 	cat ../../client/writetable.js >> dv-bundle.js
 	cat ../../client/minedata.js >> dv-bundle.js
+	cat ../../client/defaults.js >> dv-bundle.js
 	cat ../../client/openlayers/OpenLayers.js >> dv-bundle.js
 	cat ../../client/timeline/timeline_js/timeline-api.js >> dv-bundle.js
 	cat ../../client/Base64.js >> dv-bundle.js

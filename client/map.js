@@ -38,6 +38,8 @@ DV.map = function (viewport_id, data_container, options) {
         DV.initMap("");
     }
 
+    DV.processDefaultOptions(options, 'map');
+
     var sizzle = Sizzle, // JSLint hack
         headers,
         results,

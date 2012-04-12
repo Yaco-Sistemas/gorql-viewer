@@ -56,7 +56,7 @@ renderResults = function (response, params, error, results) {
             "DV.data[" + parseInt(params.idx, 10) + "] = " + JSON.stringify({
                 results: data.matrix,
                 headers: data.headers
-            }) + "; + DV.defaults = " + JSON.stringify(defaults) + ";";
+            }) + "; DV.defaults = " + JSON.stringify(defaults) + ";";
 
         // 2.- Render JSON results
 

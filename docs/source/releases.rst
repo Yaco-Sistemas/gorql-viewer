@@ -1,15 +1,25 @@
 1.0beta1
 ========
 
-Notas sobre los rpms
---------------------
+Lista de funcionalidades
+------------------------
 
-In cursus mauris feugiat dui fermentum luctus. Sed ullamcorper aliquet urna sit amet adipiscing. Integer sagittis tellus orci. Aenean euismod pulvinar tellus id convallis. Quisque cursus quam ante, in egestas sem. Donec fermentum, augue sit amet tincidunt cursus, turpis arcu luctus leo, ut congue arcu orci a velit. Integer feugiat erat sit amet arcu varius aliquet. Suspendisse potenti. Integer orci metus, luctus ut rhoncus a, dapibus ut mauris. Phasellus imperdiet leo ac sem interdum quis adipiscing orci euismod. Morbi adipiscing rhoncus enim ac accumsan. Vestibulum cursus mi eget nisi elementum vel adipiscing tortor interdum.
+- Fácilmente escalable.
+- SPARQL endpoint configurable.
+- Soporte de parámetros por defecto configurables para los gráficos.
+- Soporte de memcache para almacenar los resultados de las consultas SPARQL.
+- Soporte de las siguientes visualizaciones interactivas:
 
-Novedades
----------
+  - Barras
+  - Líneas
+  - Sectores (Tarta)
+  - Línea de tiempo
+  - Mapas (Open Street Maps)
+  - Mapas (Mapea)
 
-- In cursus mauris feugiat dui fermentum luctus.
-- Sed ullamcorper aliquet urna sit amet adipiscing.
-- Integer sagittis tellus orci.
-- Aenean euismod pulvinar tellus id convallis.
+- Soporte de navegadores antiguos mediante imágenes de los gráficos más
+  complejos.
+- Soporte de temas para los gráficos mediante CSS.
+- Soporte de embebido de la vista de resultados en otras páginas.
+- Soporte de generación de empaquetados minimizados personalizados de las
+  librerías JavaScript para embebido.

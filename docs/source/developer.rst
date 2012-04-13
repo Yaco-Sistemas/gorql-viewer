@@ -205,6 +205,14 @@ generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
     <link rel="stylesheet" href="|example_domain|/stylesheets/map.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/mapea.css" />
 
+Para el caso particular de los gráficos de tipo *map* es necesario cargar una
+hoja de estilo más. Dicha CSS es la de OpenLayers y se cargaría añadiendo la
+siguiente línea **antes de la inclusión de map.css**.
+
+.. code-block:: html
+
+    <link rel="stylesheet" href="|example_domain|/javascripts/theme/default/style.css" />
+
 Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.
 

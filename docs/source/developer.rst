@@ -197,7 +197,7 @@ generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="|example_domain|/stylesheets/style.css" />
+    <link rel="stylesheet" href="|example_domain|/stylesheets/base.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/bar.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/pie.css" />
     <link rel="stylesheet" href="|example_domain|/stylesheets/line.css" />

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
-        <name>Resultados</name>
+        <name>${lingua.kml.result}s</name>
         {{each(idx, place) places}}
         <Placemark>
             {{if place.description}}
             <name>${place.description}</name>
             {{else}}
-            <name>Resultado ${idx}</name>
+            <name>${lingua.kml.result} ${idx}</name>
             {{/if}}
             <Point>
                 <coordinates>${place.lon},${place.lat}</coordinates>

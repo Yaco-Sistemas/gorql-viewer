@@ -1,3 +1,19 @@
 {
-    "title": "Data Viewer"
+    "title": "Data Viewer",
+    "viewer": {
+        "chart": {
+            "bar": "Bar chart",
+            "pie": "Pie chart",
+            "line": "Line chart",
+            "timeline": "Timeline",
+            "map": "Open Street Maps",
+            "mapea": "Mapea"
+        },
+        "data": "Data",
+        "query": "Query",
+        "wrong": "Something wrong happened"
+    },
+    "kml": {
+        "result": "Result"
+    }
 }

@@ -1,3 +1,19 @@
 {
-    "title": "Visor de Datos"
+    "title": "Visor de Datos",
+    "viewer": {
+        "chart": {
+            "bar": "Gráfico de barras",
+            "pie": "Gráfico de sectores",
+            "line": "Gráfico de líneas",
+            "timeline": "Línea de tiempo",
+            "map": "Mapas - Open Street Maps",
+            "mapea": "Mapea"
+        },
+        "data": "Datos",
+        "query": "Consulta",
+        "wrong": "Se ha producido un error"
+    },
+    "kml": {
+        "result": "Resultado"
+    }
 }

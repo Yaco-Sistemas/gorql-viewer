@@ -27,6 +27,7 @@
  */
 
 var express = require('express'),
+    lingua = require('lingua'),
     Memcached = require('memcached'),
     viewer = require('./routes/viewer'),
     png = require('./routes/png'),
@@ -65,12 +66,20 @@ app.configure(function () {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'html');
     app.register('.html', require('jqtpl').express);
+
+    app.use(lingua(app, {
+        defaultLocale: 'en',
+        path: __dirname + '/i18n'
+    }));
+
     app.set('debug_charts', globalOpts.debug);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(app.router);
+
     // static is not in dot notation because of JSLint
     app.use(express['static'](__dirname + '/public'));
+
+    app.use(app.router);
 });
 
 configureApp = function (app, opts) {

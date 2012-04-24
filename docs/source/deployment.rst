@@ -5,7 +5,7 @@ Manual de despliegue
 Entorno de desarrollo
 =====================
 
-El proceso detallado para desplegar el visor de colecciones para un entorno
+El proceso detallado para desplegar GORQL Viewer para un entorno
 de desarrollo se encuentra en el :doc:`developer`.
 
 Dependencias
@@ -14,15 +14,17 @@ Dependencias
 NodeJS
 ------
 
-NodeJS es necesario para la ejecución del visor. Se provee de un paquete RPM
-para su instalación, el proceso se detalla en el siguiente apartado.
+NodeJS es necesario para la ejecución de GORQL Viewer. Se proporciona un
+paquete RPM para su instalación, el proceso se detalla en el siguiente
+apartado.
 
 ImageMagick
 -----------
 
-ImageMagick se utiliza para la generación de imágenes png de los gráficos en
-el servidor. No se provee RPM, pero está disponible en el repositorio. Se
-puede instalar haciendo uso de yum:
+ImageMagick se utiliza para la generación de imágenes PNG de los gráficos en
+el servidor. No se provee RPM, pero normalmente está disponible en el
+repositorio básico del sistema operativo. Se puede instalar haciendo uso de
+yum:
 
 ::
 
@@ -32,12 +34,12 @@ Memcached
 ---------
 
 Memcached es un servidor de cache y, aunque no es una dependencia obligatoria,
-sí que es muy recomendable. Si Memcached está instalado y corriendo, el visor
-hará uso de la caché para minimizar las peticiones al endpoint SparQL agilizando
-mucho el funcionamiento.
+sí que es muy recomendable. Si Memcached está instalado y corriendo, GORQL
+Viewer hará uso de la caché para minimizar las peticiones al endpoint SparQL
+agilizando mucho el funcionamiento.
 
-No se provee RPM, pero está disponible en el repositorio. Se
-puede instalar haciendo uso de yum:
+No se provee RPM, pero normalmente está disponible en el repositorio básico
+del sistema operativo. Se puede instalar haciendo uso de yum:
 
 ::
 
@@ -46,13 +48,13 @@ puede instalar haciendo uso de yum:
 Otros
 -----
 
-Las librerías que requiere el visor se distribuyen en el paquete del mismo, con
-lo que al instalar el visor se instalan también sus dependencias.
+Las librerías que requiere GORQL Viewer se distribuyen en el paquete del mismo,
+con lo que al instalarlo se instalan también sus dependencias.
 
 NodeJS
 ======
 
-NodeJS es la tecnología sobre la que se ha construido el visor de colecciones.
+NodeJS es la tecnología sobre la que se ha construido GORQL Viewer.
 Se puede instalar a partir de un RPM:
 
 *x86_64*
@@ -67,15 +69,15 @@ Una vez descargado el paquete se instala ejecutando:
  # rpm -Uvh nodejs-0.6.7-1.el6.x86_64.rpm
 
 Este paquete provee NodeJS_ y NPM_ (el sistema de paquetería de NodeJS),
-necesarios para el funcionamiento del visor de colecciones.
+necesarios para el funcionamiento de GORQL Viewer.
 
 .. _NodeJS: http://nodejs.org/
 .. _NPM: http://npmjs.org/
 
-Data Viewer
-===========
+GORQL Viewer
+============
 
-Una vez instalado NodeJS, se puede desplegar el visor. Para ello se utiliza el
+Una vez instalado NodeJS, se puede desplegar GORQL Viewer. Para ello se utiliza el
 paquete RPM:
 
 *x86_64*
@@ -89,20 +91,20 @@ Una vez descargado el paquete se instala ejecutando:
 
  # rpm -Uvh dataviewer-0.0.1-1.x86_64.rpm
 
-Este paquete incluye el visor y todas las librerías que utiliza, y crea un
-script de servicio para el arranque del servidor.
+Este paquete incluye GORQL Viewer y todas las librerías que utiliza, y crea un
+script de servicio para el arranque y parada del servidor.
 
-Los contenidos del paquete se despliegan en `/opt/dataviewer/`. Los logs se
-encuentran en `/opt/dataviewer/.forever/`.
+Los contenidos del paquete se despliegan en `/opt/gorqlviewer/`. Los logs se
+encuentran en `/opt/gorqlviewer/.forever/`.
 
 El servidor escucha, con la configuración por defecto, en el **puerto 3000**.
 La configuración del mismo se encuentra en el fichero `settings.js` en el
-directorio `/etc/dataviewer/`.
+directorio `/etc/gorqlviewer/`.
 
 Gestión del servicio
 --------------------
 
-Gracias al script de servicio *dataviewer* es muy sencillo gestionar el
+Gracias al script de servicio *gorqlviewer* es muy sencillo gestionar el
 **arranque**, **parada** y **monitorización** del servidor. Para ello tan sólo
 hemos de invocar al servicio con el argumento *start*, *stop* o *status*,
 respectivamente.
@@ -116,32 +118,32 @@ servidor se relance en caso de que ocurra algún problema.
 
 ::
 
- # service dataviewer start
- info:   Forever processing file: /opt/dataviewer/app.js
+ # service gorqlviewer start
+ info:   Forever processing file: /opt/gorqlviewer/app.js
 
 ::
 
- # service dataviewer stop
+ # service gorqlviewer stop
  info:   Forever stopped process:
  data:       uid  command script                 forever pid  logfile                           uptime
- data:   [0] ekL8 node    /opt/dataviewer/app.js 8101    8102 /opt/dataviewer/.forever/ekL8.log 0:0:40:0.5
+ data:   [0] ekL8 node    /opt/gorqlviewer/app.js 8101    8102 /opt/gorqlviewer/.forever/ekL8.log 0:0:40:0.5
 
 ::
 
- # service dataviewer status
+ # service gorqlviewer status
  info:   Forever processes running
  data:       uid  command script                 forever pid  logfile                           uptime
- data:   [0] ekL8 node    /opt/dataviewer/app.js 8101    8102 /opt/dataviewer/.forever/ekL8.log 0:0:39:15.924
+ data:   [0] ekL8 node    /opt/gorqlviewer/app.js 8101    8102 /opt/gorqlviewer/.forever/ekL8.log 0:0:39:15.924
 
 Configuración
 -------------
 
-La configuración del visor se encuentra en el directorio `/etc/dataviewer/`.
+La configuración del visor se encuentra en el directorio `/etc/gorqlviewer/`.
 
 settings.js
 ~~~~~~~~~~~
 
-Éste es el fichero principal de configuración del visor de colecciones. Incluye
+Éste es el fichero principal de configuración de GORQL Viewer. Incluye
 tres grupos de parámetros: *global*, *development* y *production*. Que son
 opciones globales para todos los casos, específicas para entornos de desarrollo,
 y específicas para entornos de producción, respectivamente.

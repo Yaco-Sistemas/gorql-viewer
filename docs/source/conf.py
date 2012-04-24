@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Data Viewer'
-copyright = u'2011, Yaco Sistemas S.L.'
+project = u'GORQL'
+copyright = u'2011-2012, Yaco Sistemas S.L.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

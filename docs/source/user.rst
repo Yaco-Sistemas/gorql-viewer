@@ -5,7 +5,7 @@ Manual del usuario
 Cómo hacer consultas
 ====================
 
-Las consultas se deben realizar a la url |example_domain|/viewer/ y a
+Las consultas se deben realizar a la url http://example.com/viewer/ y a
 continuación se añaden los parámetros en formato GET.
 
  - **query**
@@ -38,7 +38,7 @@ Los parámetros se organizan por *familias* de gráficos.
 Gráficos SVG
 ~~~~~~~~~~~~
 
-Este grupo gráficos engloba a los gráficos de tipo *bar*, *pie* y *line*.
+Este grupo de gráficos engloba a los gráficos de tipo *bar*, *pie* y *line*.
 
  - **labels**
    Propiedad seleccionada en la consulta SPARQL que se usará como etiqueta en
@@ -76,7 +76,7 @@ Líneas (*line*)
 ...............
 
  - **area**
-   Valor booleano que determina si se debe resaltar el área debajo de las
+   Valor booleano que determina si se debe rellenar el área debajo de las
    líneas. *Opcional*.
 
 .. _simile-chart:
@@ -118,7 +118,7 @@ Este grupo gráficos engloba a los gráficos de tipo *timeline*.
    - millennium
 
  - **overviewRes**
-   Resolución temporal de la banda con la vista resumisda de los eventos. Los
+   Resolución temporal de la banda con la vista resumida de los eventos. Los
    posibles valores que pude tomar son los mismos que para el parámetro
    *detailRes*. Se recomienda configurar este parámetro a una resolución menor
    que *detailRes* (una unidad mayor de tiempo). *Opcional*.
@@ -147,7 +147,7 @@ Ejemplos
 
 Consulta que pinta un gráfico de sectores (*pie*) de 700 píxeles de ancho::
 
-    |example_domain|/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20(%3Fpopulation%20%3E%2015000000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&chart=pie&labels=country_name&series=population&sizeX=700
+    http://example.com/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20%7B%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20(%3Fpopulation%20%3E%2015000000%20%26%26%20langMatches(lang(%3Fcountry_name)%2C%20%22ES%22))%20.%20%7D&chart=pie&labels=country_name&series=population&sizeX=700
 
 Además de la consulta SPARQL se le pasan los siguientes parámetros para dibujar
 el gráfico de sectores::

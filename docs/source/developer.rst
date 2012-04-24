@@ -48,7 +48,7 @@ Hay que instalarlo cómo **root** ejecutando:
 
     curl http://npmjs.org/install.sh | sh
 
-Despliegue del Data Viewer
+Despliegue de GORQL Viewer
 --------------------------
 
 Lo primero es obtener el código del repositorio mercurial:
@@ -109,7 +109,7 @@ A continuación se puede arrancar el servidor en modo debug ejecutando:
 Accediendo a http://localhost:8080/debug?port=5858 con un navegador basado en
 webkit se mostrarán las herramientas de depuración para depurar el servidor.
 
-El visor estará disponible en http://localhost:3000/ igual que sin la
+GORQL Viewer estará disponible en http://localhost:3000/ igual que sin la
 depuración activada.
 
 Embebido de informes
@@ -119,7 +119,7 @@ Es posible embeber informes y gráficos en otras páginas. Lo que se embebe es
 el gráfico y la tabla con los datos, aunque es posible ocultarlos si sólo
 se desea mostrar uno de los dos.
 
-Al embeber un informe se realiza una petición al visor de colecciones con la
+Al embeber un informe se realiza una petición a GORQL Viewer con la
 consulta deseada para obtener los resultados. La generación de la tabla con los
 datos, o del gráfico, se hace en el cliente mediante JavaScript.
 
@@ -137,7 +137,7 @@ siguiente tag no sería necesario cargar ningún otro JavaScript:
 
 .. code-block:: html
 
-    <script type="text/javascript" src="|example_domain|/javascripts/dv.min.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv.min.js"></script>
 
 Dicho fichero es bastante pesado, por ello se distribuyen las librerías
 divididas en módulos de forma que no sea necesario cargarlo todo, si no sólo
@@ -173,11 +173,11 @@ Los tags serían, para cada librería:
 
 .. code-block:: html
 
-    <script type="text/javascript" src="|example_domain|/javascripts/dv-core.js"></script>
-    <script type="text/javascript" src="|example_domain|/javascripts/dv-d3.js"></script>
-    <script type="text/javascript" src="|example_domain|/javascripts/dv-time.js"></script>
-    <script type="text/javascript" src="|example_domain|/javascripts/dv-openlayers.js"></script>
-    <script type="text/javascript" src="|example_domain|/javascripts/dv-mapea.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv-core.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv-d3.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv-time.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv-openlayers.js"></script>
+    <script type="text/javascript" src="http://example.com/javascripts/dv-mapea.js"></script>
 
 Para el caso del gráfico de tipo *timeline* hay que añadir un tag extra en la
 cabecera de la página (tag ``head``) **antes de cargar las librerías
@@ -186,8 +186,8 @@ JavaScript**, es decir, antes de los tags anteriores:
 .. code-block:: html
 
     <script type="text/javascript">
-        var Timeline_ajax_url="|example_domain|/javascripts/timeline_ajax/simile-ajax-api.js",
-            Timeline_urlPrefix='|example_domain|/javascripts/timeline_js/',
+        var Timeline_ajax_url="http://example.com/javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='http://example.com/javascripts/timeline_js/',
             Timeline_parameters='bundle=true&defaultLocale="es"';
     </script>
 
@@ -197,13 +197,13 @@ generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="|example_domain|/stylesheets/base.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/bar.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/pie.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/line.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/timeline.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/map.css" />
-    <link rel="stylesheet" href="|example_domain|/stylesheets/mapea.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/style.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/bar.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/pie.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/line.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/timeline.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/map.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/mapea.css" />
 
 Para el caso particular de los gráficos de tipo *map* es necesario cargar una
 hoja de estilo más. Dicha CSS es la de OpenLayers y se cargaría añadiendo la
@@ -211,7 +211,7 @@ siguiente línea **antes de la inclusión de map.css**.
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="|example_domain|/javascripts/theme/default/style.css" />
+    <link rel="stylesheet" href="http://example.com/javascripts
 
 Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.
@@ -231,7 +231,7 @@ Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
 
 .. code-block:: html
 
-    <script type="text/javascript" src="|example_domain|/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}&amp;embedded=true&amp;idx=0"></script>
+    <script type="text/javascript" src="http://example.com/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}&amp;embedded=true&amp;idx=0"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.writeDataToTable(Sizzle("#dv_table0")[0], 0);
@@ -239,11 +239,13 @@ Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
                 labels: "country_name",
                 series: "population",
                 sizeX: "600",
-                sizeY: "400"
+                sizeY: "400",
+                sizeLabel: "100",
+                sizeHighlight: "30"
             });
         });
     </script>
-    <noscript><a href="|example_domain|/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}">Ver resultados en el visor</a></noscript>
+    <noscript><a href="http://example.com/viewer/?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%20PREFIX%20type%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2F%3E%20PREFIX%20prop%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%20SELECT%20%3Fcountry_name%20%3Fpopulation%20WHERE%20{%20%3Fcountry%20a%20type%3ALandlockedCountries%20%3B%20rdfs%3Alabel%20%3Fcountry_name%20%3B%20prop%3ApopulationEstimate%20%3Fpopulation%20.%20FILTER%20%28%3Fpopulation%20%3E%2010000000%20%26%26%20langMatches%28lang%28%3Fcountry_name%29%2C%20%22ES%22%29%29%20.%20}">Ver resultados en el visor</a></noscript>
     <div id="dv_viewport0" class="dv_viewport"></div>
     <table id="dv_table0" class="dv_table"></table>
 
@@ -314,20 +316,20 @@ llamada extra de inicialización, antes de llamar a la función que se encarga d
 generar el gráfico deseado.
 
 Esta llamada se encarga de inicializar las librerías utilizadas para generar el
-gráfico, y reciben un único parámetro, el ``host`` donde se encuentra el visor
-de colecciones.
+gráfico, y reciben un único parámetro, el ``host`` donde se encuentra GORQL
+Viewer.
 
 Para el caso del gráfico de tipo *map*:
 
 .. code-block:: javascript
 
-    DV.initMap('|example_domain|');
+    DV.initMap('http://example.com');
 
 Para el caso del gráfico de tipo *mapea*:
 
 .. code-block:: javascript
 
-    DV.initMapea('|example_domain|');
+    DV.initMapea('http://example.com');
 
 El código quedaría tal que así para un gráfico de tipo *map*:
 
@@ -388,6 +390,6 @@ La etiqueta ``noscript`` es necesaria para proveer de un mecanismo de *fallback*
 para los casos en los que el usuario no dispone de JavaScript en su navegador.
 
 Debe estár a continuación de la etiqueta script con el código de inicialización
-del informe y contener un enlace al visor con la consulta en SPARQL, y ningún
-parámetro más. Al usuario que acceda sin capacidad de JavaScript se le
+del informe y contener un enlace a GORQL Viewer con la consulta en SPARQL, y
+ningún parámetro más. Al usuario que acceda sin capacidad de JavaScript se le
 mostrará este enlace, y podrá así acceder a los resultados de la consulta.

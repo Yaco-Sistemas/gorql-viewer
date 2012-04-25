@@ -406,6 +406,11 @@ Lo primero es obtener el código del repositorio mercurial:
 Una vez que se haya terminado de clonar el proyecto se puede proceder a la
 generación de los RPM.
 
+.. note::
+
+    Para poder generar los RPM son necesarios que estén instalados en el
+    sistema *mercurial* y *rpm-build*
+
 NodeJS
 ------
 
@@ -472,7 +477,7 @@ sistema de paquetería del sistema operativo:
 Generación
 ~~~~~~~~~~
 
-Lo primero es editar el fichero *ceic-ogov-data-viewer/specs/gorqlviewer.spec*
+Lo primero es editar el fichero *ceic-ogov-data-viewer/specs/gorql-viewer.spec*
 del visor y modificar la versión del paquete a la deseada, se trata de la
 línea que comienza con **Version:**.
 
@@ -482,18 +487,16 @@ especificada en el fichero .spec**:
 
 .. code-block:: bash
 
-    mv ceic-ogov-data-viewer gorqlviewer-VERSION
-    tar cf gorqlviewer-VERSION.tar gorqlviewer-VERSION
-    gzip gorqlviewer-VERSION.tar
-    mv gorqlviewer-VERSION ceic-ogov-data-viewer
+    cd ceic-ogov-data-viewer
+    hg archive -t tgz gorql-viewer-VERSION.tar.gz
 
 Para generar el paquete hay que copiar el **spec** y el **tar.gz** a los
 correspondientes directorios de generación:
 
 .. code-block:: bash
 
-    cp ceic-ogov-data-viewer/specs/gorqlviewer.spec /usr/src/redhat/SPECS/
-    cp gorqlviewer-VERSION.tar.gz /usr/src/redhat/SOURCES/
+    cp ceic-ogov-data-viewer/specs/gorql-viewer.spec /usr/src/redhat/SPECS/
+    cp ceic-ogov-data-viewer/gorql-viewer-VERSION.tar.gz /usr/src/redhat/SOURCES/
 
 Con esto queda preparada la generación del paquete, para ello sólo hay que
 ejecutar los siguientes comandos:
@@ -502,7 +505,19 @@ ejecutar los siguientes comandos:
 
     npm cache clean
     cd /usr/src/redhat/SPECS/
-    rpmbuild -ba gorqlviewer.spec
+    rpmbuild -ba gorql-viewer.spec
 
 Cuando termine el proceso se habrá generado el paquete RPM, que estará
-disponible en */usr/src/redhat/RPMS/x86_64/gorqlviewer-VERSION-1.x86_64.rpm*
+disponible en */usr/src/redhat/RPMS/x86_64/gorql-viewer-VERSION-1.x86_64.rpm*
+
+.. note::
+
+    Cuando se producen errores en la generación de un RPM es habitual que
+    queden restos en los directorios temporales que hay que borrar antes de
+    volver a intentar la generación de dicho RPM. Los directorios a limpiar
+    son:
+
+        - /usr/src/redhat/BUILD
+        - /usr/src/redhat/BUILDROOT
+        - /var/tmp
+        - /opt/gorql-viewer

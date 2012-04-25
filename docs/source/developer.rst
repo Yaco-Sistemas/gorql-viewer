@@ -408,8 +408,8 @@ generación de los RPM.
 
 .. note::
 
-    Para poder generar los RPM son necesarios que estén instalados en el
-    sistema *mercurial* y *rpm-build*
+    Para poder generar los RPM es necesario que estén instalados en el sistema
+    *mercurial* y *rpm-build*
 
 NodeJS
 ------

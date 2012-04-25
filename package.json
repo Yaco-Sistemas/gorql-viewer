@@ -1,5 +1,5 @@
 {
-    "name": "data-viewer",
+    "name": "gorql-viewer",
     "version": "0.0.1",
     "private": true,
     "dependencies": {

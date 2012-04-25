@@ -5,7 +5,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 0.0.1hg253
+Version: 0.0.1hg257
 Release: 1
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
@@ -65,12 +65,12 @@ rm -rf $RPM_BUILD_ROOT
 %{installdir}/views
 %{installdir}/node_modules
 %{installdir}/i18n
-%attr(755,%{name},%{name}) %{installdir}/.forever
+%attr(755,%{user},%{user}) %{installdir}/.forever
 %{installdir}/app.js
 %{installdir}/package.json
-%config %attr(755,%{name},%{name}) %{installdir}/settings.js
+%config %attr(755,%{user},%{user}) %{installdir}/settings.js
 /etc/%{name}
-%attr(755,%{name},%{name}) %{installdir}/%{name}.sh
+%attr(755,%{user},%{user}) %{installdir}/%{name}.sh
 
 %pre
 # check if this the first installation

@@ -24,13 +24,13 @@ Compilar NodeJS
 ~~~~~~~~~~~~~~~
 
 Primero se descarga el último tar disponible
-(http://nodejs.org/dist/v0.6.7/node-v0.6.7.tar.gz) y luego se ejecutan los
+(http://nodejs.org/dist/v0.6.15/node-v0.6.15.tar.gz) y luego se ejecutan los
 siguientes comandos:
 
 .. code-block:: bash
 
-    tar xvf node-v0.6.7.tar.gz
-    cd node-v0.6.7
+    tar xvf node-v0.6.15.tar.gz
+    cd node-v0.6.15
     ./configure
     make
     sudo make install

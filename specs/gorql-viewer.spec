@@ -47,6 +47,7 @@ rm -f %{installdir}/make_dev_rpm.sh
 mkdir -p `dirname $RPM_BUILD_ROOT%{installdir}`
 mkdir -p $RPM_BUILD_ROOT%{docdir}
 mv %{installdir}/README.rst $RPM_BUILD_ROOT%{docdir}/
+mv %{installdir}/CHANGES.rst $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir}/COPYING $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir} `dirname $RPM_BUILD_ROOT%{installdir}`/
 
@@ -59,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %doc %{docdir}/README.rst
 %doc %{docdir}/COPYING
+%doc %{docdir}/CHANGES.rst
 %{installdir}/client
 %{installdir}/public
 %{installdir}/routes

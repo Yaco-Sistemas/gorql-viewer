@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE="dataviewer"
+PACKAGE="gorql-viewer"
 CURRENT_DIR=`pwd`
 BUILD_ROOT=/root/rpmbuild
 

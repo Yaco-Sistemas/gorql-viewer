@@ -1,10 +1,11 @@
 %define name gorql-viewer
+%define user gorql
 %define sourcedir $(echo $PWD)
 %define installdir /opt/%{name}
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 0.0.1hg246
+Version: 0.0.1hg253
 Release: 1
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
@@ -75,8 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 # check if this the first installation
 if [ $1 = 1 ]; then
 # create group and user
-    getent group %{name} || groupadd -r %{name}
-    getent passwd %{name} || useradd -d %{installdir} -g %{name} -M -r -s /sbin/nologin %{name}
+    getent group %{user} || groupadd -r %{user}
+    getent passwd %{user} || useradd -d %{installdir} -g %{user} -M -r -s /sbin/nologin %{user}
 fi
 
 %post
@@ -96,7 +97,7 @@ fi
 
 %postun
 if [ $1 = 0 ]; then
-    getent passwd %{name} > /dev/null && userdel %{name}
+    getent passwd %{user} > /dev/null && userdel %{user}
 fi
 
 %changelog

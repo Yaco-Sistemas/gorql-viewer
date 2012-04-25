@@ -15,7 +15,7 @@ Los informes que genera GORQL Viewer están formados por una visualización
 gráfica y una tabla de datos, siendo ambas partes opcionales. Numerosos
 tipos de visualizaciones están soportados.
 
-GORQL Viewer se distribuye con licenica `EUPL o Licencia Pública de
+GORQL Viewer se distribuye con licencia `EUPL o Licencia Pública de
 la Unión Europea <http://ec.europa.eu/idabc/eupl>`_. Esta licencia es una de
 las licencias aceptadas como software libre por la `FSF (Free Software
 Foundation) <http://www.fsf.org>`_.

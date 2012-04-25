@@ -1,4 +1,4 @@
-%define name dataviewer
+%define name gorql-viewer
 %define sourcedir $(echo $PWD)
 %define installdir /opt/%{name}
 %define docdir /usr/share/doc/%{name}-%{version}
@@ -6,7 +6,7 @@
 Name: %{name}
 Version: 0.0.1hg246
 Release: 1
-Summary: Data Viewer executes SPARQL queries and shows the results
+Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
 License: EUPL 1.1 License
@@ -100,6 +100,8 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Wed Apr 25 2012 Lorenzo Gil <lgs@yaco.es>
+- Rename dataviewer for gorql-viewer
 
 * Fri Jan 13 2012 Alejandro Blanco <ablanco@yaco.es>
 - Initial version

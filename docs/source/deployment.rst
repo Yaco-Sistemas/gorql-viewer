@@ -20,7 +20,7 @@ Se puede instalar a partir de un RPM:
 *x86_64*
  Descarga-NodeJS_
 
-.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/nodejs-0.6.15-1.el6.x86_64.rpm
+.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/gorql-viewer/dependencies/nodejs-0.6.15-1.el6.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
@@ -74,30 +74,30 @@ Una vez instalado NodeJS, se puede desplegar GORQL Viewer. Para ello se utiliza 
 paquete RPM:
 
 *x86_64*
- Descarga-DataViewer_
+ Descarga-GORQL-Viewer_
 
-.. _Descarga-DataViewer: http://files.yaco.es/~ceic-ogov/dataviewer-0.0.1-1.x86_64.rpm
+.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.0.0-1.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
 ::
 
- # rpm -Uvh dataviewer-0.0.1-1.x86_64.rpm
+ # rpm -Uvh gorql-viewer-1.0.0-1.x86_64.rpm
 
 Este paquete incluye GORQL Viewer y todas las librerías que utiliza, y crea un
 script de servicio para el arranque y parada del servidor.
 
-Los contenidos del paquete se despliegan en `/opt/gorqlviewer/`. Los logs se
-encuentran en `/opt/gorqlviewer/.forever/`.
+Los contenidos del paquete se despliegan en `/opt/gorql-viewer/`. Los logs se
+encuentran en `/opt/gorql-viewer/.forever/`.
 
 El servidor escucha, con la configuración por defecto, en el **puerto 3000**.
 La configuración del mismo se encuentra en el fichero `settings.js` en el
-directorio `/etc/gorqlviewer/`.
+directorio `/etc/gorql-viewer/`.
 
 Gestión del servicio
 --------------------
 
-Gracias al script de servicio *gorqlviewer* es muy sencillo gestionar el
+Gracias al script de servicio *gorql-viewer* es muy sencillo gestionar el
 **arranque**, **parada** y **monitorización** del servidor. Para ello tan sólo
 hemos de invocar al servicio con el argumento *start*, *stop* o *status*,
 respectivamente.
@@ -111,27 +111,27 @@ servidor se relance en caso de que ocurra algún problema.
 
 ::
 
- # service gorqlviewer start
- info:   Forever processing file: /opt/gorqlviewer/app.js
+ # service gorql-viewer start
+ info:   Forever processing file: /opt/gorql-viewer/app.js
 
 ::
 
- # service gorqlviewer stop
+ # service gorql-viewer stop
  info:   Forever stopped process:
  data:       uid  command script                 forever pid  logfile                           uptime
- data:   [0] ekL8 node    /opt/gorqlviewer/app.js 8101    8102 /opt/gorqlviewer/.forever/ekL8.log 0:0:40:0.5
+ data:   [0] ekL8 node    /opt/gorql-viewer/app.js 8101    8102 /opt/gorql-viewer/.forever/ekL8.log 0:0:40:0.5
 
 ::
 
- # service gorqlviewer status
+ # service gorql-viewer status
  info:   Forever processes running
  data:       uid  command script                 forever pid  logfile                           uptime
- data:   [0] ekL8 node    /opt/gorqlviewer/app.js 8101    8102 /opt/gorqlviewer/.forever/ekL8.log 0:0:39:15.924
+ data:   [0] ekL8 node    /opt/gorql-viewer/app.js 8101    8102 /opt/gorql-viewer/.forever/ekL8.log 0:0:39:15.924
 
 Configuración
 -------------
 
-La configuración del visor se encuentra en el directorio `/etc/gorqlviewer/`.
+La configuración del visor se encuentra en el directorio `/etc/gorql-viewer/`.
 
 settings.js
 ~~~~~~~~~~~

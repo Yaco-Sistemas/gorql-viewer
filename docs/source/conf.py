@@ -175,7 +175,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'DataViewerdoc'
+htmlhelp_basename = 'GORQL-Viewer-doc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -194,7 +194,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'DataViewer.tex', u'Data Viewer Documentation',
+  ('index', 'GORQLViewer.tex', u'Documentación de GORQL Viewer',
    u'Yaco Sistemas S.L.', 'manual'),
 ]
 
@@ -224,7 +224,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'dataviewer', u'Data Viewer Documentation',
+    ('index', 'gorqlviewer', u'Documentación de GORQL Viewer',
      [u'Yaco Sistemas S.L.'], 1)
 ]
 

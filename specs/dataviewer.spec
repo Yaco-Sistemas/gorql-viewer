@@ -18,6 +18,7 @@ Requires: nodejs ImageMagick
 
 BuildRequires: nodejs
 BuildRequires: npm
+BuildRequires: make
 
 %description
 %{summary}

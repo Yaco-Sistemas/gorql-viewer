@@ -14,9 +14,25 @@ Dependencias
 NodeJS
 ------
 
-NodeJS es necesario para la ejecución de GORQL Viewer. Se proporciona un
-paquete RPM para su instalación, el proceso se detalla en el siguiente
-apartado.
+NodeJS es la tecnología sobre la que se ha construido GORQL Viewer.
+Se puede instalar a partir de un RPM:
+
+*x86_64*
+ Descarga-NodeJS_
+
+.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/nodejs-0.6.15-1.el6.x86_64.rpm
+
+Una vez descargado el paquete se instala ejecutando:
+
+::
+
+ # rpm -Uvh nodejs-0.6.15-1.el6.x86_64.rpm
+
+Este paquete provee NodeJS_ y NPM_ (el sistema de paquetería de NodeJS)
+necesarios para el funcionamiento de GORQL Viewer.
+
+.. _NodeJS: http://nodejs.org/
+.. _NPM: http://npmjs.org/
 
 ImageMagick
 -----------
@@ -50,29 +66,6 @@ Otros
 
 Las librerías que requiere GORQL Viewer se distribuyen en el paquete del mismo,
 con lo que al instalarlo se instalan también sus dependencias.
-
-NodeJS
-======
-
-NodeJS es la tecnología sobre la que se ha construido GORQL Viewer.
-Se puede instalar a partir de un RPM:
-
-*x86_64*
- Descarga-NodeJS_
-
-.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/nodejs-0.6.7-1.el6.x86_64.rpm
-
-Una vez descargado el paquete se instala ejecutando:
-
-::
-
- # rpm -Uvh nodejs-0.6.7-1.el6.x86_64.rpm
-
-Este paquete provee NodeJS_ y NPM_ (el sistema de paquetería de NodeJS),
-necesarios para el funcionamiento de GORQL Viewer.
-
-.. _NodeJS: http://nodejs.org/
-.. _NPM: http://npmjs.org/
 
 GORQL Viewer
 ============
@@ -156,15 +149,26 @@ El fichero trae una configuración de ejemplo.
 Global
 ''''''
 
- - **port**: Puerto en el que escucha el visor
+ - **port**: Puerto en el que escucha el visor. Por defecto, *3010*.
 
 Development y Production
 ''''''''''''''''''''''''
 
+Las siguientes son opciones de la plataforma, el usuario final no podrá escoger
+valores diferentes a los que el administrador haya configurado aquí:
+
  - **sparqlEndpoint**: Url del servidor al que se le realizan las consultas en
-   SparQL.
- - **memcachedServer**: Url del servidor memcached, incluye el puerto.
+   SparQL. Por ejemplo, *'http://dbpedia.org/sparql'*.
+ - **memcachedServer**: Url del servidor memcached, incluye el puerto. Por
+   ejemplo, *'localhost:11211'*.
  - **memcachedLifetime**: Tiempo en segundos que memcached mantiene los datos.
+   Por ejemplo, *1800*, que correspondería a media hora.
+
+El resto de opciones son los valores por defecto que toman los parámetros de
+los diferentes tipos de gráficos si el usuario no los especifica. Es decir, que
+está configuración puede ser sobreescrita por el usuario final mediante
+parámetros en la url de consulta:
+
  - **bar**:
 
    - **sizeX**: Ancho en píxeles del gráfico.
@@ -199,6 +203,11 @@ Development y Production
      :ref:`Posibles valores. <simile-chart>`
 
  - **map**:
+
+   - **sizeX**: Ancho en píxeles del gráfico.
+   - **sizeY**: Alto en píxeles del gráfico.
+
+ - **mapea**:
 
    - **sizeX**: Ancho en píxeles del gráfico.
    - **sizeY**: Alto en píxeles del gráfico.

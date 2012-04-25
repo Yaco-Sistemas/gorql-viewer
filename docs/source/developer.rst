@@ -393,3 +393,116 @@ Debe estár a continuación de la etiqueta script con el código de inicializaci
 del informe y contener un enlace a GORQL Viewer con la consulta en SPARQL, y
 ningún parámetro más. Al usuario que acceda sin capacidad de JavaScript se le
 mostrará este enlace, y podrá así acceder a los resultados de la consulta.
+
+Generación de los paquetes RPM
+==============================
+
+Lo primero es obtener el código del repositorio mercurial:
+
+.. code-block:: bash
+
+    hg clone https://hg.yaco.es/ceic-ogov-data-viewer
+
+Una vez que se haya terminado de clonar el proyecto se puede proceder a la
+generación de los RPM.
+
+NodeJS
+------
+
+Dependencias
+~~~~~~~~~~~~
+
+Es necesario que estén instaladas las herramientas de compilación y algunas
+librerías. Se pueden instalar mediante el sistema de paquetería del sistema
+operativo:
+
+.. code-block:: bash
+
+    yum install gcc gcc-c++ make openssl-devel libstdc++-devel
+
+Hay que descargar también el código fuente de NodeJS_ de la web, la versión
+0.6.15 se encuentra disponible aquí_.
+
+.. _NodeJS: http://nodejs.org/
+
+.. _aquí: http://nodejs.org/dist/v0.6.15/node-v0.6.15.tar.gz
+
+Generación
+~~~~~~~~~~
+
+Para generar el paquete hay que copiar el **spec** y el **tar.gz** a los
+correspondientes directorios de generación:
+
+.. code-block:: bash
+
+    cp ceic-ogov-data-viewer/specs/nodejs.spec /usr/src/redhat/SPECS/
+    cp node-v0.6.15.tar.gz /usr/src/redhat/SOURCES/
+
+Con esto queda preparada la generación del paquete, para ello sólo hay que
+ejecutar los siguientes comandos:
+
+.. code-block:: bash
+
+    cd /usr/src/redhat/SPECS/
+    rpmbuild -ba nodejs.spec
+
+Cuando termine el proceso se habrá generado el paquete RPM, que estará
+disponible en */usr/src/redhat/RPMS/x86_64/nodejs-0.6.15-1.el6.x86_64.rpm*
+
+GORQL Viewer
+------------
+
+Dependencias
+~~~~~~~~~~~~
+
+La generación del paquete RPM de GORQL Viewer requiere que esté instalado el
+paquete de NodeJS generado en el apartado anterior:
+
+.. code-block:: bash
+
+    rpm -Uvh nodejs-0.6.15-1.el6.x86_64.rpmbuild
+
+También requiere de la utilidad *make*, que se puede instalar mediante el
+sistema de paquetería del sistema operativo:
+
+.. code-block:: bash
+
+    yum install make
+
+Generación
+~~~~~~~~~~
+
+Lo primero es editar el fichero *ceic-ogov-data-viewer/specs/gorqlviewer.spec*
+del visor y modificar la versión del paquete a la deseada, se trata de la
+línea que comienza con **Version:**.
+
+Luego hay que comprimir los fuentes en un **tar.gz**. Para ello hay que
+ejecutar los siguientes comandos, **sustituyendo VERSION por la versión
+especificada en el fichero .spec**:
+
+.. code-block:: bash
+
+    mv ceic-ogov-data-viewer gorqlviewer-VERSION
+    tar cf gorqlviewer-VERSION.tar gorqlviewer-VERSION
+    gzip gorqlviewer-VERSION.tar
+    mv gorqlviewer-VERSION ceic-ogov-data-viewer
+
+Para generar el paquete hay que copiar el **spec** y el **tar.gz** a los
+correspondientes directorios de generación:
+
+.. code-block:: bash
+
+    cp ceic-ogov-data-viewer/specs/gorqlviewer.spec /usr/src/redhat/SPECS/
+    cp gorqlviewer-VERSION.tar.gz /usr/src/redhat/SOURCES/
+
+Con esto queda preparada la generación del paquete, para ello sólo hay que
+ejecutar los siguientes comandos:
+
+.. code-block:: bash
+
+    npm cache clean
+    cd /usr/src/redhat/SPECS/
+    rpmbuild -ba gorqlviewer.spec
+
+Cuando termine el proceso se habrá generado el paquete RPM, que estará
+disponible en */usr/src/redhat/RPMS/x86_64/gorqlviewer-VERSION-1.x86_64.rpm*

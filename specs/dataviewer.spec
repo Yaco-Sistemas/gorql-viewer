@@ -4,7 +4,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 0.0.1hg221
+Version: 0.0.1hg246
 Release: 1
 Summary: Data Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
@@ -45,7 +45,7 @@ rm -f %{installdir}/make_dev_rpm.sh
 # move the rest to the build root
 mkdir -p `dirname $RPM_BUILD_ROOT%{installdir}`
 mkdir -p $RPM_BUILD_ROOT%{docdir}
-mv %{installdir}/INSTALL.rst $RPM_BUILD_ROOT%{docdir}/
+mv %{installdir}/README.rst $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir}/COPYING $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir} `dirname $RPM_BUILD_ROOT%{installdir}`/
 
@@ -56,13 +56,14 @@ mkdir -p $RPM_BUILD_ROOT/etc/%{name}
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%doc %{docdir}/INSTALL.rst
+%doc %{docdir}/README.rst
 %doc %{docdir}/COPYING
 %{installdir}/client
 %{installdir}/public
 %{installdir}/routes
 %{installdir}/views
 %{installdir}/node_modules
+%{installdir}/i18n
 %attr(755,%{name},%{name}) %{installdir}/.forever
 %{installdir}/app.js
 %{installdir}/package.json

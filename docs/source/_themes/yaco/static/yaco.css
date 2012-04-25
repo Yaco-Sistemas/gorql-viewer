@@ -1,0 +1,335 @@
+/*
+ * default.css_t
+ * ~~~~~~~~~~~~~
+ *
+ * Sphinx stylesheet -- default theme.
+ *
+ * :copyright: Copyright 2007-2010 by the Sphinx team, see AUTHORS.
+ * :license: BSD, see LICENSE for details.
+ *
+ */
+
+@import url("basic.css");
+
+/* -- page layout ----------------------------------------------------------- */
+
+body {
+    color: #3E4349;
+    margin: 0;
+    padding: 0;
+    font: 14px/19px "Lucida Grande","Lucida Sans Unicode","bitstream vera sans","trebuchet ms",verdana,arial,sans-serif;
+}
+
+div.document {
+    padding-top: 43px;
+    width: 90%;
+    border-left: 21px solid #fbaf33;
+    background: transparent url(leftsidebar_bg.jpg) repeat-y left top;
+}
+
+div.documentwrapper {
+    float: left;
+    width: 100%;
+    padding-bottom: 2em;
+}
+
+div.bodywrapper {
+    margin: 0 0 0 230px;
+}
+
+div.body {
+    background-color: #ffffff;
+    color: #3E4349;
+    padding: 10px 0 0 10px;
+    font-size: 14px;
+}
+
+div.footer {
+    color: #777;
+    width: 95%;
+    min-height: 112px;
+    text-align: center;
+    font-size: 75%;
+    padding: 42px 0 9px 0;
+    border-left: 21px solid #FBAF33;
+}
+
+
+div.related {
+    background: #2F2A12 url(border_left.jpg) repeat-y top left;
+    line-height: 40px;
+    height: 42px;
+    color: #ffffff;
+    position: absolute;
+    top: 0;
+}
+
+div.related ul {
+    margin: 0 21px 0 21px;
+}
+
+div.related a {
+    color: #ffffff;
+}
+
+div.related li.right {
+    background: transparent url(indice_icon.gif) right 12px no-repeat;
+    padding-right: 18px;
+}
+
+div.sphinxsidebar {
+    width: 221px;
+}
+
+div.sphinxsidebarwrapper {
+    padding: 0 10px 0 15px;
+    line-height: 17px;
+}
+
+div.sphinxsidebar h3 {
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
+    padding-top: 21px;
+}
+
+div.sphinxsidebar h3 a {
+    color: #737373;
+}
+
+div.sphinxsidebar h4 {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: #737373;
+    font-size: 1.3em;
+    font-weight: normal;
+    margin: 5px 0 0 0;
+    padding: 0;
+}
+
+div.sphinxsidebar p {
+    color: #000;
+}
+
+div.sphinxsidebar p.topless {
+    margin: 5px 10px 10px 10px;
+}
+
+div.sphinxsidebar ul {
+    margin: 10px;
+    padding: 0;
+    color: #ffffff;
+}
+
+div.sphinxsidebar a {
+    color: #FB9C00;
+    text-decoration: underline;
+}
+
+div.sphinxsidebar a:hover {
+    color: #C78A28;
+}
+
+div.sphinxsidebar input {
+    border: 1px solid #DDD;
+    font-family: sans-serif;
+    font-size: 1em;
+    margin-top: 4px;
+}
+
+div.sphinxsidebarwrapper form {
+    padding-left: 0 !important;
+}
+
+/* -- hyperlink styles ------------------------------------------------------ */
+
+a {
+    color: #FBAF33;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #c78a28;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* -- body styles ----------------------------------------------------------- */
+
+div.body h1,
+div.body h2,
+div.body h3,
+div.body h4,
+div.body h5,
+div.body h6 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: normal;
+    /* color: #FBAF33; */
+    color: #3E4349;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 10px 0 2px 0;
+}
+
+div.body h1 { margin-top: 0; font-size: 200%; }
+div.body h2 { font-size: 160%; }
+div.body h3 { font-size: 140%; }
+div.body h4 { font-size: 120%; }
+div.body h5 { font-size: 110%; }
+div.body h6 { font-size: 100%; }
+
+a.headerlink {
+    color: #c60f0f;
+    font-size: 0.8em;
+    padding: 0 4px 0 4px;
+    text-decoration: none;
+}
+
+a.headerlink:hover {
+    background-color: #c60f0f;
+    color: white;
+}
+
+div.body p, div.body dd, div.body li {
+    text-align: justify;
+    line-height: 1.5em;
+}
+
+div.admonition p.admonition-title + p {
+    display: inline;
+}
+
+div.admonition p {
+    margin-bottom: 5px;
+}
+
+div.admonition pre {
+    margin-bottom: 5px;
+}
+
+div.admonition ul, div.admonition ol {
+    margin-bottom: 5px;
+}
+
+div.note, div.admonition {
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+div.seealso {
+    background-color: #ffc;
+    border: 1px solid #ff6;
+}
+
+div.topic {
+    background-color: #eee;
+}
+
+div.warning {
+    background-color: #ffe4e4;
+    border: 1px solid #f66;
+}
+
+p.admonition-title {
+    display: inline;
+}
+
+p.admonition-title:after {
+    content: ":";
+}
+
+pre {
+    padding: 7px;
+    background-color: #FAFAFA;
+    color: #333333;
+    line-height: 120%;
+    border-bottom: 2px solid #C6C9CB;
+    border-top: 2px solid #C6C9CB;
+}
+
+tt {
+    background-color: #ecf0f3;
+    padding: 0 1px 0 1px;
+    font-size: 0.95em;
+}
+
+th {
+    background-color: #ede;
+}
+
+.warning tt {
+    background: #efc2c2;
+}
+
+.note tt {
+    background: #d6d6d6;
+}
+
+.viewcode-back {
+    font-family: sans-serif;
+}
+
+div.viewcode-block:target {
+    background-color: #f4debf;
+    border-top: 1px solid #ac9;
+    border-bottom: 1px solid #ac9;
+}
+
+.contentstable p.biglink {
+    height: 70px;
+    width: 369px;
+    padding: 10px 15px 30px 10px;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-color: #FBAF33;
+    background: #FCF9E8 342px 40px no-repeat;
+}
+
+/* -- custom styles ----------------------------------------------------------- */
+
+div#introduccion ul.simple li,
+div.body div.toctree-wrapper ul li,
+div#indices-y-tablas ul.simple li  {
+    list-style: none;
+    background: transparent url(bullet.jpg) left 7px no-repeat;
+    padding-left: 15px;
+    line-height: 19px;
+}
+
+ul.search li {
+    background: transparent url(file.png) left 4px no-repeat;
+}
+
+dt:target, .highlighted {
+    background-color: #FFF199;
+}
+
+#documentacion-sobre-gadgets ol.arabic, #documentacion-sobre-adaptadores ol.arabic {
+    list-style: none;
+    padding: 0;
+    float: left;
+}
+
+#documentacion-sobre-gadgets ol.arabic li, #documentacion-sobre-adaptadores ol.arabic li {
+    padding: 0;
+    float: left;
+    width: 40%;
+    height: 90px;
+    margin: 30px;
+    padding: 10px;
+    background-color: #FCF9E8;
+    border-right: 1px solid #FBAF33;
+    border-top: 1px solid #FBAF33;
+}
+
+#documentacion-sobre-gadgets ol.arabic li a, #documentacion-sobre-adaptadores ol.arabic li a {
+    display: block;
+    font-size: 1.3em;
+}
+
+div.indice {
+    list-style:none;
+}

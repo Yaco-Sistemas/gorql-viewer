@@ -1,0 +1,12 @@
+========
+AUTHORS
+========
+
+Sphinx template, packaging
+============================
+* Takayuki SHIMIZUKAWA <shimizukawa AT gmail.com> sphinx-users.jp
+
+HTML Slide javascript (slide.js)
+=================================
+* Original code: http://jsdo.it/os0x/slide
+* Forked code: http://jsdo.it/nabetama/k6lQ

@@ -1,0 +1,30 @@
+{%- block doctype -%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{%- endblock %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}" />
+    {{ metatags }}
+    {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+    {%- block htmltitle %}
+    <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    {%- endblock %}
+    <link rel="stylesheet" href="{{ pathto('_static/slide.css', 1) }}" type="text/css" id="slide-base" media="screen,projection" disabled="disabled" />
+    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/prettify.css', 1) }}" type="text/css" />
+    <script type="text/javascript" src="{{ pathto('_static/jquery.js', 1) }}"></script>
+{%- block extrahead %} {% endblock %}
+  </head>
+  <body>
+
+{%- block content %}
+    <button id="startslide">slide mode</button>
+    {% block body %} {% endblock %}
+{%- endblock %}
+
+<script type="text/javascript" src="{{ pathto('_static/prettify.js', 1) }}"></script>
+<script type="text/javascript" src="{{ pathto('_static/slide.js', 1) }}"></script>
+  </body>
+</html>
+

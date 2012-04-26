@@ -211,7 +211,7 @@ siguiente línea **antes de la inclusión de map.css**.
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="http://example.com/javascripts
+    <link rel="stylesheet" href="http://example.com/javascripts/theme/default/style.css" />
 
 Estas líneas se deben incluir en la cabecera, en la etiqueta ``head`` de la
 página.

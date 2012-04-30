@@ -6,7 +6,7 @@
 
 Name: %{name}
 Version: 1.0.0
-Release: 1
+Release: 2
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -41,6 +41,8 @@ rm -rf %{installdir}/.hg
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
 rm -f %{installdir}/make_dev_rpm.sh
+rm -f %{installdir}/public/embedded.html
+rm -f %{installdir}/public/examples.html
 
 %install
 # move the rest to the build root
@@ -103,6 +105,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Mon Apr 30 2012 Alejandro Blanco <ablanco@yaco.es>
+- Remove examples from the package
+
 * Wed Apr 25 2012 Lorenzo Gil <lgs@yaco.es>
 - Rename dataviewer for gorql-viewer
 

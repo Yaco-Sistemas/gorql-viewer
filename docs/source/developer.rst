@@ -38,15 +38,8 @@ siguientes comandos:
 En la documentación de node se pueden encontrar más detalles:
 https://github.com/joyent/node/wiki/Installation
 
-Instalar NPM
-~~~~~~~~~~~~
-
-NPM es el manejador de paquetes de node, y es necesario para el despliegue.
-Hay que instalarlo cómo **root** ejecutando:
-
-.. code-block:: bash
-
-    curl http://npmjs.org/install.sh | sh
+NPM es el manejador de paquetes de node, y es necesario para el despliegue,
+pero no es necesario instalarlo porque ya viene incluido en NodeJS.
 
 Despliegue de GORQL Viewer
 --------------------------

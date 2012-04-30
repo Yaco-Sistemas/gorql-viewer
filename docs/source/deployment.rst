@@ -149,7 +149,11 @@ El fichero trae una configuración de ejemplo.
 Global
 ''''''
 
+ - **debug**: Modo depuración, para el funcionamiento normal debe estar
+   desactivado. Por defecto, *false*.
  - **port**: Puerto en el que escucha el visor. Por defecto, *3010*.
+ - **host**: Dominio en el que se sirve la aplicación. Por defecto,
+   *http://gorql-viewer.ceic-ogov.yaco.es*.
 
 Development y Production
 ''''''''''''''''''''''''

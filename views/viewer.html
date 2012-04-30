@@ -24,7 +24,7 @@
     <script type="text/javascript" src="/javascripts/dv-mapea.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.initMapea("http://data-viewer.ceic-ogov.yaco.es");
+            DV.initMapea("${host}");
         });
     </script>
     {{else}}
@@ -32,7 +32,7 @@
     <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.initMap("http://data-viewer.ceic-ogov.yaco.es");
+            DV.initMap("${host}");
         });
     </script>
     {{/if}}

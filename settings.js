@@ -25,7 +25,8 @@
 exports.settings = {
     global: {
         debug: false,
-        port: 3000
+        port: 3000,
+        host: 'http://gorql-viewer.ceic-ogov.yaco.es'
     },
 
     development: {
@@ -67,8 +68,8 @@ exports.settings = {
     },
 
     production: {
-        sparqlEndpoint: 'http://dbpedia.org/sparql', // TODO
-        memcachedServer: 'localhost:11211', // TODO
+        sparqlEndpoint: 'http://dbpedia.org/sparql',
+        memcachedServer: 'localhost:11211',
         memcachedLifetime: 1800, // seconds
         bar: {
             landscape: 'false',

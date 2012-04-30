@@ -76,13 +76,13 @@ paquete RPM:
 *x86_64*
  Descarga-GORQL-Viewer_
 
-.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.0.0-1.x86_64.rpm
+.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.0.1-2.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
 ::
 
- # rpm -Uvh gorql-viewer-1.0.0-1.x86_64.rpm
+ # rpm -Uvh gorql-viewer-1.0.1-2.x86_64.rpm
 
 Este paquete incluye GORQL Viewer y todas las librerías que utiliza, y crea un
 script de servicio para el arranque y parada del servidor.

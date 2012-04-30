@@ -24,6 +24,7 @@ echo "New version: ${TAG}"
 
 sed -i "s/Version: [0-9].[0-9].[0-9]hg[0-9]\+/Version: ${TAG}/g" specs/${PACKAGE}.spec
 
+cd /tmp/${PACKAGE}
 hg archive -t tgz ${CURRENT_DIR}/${PACKAGE}-${TAG}.tar.gz
 
 if [ -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tar.gz ]

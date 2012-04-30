@@ -1,3 +1,12 @@
+1.0.1
+=====
+
+Lista de cambios
+----------------
+
+- Nuevo setting para establecer el dominio en el que se sirve la aplicación. Se
+  utiliza para inicializar los gráficos de mapas.
+
 1.0.0
 =====
 

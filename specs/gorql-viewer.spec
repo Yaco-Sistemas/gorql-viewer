@@ -5,8 +5,8 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 1.1.0devel
-Release: 1
+Version: 1.0.1
+Release: 2
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -15,7 +15,7 @@ License: EUPL 1.1 License
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: nodejs ImageMagick
+Requires: nodejs ImageMagick make
 
 BuildRequires: nodejs
 BuildRequires: npm
@@ -41,6 +41,8 @@ rm -rf %{installdir}/.hg
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
 rm -f %{installdir}/make_dev_rpm.sh
+rm -f %{installdir}/public/embedded.html
+rm -f %{installdir}/public/examples.html
 
 %install
 # move the rest to the build root
@@ -103,6 +105,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Mon Apr 30 2012 Alejandro Blanco <ablanco@yaco.es>
+- Remove examples from the package
+
 * Wed Apr 25 2012 Lorenzo Gil <lgs@yaco.es>
 - Rename dataviewer for gorql-viewer
 

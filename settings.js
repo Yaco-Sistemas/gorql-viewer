@@ -24,7 +24,7 @@
 
 exports.settings = {
     global: {
-        debug: true,
+        debug: false,
         port: 3000,
         host: 'http://gorql-viewer.ceic-ogov.yaco.es'
     },

@@ -21,6 +21,11 @@
     <script type="text/javascript" src="/javascripts/Base64.js"></script>
     {{else}}
     <script type="text/javascript" src="/javascripts/OpenLayers.js"></script>
+    <script type="text/javascript">
+        DomReady.ready(function () {
+            DV.initMap("${host}");
+        });
+    </script>
     {{/if}}
     {{/if}}{{/if}}{{/if}}
     <script type="text/javascript" src="/javascripts/${type}.js"></script>

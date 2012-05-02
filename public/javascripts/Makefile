@@ -39,9 +39,8 @@ dv-core: ../../node_modules/uglify-js/bin/uglifyjs ../../node_modules/sizzle/siz
 	$(UJS) $(UJSFLAGS) ../../client/minedata.js >> dv-core.js
 	$(UJS) $(UJSFLAGS) ../../client/defaults.js >> dv-core.js
 
-dv-d3: dv-core d3.v2.js ../../client/d3.layout.js ../../client/bar.js ../../client/line.js ../../client/pie.js
+dv-d3: dv-core d3.v2.js ../../client/bar.js ../../client/line.js ../../client/pie.js
 	$(UJS) $(UJSFLAGS) d3.v2.js > dv-d3.js
-	$(UJS) $(UJSFLAGS) ../../client/d3.layout.js >> dv-d3.js
 	$(UJS) $(UJSFLAGS) ../../client/bar.js >> dv-d3.js
 	$(UJS) $(UJSFLAGS) ../../client/line.js >> dv-d3.js
 	$(UJS) $(UJSFLAGS) ../../client/pie.js >> dv-d3.js

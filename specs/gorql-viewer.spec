@@ -5,7 +5,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 1.0.2devel
+Version: 1.1.0
 Release: 2
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
@@ -14,6 +14,7 @@ License: EUPL 1.1 License
 # Copyright 2012 Yaco Sistemas S.L.
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
+BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: nodejs ImageMagick make
 

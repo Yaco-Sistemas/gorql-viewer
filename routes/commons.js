@@ -1,5 +1,5 @@
 /*jslint vars: false, node: true */
-/*global */
+/*global navigator: true, CSSStyleDeclaration: true, Sizzle: true */
 
 // Copyright 2012 Yaco Sistemas S.L.
 //
@@ -27,7 +27,7 @@ var app = require.main,
     sha1 = require('sha1'),
     uaParser = require('ua-parser'),
     cssom = require('cssom'),
-    sizzle = require('../client/sizzle'),
+    d3 = require('d3'),
     jsdom = require('jsdom').jsdom,
     dirname = require('path').dirname,
     readFileSync = require('fs').readFileSync,
@@ -304,12 +304,10 @@ exports.resultsToMatrix = function (results) {
 exports.generateSVG = function (chart, data) {
     "use strict";
 
-    var generator = require("../client/" + chart.type),
-        svg = generator.chart(data, chart),
+    var self = this,
+        generator = require("../client/" + chart.type),
         // FS uses relative paths to the root of the project, where is being executed node
         styles = readFileSync(dirname(app.filename) + "/public/stylesheets/base.css", 'utf-8'),
-        // Use jsdom to create a fake document so we can use sizzle later
-        document = jsdom("<html><head></head><body><div id='dv_viewport' class='dv_viewport'>" + svg + "</div></body></html>"),
         rule,
         elems,
         i,
@@ -320,16 +318,21 @@ exports.generateSVG = function (chart, data) {
     // Parse the css and get the rules
     styles = cssom.parse(styles).cssRules;
 
+    d3.selectAll("body div").remove();
+    generator.chart(d3, data, chart);
+
     for (i = 0; i < styles.length; i += 1) {
         rule = styles[i];
         // Use sizzle to get the nodes affected by the css rule
-        elems = sizzle(rule.selectorText, document);
+        elems = d3.selectAll(rule.selectorText)[0];
         for (j = 0; j < elems.length; j += 1) {
-            // Set the style for every element affected
-            elems[j].style.cssText += ' ' + rule.style.cssText;
+            if (typeof elems[j] !== "undefined") {
+                // Set the style for every element affected
+                elems[j].style.cssText += ' ' + rule.style.cssText;
+            }
         }
     }
 
     // ChildNodes[0] because the svg is inside the div viewport node
-    return document.body.childNodes[0].innerHTML;
+    return d3.select("#dv_viewport")[0][0].innerHTML;
 };

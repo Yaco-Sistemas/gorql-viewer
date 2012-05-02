@@ -1,0 +1,29 @@
+Es necesario regenerar el fichero de d3 cuando se actualice la versión de éste.
+
+Para ello hay que modificar el Makefile del d3 que hay en node_modules, buscar
+la regla "INTERMEDIATE d3.v2.js" y modificar la lista de ficheros que añade.
+Hay que dejar únicamente los siguientes:
+
+  src/start.js
+  d3.core.js
+  d3.scale.js
+  d3.svg.js
+  d3.layout.js
+  src/end.js
+
+Acto seguido se ejecuta en la carpeta de d3 los comandos:
+
+  make clean
+  make all
+
+Y se copia el fichero generado d3.v2.js a este directorio, actualizando así la
+librería d3 que se utilizamos en el cliente.
+
+Hay que restaurar el d3 de node_modules, para ello se pueden deshacer los
+cambios del Makefile, y ejecutar los comandos de make de nuevo. O bien se puede
+eliminar el directorio completo y ejecutar en la raíz del proyecto este
+comando:
+
+  npm install -d
+
+Que se traerá de nuevo d3, sin modificaciones.

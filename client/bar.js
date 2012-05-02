@@ -1,5 +1,5 @@
 /*jslint vars: false */
-/*global d3: true, exports: true, require, window: true, document: true, module, DV: true, setTimeout */
+/*global d3, exports, DV, setTimeout */
 
 // Copyright 2012 Yaco Sistemas S.L.
 //

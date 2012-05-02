@@ -198,7 +198,7 @@ DV.merge((function () {
 
         init = function (d3, container, labels, series, options) {
             var area = options.area === 'true' || options.area === true,
-                viewport = d3.select(container)[0][0];
+                viewport = d3.select(container);
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
@@ -207,8 +207,8 @@ DV.merge((function () {
             nElems = labels.length;
             nSeries = series.length;
 
-            viewport.style.width = options.sizeX + 'px';
-            viewport.style.height = options.sizeY + 'px';
+            viewport.style("width", options.sizeX + 'px');
+            viewport.style("height", options.sizeY + 'px');
 
             size.x = parseInt(options.sizeX, 10);
             size.xpadding = size.x / (nElems + 1); // to avoid cropping labels
@@ -224,7 +224,7 @@ DV.merge((function () {
                 .range([0, size.y - size.offset]);
 
             // Create the svg root node
-            svg = d3.select(container).append("svg:svg")
+            svg = viewport.append("svg:svg")
                 .attr("class", "chart line")
                 .attr("width", size.x)
                 .attr("height", size.y);
@@ -232,8 +232,8 @@ DV.merge((function () {
             render(d3, labels, series, area);
         },
 
-        node = function (document, d3, data, options) {
-            init(d3, document.body, data.labels, data.values, options);
+        node = function (d3, data, options) {
+            init(d3, "#dv_viewport", data.labels, data.values, options);
         },
 
         chart = function (container, data_container, options) {
@@ -254,17 +254,12 @@ if (typeof exports === "undefined") {
     window.exports = {};
 }
 
-exports.chart = function (data, options) {
+exports.chart = function (d3, data, options) {
     "use strict";
 
     // Node
-    var jsdom = require("jsdom").jsdom,
-        window,
-        document,
-        d3;
-    document = jsdom("<html><head></head><body></body></html>");
-    window = document.createWindow();
-    d3 = require("./d3")(window, document);
-    DV.node(document, d3, data, options);
-    return document.body.innerHTML;
+    d3.select("body").append("div")
+        .attr("id", "dv_viewport")
+        .attr("class", "dv_viewport");
+    DV.node(d3, data, options);
 };

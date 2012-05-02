@@ -307,15 +307,15 @@ DV.merge((function () {
         },
 
         init = function (d3, container, labels, series, options) {
-            var viewport = d3.select(container)[0][0],
+            var viewport = d3.select(container),
                 transform;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
             }
 
-            viewport.style.width = options.sizeX + 'px';
-            viewport.style.height = options.sizeY + 'px';
+            viewport.style("width", options.sizeX + 'px');
+            viewport.style("height", options.sizeY + 'px');
 
             nElems = labels.length;
             nSeries = series.length;
@@ -348,7 +348,7 @@ DV.merge((function () {
             }
 
             // Create the svg root node
-            svg = d3.select(container).append("svg:svg")
+            svg = viewport.append("svg:svg")
                 .attr("class", "chart bar")
                 .attr("width", parseInt(options.sizeX, 10)) // original sizes
                 .attr("height", parseInt(options.sizeY, 10))
@@ -358,8 +358,8 @@ DV.merge((function () {
             render(labels, series);
         },
 
-        node = function (document, d3, data, options) {
-            init(d3, document.body, data.labels, data.values, options);
+        node = function (d3, data, options) {
+            init(d3, "#dv_viewport", data.labels, data.values, options);
         },
 
         chart = function (container, data_container, options) {
@@ -380,17 +380,12 @@ if (typeof exports === "undefined") {
     window.exports = {};
 }
 
-exports.chart = function (data, options) {
+exports.chart = function (d3, data, options) {
     "use strict";
 
     // Node
-    var jsdom = require("jsdom").jsdom,
-        window,
-        document,
-        d3;
-    document = jsdom("<html><head></head><body></body></html>");
-    window = document.createWindow();
-    d3 = require("./d3")(window, document);
-    DV.node(document, d3, data, options);
-    return document.body.innerHTML;
+    d3.select("body").append("div")
+        .attr("id", "dv_viewport")
+        .attr("class", "dv_viewport");
+    DV.node(d3, data, options);
 };

@@ -191,10 +191,10 @@ DV.merge((function () {
         },
 
         init = function (d3, container, labels, series, options) {
-            var pie,
+            var viewport = d3.select(container),
+                pie,
                 i,
-                filter,
-                viewport = d3.select(container);
+                filter;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;

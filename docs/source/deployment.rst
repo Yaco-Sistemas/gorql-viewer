@@ -81,7 +81,7 @@ paquete RPM:
 *x86_64*
  Descarga-GORQL-Viewer_
 
-.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.1.0-3.x86_64.rpm
+.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.1/gorql-viewer-1.1.0-3.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 

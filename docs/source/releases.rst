@@ -1,3 +1,13 @@
+1.1.0
+=====
+
+Lista de cambios
+----------------
+
+- Soporte de la versión 2.9.1 de d3, que incluye soporte de NodeJS en el lado
+  del servidor.
+- Adaptación de los paquetes RPM a RH5.
+
 1.0.1
 =====
 

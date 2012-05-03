@@ -50,7 +50,7 @@ Cómo obtener GORQL Viewer
 =========================
 
 GORQL Viewer se distribuye en formato RPM y ha sido testeado en
-sistemas CentOS/6.2. Los paquetes de cada uno de sus componentes están
+sistemas RedHat EL 5.6. Los paquetes de cada uno de sus componentes están
 disponibles en el
 `siguiente servidor de Yaco <http://files.yaco.es/~ceic-ogov/>`_ de forma
 provisional. Para más información sobre cómo instalar el visor de colecciones,

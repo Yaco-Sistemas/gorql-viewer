@@ -2,6 +2,11 @@
 Manual de despliegue
 ====================
 
+Componentes
+===========
+
+.. image:: _images/componentes.png
+
 Entorno de desarrollo
 =====================
 
@@ -20,13 +25,13 @@ Se puede instalar a partir de un RPM:
 *x86_64*
  Descarga-NodeJS_
 
-.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/gorql-viewer/dependencies/nodejs-0.6.15-1.el6.x86_64.rpm
+.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/gorql-viewer/dependencies/nodejs-0.6.16-1.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
 ::
 
- # rpm -Uvh nodejs-0.6.15-1.el6.x86_64.rpm
+ # rpm -Uvh nodejs-0.6.16-1.x86_64.rpm
 
 Este paquete provee NodeJS_ y NPM_ (el sistema de paquetería de NodeJS)
 necesarios para el funcionamiento de GORQL Viewer.
@@ -76,13 +81,13 @@ paquete RPM:
 *x86_64*
  Descarga-GORQL-Viewer_
 
-.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.0.1-2.x86_64.rpm
+.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.0/gorql-viewer-1.1.0-3.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
 ::
 
- # rpm -Uvh gorql-viewer-1.0.1-2.x86_64.rpm
+ # rpm -Uvh gorql-viewer-1.1.0-3.x86_64.rpm
 
 Este paquete incluye GORQL Viewer y todas las librerías que utiliza, y crea un
 script de servicio para el arranque y parada del servidor.

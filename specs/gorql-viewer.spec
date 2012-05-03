@@ -6,7 +6,7 @@
 
 Name: %{name}
 Version: 1.1.0
-Release: 2
+Release: 3
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -14,7 +14,6 @@ License: EUPL 1.1 License
 # Copyright 2012 Yaco Sistemas S.L.
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
-BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: nodejs ImageMagick make
 
@@ -41,6 +40,7 @@ make all
 rm -rf %{installdir}/.hg
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
+rm -rf %{installdir}/node_modules/d3/node_modules/jsdom
 rm -f %{installdir}/make_dev_rpm.sh
 rm -f %{installdir}/public/embedded.html
 rm -f %{installdir}/public/examples.html
@@ -76,6 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %config %attr(755,%{user},%{user}) %{installdir}/settings.js
 /etc/%{name}
 %attr(755,%{user},%{user}) %{installdir}/%{name}.sh
+/usr/lib/debug/opt/%{name}
 
 %pre
 # check if this the first installation
@@ -106,6 +107,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Mon May 03 2012 Alejandro Blanco <ablanco@yaco.es>
+- Remove jsdom from d3 dependencies since it doesn't work in RH5
+
 * Mon Apr 30 2012 Alejandro Blanco <ablanco@yaco.es>
 - Remove examples from the package
 

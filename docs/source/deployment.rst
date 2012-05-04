@@ -64,8 +64,22 @@ sí que es muy recomendable. Si Memcached está instalado y corriendo, GORQL
 Viewer hará uso de la caché para minimizar las peticiones al endpoint SparQL
 agilizando mucho el funcionamiento.
 
-No se provee RPM, pero normalmente está disponible en el repositorio básico
-del sistema operativo. Se puede instalar haciendo uso de yum:
+Para Red Hat 5 se proporciona un RPM.
+
+*x86_64 RedHat 5*
+ Descarga-Memcached-RH5_
+
+.. _Descarga-Memcached-RH5: http://files.yaco.es/~ceic-ogov/dependencies/rh5/memcached-1.4.5-1.el5.x86_64.rpm
+
+Una vez descargado el paquete se instala ejecutando:
+
+.. code-block:: none
+
+ # rpm -Uvh memcached-1.4.5-1.el5.x86_64.rpm
+
+Para Red Hat 6 no se provee RPM, pero normalmente está disponible en el
+repositorio básico del sistema operativo. Se puede instalar haciendo uso de
+yum:
 
 .. code-block:: none
 

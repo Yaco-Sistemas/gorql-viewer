@@ -22,14 +22,19 @@ NodeJS
 NodeJS es la tecnología sobre la que se ha construido GORQL Viewer.
 Se puede instalar a partir de un RPM:
 
-*x86_64*
- Descarga-NodeJS_
+*x86_64 RedHat 5*
+ Descarga-NodeJS-RH5_
 
-.. _Descarga-NodeJS: http://files.yaco.es/~ceic-ogov/gorql-viewer/dependencies/nodejs-0.6.16-1.x86_64.rpm
+.. _Descarga-NodeJS-RH5: http://files.yaco.es/~ceic-ogov/dependencies/rh5/nodejs-0.6.16-1.x86_64.rpm
 
-Una vez descargado el paquete se instala ejecutando:
+*x86_64 RedHat 6*
+ Descarga-NodeJS-RH6_
 
-::
+.. _Descarga-NodeJS-RH6: http://files.yaco.es/~ceic-ogov/dependencies/rh6/nodejs-0.6.16-1.el6.x86_64.rpm
+
+Una vez descargado el paquete se instala ejecutando (ej RH5):
+
+.. code-block:: none
 
  # rpm -Uvh nodejs-0.6.16-1.x86_64.rpm
 
@@ -47,7 +52,7 @@ el servidor. No se provee RPM, pero normalmente está disponible en el
 repositorio básico del sistema operativo. Se puede instalar haciendo uso de
 yum:
 
-::
+.. code-block:: none
 
  # yum install ImageMagick
 
@@ -62,7 +67,7 @@ agilizando mucho el funcionamiento.
 No se provee RPM, pero normalmente está disponible en el repositorio básico
 del sistema operativo. Se puede instalar haciendo uso de yum:
 
-::
+.. code-block:: none
 
  # yum install memcached
 
@@ -78,14 +83,19 @@ GORQL Viewer
 Una vez instalado NodeJS, se puede desplegar GORQL Viewer. Para ello se utiliza el
 paquete RPM:
 
-*x86_64*
- Descarga-GORQL-Viewer_
+*x86_64 RedHat 5*
+ Descarga-GORQL-Viewer-RH5_
 
-.. _Descarga-GORQL-Viewer: http://files.yaco.es/~ceic-ogov/gorql-viewer/releases/1.1/gorql-viewer-1.1.0-3.x86_64.rpm
+.. _Descarga-GORQL-Viewer-RH5: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.1/rh5/gorql-viewer-1.1.0-3.x86_64.rpm
+
+*x86_64 RedHat 6*
+ Descarga-GORQL-Viewer-RH6_
+
+.. _Descarga-GORQL-Viewer-RH6: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.1/rh6/gorql-viewer-1.1.0-3.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 
-::
+.. code-block:: none
 
  # rpm -Uvh gorql-viewer-1.1.0-3.x86_64.rpm
 
@@ -114,19 +124,19 @@ servidor se relance en caso de que ocurra algún problema.
 
 *Ejemplos de salida*
 
-::
+.. code-block:: none
 
  # service gorql-viewer start
  info:   Forever processing file: /opt/gorql-viewer/app.js
 
-::
+.. code-block:: none
 
  # service gorql-viewer stop
  info:   Forever stopped process:
  data:       uid  command script                 forever pid  logfile                           uptime
  data:   [0] ekL8 node    /opt/gorql-viewer/app.js 8101    8102 /opt/gorql-viewer/.forever/ekL8.log 0:0:40:0.5
 
-::
+.. code-block:: none
 
  # service gorql-viewer status
  info:   Forever processes running

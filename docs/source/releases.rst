@@ -1,3 +1,12 @@
+1.1.1
+=====
+
+Lista de cambios
+----------------
+
+- Soporte de la nueva versión de NodeJS, 0.6.17. La versión anterior tiene un
+  bug de seguridad.
+
 1.1.0
 =====
 

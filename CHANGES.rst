@@ -1,6 +1,11 @@
 Changes
 =======
 
+1.1.1 (2012-05-08)
+------------------
+
+- NodeJS 0.6.16 has a security bug, upgrade the package to support NodeJS 0.6.17.
+
 1.1.0 (2012-05-02)
 ------------------
 

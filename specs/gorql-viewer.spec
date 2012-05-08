@@ -15,11 +15,8 @@ License: EUPL 1.1 License
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: nodejs ImageMagick make
-
-BuildRequires: nodejs
-BuildRequires: npm
-BuildRequires: make
+Requires: nodejs = 0.6.17, ImageMagick, make
+BuildRequires: nodejs = 0.6.17, npm, make
 
 %description
 %{summary}

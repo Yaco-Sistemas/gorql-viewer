@@ -1,6 +1,12 @@
 Changes
 =======
 
+1.2.0 (YYYY-MM-DD)
+------------------
+
+- New header and footer, both with the viewer's logo.
+- TODO
+
 1.1.1 (2012-05-08)
 ------------------
 

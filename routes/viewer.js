@@ -92,6 +92,8 @@ renderResults = function (response, params, error, results) {
             locals: {
                 debug_charts: app.exports.set('debug_charts'),
                 host: app.exports.set('viewer_host'),
+                siteLogo: app.exports.set('siteLogo'),
+                siteTitle: app.exports.set('siteTitle'),
                 error: error,
                 results: data.matrix,
                 headers: data.headers,

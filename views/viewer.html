@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>${lingua.title}</title>
+    <title>${siteTitle}</title>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/base.css" />
@@ -51,6 +51,11 @@
     {{/if}}
 </head>
 <body>
+    <div id="header">
+        <img src="${siteLogo}" alt="" />
+        <h1>${siteTitle}</h1>
+    </div>
+
     {{if error}}
     <section>
         <h1>${lingua.viewer.wrong}</h1>
@@ -77,5 +82,9 @@
         <pre id="dv_query"><code class="language-sparql">${query}</code></pre>
     </section>
     {{/if}}
+
+    <div id="footer">
+        <img class="floatr" src="/images/logo-small.png" alt="GORQL Viewer" title="GORQL Viewer" />
+    </div>
 </body>
 </html>

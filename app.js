@@ -74,6 +74,8 @@ app.configure(function () {
 
     app.set('debug_charts', globalOpts.debug);
     app.set('viewer_host', globalOpts.host);
+    app.set('siteLogo', globalOpts.logo);
+    app.set('siteTitle', globalOpts.title);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
 

@@ -23,6 +23,11 @@ h1.first {
     float: right;
 }
 
+.scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 #header {
     position: relative;
     margin-bottom: 30px;

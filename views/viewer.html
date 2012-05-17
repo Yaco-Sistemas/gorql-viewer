@@ -66,15 +66,19 @@
     {{if chart}}
     <section>
         <h1 class="first">${lingua.viewer.chart[chart.type]}</h1>
-        <div id="dv_viewport" class="dv_viewport">
-        {{if chart.png && chart.family == 'd3'}}<img src="/png/?query={{html encoded_query}}&amp;chart=${chart.type}{{each(idx, option) chart.options}}&amp;${option[0]}=${option[1]}{{/each}}" />{{/if}}
-        </div>
+        {{if chart.family != 'simile'}}<div class="scroll">{{/if}}
+            <div id="dv_viewport" class="dv_viewport">
+            {{if chart.png && chart.family == 'd3'}}<img src="/png/?query={{html encoded_query}}&amp;chart=${chart.type}{{each(idx, option) chart.options}}&amp;${option[0]}=${option[1]}{{/each}}" />{{/if}}
+            </div>
+        {{if chart.family != 'simile'}}</div>{{/if}}
     </section>
     {{/if}}
 
     <section>
         <h1 {{if !chart}}class="first"{{/if}}>${lingua.viewer.data}</h1>
-        {{html table}}
+        <div class="scroll">
+            {{html table}}
+        </div>
     </section>
 
     <section>

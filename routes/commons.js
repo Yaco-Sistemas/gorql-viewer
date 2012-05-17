@@ -56,7 +56,11 @@ sparqlCallback = function (response, params, renderCallback, cache, key) {
 
         if (res === undefined && err) {
             console.error(err);
-            error = 'Error: ' + err[1].statusCode;
+            if (err[1]) {
+                error = 'Error: ' + err[1].statusCode;
+            } else {
+                error = "Unknown error";
+            }
             res = [];
         } else {
 

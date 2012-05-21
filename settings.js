@@ -39,7 +39,7 @@ exports.settings = {
             landscape: 'false',
             sizeX: 500,
             sizeY: 500,
-            sizeLabel: 70
+            sizeLabel: 100
         },
         pie: {
             sizeX: 500,
@@ -77,7 +77,7 @@ exports.settings = {
             landscape: 'false',
             sizeX: 500,
             sizeY: 500,
-            sizeLabel: 70
+            sizeLabel: 100
         },
         pie: {
             sizeX: 500,

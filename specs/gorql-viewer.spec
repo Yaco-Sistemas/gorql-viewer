@@ -6,7 +6,7 @@
 
 Name: %{name}
 Version: 1.2.0devel
-Release: 3
+Release: 4
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -15,7 +15,7 @@ License: EUPL 1.1 License
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: nodejs = 0.6.17, ImageMagick, make
+Requires: nodejs = 0.6.17, forever = 0.9.1, ImageMagick, make
 BuildRequires: nodejs = 0.6.17, npm, make
 
 %description
@@ -104,6 +104,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Wed May 23 2012 Alejandro Blanco <ablanco@yaco.es>
+- Require forever package
+
 * Mon May 03 2012 Alejandro Blanco <ablanco@yaco.es>
 - Remove jsdom from d3 dependencies since it doesn't work in RH5
 

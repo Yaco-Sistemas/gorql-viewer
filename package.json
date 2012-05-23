@@ -3,7 +3,6 @@
     "version": "1.2.0devel",
     "private": true,
     "dependencies": {
-        "forever": "0.8.5",
         "express": "2.5.1",
         "lingua": "0.2.1",
         "jqtpl": "1.0.7",

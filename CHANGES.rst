@@ -5,6 +5,7 @@ Changes
 ------------------
 
 - New header and footer, both with the viewer's logo.
+- Forever is now an external dependency, managed at rpm level.
 - TODO
 
 1.1.1 (2012-05-08)

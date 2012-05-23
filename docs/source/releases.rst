@@ -6,6 +6,7 @@ Lista de cambios
 
 - Nuevas cabecera y pie, con el logo del visor. El logo y título mostrados en
   la cabecera son personalizables.
+- Extraído forever a un paquete rpm externo.
 - TODO
 
 1.1.1

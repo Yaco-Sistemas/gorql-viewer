@@ -9,7 +9,7 @@ Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
 License: MIT License
 URL: https://github.com/nodejitsu/forever
-Source: %{name}.tgz
+Source: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: nodejs = 0.6.17
 BuildRequires: nodejs = 0.6.17, npm
@@ -18,12 +18,12 @@ BuildRequires: nodejs = 0.6.17, npm
 %{summary}
 
 %prep
-%setup -q
+rm -rf %{installdir}
 mkdir %{installdir}
 
 %build
 cd %{installdir}
-npm install forever@%{version}
+npm install $RPM_SOURCE_DIR/%{name}-%{version}.tgz
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/node_modules/

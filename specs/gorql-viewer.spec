@@ -5,7 +5,7 @@
 %define docdir /usr/share/doc/%{name}-%{version}
 
 Name: %{name}
-Version: 1.2.0devel
+Version: 1.2.0develhg323
 Release: 4
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>

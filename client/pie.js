@@ -248,7 +248,7 @@ DV.merge((function () {
             });
             labelsBB.remove();
 
-            sizes.label = maxWidth;
+            sizes.label = maxWidth + 30; // Because of the color squares
             sizes.highlight = parseInt(options.sizeHighlight, 10);
 
             positions.labels = sizes.width - sizes.label;

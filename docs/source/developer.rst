@@ -233,7 +233,6 @@ Ejemplo de embebido de un informe, incluye todos los nodos necesarios:
                 series: "population",
                 sizeX: "600",
                 sizeY: "400",
-                sizeLabel: "100",
                 sizeHighlight: "30"
             });
         });

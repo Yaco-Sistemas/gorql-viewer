@@ -233,7 +233,6 @@ parámetros en la url de consulta:
 
    - **sizeX**: Ancho en píxeles del gráfico.
    - **sizeY**: Alto en píxeles del gráfico.
-   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
    - **landscape**: Valor booleano que determina si el gráfico se debe representar
      en horizontal.
 
@@ -241,7 +240,6 @@ parámetros en la url de consulta:
 
    - **sizeX**: Ancho en píxeles del gráfico.
    - **sizeY**: Alto en píxeles del gráfico.
-   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
    - **sizeHighlight**: Número de píxeles que se desplaza hacia afuera un sector
      al ser resaltado con el cursor.
 
@@ -249,7 +247,6 @@ parámetros en la url de consulta:
 
    - **sizeX**: Ancho en píxeles del gráfico.
    - **sizeY**: Alto en píxeles del gráfico.
-   - **sizeLabel**: Espacio en píxeles reservado para las etiquetas en el gráfico.
    - **area**: Valor booleano que determina si el área comprendida debajo de las
      líneas se debe colorear.
 

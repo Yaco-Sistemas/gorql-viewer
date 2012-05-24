@@ -113,7 +113,7 @@ exports.getDefaultChartParameters = function (chartName) {
 
     d3par = [
         {name: 'labels'}, {name: 'series'}, {name: 'sizeX', 'default': true},
-        {name: 'sizeY', 'default': true}, {name: 'sizeLabel', 'default': true}
+        {name: 'sizeY', 'default': true}
     ];
     similepar = [
         {name: 'title'}, {name: 'start'}, {name: 'end'}, {name: 'description'},

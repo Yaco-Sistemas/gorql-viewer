@@ -73,20 +73,17 @@ exports.settings = {
         bar: {
             landscape: 'false',
             sizeX: 500,
-            sizeY: 500,
-            sizeLabel: 100
+            sizeY: 500
         },
         pie: {
             sizeX: 500,
             sizeY: 500,
-            sizeLabel: 100,
             sizeHighlight: 30
         },
         line: {
             area: 'false',
             sizeX: 500,
-            sizeY: 500,
-            sizeLabel: 100
+            sizeY: 500
         },
         timeline: {
             sizeX: 800,

@@ -198,7 +198,9 @@ DV.merge((function () {
 
         init = function (d3, container, labels, series, options) {
             var area = options.area === 'true' || options.area === true,
-                viewport = d3.select(container);
+                viewport = d3.select(container),
+                maxWidth = 0,
+                labelsBB;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
@@ -213,7 +215,30 @@ DV.merge((function () {
             size.x = parseInt(options.sizeX, 10);
             size.xpadding = size.x / (nElems + 1); // to avoid cropping labels
             size.y = parseInt(options.sizeY, 10);
-            size.offset = parseInt(options.sizeLabel, 10);
+
+            // Create the svg root node
+            svg = viewport.append("svg:svg")
+                .attr("class", "chart line")
+                .attr("width", size.x)
+                .attr("height", size.y);
+
+            // Calculate required size for labels
+            labelsBB = svg.selectAll("text.label")
+                .data(labels)
+                .enter().append("svg:text")
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("text-anchor", "start")
+                .text(String);
+            labelsBB.each(function (d, i) {
+                var width = this.getBBox().width;
+                if (width > maxWidth) {
+                    maxWidth += width;
+                }
+            });
+            labelsBB.remove();
+            size.offset = maxWidth;
 
             xScale = d3.scale.linear()
                 .domain([0, nElems - 1])
@@ -222,12 +247,6 @@ DV.merge((function () {
             yScale = d3.scale.linear()
                 .domain([d3.max(d3.merge(series)), d3.min(d3.merge(series))])
                 .range([0, size.y - size.offset]);
-
-            // Create the svg root node
-            svg = viewport.append("svg:svg")
-                .attr("class", "chart line")
-                .attr("width", size.x)
-                .attr("height", size.y);
 
             render(d3, labels, series, area);
         },

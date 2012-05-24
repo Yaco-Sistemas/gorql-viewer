@@ -6,6 +6,7 @@ Changes
 
 - New header and footer, both with the viewer's logo.
 - Forever is now an external dependency, managed at rpm level.
+- Required space for labels in d3 charts is now automatically computed.
 - TODO
 
 1.1.1 (2012-05-08)

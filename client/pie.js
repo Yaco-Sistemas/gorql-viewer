@@ -192,6 +192,8 @@ DV.merge((function () {
 
         init = function (d3, container, labels, series, options) {
             var viewport = d3.select(container),
+                maxWidth = 0,
+                labelsBB,
                 pie,
                 i,
                 filter;
@@ -220,10 +222,34 @@ DV.merge((function () {
 
             sizes = {
                 width: parseInt(options.sizeX, 10),
-                height: parseInt(options.sizeY, 10),
-                label: parseInt(options.sizeLabel, 10),
-                highlight: parseInt(options.sizeHighlight, 10)
+                height: parseInt(options.sizeY, 10)
             };
+
+            // Create the svg root node
+            svg = viewport.append("svg:svg")
+                .attr("class", "chart pie")
+                .attr("width", sizes.width) // original sizes
+                .attr("height", sizes.height);
+
+            // Calculate required size for labels
+            labelsBB = svg.selectAll("text.label")
+                .data(labels)
+                .enter().append("svg:text")
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("text-anchor", "start")
+                .text(String);
+            labelsBB.each(function (d, i) {
+                var width = this.getBBox().width;
+                if (width > maxWidth) {
+                    maxWidth += width;
+                }
+            });
+            labelsBB.remove();
+
+            sizes.label = maxWidth;
+            sizes.highlight = parseInt(options.sizeHighlight, 10);
 
             positions.labels = sizes.width - sizes.label;
             positions.centerX = (sizes.width - sizes.label) / 2;
@@ -237,12 +263,6 @@ DV.merge((function () {
             labelScale = d3.scale.linear()
                 .domain([0, series.length - 1])
                 .range([20, sizes.height - 20]);
-
-            // Create the svg root node
-            svg = viewport.append("svg:svg")
-                .attr("class", "chart pie")
-                .attr("width", sizes.width) // original sizes
-                .attr("height", sizes.height);
 
             // Create Drop Shadow filter
             filter = svg.append("svg:defs")

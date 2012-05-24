@@ -52,9 +52,6 @@ Este grupo de gráficos engloba a los gráficos de tipo *bar*, *pie* y *line*.
    Tamaño en píxeles que tendrá de ancho el gráfico generado. *Opcional*.
  - **sizeY**
    Tamaño en píxeles que tendrá de alto el gráfico generado. *Opcional*.
- - **sizeLabel**
-   Tamaño en píxeles que se reservará del total para pintar las etiquetas en el
-   gráfico. *Opcional*.
 
 A continuación siguen parámetros específicos de algunos tipos de gráficos.
 

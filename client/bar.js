@@ -308,7 +308,9 @@ DV.merge((function () {
 
         init = function (d3, container, labels, series, options) {
             var viewport = d3.select(container),
-                transform;
+                maxWidth = 0,
+                transform,
+                labelsBB;
 
             if (series.length <= 0 || series[0].length <= 0) {
                 return;
@@ -322,7 +324,30 @@ DV.merge((function () {
 
             size.x = parseInt(options.sizeX, 10);
             size.y = parseInt(options.sizeY, 10);
-            size.offset = parseInt(options.sizeLabel, 10);
+
+            // Create the svg root node
+            svg = viewport.append("svg:svg")
+                .attr("class", "chart bar")
+                .attr("width", parseInt(options.sizeX, 10)) // original sizes
+                .attr("height", parseInt(options.sizeY, 10));
+
+            // Calculate required size for labels
+            labelsBB = svg.selectAll("text.label")
+                .data(labels)
+                .enter().append("svg:text")
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("text-anchor", "start")
+                .text(String);
+            labelsBB.each(function (d, i) {
+                var width = this.getBBox().width;
+                if (width > maxWidth) {
+                    maxWidth += width;
+                }
+            });
+            labelsBB.remove();
+            size.offset = maxWidth;
 
             // Create dynamically the scales
             if (options.landscape === 'true') {
@@ -347,12 +372,7 @@ DV.merge((function () {
                 transform = "";
             }
 
-            // Create the svg root node
-            svg = viewport.append("svg:svg")
-                .attr("class", "chart bar")
-                .attr("width", parseInt(options.sizeX, 10)) // original sizes
-                .attr("height", parseInt(options.sizeY, 10))
-                .append("svg:g")
+            svg = svg.append("svg:g")
                 .attr("transform", transform);
 
             render(labels, series);

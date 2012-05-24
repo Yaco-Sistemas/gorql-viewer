@@ -7,6 +7,8 @@ Lista de cambios
 - Nuevas cabecera y pie, con el logo del visor. El logo y título mostrados en
   la cabecera son personalizables.
 - Extraído forever a un paquete rpm externo.
+- El tamaño requerido para las etiquetas se calcula ahora dinámicamente en los
+  gráficos basados en d3.
 - TODO
 
 1.1.1

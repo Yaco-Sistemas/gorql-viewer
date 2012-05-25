@@ -28,7 +28,7 @@ exports.settings = {
         debug: false,
         port: 3000,
         host: 'http://gorql-viewer.ceic-ogov.yaco.es',
-        logo: '/images/logo-big.png',
+        logo: '../images/logo-big.png',
         title: 'Resultados de la Consulta'
     },
 

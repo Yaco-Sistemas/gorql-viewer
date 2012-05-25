@@ -306,7 +306,7 @@ DV.merge((function () {
                 .text(String);
         },
 
-        init = function (d3, container, labels, series, options) {
+        init = function (d3, container, labels, series, options, sizeLabel) {
             var viewport = d3.select(container),
                 maxWidth = 0,
                 transform,
@@ -331,23 +331,27 @@ DV.merge((function () {
                 .attr("width", parseInt(options.sizeX, 10)) // original sizes
                 .attr("height", parseInt(options.sizeY, 10));
 
-            // Calculate required size for labels
-            labelsBB = svg.selectAll("text.label")
-                .data(labels)
-                .enter().append("svg:text")
-                .attr("class", "label")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("text-anchor", "start")
-                .text(String);
-            labelsBB.each(function (d, i) {
-                var width = this.getBBox().width;
-                if (width > maxWidth) {
-                    maxWidth += width;
-                }
-            });
-            labelsBB.remove();
-            size.offset = maxWidth;
+            if (typeof sizeLabel === "undefined") {
+                // Calculate required size for labels
+                labelsBB = svg.selectAll("text.label")
+                    .data(labels)
+                    .enter().append("svg:text")
+                    .attr("class", "label")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("text-anchor", "start")
+                    .text(String);
+                labelsBB.each(function (d, i) {
+                    var width = this.getBBox().width;
+                    if (width > maxWidth) {
+                        maxWidth = width;
+                    }
+                });
+                labelsBB.remove();
+                size.offset = maxWidth + 10;
+            } else {
+                size.offset = sizeLabel;
+            }
 
             // Create dynamically the scales
             if (options.landscape === 'true') {
@@ -379,7 +383,14 @@ DV.merge((function () {
         },
 
         node = function (d3, data, options) {
-            init(d3, "#dv_viewport", data.labels, data.values, options);
+            var max = 0,
+                i;
+            for (i = 0; i < data.labels.length; i += 1) {
+                if (data.labels[i].length > max) {
+                    max = data.labels[i].length;
+                }
+            }
+            init(d3, "#dv_viewport", data.labels, data.values, options, max * 7);
         },
 
         chart = function (container, data_container, options) {

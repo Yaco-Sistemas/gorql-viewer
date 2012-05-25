@@ -76,6 +76,7 @@ app.configure(function () {
     app.set('viewer_host', globalOpts.host);
     app.set('siteLogo', globalOpts.logo);
     app.set('siteTitle', globalOpts.title);
+    app.set('staticUrl', globalOpts.staticUrl);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
 

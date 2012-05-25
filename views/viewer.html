@@ -4,32 +4,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>${siteTitle}</title>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/base.css" />
+    <link rel="stylesheet" href="${staticUrl}stylesheets/style.css" />
+    <link rel="stylesheet" href="${staticUrl}stylesheets/base.css" />
 
     {{if chart && !chart.png}}
     {{if debug_charts}}{{partial(chart) "debug"}}{{else}}
-    <script type="text/javascript" src="/javascripts/dv-core.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-core.js"></script>
     {{if chart.family == 'd3'}}
-    <script type="text/javascript" src="/javascripts/dv-d3.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
     <script type="text/javascript">
-        var Timeline_ajax_url="/javascripts/timeline_ajax/simile-ajax-api.js",
-            Timeline_urlPrefix='/javascripts/timeline_js/',
+        var Timeline_ajax_url="${staticUrl}javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='${staticUrl}javascripts/timeline_js/',
             Timeline_parameters='bundle=true&defaultLocale="es"';
     </script>
-    <script type="text/javascript" src="/javascripts/dv-time.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-time.js"></script>
     {{else}} {{if chart.family == 'layers'}}
     {{if chart.type == 'mapea'}}
-    <script type="text/javascript" src="/javascripts/dv-mapea.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-mapea.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.initMapea("${host}");
         });
     </script>
     {{else}}
-    <link rel="stylesheet" href="/javascripts/theme/default/style.css" />
-    <script type="text/javascript" src="/javascripts/dv-openlayers.js"></script>
+    <link rel="stylesheet" href="${staticUrl}javascripts/theme/default/style.css" />
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-openlayers.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.initMap("${host}");
@@ -47,7 +47,7 @@
                 });
         });
     </script>
-    <link rel="stylesheet" href="/stylesheets/${chart.type}.css" />
+    <link rel="stylesheet" href="${staticUrl}stylesheets/${chart.type}.css" />
     {{/if}}
 </head>
 <body>
@@ -88,7 +88,7 @@
     {{/if}}
 
     <div id="footer">
-        <img class="floatr" src="/images/logo-small.png" alt="GORQL Viewer" title="GORQL Viewer" />
+        <img class="floatr" src="${staticUrl}images/logo-small.png" alt="GORQL Viewer" title="GORQL Viewer" />
     </div>
 </body>
 </html>

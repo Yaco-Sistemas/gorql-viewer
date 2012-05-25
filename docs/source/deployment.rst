@@ -202,6 +202,9 @@ El fichero trae una configuración de ejemplo.
 Global
 ''''''
 
+ - **staticUrl**: Ruta donde se sirven los ficheros estáticos, sólo es necesario
+   modificar este parámetro si se desea servir los ficheros estáticos por
+   separado. Por defecto, *"../"*.
  - **debug**: Modo depuración, para el funcionamiento normal debe estar
    desactivado. Por defecto, *false*.
  - **port**: Puerto en el que escucha el visor. Por defecto, *3010*.

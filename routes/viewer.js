@@ -94,6 +94,7 @@ renderResults = function (response, params, error, results) {
                 host: app.exports.set('viewer_host'),
                 siteLogo: app.exports.set('siteLogo'),
                 siteTitle: app.exports.set('siteTitle'),
+                staticUrl: app.exports.set('staticUrl'),
                 error: error,
                 results: data.matrix,
                 headers: data.headers,

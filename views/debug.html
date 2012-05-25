@@ -1,16 +1,16 @@
-    <script type="text/javascript" src="/javascripts/domready.js"></script>
-    <script type="text/javascript" src="/javascripts/sizzle.js"></script>
-    <script type="text/javascript" src="/javascripts/minedata.js"></script>
-    <script type="text/javascript" src="/javascripts/defaults.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/domready.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/sizzle.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/minedata.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/defaults.js"></script>
     {{if family == 'd3'}}
-    <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/d3.v2.js"></script>
     {{else}} {{if family == 'simile'}}
     <script type="text/javascript">
-        var Timeline_ajax_url="/javascripts/timeline_ajax/simile-ajax-api.js",
-            Timeline_urlPrefix='/javascripts/timeline_js/',
+        var Timeline_ajax_url="${staticUrl}javascripts/timeline_ajax/simile-ajax-api.js",
+            Timeline_urlPrefix='${staticUrl}javascripts/timeline_js/',
             Timeline_parameters='bundle=true&defaultLocale="es"';
     </script>
-    <script type="text/javascript" src="/javascripts/timeline_js/timeline-api.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/timeline_js/timeline-api.js"></script>
     {{else}} {{if family == 'layers'}}
     {{if chart.type == 'mapea'}}
     <script type="text/javascript">
@@ -18,9 +18,9 @@
             DV.initMapea("${host}");
         });
     </script>
-    <script type="text/javascript" src="/javascripts/Base64.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/Base64.js"></script>
     {{else}}
-    <script type="text/javascript" src="/javascripts/OpenLayers.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/OpenLayers.js"></script>
     <script type="text/javascript">
         DomReady.ready(function () {
             DV.initMap("${host}");
@@ -28,4 +28,4 @@
     </script>
     {{/if}}
     {{/if}}{{/if}}{{/if}}
-    <script type="text/javascript" src="/javascripts/${type}.js"></script>
+    <script type="text/javascript" src="${staticUrl}javascripts/${type}.js"></script>

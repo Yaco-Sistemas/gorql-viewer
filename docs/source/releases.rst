@@ -9,7 +9,6 @@ Lista de cambios
 - Extraído forever a un paquete rpm externo.
 - El tamaño requerido para las etiquetas se calcula ahora dinámicamente en los
   gráficos basados en d3.
-- TODO
 
 1.1.1
 =====

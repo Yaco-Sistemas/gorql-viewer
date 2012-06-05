@@ -126,12 +126,12 @@ paquete RPM:
 *x86_64 RedHat 5*
  Descarga-GORQL-Viewer-RH5_
 
-.. _Descarga-GORQL-Viewer-RH5: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.1/rh5/gorql-viewer-1.1.1-3.x86_64.rpm
+.. _Descarga-GORQL-Viewer-RH5: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.2/rh5/gorql-viewer-1.2.0-3.x86_64.rpm
 
 *x86_64 RedHat 6*
  Descarga-GORQL-Viewer-RH6_
 
-.. _Descarga-GORQL-Viewer-RH6: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.1/rh6/gorql-viewer-1.1.1-3.x86_64.rpm
+.. _Descarga-GORQL-Viewer-RH6: http://files.yaco.es/~ceic-ogov/gorql-viewer/1.2/rh6/gorql-viewer-1.2.0-3.x86_64.rpm
 
 Una vez descargado el paquete se instala ejecutando:
 

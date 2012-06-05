@@ -1,6 +1,6 @@
 {
     "name": "gorql-viewer",
-    "version": "1.2.0devel",
+    "version": "1.2.0",
     "private": true,
     "dependencies": {
         "express": "2.5.1",

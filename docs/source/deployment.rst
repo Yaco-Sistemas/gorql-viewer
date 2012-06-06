@@ -169,6 +169,11 @@ correspondientes.
 
 Con estos comandos queda actualizado el visor.
 
+.. note:: Si se modifica la configuración en algo que afecte a las consultas
+   SPARQL, por ejemplo el *endpoint*, entonces hay que reiniciar el
+   memcached (si se está usando) para que dichos cambios tengan efecto
+   inmediatamente.
+
 Gestión del servicio
 --------------------
 
@@ -291,3 +296,8 @@ parámetros en la url de consulta:
 
    - **sizeX**: Ancho en píxeles del gráfico.
    - **sizeY**: Alto en píxeles del gráfico.
+
+.. note:: Si se modifica la configuración en algo que afecte a las consultas
+   SPARQL, por ejemplo el *endpoint*, entonces hay que reiniciar el
+   memcached (si se está usando) para que dichos cambios tengan efecto
+   inmediatamente.

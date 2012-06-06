@@ -4,6 +4,7 @@ Changes
 1.2.1 (YYYY-MM-DD)
 ------------------
 
+- chkconfig support.
 - TODO
 
 1.2.0 (2012-06-05)

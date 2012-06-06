@@ -4,6 +4,7 @@
 Lista de cambios
 ----------------
 
+- Soporte de chkconfig.
 - TODO
 
 1.2.0

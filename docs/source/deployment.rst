@@ -120,6 +120,9 @@ con lo que al instalarlo se instalan también sus dependencias.
 GORQL Viewer
 ============
 
+Instalación
+-----------
+
 Una vez instalado NodeJS, se puede desplegar GORQL Viewer. Para ello se utiliza el
 paquete RPM:
 
@@ -148,6 +151,23 @@ encuentran en `/opt/gorql-viewer/.forever/`.
 El servidor escucha, con la configuración por defecto, en el **puerto 3000**.
 La configuración del mismo se encuentra en el fichero `settings.js` en el
 directorio `/etc/gorql-viewer/`.
+
+Actualización
+-------------
+
+La actualización de GORQL Viewer a nuevas versiones es muy sencilla, dado que
+el componente no mantiene un estado. Simplemente hay que actualizar el rpm:
+
+.. code-block:: none
+
+ service gorql-viewer stop
+ rpm -Uvh gorql-viewer-X.Y.Z-W.x86_64.rpm
+ service gorql-viewer start
+
+Obviamente hay que sustituir X, Y, Z y W por los números de versión
+correspondientes.
+
+Con estos comandos queda actualizado el visor.
 
 Gestión del servicio
 --------------------

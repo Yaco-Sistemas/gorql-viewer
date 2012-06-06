@@ -235,6 +235,10 @@ Global
  - **port**: Puerto en el que escucha el visor. Por defecto, *3010*.
  - **host**: Dominio en el que se sirve la aplicación. Por defecto,
    *http://gorql-viewer.ceic-ogov.yaco.es*.
+ - **logo**: Ruta a la imagen para la cabecera del editor. Por defecto,
+   *../images/logo-big.png*.
+ - **title**: Título del editor que aparecerá en la cabecera. Por defecto,
+   *Resultados de la Consulta*.
 
 Development y Production
 ''''''''''''''''''''''''

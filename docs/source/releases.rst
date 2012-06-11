@@ -1,11 +1,11 @@
-1.2.1devel
-==========
+1.3.0
+=====
 
 Lista de cambios
 ----------------
 
 - Soporte de chkconfig.
-- TODO
+- Documentación para la actualización.
 
 1.2.0
 =====

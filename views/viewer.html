@@ -39,12 +39,27 @@
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
         DomReady.ready(function () {
-            DV.${chart.type}("#dv_viewport",
-                "#dv_table",
+            window.advanced = {
+                show: document.getElementById("showadvanced"),
+                hide: document.getElementById("hideadvanced"),
+                section: document.getElementById("advanced")
+            };
+            advanced.show.onclick = function (evt) {
+                advanced.show.className = "hidden";
+                advanced.hide.className = "";
+                advanced.section.className = "";
+            };
+            advanced.hide.onclick = function (evt) {
+                advanced.show.className = "";
+                advanced.hide.className = "hidden";
+                advanced.section.className = "hidden";
+            };
+            DV.${chart.type}("#dv_viewport", "#dv_table",
                 {
                     {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
                     {{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
-                });
+                }
+            );
         });
     </script>
     <link rel="stylesheet" href="${staticUrl}stylesheets/${chart.type}.css" />
@@ -81,7 +96,12 @@
         </div>
     </section>
 
-    <section>
+    <div class="buttons">
+        <button id="showadvanced">${lingua.viewer.advanced}</button>
+        <button id="hideadvanced" class="hidden">${lingua.viewer.hideadvanced}</button>
+    </div>
+
+    <section id="advanced" class="hidden">
         <h1>${lingua.viewer.query}</h1>
         <pre id="dv_query"><code class="language-sparql">${query}</code></pre>
     </section>

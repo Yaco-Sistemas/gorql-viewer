@@ -10,7 +10,9 @@
         },
         "data": "Datos",
         "query": "Consulta",
-        "wrong": "Se ha producido un error"
+        "wrong": "Se ha producido un error",
+        "advanced": "Mostrar contenidos avanzados",
+        "hideadvanced": "Ocultar contenidos avanzados"
     },
     "kml": {
         "result": "Resultado"

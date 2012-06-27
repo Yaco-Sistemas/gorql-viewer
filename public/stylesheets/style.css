@@ -28,6 +28,18 @@ h1.first {
     overflow-y: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
+.buttons {
+    margin-top: 35px;
+}
+
+button {
+    padding: 5px;
+}
+
 #header {
     position: relative;
     margin-bottom: 30px;
@@ -41,17 +53,6 @@ h1.first {
     border-bottom: 0;
 }
 
-#footer {
-    margin-top: 10px;
-}
-
-#footer img {
-    margin-top: 3px;
-    margin-bottom: 10px;
-    width: 74px;
-    height: 22px;
-}
-
 div.dv_viewport {
     margin-left: auto;
     margin-right: auto;
@@ -63,4 +64,15 @@ div.dv_viewport {
     border: 1px solid #555;
     white-space: pre-wrap;
     margin-bottom: 0px;
+}
+
+#footer {
+    margin-top: 10px;
+}
+
+#footer img {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 74px;
+    height: 22px;
 }

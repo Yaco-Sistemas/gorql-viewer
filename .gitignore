@@ -1,5 +1,4 @@
-syntax: glob
-
+*~
 node_modules
 docs/build
 public/javascripts/dv.min.js

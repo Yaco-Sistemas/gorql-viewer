@@ -46,7 +46,7 @@ rm -f %{installdir}/public/examples.html
 # move the rest to the build root
 mkdir -p `dirname $RPM_BUILD_ROOT%{installdir}`
 mkdir -p $RPM_BUILD_ROOT%{docdir}
-mv %{installdir}/README.rst $RPM_BUILD_ROOT%{docdir}/
+mv %{installdir}/README.md $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir}/CHANGES.rst $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir}/COPYING $RPM_BUILD_ROOT%{docdir}/
 mv %{installdir} `dirname $RPM_BUILD_ROOT%{installdir}`/
@@ -58,7 +58,7 @@ mkdir -p $RPM_BUILD_ROOT/etc/%{name}
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%doc %{docdir}/README.rst
+%doc %{docdir}/README.md
 %doc %{docdir}/COPYING
 %doc %{docdir}/CHANGES.rst
 %{installdir}/client

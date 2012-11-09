@@ -1,7 +1,7 @@
 %define   _base node
 
 Name:          %{_base}js
-Version:       0.6.17
+Version:       0.8.14
 Release:       1%{?dist}
 Summary:       Node.js is a server-side JavaScript environment that uses an asynchronous event-driven model.
 Packager:      Kazuhisa Hara <kazuhisya@gmail.com>
@@ -42,13 +42,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %dir %{_includedir}/node
 %{_includedir}/node/*.h
-%{_includedir}/node/c-ares/*.h
+#%{_includedir}/node/c-ares/*.h
 %{_includedir}/node/uv-private/*.h
 #%{_includedir}/node/ev/*.h
 #%{_prefix}/lib/pkgconfig/nodejs.pc
 %attr(755,root,root) %{_bindir}/node
 %attr(755,root,root) %{_bindir}/node-waf
 %attr(755,root,root) %{_bindir}/npm
+%{_prefix}/lib/dtrace/node.d
 %dir %{_prefix}/lib/node
 %dir %{_prefix}/lib/node/wafadmin
 %dir %{_prefix}/lib/node/wafadmin/Tools
@@ -60,6 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/man/man1/node.1.gz
 
 %changelog
+* Fri Nov 09 2012 Alejandro Blanco <ablanco@yaco.es>
+- Updated to node.js version 0.8.14
 * Tue May 08 2012 Alejandro Blanco <ablanco@yaco.es>
 - Updated to node.js version 0.6.17
 * Wed May 02 2012 Alejandro Blanco <ablanco@yaco.es>

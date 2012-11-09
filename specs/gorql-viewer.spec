@@ -6,7 +6,7 @@
 
 Name: %{name}
 Version: 1.3.1develhg340
-Release: 4
+Release: 5
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -15,8 +15,8 @@ License: EUPL 1.1 License
 URL: http://www.yaco.es
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: nodejs = 0.6.17, forever = 0.9.1, ImageMagick, make
-BuildRequires: nodejs = 0.6.17, npm, make
+Requires: nodejs = 0.8.14, forever = 0.10.0, ImageMagick, make
+BuildRequires: nodejs = 0.8.14, npm, make
 
 %description
 %{summary}
@@ -103,6 +103,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Fri Nov 09 2012 Alejandro Blanco <ablanco@yaco.es>
+- Update required nodejs and forever versions
+
 * Wed May 23 2012 Alejandro Blanco <ablanco@yaco.es>
 - Require forever package
 

@@ -2,8 +2,8 @@
 %define installdir /tmp/%{name}
 
 Name: %{name}
-Version: 0.9.1
-Release: 1
+Version: 0.10.0
+Release: 2
 Summary: A simple CLI tool for ensuring that a given node script runs continuously (i.e. forever)
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -11,8 +11,8 @@ License: MIT License
 URL: https://github.com/nodejitsu/forever
 Source: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: nodejs = 0.6.17
-BuildRequires: nodejs = 0.6.17, npm
+Requires: nodejs = 0.8.14
+BuildRequires: nodejs = 0.8.14, npm
 
 %description
 %{summary}
@@ -53,5 +53,7 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Fri Nov 09 2012 Alejandro Blanco <ablanco@yaco.es>
+- Update required nodejs version and forever version
 * Tue May 22 2012 Alejandro Blanco <ablanco@yaco.es>
 - Initial version

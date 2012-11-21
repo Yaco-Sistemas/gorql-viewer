@@ -25,7 +25,7 @@ mercado específico para usuarios técnicos avanzados.
 Esta documentación cubre el módulo GORQL Viewer que es el encargado
 de la generación de informes a partir de un punto SPARQL y un conjunto
 de parámetros. GORQL Viewer por sí sólo no cubre los objetivos arriba
-descritos y necesita el uso de otros módulos como GORQL Assistant para
+descritos y necesita el uso de otros módulos como GORQL Editor para
 obtener el sistema final deseado.
 
 Si bien GORQL Viewer puede ser usado de forma independiente, la necesidad

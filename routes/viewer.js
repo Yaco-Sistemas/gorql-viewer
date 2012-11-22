@@ -32,6 +32,7 @@ renderResults = function (response, params, error, results) {
 
     var charts = ['bar', 'pie', 'line', 'timeline', 'map', 'mapea'],
         defaults = {},
+        prettyHeaders,
         chart,
         data,
         aux,
@@ -41,6 +42,12 @@ renderResults = function (response, params, error, results) {
     // 1.- Get the values from the array of objects
 
     data = commons.resultsToMatrix(results);
+
+    if (params.prettyHeaders) {
+        prettyHeaders = params.prettyHeaders.split(',');
+    } else {
+        prettyHeaders = data.headers;
+    }
 
     if (params.embedded) {
 
@@ -55,7 +62,8 @@ renderResults = function (response, params, error, results) {
         aux = "if (!DV) { var DV = {}; } if (!DV.data) { DV.data = []; } " +
             "DV.data[" + parseInt(params.idx, 10) + "] = " + JSON.stringify({
                 results: data.matrix,
-                headers: data.headers
+                headers: data.headers,
+                prettyHeaders: prettyHeaders
             }) + "; DV.defaults = " + JSON.stringify(defaults) + ";";
 
         // 2.- Render JSON results
@@ -87,7 +95,11 @@ renderResults = function (response, params, error, results) {
             aux = "";
             error = response.lingua.content.viewer.noresults;
         } else {
-            aux = table.generateTableHTML(data.headers, data.matrix);
+            aux = data.headers;
+            if (prettyHeaders.length === aux.length) {
+                aux = prettyHeaders;
+            }
+            aux = table.generateTableHTML(data.headers, aux, data.matrix);
         }
 
         // 2.- Render regular HTML response

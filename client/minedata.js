@@ -55,7 +55,7 @@ DV.extractData = function (data_container, options) {
 
     // Get indexes
     for (i = 0; i < aux[0].cells.length; i += 1) {
-        aux2 = aux[0].cells[i].innerHTML;
+        aux2 = aux[0].cells[i].id;
         headers.push(aux2);
         if (aux2 === options.labels) {
             labelIdx = i;

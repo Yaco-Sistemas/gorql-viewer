@@ -12,7 +12,8 @@
         "query": "Consulta",
         "wrong": "Se ha producido un error",
         "advanced": "Mostrar contenidos avanzados",
-        "hideadvanced": "Ocultar contenidos avanzados"
+        "hideadvanced": "Ocultar contenidos avanzados",
+        "noresults": "No hay resultados"
     },
     "kml": {
         "result": "Resultado"

@@ -12,7 +12,8 @@
         "query": "Query",
         "wrong": "Something wrong happened",
         "advanced": "Show advanced content",
-        "hideadvanced": "Hide advanced content"
+        "hideadvanced": "Hide advanced content",
+        "noresults": "No results returned"
     },
     "kml": {
         "result": "Result"

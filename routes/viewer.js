@@ -83,7 +83,12 @@ renderResults = function (response, params, error, results) {
 
         // Generate table with the data
 
-        aux = table.generateTableHTML(data.headers, data.matrix);
+        if (data.matrix.length === 0) {
+            aux = "";
+            error = response.lingua.content.viewer.noresults;
+        } else {
+            aux = table.generateTableHTML(data.headers, data.matrix);
+        }
 
         // 2.- Render regular HTML response
 

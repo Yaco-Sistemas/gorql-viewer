@@ -10,6 +10,11 @@ continuación se añaden los parámetros en formato GET.
 
  - **query**
    Consulta en SPARQL codificada para urls. *Obligatorio*.
+ - **prettyHeaders**
+   Lista separada por comas de los nombres a utilizar en la cabecera de la
+   tabla con los resultados, en lugar de usar directamente el nombre de las
+   variables. Debe haber el mismo número de nombres que de variables
+   seleccionadas en la consulta, y aparecer en el mismo orden. *Opcional*.
  - **embedded**
    Valor booleano que determina si se deben devolver los datos en formato JSON
    en lugar de mostrar el visor. *Opcional*.

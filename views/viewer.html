@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="${staticUrl}stylesheets/style.css" />
     <link rel="stylesheet" href="${staticUrl}stylesheets/base.css" />
 
+    {{if debug_charts}}
+    <script type="text/javascript" src="${staticUrl}javascripts/domready.js"></script>
+    {{else}}
+    <script type="text/javascript" src="${staticUrl}javascripts/dv-core.js"></script>
+    {{/if}}
+
     {{if chart && !chart.png}}
     {{if debug_charts}}{{partial(chart) "debug"}}{{else}}
-    <script type="text/javascript" src="${staticUrl}javascripts/dv-core.js"></script>
     {{if chart.family == 'd3'}}
     <script type="text/javascript" src="${staticUrl}javascripts/dv-d3.js"></script>
     {{else}} {{if chart.family == 'simile'}}
@@ -39,6 +44,18 @@
     {{/if}}{{/if}}{{/if}}{{/if}}
     <script type="text/javascript">
         DomReady.ready(function () {
+            DV.${chart.type}("#dv_viewport", "#dv_table",
+                {
+                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
+                    {{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
+                }
+            );
+        });
+    </script>
+    <link rel="stylesheet" href="${staticUrl}stylesheets/${chart.type}.css" />
+    {{/if}}
+    <script type="text/javascript">
+        DomReady.ready(function () {
             window.advanced = {
                 show: document.getElementById("showadvanced"),
                 hide: document.getElementById("hideadvanced"),
@@ -54,16 +71,8 @@
                 advanced.hide.className = "hidden";
                 advanced.section.className = "hidden";
             };
-            DV.${chart.type}("#dv_viewport", "#dv_table",
-                {
-                    {{each(idx, option) chart.options}}{{if idx != 0}}, {{/if}}${option[0]}: "${option[1]}"{{/each}}
-                    {{if chart.type == 'mapea'}}, encoded_query: "{{html encoded_query}}"{{/if}}
-                }
-            );
         });
     </script>
-    <link rel="stylesheet" href="${staticUrl}stylesheets/${chart.type}.css" />
-    {{/if}}
 </head>
 <body>
     <div id="header">
@@ -104,6 +113,9 @@
     <section id="advanced" class="hidden">
         <h1>${lingua.viewer.query}</h1>
         <pre id="dv_query"><code class="language-sparql">${query}</code></pre>
+
+        <h1>${lingua.viewer.embed}</h1>
+        <pre><code class="html">${embedCode}</code></pre>
     </section>
     {{/if}}
 

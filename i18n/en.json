@@ -13,7 +13,9 @@
         "wrong": "Something wrong happened",
         "advanced": "Show advanced content",
         "hideadvanced": "Hide advanced content",
-        "noresults": "No results returned"
+        "noresults": "No results returned",
+        "embed": "Embed code",
+        "embedView": "View results in GORQL Viewer"
     },
     "kml": {
         "result": "Result"

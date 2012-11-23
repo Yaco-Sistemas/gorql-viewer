@@ -58,12 +58,16 @@ div.dv_viewport {
     margin-right: auto;
 }
 
-#dv_query {
+pre {
     background: #EEE;
     padding: 5px;
     border: 1px solid #555;
     white-space: pre-wrap;
     margin-bottom: 0px;
+}
+
+pre code {
+    word-wrap: break-word;
 }
 
 #footer {

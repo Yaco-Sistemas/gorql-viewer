@@ -13,7 +13,9 @@
         "wrong": "Se ha producido un error",
         "advanced": "Mostrar contenidos avanzados",
         "hideadvanced": "Ocultar contenidos avanzados",
-        "noresults": "No hay resultados"
+        "noresults": "No hay resultados",
+        "embed": "Código de embebido",
+        "embedView": "Ver resultados en GORQL Viewer"
     },
     "kml": {
         "result": "Resultado"

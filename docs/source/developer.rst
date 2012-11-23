@@ -190,7 +190,7 @@ generados simplemente sustituyendo las hojas de estilo por unas personalizadas.
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="http://example.com/stylesheets/style.css" />
+    <link rel="stylesheet" href="http://example.com/stylesheets/base.css" />
     <link rel="stylesheet" href="http://example.com/stylesheets/bar.css" />
     <link rel="stylesheet" href="http://example.com/stylesheets/pie.css" />
     <link rel="stylesheet" href="http://example.com/stylesheets/line.css" />

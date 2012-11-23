@@ -70,6 +70,10 @@ pre code {
     word-wrap: break-word;
 }
 
+p.note {
+    font-style: italic;
+}
+
 #footer {
     margin-top: 10px;
 }

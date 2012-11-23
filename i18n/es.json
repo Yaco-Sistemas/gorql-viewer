@@ -15,7 +15,8 @@
         "hideadvanced": "Ocultar contenidos avanzados",
         "noresults": "No hay resultados",
         "embed": "Código de embebido",
-        "embedView": "Ver resultados en GORQL Viewer"
+        "embedView": "Ver resultados en GORQL Viewer",
+        "embedNote": "Para añadir dos informes o más en una misma página es necesario modificar los índices en el código generado. Para más información consulte la documentación."
     },
     "kml": {
         "result": "Resultado"

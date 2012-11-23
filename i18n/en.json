@@ -15,7 +15,8 @@
         "hideadvanced": "Hide advanced content",
         "noresults": "No results returned",
         "embed": "Embed code",
-        "embedView": "View results in GORQL Viewer"
+        "embedView": "View results in GORQL Viewer",
+        "embedNote": "In order to add two or more reports en the same page you need to modify the indexes in the generated code. Details in the documentation."
     },
     "kml": {
         "result": "Result"

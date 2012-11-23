@@ -25,7 +25,7 @@
 exports.settings = {
     global: {
         staticUrl: "../",
-        debug: true,
+        debug: false,
         port: 3000,
         host: 'http://viewer.gorql.com',
         logo: '../images/logo-big.png',

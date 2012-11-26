@@ -96,7 +96,10 @@ renderResults = function (response, params, error, results) {
 
         if (data.matrix.length === 0) {
             aux = "";
-            error = response.lingua.content.viewer.noresults;
+            if (!error) {
+                error = "";
+            }
+            error += " " + response.lingua.content.viewer.noresults;
         } else {
             aux = data.headers;
             if (prettyHeaders.length === aux.length) {

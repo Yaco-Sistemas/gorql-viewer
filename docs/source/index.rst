@@ -6,7 +6,7 @@ GORQL Viewer
 ============
 
 :Author: `Yaco Sistemas S.L. <http://www.yaco.es/>`_
-:Website: https://trac.yaco.es/ceic-ogov/
+:Website: https://github.com/Yaco-Sistemas/gorql-viewer/
 :Release: |release|
 
 GORQL Viewer es el primer componente del sistema GORQL. Su objetivo es
@@ -50,14 +50,14 @@ Cómo obtener GORQL Viewer
 =========================
 
 GORQL Viewer se distribuye en formato RPM y ha sido testeado en
-sistemas RedHat EL 5.6. Los paquetes de cada uno de sus componentes están
+sistemas RedHat EL 6.2. Los paquetes de cada uno de sus componentes están
 disponibles en el
 `siguiente servidor de Yaco <http://files.yaco.es/~ceic-ogov/>`_ de forma
 provisional. Para más información sobre cómo instalar el visor de colecciones,
 consulte el :doc:`deployment`.
 
-Puede obtener las fuentes del proyecto utilizando un cliente Mercurial:
+Puede obtener las fuentes del proyecto utilizando un cliente Git:
 
 .. code-block:: bash
 
-    hg clone http://hg.yaco.es/ceic-ogov-data-viewer
+    git clone git://github.com/Yaco-Sistemas/gorql-viewer.git

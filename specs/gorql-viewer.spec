@@ -6,7 +6,7 @@
 
 Name: %{name}
 Version: 1.4.0
-Release: 5
+Release: 6
 Summary: GORQL Viewer executes SPARQL queries and shows the results
 Packager: Alejandro Blanco <ablanco@yaco.es>
 Group: Applications/Internet
@@ -34,7 +34,8 @@ cd %{installdir}/public/javascripts/
 make all
 
 # clean files not needed
-rm -rf %{installdir}/.hg
+rm -rf %{installdir}/.git
+rm -f %{installdir}/.gitignore
 rm -rf %{installdir}/docs
 rm -rf %{installdir}/specs
 rm -rf %{installdir}/node_modules/d3/node_modules/jsdom
@@ -103,6 +104,9 @@ if [ $1 = 0 ]; then
 fi
 
 %changelog
+* Mon Nov 26 2012 Alejandro Blanco <ablanco@yaco.es>
+- Remove git files instead of mercurial files
+
 * Fri Nov 09 2012 Alejandro Blanco <ablanco@yaco.es>
 - Update required nodejs and forever versions
 

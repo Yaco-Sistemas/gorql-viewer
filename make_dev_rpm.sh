@@ -3,16 +3,17 @@
 PACKAGE="gorql-viewer"
 CURRENT_DIR=`pwd`
 BUILD_ROOT=/root/rpmbuild
+TAG="1.4.0"
 
 if [ -d /tmp/${PACKAGE} ]
 then
     cd /tmp/${PACKAGE}
     git pull origin master
 else
-    git clone git://github.com/Yaco-Sistemas/gorql-viewer.git /tmp/${PACKAGE}
+    git clone git://github.com/Yaco-Sistemas/gorql-editor.git /tmp/${PACKAGE}
+    cd /tmp/${PACKAGE}
 fi
-
-TAG="1.4.0"
+git checkout ${TAG}
 
 cd /tmp/
 mv ${PACKAGE} ${PACKAGE}-${TAG}

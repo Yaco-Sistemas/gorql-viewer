@@ -8,7 +8,7 @@ Lista de cambios
 - Mensaje informativo cuando no hay resultados.
 - Soporte de un párametro más en la url que define cabeceras legibles y
   amigables para la tabla de resultados.
-- Autogeneración del código de embebido de informes.s
+- Autogeneración del código de embebido de informes.
 
 1.3.0
 =====

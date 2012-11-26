@@ -1,10 +1,13 @@
 Changes
 =======
 
-1.3.1 (YYYY-MM-DD)
+1.4.0 (2012-11-26)
 ------------------
 
-- TODO
+- Newer versions of dependencies, support nodejs 0.8.X
+- Show a message when there are no results
+- Support readable headers extra parameter for results table
+- Generate embed code
 
 1.3.0 (2012-06-12)
 ------------------

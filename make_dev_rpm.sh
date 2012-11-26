@@ -7,25 +7,18 @@ BUILD_ROOT=/root/rpmbuild
 if [ -d /tmp/${PACKAGE} ]
 then
     cd /tmp/${PACKAGE}
-    hg pull
-    hg up default
+    git pull origin master
 else
-    hg clone https://hg.yaco.es/ceic-ogov-data-viewer /tmp/${PACKAGE}
+    git clone git://github.com/Yaco-Sistemas/gorql-viewer.git /tmp/${PACKAGE}
 fi
 
-cd ${CURRENT_DIR}
+TAG="1.4.0"
 
-export LANG=C
-REV=`hg parent | cut -d" " -f4 | cut -d":" -f1 | head -n 1`
-VERSION=`grep "Version: " specs/${PACKAGE}.spec | cut -d" " -f2 | cut -d"h" -f1`
-TAG="${VERSION}hg${REV}"
-
-echo "New version: ${TAG}"
-
-sed -i "s/Version: [0-9].[0-9].[0-9]develhg[0-9]\+/Version: ${TAG}/g" specs/${PACKAGE}.spec
-
-cd /tmp/${PACKAGE}
-hg archive -t tgz ${CURRENT_DIR}/${PACKAGE}-${TAG}.tar.gz
+cd /tmp/
+mv ${PACKAGE} ${PACKAGE}-${TAG}
+tar cvf ${CURRENT_DIR}/${PACKAGE}-${TAG}.tar ${PACKAGE}-${TAG}
+mv ${PACKAGE}-${TAG} ${PACKAGE}
+gzip ${CURRENT_DIR}/${PACKAGE}-${TAG}.tar
 
 if [ -f ${BUILD_ROOT}/SOURCES/${PACKAGE}-${TAG}.tar.gz ]
 then

@@ -1,10 +1,14 @@
-1.3.1
+1.4.0
 =====
 
 Lista de cambios
 ----------------
 
-- TODO
+- Nuevas versiones de las dependencias, soporte de nodejs 0.8.X.
+- Mensaje informativo cuando no hay resultados.
+- Soporte de un párametro más en la url que define cabeceras legibles y
+  amigables para la tabla de resultados.
+- Autogeneración del código de embebido de informes.s
 
 1.3.0
 =====
